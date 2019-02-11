@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha",
-    "dev": "nodemon ./node_modules/.bin/babel-node src/index.js",
-    "start": "nodemon ./node_modules/.bin/babel-node src/index.js"
+    "test": "npm run test:other && npm run test:js",
+    "dev": "nodemon ./node_modules/.bin/babel-node index.js",
+    "start": "nodemon ./node_modules/.bin/babel-node index.js",
+    "fix:other": "npm run prettier --write",
+    "fix:js": "npm run test:js --fix",
+    "fix": "npm run fix:js && npm run fix:other",
+    "prettier": "prettier \"**/*.{json,md,scss,yaml,yml}\"",
+    "test:other": "npm run prettier --list-different",
+    "test:js": "eslint --ignore-path .gitignore --ignore-path .prettierignore \"**/*.{js,jsx}\""
   },
   "author": "",
   "license": "ISC",
@@ -14,19 +20,27 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "morgan": "^1.9.1",
+    "onchange": "^5.2.0",
     "tdaw": "^1.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "chai": "^4.2.0",
-    "eslint": "^5.13.0",
+    "chai-http": "^4.2.1",
+    "eslint": "5.13.0",
     "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "4.0.0",
     "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "3.0.1",
+    "husky": "1.3.1",
+    "lint-staged": "8.1.3",
     "mocha": "^5.2.0",
     "nock": "^10.0.6",
     "nodemon": "^1.18.9",
-    "nyc": "^13.2.0"
+    "nyc": "^13.2.0",
+    "prettier": "1.16.4"
   }
 }
