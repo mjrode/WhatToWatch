@@ -38,7 +38,7 @@ PlexApiClient.prototype.request = async function(url) {
     httpClient
       .get(url)
       .then(response => {
-        return resolve(parser.toJson(response.data));
+        return resolve(JSON.parse(parser.toJson(response.data)));
       })
       .catch(error => {
         // Error
