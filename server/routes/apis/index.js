@@ -1,8 +1,8 @@
-const express = require('express');
-const v1ApiController = require('./v1');
+import {Router} from 'express';
+import v1ApiController from './v1';
 
-const router = express.Router();
+const router = Router();
 
 router.use('/v1', v1ApiController);
 
-module.exports = router;
+export default router;

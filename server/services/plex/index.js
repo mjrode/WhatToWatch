@@ -12,10 +12,10 @@ const dogs = [
   },
 ];
 
-function getUsers(req, res) {
+const getUsers = (req, res) => {
   res.json(dogs);
-}
+};
 
-module.exports = {
+export default {
   getUsers,
 };

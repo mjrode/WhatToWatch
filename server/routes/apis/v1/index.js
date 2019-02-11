@@ -1,8 +1,8 @@
-const express = require('express');
-const plexController = require('../../../controllers/apis/plex');
+import {Router} from 'express';
+import plexController from '../../../controllers/apis/plex';
 
-const router = express.Router();
+const router = Router();
 
 router.use('/plex', plexController);
 
-module.exports = router;
+export default router;

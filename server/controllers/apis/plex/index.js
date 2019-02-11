@@ -1,9 +1,9 @@
-const express = require('express');
-const plexService = require('../../../services/plex');
+import {Router} from 'express';
+import plexService from '../../../services/plex';
 
-const router = express.Router();
+const router = Router();
 
 router.get('/', plexService.getUsers);
 // router.get('/:id', plexService.getDogWithId);
 
-module.exports = router;
+export default router;

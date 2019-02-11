@@ -1,42 +1,33 @@
-const express = require('express');
+import express from 'express';
+import {json} from 'body-parser';
 
-const bodyParser = require('body-parser');
+const routes = require('./routes').default;
 
-module.exports = function() {
+export default () => {
   const server = express();
 
-  let create;
-
-  let start;
-
-  create = function(config) {
-    const routes = require('./routes');
-
+  const create = config => {
     // Server settings
     server.set('env', config.env);
     server.set('port', config.port);
     server.set('hostname', config.hostname);
-    server.set('viewDir', config.viewDir);
 
     // Returns middleware that parses json
-    server.use(bodyParser.json());
+    server.use(json());
 
     // Set up routes
     routes.init(server);
   };
 
-  start = function() {
+  const start = () => {
     const hostname = server.get('hostname');
 
     const port = server.get('port');
 
-    server.listen(port, function() {
+    server.listen(port, () => {
       console.log(`Express server listening on - http://${hostname}:${port}`);
     });
   };
 
-  return {
-    create,
-    start,
-  };
+  return {create, start};
 };
