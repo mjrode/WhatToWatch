@@ -1,8 +1,8 @@
 // import axios from 'axios';
-// import config from '../../../config';
+import buildUrl from 'build-url';
+import config from '../../../config';
 
 // const url = require('url');
-// const buildUrl = require('build-url');
 
 function PlexApiClient(options) {
   this.setOptions(options);
@@ -12,31 +12,31 @@ PlexApiClient.prototype.setOptions = function(options) {
   this.options = options || {};
 };
 
+PlexApiClient.prototype.getUsersUrlParams = function() {
+  return {
+    host: 'https://plex.tv',
+    path: '/api/users',
+    queryParams: {
+      'X-Plex-Token': this.options.token,
+    },
+  };
+};
+
+PlexApiClient.prototype.buildUrl = function(urlParams) {
+  const params = urlParams;
+  const {host} = params;
+  delete params.host;
+  const urlHash = params;
+
+  return buildUrl(host, urlHash);
+};
+
 // console.log(PlexApiClient.prototype);
 export default PlexApiClient;
 
-// PlexApiClient.prototype.setConfig = (options) => {
-//   if (typeof options === 'object' && options != null && options.length != 0) {
-//     if (options.url) config.url = options.url;
-//     if (options.version) config.version = options.version;
-//     if (options.secured) config.secured = options.secured;
-//   } else if (options != null) {
-//     throw new Error('warning, your options variable is not a valid object.');
-//   }
-
-//   return config;
-// };
 // const plexUrl = buildUrl(config.plex.url, {
 //   path: '/library/sections',
 //   port: '32400',
-//   queryParams: {
-//     'X-Plex-Token': config.plex.token,
-//   },
-// });
-
-// const getUsersUrlParams = () => ({
-//   host: 'https://plex.tv',
-//   path: '/api/users',
 //   queryParams: {
 //     'X-Plex-Token': config.plex.token,
 //   },
