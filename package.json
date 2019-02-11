@@ -4,20 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register ./test/*.test.js --exit",
+    "test": "mocha --compilers js:babel-core/register ./test/**/**/**/*.test.js --exit",
     "dev": "nodemon --exec babel-node index.js",
     "start": "nodemon --exec babel-node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "build-url": "^1.3.2",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "morgan": "^1.9.1",
     "onchange": "^5.2.0",
-    "tdaw": "^1.3.0"
+    "plex-api": "^5.2.1",
+    "tdaw": "^1.3.0",
+    "xml2json": "^0.11.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -1,5 +1,5 @@
 import express from 'express';
-import {json} from 'body-parser';
+import {json, urlencoded} from 'body-parser';
 
 const routes = require('./routes').default;
 
@@ -14,6 +14,7 @@ export default () => {
 
     // Returns middleware that parses json
     server.use(json());
+    server.use(urlencoded({extended: true}));
 
     // Set up routes
     routes.init(server);

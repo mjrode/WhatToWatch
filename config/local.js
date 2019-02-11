@@ -4,4 +4,4 @@ const localConfig = {
   // viewDir: './app/views',
 };
 
-module.exports = localConfig;
+export default localConfig;

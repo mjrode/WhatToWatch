@@ -11,8 +11,9 @@ module.exports = {
     'func-names': 0,
     'prefer-arrow-callback': 0,
     'no-unused-expressions': 0,
+    'no-shadow': 0,
     'prefer-arrow/prefer-arrow-functions': [
-      'warn',
+      0,
       {
         disallowPrototype: true,
         singleReturnOnly: false,
