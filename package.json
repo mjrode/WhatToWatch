@@ -4,15 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test:other && npm run test:js",
-    "dev": "nodemon ./node_modules/.bin/babel-node index.js",
-    "start": "nodemon ./node_modules/.bin/babel-node index.js",
-    "fix:other": "npm run prettier --write",
-    "fix:js": "npm run test:js --fix",
-    "fix": "npm run fix:js && npm run fix:other",
-    "prettier": "prettier \"**/*.{json,md,scss,yaml,yml}\"",
-    "test:other": "npm run prettier --list-different",
-    "test:js": "eslint --ignore-path .gitignore --ignore-path .prettierignore \"**/*.{js,jsx}\""
+    "test": "mocha --compilers js:babel-core/register ./test/*.test.js --exit",
+    "dev": "nodemon --exec babel-node index.js",
+    "start": "nodemon --exec babel-node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +21,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-plugin-istanbul": "^5.1.0",
     "babel-preset-node8": "^1.2.0",
     "chai": "^4.2.0",
@@ -45,6 +40,7 @@
     "nodemon": "^1.18.9",
     "npm": "^6.7.0",
     "nyc": "^13.2.0",
-    "prettier": "1.16.4"
+    "prettier": "1.16.4",
+    "supertest": "^3.4.2"
   }
 }

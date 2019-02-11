@@ -13,6 +13,7 @@ const dogs = [
 ];
 
 const getUsers = (req, res) => {
+  console.log(dogs);
   res.json(dogs);
 };
 

@@ -17,6 +17,7 @@ export default () => {
 
     // Set up routes
     routes.init(server);
+    return server;
   };
 
   const start = () => {
