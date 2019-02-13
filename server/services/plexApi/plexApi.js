@@ -21,6 +21,16 @@ PlexApiClient.prototype.getUsersUrlParams = function() {
   };
 };
 
+PlexApiClient.prototype.getSectionsUrlParams = function() {
+  return {
+    host: config.plex.plexServerUrl,
+    path: '/library/sections',
+    queryParams: {
+      'X-Plex-Token': this.options.token || config.plex.token,
+    },
+  };
+};
+
 PlexApiClient.prototype.mostWatchedUrlParams = function(type, limit = 10) {
   return {
     host: config.plex.plexServerUrl,
@@ -92,6 +102,13 @@ PlexApiClient.prototype.getMostWatched = async function(type, limit = 10) {
   const mostWatchedUrl = this.buildUrl(urlParams);
   const response = await this.request(mostWatchedUrl);
   return response.MediaContainer.Metadata;
+};
+
+PlexApiClient.prototype.getSections = async function() {
+  const urlParams = this.getSectionsUrlParams();
+  const getUsersUrl = this.buildUrl(urlParams);
+  const response = await this.request(getUsersUrl);
+  return response.MediaContainer.Directory;
 };
 
 const plexApiClient = (options = []) => {

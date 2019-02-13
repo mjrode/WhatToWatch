@@ -33,19 +33,42 @@ describe('Users', () => {
 describe('Most Watched', () => {
   describe('GET /api/v1/plex/most-watched', async () => {
     it('should return most watched history', (done) => {
-      nock('https://plex.tv')
-        .get('/api/users?X-Plex-Token=hhnKQYskVjepfkhixqJu')
+      nock('https://plex.mjrflix.com')
+        .get(
+          '/library/all/top?type=2&limit=10&X-Plex-Token=hhnKQYskVjepfkhixqJu',
+        )
         .reply(200, responses.mostWatchedRaw, {
-          'Content-Type': 'text/xml',
+          'Content-Type': 'text/json',
         });
 
       chai
         .request(app)
-        .get('/api/v1/plex/most-watched')
+        .get('/api/v1/plex/most-watched?type=2')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
           res.body.should.deep.equal(responses.mostWatchedParsed);
+          done();
+        });
+    });
+  });
+});
+
+describe('Sections', () => {
+  describe('GET /api/v1/plex/sections', async () => {
+    it('should sections', (done) => {
+      nock('https://plex.mjrflix.com')
+        .get('/library/sections?X-Plex-Token=hhnKQYskVjepfkhixqJu')
+        .reply(200, responses.sectionsRaw, {
+          'Content-Type': 'text/json',
+        });
+      chai
+        .request(app)
+        .get('/api/v1/plex/sections')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.should.deep.equal(responses.sectionsParsed);
           done();
         });
     });
