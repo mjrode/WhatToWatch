@@ -1,7 +1,7 @@
 import axios from 'axios';
 import buildUrl from 'build-url';
 import parser from 'xml2json';
-// import config from '../../../config'
+import config from '../../../config';
 
 function PlexApiClient(options) {
   this.setOptions(options);
@@ -16,7 +16,7 @@ PlexApiClient.prototype.getUsersUrlParams = function() {
     host: 'https://plex.tv',
     path: '/api/users',
     queryParams: {
-      'X-Plex-Token': this.options.token,
+      'X-Plex-Token': this.options.token || config.plex.token,
     },
   };
 };
@@ -57,6 +57,14 @@ PlexApiClient.prototype.request = async function(url) {
         return reject(error);
       });
   });
+};
+
+PlexApiClient.prototype.getUsers = function() {
+  const urlParams = this.getUsersUrlParams();
+  console.log('URL params', urlParams);
+  const getUsersUrl = this.buildUrl(urlParams);
+  console.log('mike', getUsersUrl);
+  return this.request(getUsersUrl);
 };
 
 const plexApiClient = (options = []) => {
