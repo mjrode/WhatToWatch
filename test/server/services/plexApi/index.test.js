@@ -1,5 +1,3 @@
-import request from 'supertest';
-import mocha from 'mocha';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import nock from 'nock';
@@ -26,6 +24,7 @@ describe('Users', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
+          res.body.should.deep.equal(responses.getUsers);
           done();
         });
     });
