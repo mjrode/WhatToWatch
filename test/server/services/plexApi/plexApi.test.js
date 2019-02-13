@@ -3,7 +3,7 @@ import mocha from 'mocha';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import nock from 'nock';
-import PlexApiClient from '../../../../server/services/plexApi/index';
+import plexApiClient from '../../../../server/services/plexApi/index';
 
 nock.enableNetConnect;
 
@@ -12,7 +12,7 @@ const should = chai.should();
 describe('plexApi', () => {
   it('sets options when passed valid options object', () => {
     const options = { token: 'plexToken' };
-    const result = new PlexApiClient(options).options;
+    const result = plexApiClient(options).options;
     result.should.deep.equal({
       token: 'plexToken',
     });
@@ -20,7 +20,7 @@ describe('plexApi', () => {
 
   it('return url params object', () => {
     const options = { token: 'plexToken' };
-    const result = new PlexApiClient(options).getUsersUrlParams();
+    const result = plexApiClient(options).getUsersUrlParams();
     result.should.deep.equal({
       host: 'https://plex.tv',
       path: '/api/users',
@@ -32,7 +32,7 @@ describe('plexApi', () => {
 
   it('returns url', () => {
     const options = { token: 'plexToken' };
-    const PlexApi = new PlexApiClient(options);
+    const PlexApi = plexApiClient(options);
     const urlParams = PlexApi.getUsersUrlParams();
     const url = PlexApi.buildUrl(urlParams);
     url.should.equal('https://plex.tv/api/users?X-Plex-Token=plexToken');
@@ -45,7 +45,7 @@ describe('plexApi', () => {
       .replyWithFile(200, usersResponse, { 'Content-Type': 'text/xml' });
 
     const options = { token: 'plexToken' };
-    const PlexApi = new PlexApiClient(options);
+    const PlexApi = plexApiClient(options);
     const urlParams = PlexApi.getUsersUrlParams();
     const url = PlexApi.buildUrl(urlParams);
     const result = await PlexApi.request(url);

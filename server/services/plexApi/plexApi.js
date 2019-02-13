@@ -1,9 +1,7 @@
 import axios from 'axios';
 import buildUrl from 'build-url';
 import parser from 'xml2json';
-import config from '../../../config';
-
-// const url = require('url');
+// import config from '../../../config'
 
 function PlexApiClient(options) {
   this.setOptions(options);
@@ -61,39 +59,15 @@ PlexApiClient.prototype.request = async function(url) {
   });
 };
 
-// console.log(PlexApiClient.prototype);
-export default PlexApiClient;
+const plexApiClient = (options = []) => {
+  return new PlexApiClient(options);
+};
+
+export default plexApiClient;
+
 // const options = {token: config.plex.token};
 // const PlexApi = new PlexApiClient(options);
 // const urlParams = PlexApi.getUsersUrlParams();
 // const url = PlexApi.buildUrl(urlParams);
+// console.log(url)
 // const result = PlexApi.request(url);
-// const plexUrl = buildUrl(config.plex.url, {
-//   path: '/library/sections',
-//   port: '32400',
-//   queryParams: {
-//     'X-Plex-Token': config.plex.token,
-//   },
-// });
-
-// const constructPlexUrl = urlParams => {
-//   const params = urlParams();
-//   const {host} = params;
-//   delete params.host;
-//   const urlHash = params;
-
-//   return buildUrl(host, urlHash);
-// };
-
-// const request = options => {
-
-// };
-
-// // console.log(
-// //   url.parse('https://plex.tv/api/users?&X-Plex-Token=hhnKQYskVjepfkhixqJu'),
-// // );
-
-// const usersUrl = constructPlexUrl(getUsersUrlParams);
-
-// request(usersUrl);
-// // console.log(request(usersUrl));
