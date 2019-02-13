@@ -59,10 +59,11 @@ PlexApiClient.prototype.request = async function(url) {
   });
 };
 
-PlexApiClient.prototype.getUsers = function() {
+PlexApiClient.prototype.getUsers = async function() {
   const urlParams = this.getUsersUrlParams();
   const getUsersUrl = this.buildUrl(urlParams);
-  return this.request(getUsersUrl);
+  const response = await this.request(getUsersUrl);
+  return response.MediaContainer.User;
 };
 
 const plexApiClient = (options = []) => {

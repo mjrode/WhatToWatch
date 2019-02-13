@@ -50,7 +50,7 @@ describe('plexApi', () => {
     const urlParams = PlexApi.getUsersUrlParams();
     const url = PlexApi.buildUrl(urlParams);
     const result = await PlexApi.request(url);
-    result.should.deep.equal(parsedResponses.getUsers);
+    result.should.deep.equal(parsedResponses.getUsersRaw);
   });
 
   it('returns users using getUsers', async () => {
@@ -62,6 +62,6 @@ describe('plexApi', () => {
     const options = { token: 'plexToken' };
     const PlexApi = plexApiClient(options);
     const result = await PlexApi.getUsers();
-    result.should.deep.equal(parsedResponses.getUsers);
+    result.should.deep.equal(parsedResponses.getUsersParsed);
   });
 });

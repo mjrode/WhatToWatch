@@ -11,7 +11,6 @@ const should = chai.should();
 
 describe('Users', () => {
   describe('GET /api/v1/plex/users', async () => {
-    // Test to get all students record
     it('should get all plex users', (done) => {
       const usersResponse = `${__dirname}/mocks/getUsersResponse.xml`;
       nock('https://plex.tv')
@@ -23,8 +22,8 @@ describe('Users', () => {
         .get('/api/v1/plex/users')
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.deep.equal(responses.getUsers);
+          res.body.should.be.a('array');
+          res.body.should.deep.equal(responses.getUsersParsed);
           done();
         });
     });
