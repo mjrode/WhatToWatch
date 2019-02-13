@@ -29,3 +29,25 @@ describe('Users', () => {
     });
   });
 });
+
+describe('Most Watched', () => {
+  describe('GET /api/v1/plex/most-watched', async () => {
+    it('should return most watched history', (done) => {
+      nock('https://plex.tv')
+        .get('/api/users?X-Plex-Token=hhnKQYskVjepfkhixqJu')
+        .reply(200, responses.mostWatchedRaw, {
+          'Content-Type': 'text/xml',
+        });
+
+      chai
+        .request(app)
+        .get('/api/v1/plex/most-watched')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.should.deep.equal(responses.mostWatchedParsed);
+          done();
+        });
+    });
+  });
+});

@@ -90,9 +90,8 @@ PlexApiClient.prototype.getUsers = async function() {
 PlexApiClient.prototype.getMostWatched = async function(type, limit = 10) {
   const urlParams = this.mostWatchedUrlParams(type, limit);
   const mostWatchedUrl = this.buildUrl(urlParams);
-  console.log(mostWatchedUrl);
   const response = await this.request(mostWatchedUrl);
-  return response;
+  return response.MediaContainer.Metadata;
 };
 
 const plexApiClient = (options = []) => {

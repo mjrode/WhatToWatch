@@ -23,8 +23,8 @@ describe('plexApi', () => {
     const options = { token: 'plexToken' };
     const result = plexApiClient(options).getUsersUrlParams();
     result.should.deep.equal({
-      host: 'https://plex.tv',
-      path: '/api/users',
+      host: 'https://plex.tv/api',
+      path: '/users',
       queryParams: {
         'X-Plex-Token': 'plexToken',
       },
