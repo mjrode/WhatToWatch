@@ -11,8 +11,8 @@ nock.enableNetConnect;
 chai.use(chaiHttp);
 const should = chai.should();
 
-describe('Students', () => {
-  describe('GET /', async () => {
+describe('Users', () => {
+  describe('GET /api/v1/plex/users', async () => {
     // Test to get all students record
     it('should get all plex users', (done) => {
       const usersResponse = `${__dirname}/mocks/getUsersResponse.xml`;
@@ -29,29 +29,5 @@ describe('Students', () => {
           done();
         });
     });
-    // Test to get single student record
-    // it('should get a single student record', (done) => {
-    //   const id = 1;
-    //   chai
-    //     .request(app)
-    //     .get(`/${id}`)
-    //     .end((err, res) => {
-    //       res.should.have.status(200);
-    //       res.body.should.be.a('object');
-    //       done();
-    //     });
-    // });
-
-    // // Test to get single student record
-    // it('should not get a single student record', (done) => {
-    //   const id = 5;
-    //   chai
-    //     .request(app)
-    //     .get(`/${id}`)
-    //     .end((err, res) => {
-    //       res.should.have.status(404);
-    //       done();
-    //     });
-    // });
   });
 });
