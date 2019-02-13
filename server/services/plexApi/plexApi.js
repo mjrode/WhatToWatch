@@ -13,9 +13,21 @@ PlexApiClient.prototype.setOptions = function(options) {
 
 PlexApiClient.prototype.getUsersUrlParams = function() {
   return {
-    host: 'https://plex.tv',
-    path: '/api/users',
+    host: config.plex.plexApiUrl,
+    path: '/users',
     queryParams: {
+      'X-Plex-Token': this.options.token || config.plex.token,
+    },
+  };
+};
+
+PlexApiClient.prototype.mostWatchedUrlParams = function(type, limit = 10) {
+  return {
+    host: config.plex.plexServerUrl,
+    path: '/library/all/top',
+    queryParams: {
+      type,
+      limit,
       'X-Plex-Token': this.options.token || config.plex.token,
     },
   };
@@ -30,13 +42,22 @@ PlexApiClient.prototype.buildUrl = function(urlParams) {
   return buildUrl(host, urlHash);
 };
 
+const formatResponse = response => {
+  const xmlResponse = response.headers['content-type'].includes('xml');
+  if (xmlResponse) {
+    return JSON.parse(parser.toJson(response.data));
+  }
+  return response.data;
+};
+
 PlexApiClient.prototype.request = async function(url) {
+  console.log('Request URL', url);
   return new Promise((resolve, reject) => {
     const httpClient = this.options.httpClient || axios;
     httpClient
       .get(url)
       .then(response => {
-        return resolve(JSON.parse(parser.toJson(response.data)));
+        return resolve(formatResponse(response));
       })
       .catch(error => {
         // Error
@@ -46,7 +67,7 @@ PlexApiClient.prototype.request = async function(url) {
           console.log('data', error.response.data);
           console.log('status', error.response.status);
           console.log('headers', error.response.headers);
-          return reject(error.data);
+          return reject(error.response);
         }
         if (error.request) {
           // The request was made but no response was received
@@ -64,6 +85,14 @@ PlexApiClient.prototype.getUsers = async function() {
   const getUsersUrl = this.buildUrl(urlParams);
   const response = await this.request(getUsersUrl);
   return response.MediaContainer.User;
+};
+
+PlexApiClient.prototype.getMostWatched = async function(type, limit = 10) {
+  const urlParams = this.mostWatchedUrlParams(type, limit);
+  const mostWatchedUrl = this.buildUrl(urlParams);
+  console.log(mostWatchedUrl);
+  const response = await this.request(mostWatchedUrl);
+  return response;
 };
 
 const plexApiClient = (options = []) => {
