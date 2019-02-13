@@ -61,9 +61,7 @@ PlexApiClient.prototype.request = async function(url) {
 
 PlexApiClient.prototype.getUsers = function() {
   const urlParams = this.getUsersUrlParams();
-  console.log('URL params', urlParams);
   const getUsersUrl = this.buildUrl(urlParams);
-  console.log('mike', getUsersUrl);
   return this.request(getUsersUrl);
 };
 
@@ -72,10 +70,3 @@ const plexApiClient = (options = []) => {
 };
 
 export default plexApiClient;
-
-// const options = {token: config.plex.token};
-// const PlexApi = new PlexApiClient(options);
-// const urlParams = PlexApi.getUsersUrlParams();
-// const url = PlexApi.buildUrl(urlParams);
-// console.log(url)
-// const result = PlexApi.request(url);
