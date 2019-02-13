@@ -3,7 +3,7 @@ import mocha from 'mocha';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import nock from 'nock';
-import plexApiClient from '../../../../server/services/plexApi/index';
+import plexApiClient from '../../../../server/services/plexApi/plexApi';
 
 nock.enableNetConnect;
 
