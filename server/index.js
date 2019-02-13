@@ -9,8 +9,8 @@ export default () => {
   const create = config => {
     // Server settings
     server.set('env', config.env);
-    server.set('port', config.port);
-    server.set('hostname', config.hostname);
+    server.set('port', config.server.port);
+    server.set('hostname', config.server.hostname);
 
     // Returns middleware that parses json
     server.use(json());

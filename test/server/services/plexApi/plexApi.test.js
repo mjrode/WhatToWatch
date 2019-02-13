@@ -43,6 +43,7 @@ describe('plexApi', () => {
     nock('https://plex.tv')
       .get('/api/users?X-Plex-Token=plexToken')
       .replyWithFile(200, usersResponse, { 'Content-Type': 'text/xml' });
+
     const options = { token: 'plexToken' };
     const PlexApi = new PlexApiClient(options);
     const urlParams = PlexApi.getUsersUrlParams();
