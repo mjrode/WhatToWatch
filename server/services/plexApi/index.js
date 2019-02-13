@@ -8,8 +8,7 @@ const getUsers = async (req, res) => {
 
 const getMostWatched = async (req, res) => {
   const plexApi = plexApiClient();
-  console.log('url---', req.query);
-  const mostWatched = await plexApi.getMostWatched(req.query.type);
+  const mostWatched = await plexApi.getMostWatched(req.query);
   res.json(mostWatched);
 };
 

@@ -31,13 +31,14 @@ PlexApiClient.prototype.getSectionsUrlParams = function() {
   };
 };
 
-PlexApiClient.prototype.mostWatchedUrlParams = function(type, limit = 10) {
+PlexApiClient.prototype.mostWatchedUrlParams = function(query) {
   return {
     host: config.plex.plexServerUrl,
     path: '/library/all/top',
     queryParams: {
-      type,
-      limit,
+      ...(query.accountID && {accountID: query.accountID}),
+      ...(query.type && {type: query.type}),
+      ...((query.limit && {limit: query.limit}) || {limit: 10}),
       'X-Plex-Token': this.options.token || config.plex.token,
     },
   };
@@ -52,6 +53,7 @@ PlexApiClient.prototype.buildUrl = function(urlParams) {
   return buildUrl(host, urlHash);
 };
 
+// Move to helper function
 const formatResponse = response => {
   const xmlResponse = response.headers['content-type'].includes('xml');
   if (xmlResponse) {
@@ -97,8 +99,8 @@ PlexApiClient.prototype.getUsers = async function() {
   return response.MediaContainer.User;
 };
 
-PlexApiClient.prototype.getMostWatched = async function(type, limit = 10) {
-  const urlParams = this.mostWatchedUrlParams(type, limit);
+PlexApiClient.prototype.getMostWatched = async function(query) {
+  const urlParams = this.mostWatchedUrlParams(query);
   const mostWatchedUrl = this.buildUrl(urlParams);
   const response = await this.request(mostWatchedUrl);
   return response.MediaContainer.Metadata;
