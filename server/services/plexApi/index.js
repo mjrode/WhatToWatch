@@ -18,8 +18,19 @@ const getSections = async (req, res) => {
   res.json(sections);
 };
 
+const getLibraryDataBySection = async (req, res) => {
+  try {
+    const plexApi = plexApiClient();
+    const sections = await plexApi.getLibraryDataBySection(req.query);
+    res.json(sections);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default {
   getUsers,
   getMostWatched,
   getSections,
+  getLibraryDataBySection,
 };

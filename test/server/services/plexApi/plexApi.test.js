@@ -3,7 +3,7 @@ import mocha from 'mocha';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import nock from 'nock';
-import parsedResponses from './mocks/parsedResponses';
+import plexResponses from './mocks/plexResponses';
 import plexApiClient from '../../../../server/services/plexApi/plexApi';
 
 const should = chai.should();
@@ -48,7 +48,7 @@ describe('plexApi', () => {
     const urlParams = PlexApi.getUsersUrlParams();
     const url = PlexApi.buildUrl(urlParams);
     const result = await PlexApi.request(url);
-    result.should.deep.equal(parsedResponses.getUsersRaw);
+    result.should.deep.equal(plexResponses.getUsersRaw);
   });
 
   it('returns users using getUsers', async () => {
@@ -60,6 +60,6 @@ describe('plexApi', () => {
     const options = { token: 'plexToken' };
     const PlexApi = plexApiClient(options);
     const result = await PlexApi.getUsers();
-    result.should.deep.equal(parsedResponses.getUsersParsed);
+    result.should.deep.equal(plexResponses.getUsersParsed);
   });
 });
