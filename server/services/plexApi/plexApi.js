@@ -1,7 +1,7 @@
 import axios from 'axios';
 import buildUrl from 'build-url';
-import parser from 'xml2json';
 import config from '../../../config';
+import formatResponse from './helpers';
 
 function PlexApiClient(options) {
   this.setOptions(options);
@@ -51,15 +51,6 @@ PlexApiClient.prototype.buildUrl = function(urlParams) {
   const urlHash = params;
 
   return buildUrl(host, urlHash);
-};
-
-// Move to helper function
-const formatResponse = response => {
-  const xmlResponse = response.headers['content-type'].includes('xml');
-  if (xmlResponse) {
-    return JSON.parse(parser.toJson(response.data));
-  }
-  return response.data;
 };
 
 PlexApiClient.prototype.request = async function(url) {
