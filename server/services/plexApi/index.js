@@ -1,4 +1,5 @@
 import plexApiClient from './plexApi';
+import importData from './importData';
 
 const getUsers = async (req, res) => {
   const plexApi = plexApiClient();
@@ -28,9 +29,21 @@ const getLibraryDataBySection = async (req, res) => {
   }
 };
 
+const importSections = async (req, res) => {
+  const sections = await importData.importSections();
+  res.json(sections);
+};
+
+const importLibraries = async (req, res) => {
+  const libraries = await importData.importLibraries();
+  res.json(libraries);
+};
+
 export default {
   getUsers,
   getMostWatched,
   getSections,
   getLibraryDataBySection,
+  importSections,
+  importLibraries,
 };

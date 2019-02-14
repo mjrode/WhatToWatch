@@ -12,6 +12,7 @@ module.exports = {
     'prefer-arrow-callback': 0,
     'no-unused-expressions': 0,
     'no-shadow': 0,
+    'no-use-before-define': 0,
     'prefer-arrow/prefer-arrow-functions': [
       0,
       {

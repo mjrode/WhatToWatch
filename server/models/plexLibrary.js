@@ -11,10 +11,6 @@ const plexLibrary = (sequelize, DataTypes) => {
     genre: DataTypes.STRING,
   });
 
-  plexLibrary.associate = models => {
-    plexLibrary.belongsTo(models.User);
-  };
-
   return plexLibrary;
 };
 

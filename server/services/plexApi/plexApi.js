@@ -45,9 +45,10 @@ PlexApiClient.prototype.mostWatchedUrlParams = function(query) {
 };
 
 PlexApiClient.prototype.getLibraryDataBySectionUrlParams = function(query) {
+  console.log('url query', query.sectionId);
   return {
     host: config.plex.plexServerUrl,
-    path: `/library/sections/${query.sectionID}/all`,
+    path: `/library/sections/${query.sectionId}/all`,
     queryParams: {
       'X-Plex-Token': this.options.token || config.plex.token,
     },
@@ -121,7 +122,7 @@ PlexApiClient.prototype.getLibraryDataBySection = async function(query) {
     const urlParams = this.getLibraryDataBySectionUrlParams(query);
     const getLibraryDataBySectionUrl = this.buildUrl(urlParams);
     const response = await this.request(getLibraryDataBySectionUrl);
-    return response;
+    return response.MediaContainer.Metadata;
   } catch (error) {
     console.log(error);
     return error;
