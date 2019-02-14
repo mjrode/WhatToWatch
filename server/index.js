@@ -1,5 +1,6 @@
 import express from 'express';
 import {json, urlencoded} from 'body-parser';
+import {sequelize} from './models';
 
 const routes = require('./routes').default;
 
@@ -26,8 +27,10 @@ export default () => {
 
     const port = server.get('port');
 
-    server.listen(port, () => {
-      console.log(`Express server listening on - http://${hostname}:${port}`);
+    sequelize.sync().then(() => {
+      server.listen(port, () => {
+        console.log(`Express server listening on - http://${hostname}:${port}`);
+      });
     });
   };
 

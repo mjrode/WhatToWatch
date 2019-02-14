@@ -97,7 +97,7 @@ describe('Sections', () => {
 });
 
 describe('Library Data', () => {
-  describe('GET /api/v1/plex/library-data?sectionID=3', async () => {
+  describe('GET /api/v1/plex/library?sectionID=3', async () => {
     it('should sections', (done) => {
       nock('https://plex.mjrflix.com')
         .get('/library/sections/3/all?X-Plex-Token=hhnKQYskVjepfkhixqJu')
@@ -106,7 +106,7 @@ describe('Library Data', () => {
         });
       chai
         .request(app)
-        .get('/api/v1/plex/library-data?sectionID=3')
+        .get('/api/v1/plex/library-by-section?sectionID=3')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
