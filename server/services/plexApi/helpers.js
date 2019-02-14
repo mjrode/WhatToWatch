@@ -5,6 +5,7 @@ const formatResponse = response => {
   if (xmlResponse) {
     return JSON.parse(parser.toJson(response.data));
   }
+  // console.log(JSON.stringify(response.data));
   return response.data;
 };
 

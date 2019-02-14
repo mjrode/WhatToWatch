@@ -6,8 +6,6 @@ import nock from 'nock';
 import parsedResponses from './mocks/parsedResponses';
 import plexApiClient from '../../../../server/services/plexApi/plexApi';
 
-nock.enableNetConnect;
-
 const should = chai.should();
 
 describe('plexApi', () => {

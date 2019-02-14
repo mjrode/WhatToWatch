@@ -31,7 +31,7 @@ describe('Users', () => {
 });
 
 describe('Most Watched', () => {
-  describe('GET /api/v1/plex/most-watched', async () => {
+  describe('GET /api/v1/plex/most-watched?:type', async () => {
     it('should return most watched history', (done) => {
       nock('https://plex.mjrflix.com')
         .get(
@@ -48,6 +48,27 @@ describe('Most Watched', () => {
           res.should.have.status(200);
           res.body.should.be.a('array');
           res.body.should.deep.equal(responses.mostWatchedParsed);
+          done();
+        });
+    });
+  });
+  describe('GET /api/v1/plex/most-watched?:accountID&:type', async () => {
+    it('should return most watched history per account', (done) => {
+      nock('https://plex.mjrflix.com')
+        .get(
+          '/library/all/top?accountID=22099864&type=2&limit=10&X-Plex-Token=hhnKQYskVjepfkhixqJu',
+        )
+        .reply(200, responses.mostWatchedByAccountRaw, {
+          'Content-Type': 'text/json',
+        });
+
+      chai
+        .request(app)
+        .get('/api/v1/plex/most-watched?accountID=22099864&type=2')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.should.deep.equal(responses.mostWatchedByAccountParsed);
           done();
         });
     });
