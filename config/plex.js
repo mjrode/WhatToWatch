@@ -2,7 +2,6 @@ const plexConfig = {
   ip: 'http://192.168.0.44',
   plexServerUrl: 'https://plex.mjrflix.com',
   plexApiUrl: 'https://plex.tv/api',
-  token: 'testPlexApiToken',
+  token: process.env.PLEX_API_TOKEN,
 };
-
 export default plexConfig;

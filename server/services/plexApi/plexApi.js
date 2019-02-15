@@ -45,7 +45,6 @@ PlexApiClient.prototype.mostWatchedUrlParams = function(query) {
 };
 
 PlexApiClient.prototype.getLibraryDataBySectionUrlParams = function(query) {
-  console.log('url query', query.sectionId);
   return {
     host: config.plex.plexServerUrl,
     path: `/library/sections/${query.sectionId}/all`,
@@ -80,7 +79,7 @@ PlexApiClient.prototype.request = async function(url) {
       })
       .catch(error => {
         if (error.response) {
-          console.log('data', error.response.data);
+          // console.log('data', error.response.data);
           console.log('status', error.response.status);
           console.log('headers', error.response.headers);
           return reject(error.response);

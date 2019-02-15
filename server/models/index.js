@@ -8,7 +8,6 @@ const sequelize = new Sequelize(
     dialect: 'postgres',
     host: 'localhost',
   },
-  console.log(process.env.DATABASE),
 );
 
 const models = {

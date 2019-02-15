@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+require('dotenv').config();
 const _ = require('lodash');
 
 const env = process.env.NODE_ENV || 'local';
