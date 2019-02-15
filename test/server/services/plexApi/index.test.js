@@ -14,7 +14,7 @@ describe('Users', () => {
     it('should get all plex users', (done) => {
       const usersResponse = `${__dirname}/mocks/getUsersResponse.xml`;
       nock('https://plex.tv')
-        .get('/api/users?X-Plex-Token=hhnKQYskVjepfkhixqJu')
+        .get('/api/users?X-Plex-Token=testPlexApiToken')
         .replyWithFile(200, usersResponse, { 'Content-Type': 'text/xml' });
 
       chai
@@ -34,9 +34,7 @@ describe('Most Watched', () => {
   describe('GET /api/v1/plex/most-watched?:type', async () => {
     it('should return most watched history', (done) => {
       nock('https://plex.mjrflix.com')
-        .get(
-          '/library/all/top?type=2&limit=10&X-Plex-Token=hhnKQYskVjepfkhixqJu',
-        )
+        .get('/library/all/top?type=2&limit=10&X-Plex-Token=testPlexApiToken')
         .reply(200, responses.mostWatchedRaw, {
           'Content-Type': 'text/json',
         });
@@ -56,7 +54,7 @@ describe('Most Watched', () => {
     it('should return most watched history per account', (done) => {
       nock('https://plex.mjrflix.com')
         .get(
-          '/library/all/top?accountID=22099864&type=2&limit=10&X-Plex-Token=hhnKQYskVjepfkhixqJu',
+          '/library/all/top?accountID=22099864&type=2&limit=10&X-Plex-Token=testPlexApiToken',
         )
         .reply(200, responses.mostWatchedByAccountRaw, {
           'Content-Type': 'text/json',
@@ -79,7 +77,7 @@ describe('Sections', () => {
   describe('GET /api/v1/plex/sections', async () => {
     it('should sections', (done) => {
       nock('https://plex.mjrflix.com')
-        .get('/library/sections?X-Plex-Token=hhnKQYskVjepfkhixqJu')
+        .get('/library/sections?X-Plex-Token=testPlexApiToken')
         .reply(200, responses.sectionsRaw, {
           'Content-Type': 'text/json',
         });
@@ -100,7 +98,7 @@ describe('Library Data', () => {
   describe('GET /api/v1/plex/library?sectionId=3', async () => {
     it('should sections', (done) => {
       nock('https://plex.mjrflix.com')
-        .get('/library/sections/3/all?X-Plex-Token=hhnKQYskVjepfkhixqJu')
+        .get('/library/sections/3/all?X-Plex-Token=testPlexApiToken')
         .reply(200, responses.getLibraryDataBySectionRaw, {
           'Content-Type': 'text/json',
         });
