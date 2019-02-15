@@ -9,7 +9,7 @@ const getUsers = async (req, res) => {
 
 const getMostWatched = async (req, res) => {
   const plexApi = plexApiClient();
-  const mostWatched = await plexApi.getMostWatched(req.query);
+  const mostWatched = await plexApi.getMostWatched(req);
   res.json(mostWatched);
 };
 
@@ -22,7 +22,7 @@ const getSections = async (req, res) => {
 const getLibraryDataBySection = async (req, res) => {
   try {
     const plexApi = plexApiClient();
-    const sections = await plexApi.getLibraryDataBySection(req.query);
+    const sections = await plexApi.getLibraryDataBySection(req);
     res.json(sections);
   } catch (error) {
     console.log(error);

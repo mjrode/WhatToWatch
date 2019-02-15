@@ -6,8 +6,8 @@ const router = Router();
 router.get('/users', plexService.getUsers);
 router.get('/most-watched', plexService.getMostWatched);
 router.get('/sections', plexService.getSections);
-router.get('/sections/import', plexService.importSections);
-router.get('/library-by-section', plexService.getLibraryDataBySection);
-router.get('/libraries/import', plexService.importLibraries);
+router.get('/import/sections', plexService.importSections);
+router.get('/library/:id', plexService.getLibraryDataBySection);
+router.get('/import/libraries', plexService.importLibraries);
 
 export default router;

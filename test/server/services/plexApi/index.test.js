@@ -104,11 +104,13 @@ describe('Library Data', () => {
         });
       chai
         .request(app)
-        .get('/api/v1/plex/library-by-section?sectionId=3')
+        .get('/api/v1/plex/library/3')
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.deep.equal(responses.getLibraryDataBySectionRaw);
+          res.body.should.be.a('array');
+          res.body.should.deep.equal(
+            responses.getLibraryDataBySectionRaw.MediaContainer.Metadata,
+          );
           done();
         });
     });

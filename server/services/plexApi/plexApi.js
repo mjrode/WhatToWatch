@@ -31,23 +31,23 @@ PlexApiClient.prototype.getSectionsUrlParams = function() {
   };
 };
 
-PlexApiClient.prototype.mostWatchedUrlParams = function(query) {
+PlexApiClient.prototype.mostWatchedUrlParams = function(req) {
   return {
     host: config.plex.plexServerUrl,
     path: '/library/all/top',
     queryParams: {
-      ...(query.accountID && {accountID: query.accountID}),
-      ...(query.type && {type: query.type}),
-      ...((query.limit && {limit: query.limit}) || {limit: 10}),
+      ...(req.query.accountID && {accountID: req.query.accountID}),
+      ...(req.query.type && {type: req.query.type}),
+      ...((req.query.limit && {limit: req.query.limit}) || {limit: 10}),
       'X-Plex-Token': this.options.token || config.plex.token,
     },
   };
 };
 
-PlexApiClient.prototype.getLibraryDataBySectionUrlParams = function(query) {
+PlexApiClient.prototype.getLibraryDataBySectionUrlParams = function(req) {
   return {
     host: config.plex.plexServerUrl,
-    path: `/library/sections/${query.sectionId}/all`,
+    path: `/library/sections/${req.params.id}/all`,
     queryParams: {
       'X-Plex-Token': this.options.token || config.plex.token,
     },
@@ -101,8 +101,8 @@ PlexApiClient.prototype.getUsers = async function() {
   return response.MediaContainer.User;
 };
 
-PlexApiClient.prototype.getMostWatched = async function(query) {
-  const urlParams = this.mostWatchedUrlParams(query);
+PlexApiClient.prototype.getMostWatched = async function(req) {
+  const urlParams = this.mostWatchedUrlParams(req);
   const mostWatchedUrl = this.buildUrl(urlParams);
   const response = await this.request(mostWatchedUrl);
   return response.MediaContainer.Metadata;
@@ -115,10 +115,10 @@ PlexApiClient.prototype.getSections = async function() {
   return response.MediaContainer.Directory;
 };
 
-PlexApiClient.prototype.getLibraryDataBySection = async function(query) {
+PlexApiClient.prototype.getLibraryDataBySection = async function(req) {
   try {
-    console.log('Query', query);
-    const urlParams = this.getLibraryDataBySectionUrlParams(query);
+    console.log('Query', req.query);
+    const urlParams = this.getLibraryDataBySectionUrlParams(req);
     const getLibraryDataBySectionUrl = this.buildUrl(urlParams);
     const response = await this.request(getLibraryDataBySectionUrl);
     return response.MediaContainer.Metadata;
