@@ -39,18 +39,25 @@ const importLibrary = async sectionId => {
 const createLibrary = libraryData => {
   console.log(libraryData[1]);
   libraryData.forEach(async data => {
-    await models.PlexLibrary.create({
-      userId: 1,
-      title: data.title,
-      type: data.type,
-      views: data.views,
-      rating_key: data.ratingKey,
-      metadata_path: data.key,
-      summary: data.summary,
-      rating: data.rating,
-      year: data.year,
-      genre: JSON.stringify(data.Genre),
-    });
+    await models.PlexLibrary.upsert(
+      {
+        userId: 1,
+        title: data.title,
+        type: data.type,
+        views: data.views,
+        rating_key: data.ratingKey,
+        metadata_path: data.key,
+        summary: data.summary,
+        rating: data.rating,
+        year: data.year,
+        genre: JSON.stringify(data.Genre),
+      },
+      {
+        where: {
+          title: data.title,
+        },
+      },
+    );
   });
 };
 

@@ -3,6 +3,7 @@ import plexService from '../../../services/plexApi';
 
 const router = Router();
 
+// users
 router.get('/users', plexService.getUsers);
 router.get('/most-watched', plexService.getMostWatched);
 router.get('/sections', plexService.getSections);

@@ -1,6 +1,9 @@
 const plexLibrary = (sequelize, DataTypes) => {
   const plexLibrary = sequelize.define('plex_library', {
-    title: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
     type: DataTypes.STRING,
     views: DataTypes.INTEGER,
     rating_key: DataTypes.INTEGER,

@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+require('custom-env').env();
 require('dotenv').config();
 const _ = require('lodash');
 

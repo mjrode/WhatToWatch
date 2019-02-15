@@ -45,9 +45,10 @@ PlexApiClient.prototype.mostWatchedUrlParams = function(req) {
 };
 
 PlexApiClient.prototype.getLibraryDataBySectionUrlParams = function(req) {
+  const sectionId = req.sectionId || req.params.id;
   return {
     host: config.plex.plexServerUrl,
-    path: `/library/sections/${req.params.id}/all`,
+    path: `/library/sections/${sectionId}/all`,
     queryParams: {
       'X-Plex-Token': this.options.token || config.plex.token,
     },
