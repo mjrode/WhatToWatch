@@ -27,6 +27,15 @@ const importLibraries = async () => {
   });
 };
 
+const importMostWatched = async req => {
+  const plexApi = plexApiClient();
+  const mostWatched = await plexApi.getMostWatched(req);
+  console.log('6========', mostWatched);
+  mostWatched.forEach(async libraryData => {
+    await updateLibrary([libraryData]);
+  });
+};
+
 const importLibrary = async sectionId => {
   const plexApi = plexApiClient();
   const libraryData = await plexApi.getLibraryDataBySection({
@@ -34,6 +43,30 @@ const importLibrary = async sectionId => {
   });
   createLibrary(libraryData);
   return libraryData;
+};
+
+const updateLibrary = libraryData => {
+  libraryData.forEach(async data => {
+    await models.PlexLibrary.update(
+      {
+        userId: 1,
+        title: data.title,
+        type: data.type,
+        views: data.globalViewCount,
+        rating_key: data.ratingKey,
+        metadata_path: data.key,
+        summary: data.summary,
+        rating: data.rating,
+        year: data.year,
+        genre: JSON.stringify(data.Genre),
+      },
+      {
+        where: {
+          title: data.title,
+        },
+      },
+    );
+  });
 };
 
 const createLibrary = libraryData => {
@@ -61,4 +94,4 @@ const createLibrary = libraryData => {
   });
 };
 
-export default {importSections, importLibraries};
+export default {importSections, importLibraries, importMostWatched};

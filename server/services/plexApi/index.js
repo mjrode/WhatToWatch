@@ -39,6 +39,12 @@ const importLibraries = async (req, res) => {
   res.json(libraries);
 };
 
+const importMostWatched = async (req, res) => {
+  req.query.type = 2;
+  const libraries = await importData.importMostWatched(req);
+  res.json(libraries);
+};
+
 export default {
   getUsers,
   getMostWatched,
@@ -46,4 +52,5 @@ export default {
   getLibraryDataBySection,
   importSections,
   importLibraries,
+  importMostWatched,
 };

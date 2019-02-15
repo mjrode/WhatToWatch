@@ -36,9 +36,11 @@ PlexApiClient.prototype.mostWatchedUrlParams = function(req) {
     host: config.plex.plexServerUrl,
     path: '/library/all/top',
     queryParams: {
-      ...(req.query.accountID && {accountID: req.query.accountID}),
-      ...(req.query.type && {type: req.query.type}),
-      ...((req.query.limit && {limit: req.query.limit}) || {limit: 10}),
+      ...(req && req.query.accountID && {accountID: req.query.accountID}),
+      ...(req && req.query.type && {type: req.query.type}),
+      ...((req && (req.query.limit && {limit: req.query.limit})) || {
+        limit: 10,
+      }),
       'X-Plex-Token': this.options.token || config.plex.token,
     },
   };
@@ -106,6 +108,7 @@ PlexApiClient.prototype.getMostWatched = async function(req) {
   const urlParams = this.mostWatchedUrlParams(req);
   const mostWatchedUrl = this.buildUrl(urlParams);
   const response = await this.request(mostWatchedUrl);
+  console.log(response.MediaContainer.Metadata);
   return response.MediaContainer.Metadata;
 };
 
