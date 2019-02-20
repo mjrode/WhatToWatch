@@ -1,37 +1,29 @@
 import axios from 'axios';
-import buildUrl from 'build-url';
+import buildUrlPack from 'build-url';
 import config from '../../../config';
 import formatResponse from './helpers';
 
-function PlexApiClient(options) {
-  this.setOptions(options);
-}
-
-PlexApiClient.prototype.setOptions = function(options) {
-  this.options = options || {};
-};
-
-PlexApiClient.prototype.getUsersUrlParams = function() {
+const getUsersUrlParams = function() {
   return {
     host: config.plex.plexApiUrl,
     path: '/users',
     queryParams: {
-      'X-Plex-Token': this.options.token || config.plex.token,
+      'X-Plex-Token': config.plex.token,
     },
   };
 };
 
-PlexApiClient.prototype.getSectionsUrlParams = function() {
+const getSectionsUrlParams = function() {
   return {
     host: config.plex.plexServerUrl,
     path: '/library/sections',
     queryParams: {
-      'X-Plex-Token': this.options.token || config.plex.token,
+      'X-Plex-Token': config.plex.token,
     },
   };
 };
 
-PlexApiClient.prototype.mostWatchedUrlParams = function(req) {
+const mostWatchedUrlParams = function(req) {
   return {
     host: config.plex.plexServerUrl,
     path: '/library/all/top',
@@ -41,40 +33,40 @@ PlexApiClient.prototype.mostWatchedUrlParams = function(req) {
       ...((req && (req.query.limit && {limit: req.query.limit})) || {
         limit: 10,
       }),
-      'X-Plex-Token': this.options.token || config.plex.token,
+      'X-Plex-Token': config.plex.token,
     },
   };
 };
 
-PlexApiClient.prototype.getLibraryDataBySectionUrlParams = function(req) {
+const getLibraryDataBySectionUrlParams = function(req) {
   const sectionId = req.sectionId || req.params.id;
   return {
     host: config.plex.plexServerUrl,
     path: `/library/sections/${sectionId}/all`,
     queryParams: {
-      'X-Plex-Token': this.options.token || config.plex.token,
+      'X-Plex-Token': config.plex.token,
     },
   };
 };
 
-PlexApiClient.prototype.buildUrl = function(urlParams) {
+const buildUrl = function(urlParams) {
   try {
     const params = urlParams;
     const {host} = params;
     delete params.host;
     const urlHash = params;
 
-    return buildUrl(host, urlHash);
+    return buildUrlPack(host, urlHash);
   } catch (error) {
     console.log(error);
     return error;
   }
 };
 
-PlexApiClient.prototype.request = async function(url) {
+const request = async function(url) {
   console.log('Request URL', url);
   return new Promise((resolve, reject) => {
-    const httpClient = this.options.httpClient || axios;
+    const httpClient = axios;
     httpClient
       .get(url)
       .then(response => {
@@ -97,43 +89,47 @@ PlexApiClient.prototype.request = async function(url) {
   });
 };
 
-PlexApiClient.prototype.getUsers = async function() {
-  const urlParams = this.getUsersUrlParams();
-  const getUsersUrl = this.buildUrl(urlParams);
-  const response = await this.request(getUsersUrl);
+const getUsers = async function() {
+  const urlParams = getUsersUrlParams();
+  const getUsersUrl = buildUrl(urlParams);
+  const response = await request(getUsersUrl);
   return response.MediaContainer.User;
 };
 
-PlexApiClient.prototype.getMostWatched = async function(req) {
-  const urlParams = this.mostWatchedUrlParams(req);
-  const mostWatchedUrl = this.buildUrl(urlParams);
-  const response = await this.request(mostWatchedUrl);
+const getMostWatched = async function(req) {
+  const urlParams = mostWatchedUrlParams(req);
+  const mostWatchedUrl = buildUrl(urlParams);
+  const response = await request(mostWatchedUrl);
   console.log(response.MediaContainer.Metadata);
   return response.MediaContainer.Metadata;
 };
 
-PlexApiClient.prototype.getSections = async function() {
-  const urlParams = this.getSectionsUrlParams();
-  const getSectionsUrl = this.buildUrl(urlParams);
-  const response = await this.request(getSectionsUrl);
+const getSections = async function() {
+  const urlParams = getSectionsUrlParams();
+  const getSectionsUrl = buildUrl(urlParams);
+  const response = await request(getSectionsUrl);
   return response.MediaContainer.Directory;
 };
 
-PlexApiClient.prototype.getLibraryDataBySection = async function(req) {
+const getLibraryDataBySection = async function(req) {
   try {
-    console.log('Query', req.query);
-    const urlParams = this.getLibraryDataBySectionUrlParams(req);
-    const getLibraryDataBySectionUrl = this.buildUrl(urlParams);
-    const response = await this.request(getLibraryDataBySectionUrl);
+    const urlParams = getLibraryDataBySectionUrlParams(req);
+    const getLibraryDataBySectionUrl = buildUrl(urlParams);
+    const response = await request(getLibraryDataBySectionUrl);
     return response.MediaContainer.Metadata;
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
 
-const plexApiClient = (options = []) => {
-  return new PlexApiClient(options);
+export default {
+  getUsers,
+  getMostWatched,
+  getSections,
+  getLibraryDataBySection,
+  getUsersUrlParams,
+  getLibraryDataBySectionUrlParams,
+  getSectionsUrlParams,
+  buildUrl,
+  request,
 };
-
-export default plexApiClient;

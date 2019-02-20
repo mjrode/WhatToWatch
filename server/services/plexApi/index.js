@@ -1,27 +1,35 @@
-import plexApiClient from './plexApi';
+import plexApi from './plexApi';
 import importData from './importData';
+import auth from './auth';
+import helpers from './helpers';
+
+const getAuthToken = async (req, res) => {
+  const {username} = req.query;
+  const {password} = req.query;
+
+  auth(username, password).then(data => {
+    console.log(data);
+    return res.json(data);
+  });
+};
 
 const getUsers = async (req, res) => {
-  const plexApi = plexApiClient();
   const users = await plexApi.getUsers();
   res.json(users);
 };
 
 const getMostWatched = async (req, res) => {
-  const plexApi = plexApiClient();
   const mostWatched = await plexApi.getMostWatched(req);
   res.json(mostWatched);
 };
 
 const getSections = async (req, res) => {
-  const plexApi = plexApiClient();
   const sections = await plexApi.getSections();
   res.json(sections);
 };
 
 const getLibraryDataBySection = async (req, res) => {
   try {
-    const plexApi = plexApiClient();
     const sections = await plexApi.getLibraryDataBySection(req);
     res.json(sections);
   } catch (error) {
@@ -53,4 +61,5 @@ export default {
   importSections,
   importLibraries,
   importMostWatched,
+  getAuthToken,
 };

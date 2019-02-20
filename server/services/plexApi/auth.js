@@ -17,11 +17,11 @@ const encryptUserCreds = (username, password) => {
   return btoa(creds);
 };
 
-const fetchToken = (username, password) => {
-  request.post(options(username, password)).then(res => {
-    const token = res.match(rxAuthToken)[1];
-    return token;
-  });
+const fetchToken = async (username, password) => {
+  const res = await request.post(options(username, password));
+  console.log(res);
+  const token = res.match(rxAuthToken)[1];
+  return token;
 };
 
 export default fetchToken;

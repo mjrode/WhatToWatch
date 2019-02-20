@@ -4,47 +4,44 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import nock from 'nock';
 import plexResponses from './mocks/plexResponses';
-import plexApiClient from '../../../../server/services/plexApi/plexApi';
+import plexApi from '../../../../server/services/plexApi/plexApi';
 
 const should = chai.should();
 
 describe('plexApi', () => {
-  it('sets options when passed valid options object', () => {
-    const options = { token: 'plexToken' };
-    const result = plexApiClient(options).options;
-    result.should.deep.equal({
-      token: 'plexToken',
-    });
-  });
+  // it('sets options when passed valid options object', () => {
+  //   const options = { token: 'testPlexApiToken' };
+  //   const result = plexApi.options;
+  //   result.should.deep.equal({
+  //     token: 'testPlexApiToken',
+  //   });
+  // });
 
   it('return url params object', () => {
-    const options = { token: 'plexToken' };
-    const result = plexApiClient(options).getUsersUrlParams();
+    const result = plexApi.getUsersUrlParams();
     result.should.deep.equal({
       host: 'https://plex.tv/api',
       path: '/users',
       queryParams: {
-        'X-Plex-Token': 'plexToken',
+        'X-Plex-Token': 'testPlexApiToken',
       },
     });
   });
 
   it('returns url', () => {
-    const options = { token: 'plexToken' };
-    const PlexApi = plexApiClient(options);
+    const PlexApi = plexApi;
     const urlParams = PlexApi.getUsersUrlParams();
     const url = PlexApi.buildUrl(urlParams);
-    url.should.equal('https://plex.tv/api/users?X-Plex-Token=plexToken');
+    url.should.equal('https://plex.tv/api/users?X-Plex-Token=testPlexApiToken');
   });
 
   it('returns users', async () => {
     const usersResponse = `${__dirname}/mocks/getUsersResponse.xml`;
     nock('https://plex.tv')
-      .get('/api/users?X-Plex-Token=plexToken')
+      .get('/api/users?X-Plex-Token=testPlexApiToken')
       .replyWithFile(200, usersResponse, { 'Content-Type': 'text/xml' });
 
-    const options = { token: 'plexToken' };
-    const PlexApi = plexApiClient(options);
+    const PlexApi = plexApi;
     const urlParams = PlexApi.getUsersUrlParams();
     const url = PlexApi.buildUrl(urlParams);
     const result = await PlexApi.request(url);
@@ -54,11 +51,10 @@ describe('plexApi', () => {
   it('returns users using getUsers', async () => {
     const usersResponse = `${__dirname}/mocks/getUsersResponse.xml`;
     nock('https://plex.tv')
-      .get('/api/users?X-Plex-Token=plexToken')
+      .get('/api/users?X-Plex-Token=testPlexApiToken')
       .replyWithFile(200, usersResponse, { 'Content-Type': 'text/xml' });
 
-    const options = { token: 'plexToken' };
-    const PlexApi = plexApiClient(options);
+    const PlexApi = plexApi;
     const result = await PlexApi.getUsers();
     result.should.deep.equal(plexResponses.getUsersParsed);
   });
