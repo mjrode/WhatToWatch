@@ -1,20 +1,21 @@
-const plexLibrary = (sequelize, DataTypes) => {
-  const plexLibrary = sequelize.define('plex_library', {
-    title: {
+module.exports = (sequelize, DataTypes) => {
+  const PlexLibrary = sequelize.define(
+    'plexlibrary',
+    {
       type: DataTypes.STRING,
-      unique: true,
+      views: DataTypes.INTEGER,
+      rating_key: DataTypes.INTEGER,
+      metadata_path: DataTypes.STRING,
+      summary: DataTypes.STRING,
+      rating: DataTypes.FLOAT,
+      year: DataTypes.INTEGER,
+      genre: DataTypes.STRING,
     },
-    type: DataTypes.STRING,
-    views: DataTypes.INTEGER,
-    rating_key: DataTypes.INTEGER,
-    metadata_path: DataTypes.STRING,
-    summary: DataTypes.TEXT,
-    rating: DataTypes.FLOAT,
-    year: DataTypes.INTEGER,
-    genre: DataTypes.STRING,
-  });
-
-  return plexLibrary;
+    {},
+  );
+  // eslint-disable-next-line no-unused-vars
+  PlexLibrary.associate = function(models) {
+    // associations can be defined here
+  };
+  return PlexLibrary;
 };
-
-export default plexLibrary;

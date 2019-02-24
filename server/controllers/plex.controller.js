@@ -5,7 +5,6 @@ const router = Router();
 
 router.get('/auth', plexService.getAuthToken);
 
-// users
 router.get('/users', plexService.getUsers);
 
 router.get('/most-watched', plexService.getMostWatched);

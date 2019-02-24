@@ -74,7 +74,7 @@ describe('Most Watched', () => {
 
 describe('Sections', () => {
   describe('GET plex/sections', async () => {
-    it('should sections', (done) => {
+    it('should get sections', (done) => {
       nock('https://plex.mjrflix.com')
         .get('/library/sections?X-Plex-Token=testPlexApiToken')
         .reply(200, responses.sectionsRaw, {

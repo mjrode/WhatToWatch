@@ -1,30 +1,15 @@
-const user = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
-    username: {
-      type: DataTypes.STRING,
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define(
+    'user',
+    {
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
+      email: DataTypes.STRING,
     },
-  });
-
-  // User.associate = models => {
-  // User.hasMany(models.PlexLibrary, {onDelete: 'CASCADE'});
-  // User.hasMany(models.PlexSection, {onDelete: 'CASCADE'});
-  // };
-
-  User.findByLogin = async login => {
-    let user = await User.findOne({
-      where: {username: login},
-    });
-
-    if (!user) {
-      user = await User.findOne({
-        where: {email: login},
-      });
-    }
-
-    return user;
+    {},
+  );
+  User.associate = function(models) {
+    User.hasMany(models.plexsection);
   };
-
   return User;
 };
-
-export default user;

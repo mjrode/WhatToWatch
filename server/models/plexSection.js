@@ -1,15 +1,16 @@
-const plexSection = (sequelize, DataTypes) => {
-  const plexSection = sequelize.define('plex_section', {
-    title: DataTypes.STRING,
-    type: DataTypes.STRING,
-    key: DataTypes.INTEGER,
-  });
-
-  plexSection.associate = models => {
-    plexSection.belongsTo(models.User);
+module.exports = (sequelize, DataTypes) => {
+  const PlexSection = sequelize.define(
+    'plexsection',
+    {
+      title: DataTypes.STRING,
+      type: DataTypes.STRING,
+      key: DataTypes.INTEGER,
+    },
+    {},
+  );
+  PlexSection.associate = function(models) {
+    console.log(models);
+    PlexSection.belongsTo(models.user);
   };
-
-  return plexSection;
+  return PlexSection;
 };
-
-export default plexSection;

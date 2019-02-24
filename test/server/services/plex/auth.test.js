@@ -1,12 +1,7 @@
 import chai from 'chai';
-import chaiHttp from 'chai-http';
 import nock from 'nock';
-import sinon from 'sinon';
-import responses from './mocks/plexResponses';
 import app from '../../../../index';
 
-chai.use(chaiHttp);
-const should = chai.should();
 describe('Users', () => {
   describe('GET /api/v1/plex/auth', async () => {
     it('should get plex auth token', (done) => {
@@ -22,7 +17,6 @@ describe('Users', () => {
         .get('/plex/auth')
         .query({ username: 'username', password: 'password' })
         .end((err, res) => {
-          console.log('mike', res.body);
           res.should.have.status(200);
           res.body.should.equal('testPlexApiToken');
           done();
