@@ -2,7 +2,7 @@ import nock from 'nock';
 import plexResponses from './mocks/plexResponses';
 import plexApi from '../../../../server/services/plex/plexApi';
 import helpers from '../../../../server/services/plex/helpers';
-import nocks from '../../../nocks';
+import * as nocks from '../../../nocks';
 
 describe('plexApi', () => {
   it('return url params object', () => {

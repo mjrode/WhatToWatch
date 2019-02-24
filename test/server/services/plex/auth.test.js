@@ -1,16 +1,11 @@
 import chai from 'chai';
-import nock from 'nock';
+import * as nocks from '../../../nocks';
 import app from '../../../../index';
 
 describe('Users', () => {
   describe('GET /api/v1/plex/auth', async () => {
     it('should get plex auth token', (done) => {
-      const response = `${__dirname}/mocks/authResponse.xml`;
-      nock('https://plex.tv')
-        .post(uri => uri.includes('/users/sign_in.xml'))
-        .replyWithFile(200, response, {
-          'Content-Type': 'text/xml',
-        });
+      nocks.auth();
 
       chai
         .request(app)

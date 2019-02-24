@@ -3,14 +3,14 @@ import models from '../../db/models';
 
 const importSections = async () => {
   const sections = await plexApi.getSections();
-  createSections(sections);
-  return sections;
+  const sectionsDb = await createSections(sections);
+  return sectionsDb;
 };
 
 const createSections = sections => {
   try {
-    sections.forEach(async section => {
-      await models.PlexSection.upsert(
+    return sections.forEach(section => {
+      models.PlexSection.upsert(
         {
           title: section.title,
           type: section.type,

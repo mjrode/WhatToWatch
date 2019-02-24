@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import nock from 'nock';
+import * as nocks from '../../../nocks';
 import responses from './mocks/plexResponses';
 import app from '../../../../index';
 
@@ -10,10 +10,7 @@ const should = chai.should();
 describe('Users', () => {
   describe('GET plex/users', async () => {
     it('should get all plex users', (done) => {
-      const usersResponse = `${__dirname}/mocks/getUsersResponse.xml`;
-      nock('https://plex.tv')
-        .get('/api/users?X-Plex-Token=testPlexApiToken')
-        .replyWithFile(200, usersResponse, { 'Content-Type': 'text/xml' });
+      nocks.plexUsers();
 
       chai
         .request(app)
@@ -31,11 +28,7 @@ describe('Users', () => {
 describe('Most Watched', () => {
   describe('GET plex/most-watched?:type', async () => {
     it('should return most watched history', (done) => {
-      nock('https://plex.mjrflix.com')
-        .get('/library/all/top?type=2&limit=10&X-Plex-Token=testPlexApiToken')
-        .reply(200, responses.mostWatchedRaw, {
-          'Content-Type': 'text/json',
-        });
+      nocks.mostWatched();
 
       chai
         .request(app)
@@ -51,13 +44,7 @@ describe('Most Watched', () => {
 
   describe('GET plex/most-watched?:accountID&:type', async () => {
     it('should return most watched history per account', (done) => {
-      nock('https://plex.mjrflix.com')
-        .get(
-          '/library/all/top?accountID=22099864&type=2&limit=10&X-Plex-Token=testPlexApiToken',
-        )
-        .reply(200, responses.mostWatchedByAccountRaw, {
-          'Content-Type': 'text/json',
-        });
+      nocks.mostWatchedByAccount();
 
       chai
         .request(app)
@@ -75,11 +62,7 @@ describe('Most Watched', () => {
 describe('Sections', () => {
   describe('GET plex/sections', async () => {
     it('should get sections', (done) => {
-      nock('https://plex.mjrflix.com')
-        .get('/library/sections?X-Plex-Token=testPlexApiToken')
-        .reply(200, responses.sectionsRaw, {
-          'Content-Type': 'text/json',
-        });
+      nocks.plexSections();
       chai
         .request(app)
         .get('/plex/sections')
@@ -95,12 +78,8 @@ describe('Sections', () => {
 
 describe('Library Data', () => {
   describe('GET plex/library?sectionId=3', async () => {
-    it('should sections', (done) => {
-      nock('https://plex.mjrflix.com')
-        .get('/library/sections/3/all?X-Plex-Token=testPlexApiToken')
-        .reply(200, responses.getLibraryDataBySectionRaw, {
-          'Content-Type': 'text/json',
-        });
+    it('should fetch library', (done) => {
+      nocks.plexLibrary();
       chai
         .request(app)
         .get('/plex/library/3')
