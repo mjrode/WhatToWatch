@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   // eslint-disable-next-line no-unused-vars
   PlexLibrary.associate = function(models) {
-    // associations can be defined here
+    PlexLibrary.belongsTo(models.User);
   };
   return PlexLibrary;
 };

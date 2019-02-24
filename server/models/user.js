@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.associate = function(models) {
     User.hasMany(models.PlexSection);
+    User.hasMany(models.PlexLibrary);
   };
   return User;
 };
