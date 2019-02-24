@@ -2,7 +2,7 @@ import chai from 'chai';
 import nock from 'nock';
 import app from '../../../../index';
 import responses from './mocks/plexResponses';
-import { PlexSection, User, PlexLibrary } from '../../../../server/models';
+import { PlexSection, User, PlexLibrary } from '../../../../server/db/models';
 import truncate from '../../../truncate';
 
 // before(() => truncate('PlexSection'));

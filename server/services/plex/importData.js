@@ -1,5 +1,5 @@
 import plexApi from './plexApi';
-import models from '../../models';
+import models from '../../db/models';
 
 const importSections = async () => {
   const sections = await plexApi.getSections();

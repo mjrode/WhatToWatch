@@ -1,4 +1,4 @@
-import models from '../server/models';
+import models from '../server/db/models';
 
 const truncateTable = modelName => models[modelName].destroy({
   where: {},

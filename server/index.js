@@ -1,6 +1,6 @@
 import express from 'express';
 import {json, urlencoded} from 'body-parser';
-import {sequelize} from './models';
+import {sequelize} from './db/models';
 import plex from './routes/plex.route';
 
 export default () => {
