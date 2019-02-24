@@ -1,12 +1,7 @@
-import request from 'supertest';
-import mocha from 'mocha';
-import chai from 'chai';
-import chaiHttp from 'chai-http';
 import nock from 'nock';
 import plexResponses from './mocks/plexResponses';
 import plexApi from '../../../../server/services/plex/plexApi';
-
-const should = chai.should();
+import helpers from '../../../../server/services/plex/helpers';
 
 describe('plexApi', () => {
   it('return url params object', () => {
@@ -23,7 +18,7 @@ describe('plexApi', () => {
   it('returns url', () => {
     const PlexApi = plexApi;
     const urlParams = PlexApi.getUsersUrlParams();
-    const url = PlexApi.buildUrl(urlParams);
+    const url = helpers.buildUrl(urlParams);
     url.should.equal('https://plex.tv/api/users?X-Plex-Token=testPlexApiToken');
   });
 
@@ -35,8 +30,8 @@ describe('plexApi', () => {
 
     const PlexApi = plexApi;
     const urlParams = PlexApi.getUsersUrlParams();
-    const url = PlexApi.buildUrl(urlParams);
-    const result = await PlexApi.request(url);
+    const url = helpers.buildUrl(urlParams);
+    const result = await helpers.request(url);
     result.should.deep.equal(plexResponses.getUsersRaw);
   });
 

@@ -27,7 +27,6 @@ export default () => {
 
     const port = server.get('port');
 
-    console.log('port', port);
     sequelize.sync().then(() => {
       server.listen(port, () => {
         console.log(`Express server listening on - http://${hostname}:${port}`);

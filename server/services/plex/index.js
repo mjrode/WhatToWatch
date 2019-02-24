@@ -12,7 +12,6 @@ const getAuthToken = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
-  console.log('getUsers-mike-');
   const users = await plexApi.getUsers();
   res.json(users);
 };
@@ -33,6 +32,7 @@ const getLibraryDataBySection = async (req, res) => {
     res.json(sections);
   } catch (error) {
     console.log(error);
+    res.json(error);
   }
 };
 

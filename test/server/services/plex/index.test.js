@@ -48,6 +48,7 @@ describe('Most Watched', () => {
         });
     });
   });
+
   describe('GET plex/most-watched?:accountID&:type', async () => {
     it('should return most watched history per account', (done) => {
       nock('https://plex.mjrflix.com')
