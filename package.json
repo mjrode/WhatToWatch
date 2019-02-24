@@ -4,10 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "PLEX_API_TOKEN=testPlexApiToken mocha  --require babel-core/register ./test/**/**/**/*.test.js --exit",
+    "test": "cross-env NODE_ENV=test PLEX_API_TOKEN=testPlexApiToken nyc --reporter=html --reporter=text mocha --require babel-core/register ./test/**/**/**/*.test.js --exit",
     "dev": "nodemon --exec babel-node --inspect index.js",
     "debug": "nodemon --exec babel-node --inspect index.js",
     "start": "nodemon --exec babel-node index.js"
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +25,7 @@
     "btoa": "^1.2.1",
     "build-url": "^1.3.2",
     "cors": "^2.8.5",
+    "cross-env": "^5.2.0",
     "custom-env": "^1.0.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
