@@ -22,8 +22,12 @@ const getMostWatched = async (req, res) => {
 };
 
 const getSections = async (req, res) => {
-  const sections = await plexApi.getSections();
-  res.json(sections);
+  try {
+    const sections = await plexApi.getSections();
+    res.json(sections);
+  } catch (error) {
+    res.json(error);
+  }
 };
 
 const getLibraryDataBySection = async (req, res) => {

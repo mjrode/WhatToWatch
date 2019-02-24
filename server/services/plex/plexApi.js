@@ -62,10 +62,14 @@ const getMostWatched = async function(req) {
 };
 
 const getSections = async function() {
-  const urlParams = getSectionsUrlParams();
-  const getSectionsUrl = helpers.buildUrl(urlParams);
-  const response = await helpers.request(getSectionsUrl);
-  return response.MediaContainer.Directory;
+  try {
+    const urlParams = getSectionsUrlParams();
+    const getSectionsUrl = helpers.buildUrl(urlParams);
+    const response = await helpers.request(getSectionsUrl);
+    return response.MediaContainer.Directory;
+  } catch (error) {
+    return error;
+  }
 };
 
 const getLibraryDataBySection = async function(req) {

@@ -8,20 +8,24 @@ const importSections = async () => {
 };
 
 const createSections = sections => {
-  sections.forEach(async section => {
-    await models.PlexSection.upsert(
-      {
-        title: section.title,
-        type: section.type,
-        key: section.key,
-      },
-      {
-        where: {
+  try {
+    sections.forEach(async section => {
+      await models.PlexSection.upsert(
+        {
           title: section.title,
+          type: section.type,
+          key: section.key,
         },
-      },
-    );
-  });
+        {
+          where: {
+            title: section.title,
+          },
+        },
+      );
+    });
+  } catch (error) {
+    return error;
+  }
 };
 
 const importLibraries = async () => {
