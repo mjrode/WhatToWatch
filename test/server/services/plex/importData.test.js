@@ -3,19 +3,12 @@ import nock from 'nock';
 import app from '../../../../index';
 import responses from './mocks/plexResponses';
 import { PlexSection, User, PlexLibrary } from '../../../../server/db/models';
-import truncate from '../../../truncate';
+import { seed, truncate } from '../../../../server/db/scripts';
 
 // before(() => truncate('PlexSection'));
 describe('ImportData', () => {
   before(() => {
-    User.upsert(
-      {
-        firstName: 'Mike',
-        lastName: 'Rode',
-        email: 'michaelrode44@gmail.com',
-      },
-      { where: { email: 'micahelrode44@gmail.com' } },
-    );
+    seed('User');
   });
   describe('GET /plex/import/sections', async () => {
     it('should find and store sections in the database first', async () => {
