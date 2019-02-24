@@ -1,8 +1,7 @@
 import express from 'express';
 import {json, urlencoded} from 'body-parser';
 import {sequelize} from './models';
-
-const routes = require('./routes').default;
+import plex from './routes/plex.route';
 
 export default () => {
   const server = express();
@@ -18,7 +17,8 @@ export default () => {
     server.use(urlencoded({extended: true}));
 
     // Set up routes
-    routes.init(server);
+    server.use('/plex', plex);
+
     return server;
   };
 
@@ -27,14 +27,11 @@ export default () => {
 
     const port = server.get('port');
 
+    console.log('port', port);
     sequelize.sync().then(() => {
-      if (!module.parent) {
-        server.listen(port, () => {
-          console.log(
-            `Express server listening on - http://${hostname}:${port}`,
-          );
-        });
-      }
+      server.listen(port, () => {
+        console.log(`Express server listening on - http://${hostname}:${port}`);
+      });
     });
   };
 

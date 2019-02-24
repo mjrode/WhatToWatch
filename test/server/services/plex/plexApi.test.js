@@ -4,19 +4,11 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import nock from 'nock';
 import plexResponses from './mocks/plexResponses';
-import plexApi from '../../../../server/services/plexApi/plexApi';
+import plexApi from '../../../../server/services/plex/plexApi';
 
 const should = chai.should();
 
 describe('plexApi', () => {
-  // it('sets options when passed valid options object', () => {
-  //   const options = { token: 'testPlexApiToken' };
-  //   const result = plexApi.options;
-  //   result.should.deep.equal({
-  //     token: 'testPlexApiToken',
-  //   });
-  // });
-
   it('return url params object', () => {
     const result = plexApi.getUsersUrlParams();
     result.should.deep.equal({

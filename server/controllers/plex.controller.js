@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import plexService from '../../../services/plexApi';
+import plexService from '../services/plex';
 
 const router = Router();
 

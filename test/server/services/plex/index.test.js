@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const should = chai.should();
 
 describe('Users', () => {
-  describe('GET /api/v1/plex/users', async () => {
+  describe('GET plex/users', async () => {
     it('should get all plex users', (done) => {
       const usersResponse = `${__dirname}/mocks/getUsersResponse.xml`;
       nock('https://plex.tv')
@@ -17,7 +17,7 @@ describe('Users', () => {
 
       chai
         .request(app)
-        .get('/api/v1/plex/users')
+        .get('/plex/users')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -29,7 +29,7 @@ describe('Users', () => {
 });
 
 describe('Most Watched', () => {
-  describe('GET /api/v1/plex/most-watched?:type', async () => {
+  describe('GET plex/most-watched?:type', async () => {
     it('should return most watched history', (done) => {
       nock('https://plex.mjrflix.com')
         .get('/library/all/top?type=2&limit=10&X-Plex-Token=testPlexApiToken')
@@ -39,7 +39,7 @@ describe('Most Watched', () => {
 
       chai
         .request(app)
-        .get('/api/v1/plex/most-watched?type=2')
+        .get('/plex/most-watched?type=2')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -48,7 +48,7 @@ describe('Most Watched', () => {
         });
     });
   });
-  describe('GET /api/v1/plex/most-watched?:accountID&:type', async () => {
+  describe('GET plex/most-watched?:accountID&:type', async () => {
     it('should return most watched history per account', (done) => {
       nock('https://plex.mjrflix.com')
         .get(
@@ -60,7 +60,7 @@ describe('Most Watched', () => {
 
       chai
         .request(app)
-        .get('/api/v1/plex/most-watched?accountID=22099864&type=2')
+        .get('/plex/most-watched?accountID=22099864&type=2')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -72,7 +72,7 @@ describe('Most Watched', () => {
 });
 
 describe('Sections', () => {
-  describe('GET /api/v1/plex/sections', async () => {
+  describe('GET plex/sections', async () => {
     it('should sections', (done) => {
       nock('https://plex.mjrflix.com')
         .get('/library/sections?X-Plex-Token=testPlexApiToken')
@@ -81,7 +81,7 @@ describe('Sections', () => {
         });
       chai
         .request(app)
-        .get('/api/v1/plex/sections')
+        .get('/plex/sections')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -93,7 +93,7 @@ describe('Sections', () => {
 });
 
 describe('Library Data', () => {
-  describe('GET /api/v1/plex/library?sectionId=3', async () => {
+  describe('GET plex/library?sectionId=3', async () => {
     it('should sections', (done) => {
       nock('https://plex.mjrflix.com')
         .get('/library/sections/3/all?X-Plex-Token=testPlexApiToken')
@@ -102,7 +102,7 @@ describe('Library Data', () => {
         });
       chai
         .request(app)
-        .get('/api/v1/plex/library/3')
+        .get('/plex/library/3')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
