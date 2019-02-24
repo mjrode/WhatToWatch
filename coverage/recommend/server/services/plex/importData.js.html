@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">48% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>12/25</span>
+        <span class='fraction'>20/25</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,21 +30,21 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">25% </span>
+        <span class="strong">66.67% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/12</span>
+        <span class='fraction'>8/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">48% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>12/25</span>
+        <span class='fraction'>20/25</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -141,8 +141,7 @@
 <a name='L93'></a><a href='#L93'>93</a>
 <a name='L94'></a><a href='#L94'>94</a>
 <a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L96'></a><a href='#L96'>96</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -168,6 +167,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -177,18 +182,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -215,8 +213,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">112x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -251,7 +249,6 @@ const createSections = sections =&gt; {
   sections.forEach(async section =&gt; {
     await models.PlexSection.upsert(
       {
-        UserId: 1,
         title: section.title,
         type: section.type,
         key: section.key,
@@ -265,10 +262,10 @@ const createSections = sections =&gt; {
   });
 };
 &nbsp;
-const importLibraries = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
-  const sections = <span class="cstat-no" title="statement not covered" >await plexApi.getSections();</span>
-<span class="cstat-no" title="statement not covered" >  sections.forEach(<span class="fstat-no" title="function not covered" >as</span>ync section =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    await importLibrary(section.key);</span>
+const importLibraries = async () =&gt; {
+  const sections = await plexApi.getSections();
+  sections.forEach(async section =&gt; {
+    await importLibrary(section.key);
   });
 };
 &nbsp;
@@ -279,12 +276,12 @@ const importMostWatched = <span class="fstat-no" title="function not covered" >a
   });
 };
 &nbsp;
-const importLibrary = <span class="fstat-no" title="function not covered" >as</span>ync sectionId =&gt; {
-  const libraryData = <span class="cstat-no" title="statement not covered" >await plexApi.getLibraryDataBySection({</span>
+const importLibrary = async sectionId =&gt; {
+  const libraryData = await plexApi.getLibraryDataBySection({
     sectionId,
   });
-<span class="cstat-no" title="statement not covered" >  createLibrary(libraryData);</span>
-<span class="cstat-no" title="statement not covered" >  return libraryData;</span>
+  createLibrary(libraryData);
+  return libraryData;
 };
 &nbsp;
 const updateLibrary = <span class="fstat-no" title="function not covered" >li</span>braryData =&gt; {
@@ -310,9 +307,9 @@ const updateLibrary = <span class="fstat-no" title="function not covered" >li</s
   });
 };
 &nbsp;
-const createLibrary = <span class="fstat-no" title="function not covered" >li</span>braryData =&gt; {
-<span class="cstat-no" title="statement not covered" >  libraryData.forEach(<span class="fstat-no" title="function not covered" >as</span>ync data =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    await models.PlexLibrary.upsert(</span>
+const createLibrary = libraryData =&gt; {
+  libraryData.forEach(async data =&gt; {
+    await models.PlexLibrary.upsert(
       {
         title: data.title,
         type: data.type,
@@ -340,7 +337,7 @@ export default {importSections, importLibraries, importMostWatched};
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Feb 24 2019 01:38:48 GMT-0600 (Central Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Feb 24 2019 02:09:19 GMT-0600 (Central Standard Time)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

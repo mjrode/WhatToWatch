@@ -11,7 +11,6 @@ const createSections = sections => {
   sections.forEach(async section => {
     await models.PlexSection.upsert(
       {
-        UserId: 1,
         title: section.title,
         type: section.type,
         key: section.key,
