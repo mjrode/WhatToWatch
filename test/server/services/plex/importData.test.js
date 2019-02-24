@@ -7,9 +7,9 @@ import { seed, truncate } from '../../../../server/db/scripts';
 
 // before(() => truncate('PlexSection'));
 describe('ImportData', () => {
-  before(() => {
-    seed('User');
-  });
+  before(() => seed('User'));
+  after(() => truncate('User'));
+
   describe('GET /plex/import/sections', async () => {
     it('should find and store sections in the database first', async () => {
       nock('https://plex.mjrflix.com')
