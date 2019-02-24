@@ -1,7 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const PlexLibrary = sequelize.define(
-    'plexlibrary',
+    'PlexLibrary',
     {
+      title: DataTypes.STRING,
       type: DataTypes.STRING,
       views: DataTypes.INTEGER,
       rating_key: DataTypes.INTEGER,

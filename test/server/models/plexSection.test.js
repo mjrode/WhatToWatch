@@ -1,18 +1,26 @@
-import plexSection from '../../../server/models/plexSection';
+import { assert } from 'chai';
+import factories from '../../factories';
+import truncate from '../../truncate';
 
-const {
-  sequelize,
-  dataTypes,
-  checkModelName,
-  checkPropertyExists,
-} = require('sequelize-test-helpers');
+import models from '../../../server/models';
 
-describe('server/models/plexSection', () => {
-  const Model = plexSection(sequelize, dataTypes);
-  const instance = new Model();
+describe('User model', () => {
+  let user;
 
-  checkModelName(Model)('plex_section');
-  context('properties', () => {
-    ['title', 'type', 'key', 'userId'].forEach(checkPropertyExists(instance));
+  beforeEach(async () => {
+    await truncate();
+
+    console.log('mike=========', factories);
+    user = await factories.user();
+  });
+
+  it('should generate a user from the factory', async () => {
+    assert.isOk(user.id);
+  });
+
+  it('should truncate the user table with each test', async () => {
+    const count = await models.User.count();
+
+    assert.equal(count, 1);
   });
 });

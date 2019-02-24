@@ -1,8 +1,7 @@
-import plexApiClient from './plexApi';
+import plexApi from './plexApi';
 import models from '../../models';
 
 const importSections = async () => {
-  const plexApi = plexApiClient();
   const sections = await plexApi.getSections();
   createSections(sections);
   return sections;
@@ -20,7 +19,6 @@ const createSections = sections => {
 };
 
 const importLibraries = async () => {
-  const plexApi = plexApiClient();
   const sections = await plexApi.getSections();
   sections.forEach(async section => {
     await importLibrary(section.key);
@@ -28,7 +26,6 @@ const importLibraries = async () => {
 };
 
 const importMostWatched = async req => {
-  const plexApi = plexApiClient();
   const mostWatched = await plexApi.getMostWatched(req);
   mostWatched.forEach(async libraryData => {
     await updateLibrary([libraryData]);
@@ -36,7 +33,6 @@ const importMostWatched = async req => {
 };
 
 const importLibrary = async sectionId => {
-  const plexApi = plexApiClient();
   const libraryData = await plexApi.getLibraryDataBySection({
     sectionId,
   });

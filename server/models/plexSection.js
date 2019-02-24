@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const PlexSection = sequelize.define(
-    'plexsection',
+    'PlexSection',
     {
       title: DataTypes.STRING,
       type: DataTypes.STRING,
@@ -9,8 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     {},
   );
   PlexSection.associate = function(models) {
-    console.log(models);
-    PlexSection.belongsTo(models.user);
+    PlexSection.belongsTo(models.User);
   };
   return PlexSection;
 };

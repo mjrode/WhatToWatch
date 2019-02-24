@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
-    'user',
+    'User',
     {
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     {},
   );
   User.associate = function(models) {
-    User.hasMany(models.plexsection);
+    User.hasMany(models.PlexSection);
   };
   return User;
 };

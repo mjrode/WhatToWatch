@@ -1,11 +1,14 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('plexlibraries', {
+    return queryInterface.createTable('PlexLibraries', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
+      },
+      title: {
+        type: Sequelize.STRING,
       },
       type: {
         type: Sequelize.STRING,
@@ -43,6 +46,6 @@ module.exports = {
   },
   // eslint-disable-next-line no-unused-vars
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('plexlibraries');
+    return queryInterface.dropTable('PlexLibraries');
   },
 };
