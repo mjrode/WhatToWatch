@@ -28,15 +28,18 @@ export default () => {
     const port = server.get('port');
 
     sequelize.sync().then(() => {
-      server.listen(port, () => {
-        console.log(`Express server listening on - http://${hostname}:${port}`);
-      });
+      if (!module.parent) {
+        server.listen(port, () => {
+          console.log(
+            `Express server listening on - http://${hostname}:${port}`,
+          );
+        });
+      }
     });
   };
 
   process.on('unhandledRejection', (reason, p) => {
     console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
-    // application specific logging, throwing an error, or other logic here
   });
 
   return {create, start};

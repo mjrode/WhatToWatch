@@ -1,10 +1,10 @@
-import uuid from 'uuid/v1';
+import uuid from 'uuid';
 import btoa from 'btoa';
 import request from 'request-promise';
 
 const rxAuthToken = /authenticationToken="([^"]+)"/;
 
-const options = (username, password) => ({
+const urlParams = (username, password) => ({
   url: 'https://plex.tv/users/sign_in.xml',
   headers: {
     'X-Plex-Client-Identifier': uuid(),
@@ -18,8 +18,7 @@ const encryptUserCreds = (username, password) => {
 };
 
 const fetchToken = async (username, password) => {
-  const res = await request.post(options(username, password));
-  console.log(res);
+  const res = await request.post(urlParams(username, password));
   const token = res.match(rxAuthToken)[1];
   return token;
 };

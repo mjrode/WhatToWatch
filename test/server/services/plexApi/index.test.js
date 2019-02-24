@@ -4,8 +4,6 @@ import nock from 'nock';
 import responses from './mocks/plexResponses';
 import app from '../../../../index';
 
-nock.enableNetConnect;
-
 chai.use(chaiHttp);
 const should = chai.should();
 

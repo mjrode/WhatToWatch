@@ -30,7 +30,6 @@ const importLibraries = async () => {
 const importMostWatched = async req => {
   const plexApi = plexApiClient();
   const mostWatched = await plexApi.getMostWatched(req);
-  console.log('6========', mostWatched);
   mostWatched.forEach(async libraryData => {
     await updateLibrary([libraryData]);
   });
@@ -70,7 +69,6 @@ const updateLibrary = libraryData => {
 };
 
 const createLibrary = libraryData => {
-  console.log(libraryData[1]);
   libraryData.forEach(async data => {
     await models.PlexLibrary.upsert(
       {

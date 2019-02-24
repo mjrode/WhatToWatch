@@ -7,6 +7,12 @@ const init = server => {
   });
 
   server.use('/api', apiRoute);
+
+  server.use((err, req, res, next) => {
+    if (err) {
+      console.log('Error in routes/index', err);
+    }
+  });
 };
 
 export default {

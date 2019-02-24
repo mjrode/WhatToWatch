@@ -74,7 +74,6 @@ const request = async function(url) {
       })
       .catch(error => {
         if (error.response) {
-          // console.log('data', error.response.data);
           console.log('status', error.response.status);
           console.log('headers', error.response.headers);
           return reject(error.response);
@@ -100,7 +99,6 @@ const getMostWatched = async function(req) {
   const urlParams = mostWatchedUrlParams(req);
   const mostWatchedUrl = buildUrl(urlParams);
   const response = await request(mostWatchedUrl);
-  console.log(response.MediaContainer.Metadata);
   return response.MediaContainer.Metadata;
 };
 

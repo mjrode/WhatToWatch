@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <user email="michaelrode44@gmail.com" id="1785591" uuid="8aa3f610df561c94" mailing_list_status="active" thumb="https://plex.tv/users/8aa3f610df561c94/avatar?c=1550019870" username="mjrode" title="mjrode" cloudSyncDevice="" locale="" authenticationToken="testPlexApiToken" authToken="testPlexApiToken" scrobbleTypes="" restricted="0" home="0" guest="0" queueEmail="queue+99Jp8cx4zmqjSkE4YHZG@save.plex.tv" queueUid="e8500dd3b8ebf1e5" hasPassword="true" homeSize="1" maxHomeSize="15" rememberMe="false" secure="1" certificateVersion="2">
+    <subscription active="1" status="Active" plan="monthly">
+      <feature id="webhooks"/>
+      <feature id="camera_upload"/>
+      <feature id="home"/>
+      <feature id="pass"/>
+      <feature id="dvr"/>
+      <feature id="trailers"/>
+      <feature id="session_bandwidth_restrictions"/>
+      <feature id="music_videos"/>
+      <feature id="content_filter"/>
+      <feature id="adaptive_bitrate"/>
+      <feature id="sync"/>
+      <feature id="photo_autotags"/>
+      <feature id="lyrics"/>
+      <feature id="cloudsync"/>
+      <feature id="premium_music_metadata"/>
+      <feature id="hardware_transcoding"/>
+      <feature id="session_kick"/>
+      <feature id="photos-metadata-edition"/>
+      <feature id="collections"/>
+      <feature id="radio"/>
+      <feature id="tuner-sharing"/>
+      <feature id="photos-favorites"/>
+      <feature id="hwtranscode"/>
+      <feature id="photosV6-tv-albums"/>
+      <feature id="photosV6-edit"/>
+      <feature id="federated-auth"/>
+      <feature id="item_clusters"/>
+      <feature id="livetv"/>
+      <feature id="Android - PiP"/>
+      <feature id="news"/>
+      <feature id="photos-v5"/>
+      <feature id="publishing_platform"/>
+      <feature id="unsupportedtuners"/>
+      <feature id="kevin-bacon"/>
+      <feature id="client-radio-stations"/>
+      <feature id="imagga-v2"/>
+      <feature id="silence-removal"/>
+      <feature id="boost-voices"/>
+      <feature id="volume-leveling"/>
+      <feature id="sweet-fades"/>
+      <feature id="sleep-timer"/>
+      <feature id="TREBLE-show-features"/>
+      <feature id="web_server_dashboard"/>
+      <feature id="visualizers"/>
+      <feature id="premium-dashboard"/>
+      <feature id="conan_redirect_qa"/>
+      <feature id="conan_redirect_alpha"/>
+      <feature id="conan_redirect_beta"/>
+      <feature id="nominatim"/>
+      <feature id="transcoder_cache"/>
+    </subscription>
+    <roles>
+      <role id="plexpass"/>
+    </roles>
+    <entitlements all="1">
+      <entitlement id="roku"/>
+      <entitlement id="android"/>
+      <entitlement id="xbox_one"/>
+      <entitlement id="xbox_360"/>
+      <entitlement id="windows"/>
+      <entitlement id="windows_phone"/>
+      <entitlement id="ios"/>
+    </entitlements>
+    <profile_settings default_audio_language="en" default_subtitle_language="en" auto_select_subtitle="0" auto_select_audio="0" default_subtitle_accessibility="0" default_subtitle_forced="0"/>
+    <providers>
+      <provider id="google_federated" uid="michaelrode44@gmail.com" token="eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlMTg3MTc3Zjk5ODdjMTkxMDg1MTA3ZjY4M2E2ZWEyNzdhZmJjOGQifQ.eyJhenAiOiI5NTQzOTYxMDczMTEtdnBkaTBpZTY5MDVqMXByOHVkYzJ2MWRybTlwMGtuMHAuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI5NTQzOTYxMDczMTEtdnBkaTBpZTY5MDVqMXByOHVkYzJ2MWRybTlwMGtuMHAuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDM5MTMwOTczODY4MDc2ODAxNTEiLCJlbWFpbCI6Im1pY2hhZWxyb2RlNDRAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiI3MXNUaHk0Y2E2aHdpY2x1bjk3SVZRIiwiZXhwIjoxNTE5MjgzNjY1LCJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwianRpIjoiNzFjODljODFjYjg2NTJiOTM5NmJlZGZkOTVmNDM4NTM3OTcxMjAyMiIsImlhdCI6MTUxOTI4MDA2NSwibmFtZSI6Ik1pY2hhZWwgUm9kZSIsInBpY3R1cmUiOiJodHRwczovL2xoNi5nb29nbGV1c2VyY29udGVudC5jb20vLWozNzJBdEt6b1FnL0FBQUFBQUFBQUFJL0FBQUFBQUFBZHcwL0ZKSEpHcXZ6UWhNL3M5Ni1jL3Bob3RvLmpwZyIsImdpdmVuX25hbWUiOiJNaWNoYWVsIiwiZmFtaWx5X25hbWUiOiJSb2RlIiwibG9jYWxlIjoiZW4ifQ.wthNayjhoUWpFD0FzdUu0Sl3KLcRILIJzg0T5KaXrjECk0yAbTCkuY1DfeFGyGrX_j8CU-I0CisgZzlSvmmGX7aXWKHn6PQftZLFwE2KH0M1xubJPmS0DBOzBFShT115mCoMVfQwDIp4ibch5XA8asF6G5a9PA6ALVf-1IVC-Cw606g9zdzWogalPb2rN_KkYHzjONHnL8JQm0PLYK7jn7KbPAEK5tNrEXThWX4DlpRt4-nvcZZ3NLHAfxwyMzft_uUK0vXk5jlgqUlUCTJuQhfNgQ0fMUj71Cfw0w-XiugfYx9rP3aH4ZrCLdEoV_bWaeDrfVKNpER7k1ylgb7rhg"/>
+      <provider id="facebook_federated" uid="10211542468182915" token="EAATZBvQHPWEYBAOfor8c9ZAiZCsfdhMxBc5WVI39eOmSLjU58zV9FOSZCw5PbOMJ40FSaUAmVWzxDlGAtDVK7klpZBHcdlYkDZCbZBhPzppArqpAswW6maHu5YnRZAzCB7e6j6fUJpmjoqn1R7qhRFfvJLXOoEXNfzz8ZAtJk6i4YxeHl1U1C6sYBtPaI0pe6VJol4AdjBOX41vFfKI09DsNncmUd8Tbg5ymBw02DxrUY0AZDZD"/>
+    </providers>
+    <services>
+      <service identifier="eyeq" endpoint="https://c4412416.ipg.web.cddbp.net/webapi/xml/1.0/" token="6iUU7VrBzA/Hz5nsS9o65Yz77qvh63pYmUN+TaVHeonhsQWlzYGcsik1opEU3toj" status="online"/>
+      <service identifier="eyeq-channel-icons" endpoint="http://akamai-b.cdn.cddbp.net/cds/2.0/image" status="online"/>
+      <service identifier="imagga-v2" endpoint="https://api.imagga.com/v2" token="AunxEHP5CLc5vu/jsdobovGRXa8Rijd+b35tHpUavpY=" secret="XuI9cYEa+ljybVxAU5puuD8jxxA49EMey5xmomcmraKgv6AW2kaFv80dzQnpETm7" status="online"/>
+      <service identifier="nominatim" endpoint="https://locationiq.org/v1" token="MLJSTFcm5IurTy3c7juhvvFs0fX0YR6dRjKNAywidVk=" status="online"/>
+      <service identifier="metadata-provider" endpoint="https://mpm.plex.tv/" status="online"/>
+      <service identifier="tmsapi" endpoint="https://tmsapi.plex.tv/v1.1/" token="a0VC3zjGN7FmzvlZKIuRRUjLCRoQkgY2jwJsLgi8+OQ=" status="online"/>
+      <service identifier="subtitles-search" endpoint="https://metadata.provider.plex.tv/library/metadata/matches" status="online"/>
+    </services>
+    <username>mjrode</username>
+    <email>michaelrode44@gmail.com</email>
+    <joined-at type="datetime">2014-01-03 03:05:51 UTC</joined-at>
+    <authentication-token>testPlexApiToken</authentication-token>
+  </user>

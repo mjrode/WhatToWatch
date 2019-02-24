@@ -8,7 +8,6 @@ const getAuthToken = async (req, res) => {
   const {password} = req.query;
 
   auth(username, password).then(data => {
-    console.log(data);
     return res.json(data);
   });
 };
