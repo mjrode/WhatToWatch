@@ -9,6 +9,7 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
+        unique: true,
       },
       type: {
         type: Sequelize.STRING,
@@ -24,7 +25,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      userId: {
+      UserId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',

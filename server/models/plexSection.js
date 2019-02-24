@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const PlexSection = sequelize.define(
     'PlexSection',
     {
-      title: DataTypes.STRING,
+      title: {type: DataTypes.STRING, unique: true},
       type: DataTypes.STRING,
       key: DataTypes.INTEGER,
     },

@@ -9,12 +9,19 @@ const importSections = async () => {
 
 const createSections = sections => {
   sections.forEach(async section => {
-    await models.PlexSection.create({
-      userId: 1,
-      title: section.title,
-      type: section.type,
-      key: section.key,
-    });
+    await models.PlexSection.upsert(
+      {
+        UserId: 1,
+        title: section.title,
+        type: section.type,
+        key: section.key,
+      },
+      {
+        where: {
+          title: section.title,
+        },
+      },
+    );
   });
 };
 
@@ -44,7 +51,6 @@ const updateLibrary = libraryData => {
   libraryData.forEach(async data => {
     await models.PlexLibrary.update(
       {
-        userId: 1,
         title: data.title,
         type: data.type,
         views: data.globalViewCount,
@@ -68,7 +74,6 @@ const createLibrary = libraryData => {
   libraryData.forEach(async data => {
     await models.PlexLibrary.upsert(
       {
-        userId: 1,
         title: data.title,
         type: data.type,
         views: data.views,

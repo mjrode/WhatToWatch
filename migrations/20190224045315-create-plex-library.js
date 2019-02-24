@@ -9,6 +9,7 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
+        unique: true,
       },
       type: {
         type: Sequelize.STRING,
@@ -34,7 +35,7 @@ module.exports = {
       genre: {
         type: Sequelize.STRING,
       },
-      userId: {
+      UserId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
