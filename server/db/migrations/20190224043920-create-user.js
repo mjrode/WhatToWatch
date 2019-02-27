@@ -17,6 +17,20 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
+      username: Sequelize.STRING,
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+
+      last_login: {
+        type: Sequelize.DATE,
+      },
+
+      status: {
+        type: Sequelize.ENUM('active', 'inactive'),
+        defaultValue: 'active',
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

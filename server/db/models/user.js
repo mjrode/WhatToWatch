@@ -5,6 +5,20 @@ module.exports = (sequelize, DataTypes) => {
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
       email: {type: DataTypes.STRING, unique: true},
+      username: DataTypes.STRING,
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
+      last_login: {
+        type: DataTypes.DATE,
+      },
+
+      status: {
+        type: DataTypes.ENUM('active', 'inactive'),
+        defaultValue: 'active',
+      },
     },
     {},
   );
