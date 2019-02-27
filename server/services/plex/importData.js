@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import plexApi from './plexApi';
 import models from '../../db/models';
 
@@ -8,7 +9,7 @@ const importSections = async () => {
 };
 
 const createSections = sections => {
-  try {
+  return Promise.try(() => {
     return sections.forEach(section => {
       models.PlexSection.upsert(
         {
@@ -23,9 +24,9 @@ const createSections = sections => {
         },
       );
     });
-  } catch (error) {
-    return error;
-  }
+  }).catch(err => {
+    console.log(err);
+  });
 };
 
 const importLibraries = async () => {
