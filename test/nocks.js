@@ -3,6 +3,7 @@ import responses from './server/services/plex/mocks/plexResponses';
 
 const usersResponse = `${__dirname}/server/services/plex/mocks/getUsersResponse.xml`;
 const authResponse = `${__dirname}/server/services/plex/mocks/authResponse.xml`;
+const invalidRequestResponse = `${__dirname}/server/services/plex/mocks/error.html`;
 
 export const plexSections = () => {
   nock('https://plex.mjrflix.com')
@@ -12,14 +13,12 @@ export const plexSections = () => {
     });
 };
 
-export const plexLibrary = () => {
-  nock('https://plex.mjrflix.com')
-    .persist()
-    .get(url => url.includes('/library/sections/'))
-    .reply(200, responses.getLibraryDataBySectionRaw, {
-      'Content-Type': 'text/json',
-    });
-};
+export const plexLibrary = () => nock('https://plex.mjrflix.com')
+  .persist()
+  .get(url => url.includes('/library/sections/'))
+  .reply(200, responses.getLibraryDataBySectionRaw, {
+    'Content-Type': 'text/json',
+  });
 
 export const plexUsers = () => {
   nock('https://plex.tv')
@@ -29,6 +28,7 @@ export const plexUsers = () => {
 
 export const mostWatched = () => {
   nock('https://plex.mjrflix.com')
+    .persist()
     .get(uri => uri.includes('/library/all/top?type='))
     .reply(200, responses.mostWatchedRawTV, {
       'Content-Type': 'text/json',
@@ -49,6 +49,14 @@ export const auth = () => {
   nock('https://plex.tv')
     .post(uri => uri.includes('/users/sign_in.xml'))
     .replyWithFile(200, authResponse, {
+      'Content-Type': 'text/xml',
+    });
+};
+
+export const invalidRequest = () => {
+  nock('https://plex.mjrflix.com')
+    .get(uri => uri.includes('users'))
+    .replyWithFile(200, invalidRequestResponse, {
       'Content-Type': 'text/xml',
     });
 };

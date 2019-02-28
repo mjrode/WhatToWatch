@@ -34,6 +34,7 @@ const request = async function(url) {
         return resolve(formatResponse(response));
       })
       .catch(error => {
+        console.log(error);
         if (error.response) {
           console.log('Status Error--', error.response.status);
           console.log('Headers Error--', error.response.headers);

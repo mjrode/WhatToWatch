@@ -93,4 +93,18 @@ describe('Library Data', () => {
         });
     });
   });
+
+  describe('GET plex/library?sectionId=3', async () => {
+    it('should return error upon failure', (done) => {
+      nocks.invalidRequest();
+      chai
+        .request(app)
+        .get('/api/users?X-Plex-Token')
+        .end((err, res) => {
+          console.log('error-mike--', res);
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
 });

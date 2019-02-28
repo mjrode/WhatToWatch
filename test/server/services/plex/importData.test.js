@@ -65,8 +65,6 @@ describe('ImportData', () => {
       library.should.be.length(56);
 
       nocks.mostWatched();
-      nocks.mostWatched();
-
       await importData.importMostWatched();
       const libraryMostWatched = await models.PlexLibrary.findAll();
       const newGirl = libraryMostWatched.filter(
