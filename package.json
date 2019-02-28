@@ -13,6 +13,7 @@
     "db:rollback": "babel-node ./scripts/db/rollback",
     "dev": "nodemon --exec babel-node --inspect index.js",
     "debug": "nodemon --exec babel-node --inspect index.js",
+    "db:reset": "NODE_ENV=test npx sequelize db:migrate:undo:all &&  NODE_ENV=test npx sequelize db:migrate && npx sequelize db:migrate:undo:all && npx sequelize db:migrate",
     "start": "nodemon --exec babel-node index.js"
   },
   "nyc": {
