@@ -55,4 +55,28 @@ describe('ImportData', () => {
       librarySecondRequest.should.be.length(56);
     });
   });
+
+  describe('GET /plex/import/most-watched', () => {
+    it('should find and store libraries in the database', async () => {
+      nocks.plexSections();
+      nocks.plexLibrary();
+      await importData.importLibraries();
+      const library = await models.PlexLibrary.findAll();
+      library.should.be.length(56);
+
+      nocks.mostWatched();
+      const req = { query: { type: 2 } };
+      await importData.importMostWatched(req);
+      const libraryMostWatched = await models.PlexLibrary.findAll();
+      const newGirl = libraryMostWatched.filter(
+        data => data.dataValues.title === 'New Girl',
+      );
+
+      newGirl[0].dataValues.views.should.eq(74);
+      newGirl[0].dataValues.metadata_path.should.eq(
+        '/library/metadata/5485/children',
+      );
+      libraryMostWatched.should.be.length(56);
+    });
+  });
 });

@@ -34,10 +34,10 @@ const importLibraries = async () => {
   });
 };
 
-const importMostWatched = async req => {
-  const mostWatched = await plexApi.getMostWatched(req);
-  mostWatched.forEach(async libraryData => {
-    await updateLibrary([libraryData]);
+const importMostWatched = async type => {
+  const mostWatchedRecords = await plexApi.getMostWatched(type);
+  return Promise.map(mostWatchedRecords, mostWatchedRecord => {
+    return updateLibrary([mostWatchedRecord]);
   });
 };
 
@@ -50,27 +50,25 @@ const importLibrary = async sectionId => {
 };
 
 const updateLibrary = libraryData => {
-  return Promise.try(() => {
-    libraryData.forEach(data => {
-      models.PlexLibrary.update(
-        {
+  return Promise.map(libraryData, data => {
+    return models.PlexLibrary.update(
+      {
+        title: data.title,
+        type: data.type,
+        views: data.globalViewCount,
+        rating_key: data.ratingKey,
+        metadata_path: data.key,
+        summary: data.summary,
+        rating: data.rating,
+        year: data.year,
+        genre: JSON.stringify(data.Genre),
+      },
+      {
+        where: {
           title: data.title,
-          type: data.type,
-          views: data.globalViewCount,
-          rating_key: data.ratingKey,
-          metadata_path: data.key,
-          summary: data.summary,
-          rating: data.rating,
-          year: data.year,
-          genre: JSON.stringify(data.Genre),
         },
-        {
-          where: {
-            title: data.title,
-          },
-        },
-      );
-    });
+      },
+    );
   }).catch(err => {
     console.log(err);
   });
@@ -78,7 +76,7 @@ const updateLibrary = libraryData => {
 
 const createLibrary = libraryData => {
   return Promise.map(libraryData, sectionLibraryData => {
-    models.PlexLibrary.upsert(
+    return models.PlexLibrary.upsert(
       {
         title: sectionLibraryData.title,
         type: sectionLibraryData.type,
