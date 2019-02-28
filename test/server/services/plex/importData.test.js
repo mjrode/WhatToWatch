@@ -65,13 +65,13 @@ describe('ImportData', () => {
       library.should.be.length(56);
 
       nocks.mostWatched();
-      const req = { query: { type: 2 } };
-      await importData.importMostWatched(req);
+      nocks.mostWatched();
+
+      await importData.importMostWatched();
       const libraryMostWatched = await models.PlexLibrary.findAll();
       const newGirl = libraryMostWatched.filter(
         data => data.dataValues.title === 'New Girl',
       );
-
       newGirl[0].dataValues.views.should.eq(74);
       newGirl[0].dataValues.metadata_path.should.eq(
         '/library/metadata/5485/children',

@@ -29,7 +29,7 @@ export const plexUsers = () => {
 
 export const mostWatched = () => {
   nock('https://plex.mjrflix.com')
-    .get('/library/all/top?type=2&limit=10&X-Plex-Token=testPlexApiToken')
+    .get(uri => uri.includes('/library/all/top?sectionKey='))
     .reply(200, responses.mostWatchedRaw, {
       'Content-Type': 'text/json',
     });
@@ -38,7 +38,7 @@ export const mostWatched = () => {
 export const mostWatchedByAccount = () => {
   nock('https://plex.mjrflix.com')
     .get(
-      '/library/all/top?accountID=22099864&type=2&limit=10&X-Plex-Token=testPlexApiToken',
+      '/library/all/top?accountId=22099864&sectionKey=2&limit=10&X-Plex-Token=testPlexApiToken',
     )
     .reply(200, responses.mostWatchedByAccountRaw, {
       'Content-Type': 'text/json',

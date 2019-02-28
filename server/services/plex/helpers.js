@@ -35,12 +35,12 @@ const request = async function(url) {
       })
       .catch(error => {
         if (error.response) {
-          console.log('status', error.response.status);
-          console.log('headers', error.response.headers);
+          console.log('Status Error--', error.response.status);
+          console.log('Headers Error--', error.response.headers);
           return reject(error.response);
         }
         if (error.request) {
-          console.log('request', error.request);
+          console.log('Request Error--', error.request);
         } else {
           console.log('Error', error.message);
         }

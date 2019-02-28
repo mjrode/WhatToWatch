@@ -17,7 +17,8 @@ const getUsers = async (req, res) => {
 };
 
 const getMostWatched = async (req, res) => {
-  const mostWatched = await plexApi.getMostWatched(req);
+  const options = req.query;
+  const mostWatched = await plexApi.getMostWatched(options);
   res.json(mostWatched);
 };
 
@@ -32,7 +33,9 @@ const getSections = async (req, res) => {
 
 const getLibraryDataBySection = async (req, res) => {
   try {
-    const sections = await plexApi.getLibraryDataBySection(req);
+    const sectionId = req.sectionId || req.params.id;
+    const options = {sectionId};
+    const sections = await plexApi.getLibraryDataBySection(options);
     res.json(sections);
   } catch (error) {
     console.log(error);
@@ -51,8 +54,7 @@ const importLibraries = async (req, res) => {
 };
 
 const importMostWatched = async (req, res) => {
-  req.query.type = 2;
-  const libraries = await importData.importMostWatched(req);
+  const libraries = await importData.importMostWatched();
   res.json(libraries);
 };
 

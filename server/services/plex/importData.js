@@ -34,16 +34,28 @@ const importLibraries = async () => {
   });
 };
 
-const importMostWatched = async type => {
-  const mostWatchedRecords = await plexApi.getMostWatched(type);
-  return Promise.map(mostWatchedRecords, mostWatchedRecord => {
-    return updateLibrary([mostWatchedRecord]);
+// Get section ids from database
+//
+const importMostWatched = async () => {
+  const sectionKeys = await models.PlexSection.findAll().then(sections => {
+    return sections.map(section => section.key.toString());
+  });
+  return Promise.map(sectionKeys, sectionKey => {
+    return importMostWatchedData(sectionKey);
+  }).catch(err => {
+    console.log(err);
   });
 };
 
-const importLibrary = async sectionId => {
+const importMostWatchedData = async sectionKey => {
+  const mostWatchedData = await plexApi.getMostWatched({sectionKey});
+  const mostWatchedDbData = await updateLibrary(mostWatchedData);
+  return mostWatchedDbData;
+};
+
+const importLibrary = async sectionKey => {
   const libraryData = await plexApi.getLibraryDataBySection({
-    sectionId,
+    sectionKey,
   });
   const dbLibraryData = await createLibrary(libraryData);
   return dbLibraryData;

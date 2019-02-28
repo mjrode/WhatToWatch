@@ -26,13 +26,13 @@ describe('Users', () => {
 });
 
 describe('Most Watched', () => {
-  describe('GET plex/most-watched?:type', async () => {
+  describe('GET plex/most-watched?:sectionKey', async () => {
     it('should return most watched history', (done) => {
       nocks.mostWatched();
 
       chai
         .request(app)
-        .get('/plex/most-watched?type=2')
+        .get('/plex/most-watched?sectionKey=2')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -42,13 +42,13 @@ describe('Most Watched', () => {
     });
   });
 
-  describe('GET plex/most-watched?:accountID&:type', async () => {
+  describe('GET plex/most-watched?:accountId&:sectionKey', async () => {
     it('should return most watched history per account', (done) => {
       nocks.mostWatchedByAccount();
 
       chai
         .request(app)
-        .get('/plex/most-watched?accountID=22099864&type=2')
+        .get('/plex/most-watched?accountId=22099864&sectionKey=2')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
