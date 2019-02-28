@@ -28,6 +28,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "btoa": "^1.2.1",
     "build-url": "^1.3.2",
