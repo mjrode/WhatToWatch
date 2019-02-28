@@ -1,7 +1,6 @@
 const localConfig = {
   hostname: 'localhost',
-  port: 8000,
-  // viewDir: './app/views',
+  port: 8080,
 };
 
 export default localConfig;

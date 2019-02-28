@@ -1,7 +1,7 @@
 import express from 'express';
 import {json, urlencoded} from 'body-parser';
-
-const routes = require('./routes').default;
+import {sequelize} from './db/models';
+import plex from './routes/plex.route';
 
 export default () => {
   const server = express();
@@ -9,15 +9,16 @@ export default () => {
   const create = config => {
     // Server settings
     server.set('env', config.env);
-    server.set('port', config.port);
-    server.set('hostname', config.hostname);
+    server.set('port', config.server.port);
+    server.set('hostname', config.server.hostname);
 
     // Returns middleware that parses json
     server.use(json());
     server.use(urlencoded({extended: true}));
 
     // Set up routes
-    routes.init(server);
+    server.use('/plex', plex);
+
     return server;
   };
 
@@ -26,10 +27,16 @@ export default () => {
 
     const port = server.get('port');
 
-    server.listen(port, () => {
-      console.log(`Express server listening on - http://${hostname}:${port}`);
+    sequelize.sync().then(() => {
+      server.listen(port, () => {
+        console.log(`Express server listening on - http://${hostname}:${port}`);
+      });
     });
   };
+
+  process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+  });
 
   return {create, start};
 };

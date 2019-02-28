@@ -1,5 +1,7 @@
+.env
 node_modules
 .vscode
 .nyc_output
 dist
 npm-debug.log
+coverage
