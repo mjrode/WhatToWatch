@@ -21,7 +21,7 @@ const getSectionsUrlParams = function() {
   };
 };
 
-const mostWatchedUrlParams = function({accountId, sectionKey, limit = 10}) {
+const mostWatchedUrlParams = function(accountId, sectionKey, limit = 10) {
   return {
     host: config.plex.plexServerUrl,
     path: '/library/all/top',
@@ -34,8 +34,7 @@ const mostWatchedUrlParams = function({accountId, sectionKey, limit = 10}) {
   };
 };
 
-const getLibraryDataBySectionUrlParams = function(options) {
-  const {sectionId} = options;
+const getLibraryDataBySectionUrlParams = function(sectionId) {
   return {
     host: config.plex.plexServerUrl,
     path: `/library/sections/${sectionId}/all`,
@@ -60,9 +59,9 @@ const getUsers = async function() {
   }
 };
 
-const getMostWatched = async function(options) {
+const getMostWatched = async function({accountId, sectionKey, limit = 10}) {
   try {
-    const urlParams = mostWatchedUrlParams(options);
+    const urlParams = mostWatchedUrlParams(accountId, sectionKey, limit);
     const mostWatchedUrl = helpers.buildUrl(urlParams);
     const response = await helpers.request(mostWatchedUrl);
     return response.MediaContainer.Metadata;
@@ -91,9 +90,9 @@ const getSections = async function() {
   }
 };
 
-const getLibraryDataBySection = async function(options) {
+const getLibraryDataBySection = async function({sectionId}) {
   try {
-    const urlParams = getLibraryDataBySectionUrlParams(options);
+    const urlParams = getLibraryDataBySectionUrlParams(sectionId);
     const getLibraryDataBySectionUrl = helpers.buildUrl(urlParams);
     const response = await helpers.request(getLibraryDataBySectionUrl);
     return response.MediaContainer.Metadata;

@@ -20,6 +20,9 @@ const createSections = sections => {
         where: {
           title: section.title,
         },
+        returning: true,
+        plain: true,
+        raw: true,
       },
     );
   }).catch(err => {

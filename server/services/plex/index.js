@@ -37,12 +37,10 @@ const getSections = async (req, res) => {
 
 const getLibraryDataBySection = async (req, res) => {
   try {
-    const sectionId = req.sectionId || req.params.id;
-    const options = {sectionId};
+    const options = {sectionId: req.params.id};
     const sections = await plexApi.getLibraryDataBySection(options);
     res.json(sections);
   } catch (error) {
-    console.log(error);
     res.json(error);
   }
 };
@@ -62,7 +60,15 @@ const importMostWatched = async (req, res) => {
   res.json(libraries);
 };
 
+const importAll = async (req, res) => {
+  await importData.importSections();
+  await importData.importLibraries();
+  const data = await importData.importMostWatched();
+  res.json(data);
+};
+
 export default {
+  getAuthToken,
   getUsers,
   getMostWatched,
   getSections,
@@ -70,5 +76,5 @@ export default {
   importSections,
   importLibraries,
   importMostWatched,
-  getAuthToken,
+  importAll,
 };

@@ -37,4 +37,12 @@ describe('plexApi', () => {
     const result = await plexApi.getUsers();
     result.should.deep.equal(plexResponses.getUsersParsed);
   });
+
+  it('returns library data by sectionId', async () => {
+    nocks.plexLibrary();
+    const result = await plexApi.getLibraryDataBySection({ sectionId: 2 });
+    result.should.deep.equal(
+      plexResponses.getLibraryDataBySectionRaw.MediaContainer.Metadata,
+    );
+  });
 });

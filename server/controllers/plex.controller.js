@@ -16,4 +16,6 @@ router.get('/import/sections', plexService.importSections);
 router.get('/library/:id', plexService.getLibraryDataBySection);
 router.get('/import/libraries', plexService.importLibraries);
 
+router.get('/import/all', plexService.importAll);
+
 export default router;
