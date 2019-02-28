@@ -27,7 +27,7 @@ const mostWatchedUrlParams = function({accountId, sectionKey, limit = 10}) {
     path: '/library/all/top',
     queryParams: {
       ...(accountId && {accountId}),
-      ...(sectionKey && {sectionKey}),
+      ...(sectionKey && {type: sectionKey}),
       ...(limit && {limit}),
       'X-Plex-Token': config.plex.token,
     },
