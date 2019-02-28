@@ -30,7 +30,7 @@ export const plexUsers = () => {
 export const mostWatched = () => {
   nock('https://plex.mjrflix.com')
     .get(uri => uri.includes('/library/all/top?sectionKey='))
-    .reply(200, responses.mostWatchedRaw, {
+    .reply(200, responses.mostWatchedRawTV, {
       'Content-Type': 'text/json',
     });
 };

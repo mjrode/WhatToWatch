@@ -396,7 +396,7 @@ export default {
       },
     },
   ],
-  mostWatchedParsed: [
+  mostWatchedParsedTV: [
     {
       ratingKey: '5485',
       key: '/library/metadata/5485/children',
@@ -665,7 +665,7 @@ export default {
       ],
     },
   ],
-  mostWatchedRaw: {
+  mostWatchedRawTV: {
     MediaContainer: {
       size: 6,
       allowSync: false,
@@ -943,6 +943,984 @@ export default {
       ],
     },
   },
+  mostWatchedRawMovies: {
+    "MediaContainer": {
+        "size": 10,
+        "allowSync": false,
+        "identifier": "com.plexapp.plugins.library",
+        "mediaTagPrefix": "/system/bundle/media/flags/",
+        "mediaTagVersion": 1550857654,
+        "Metadata": [
+            {
+                "ratingKey": "7515",
+                "key": "/library/metadata/7515",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "Universal Pictures",
+                "type": "movie",
+                "title": "Pride & Prejudice",
+                "contentRating": "PG",
+                "summary": "Pride & Prejudice is a humorous story of love and life among English gentility during the Georgian era. Mr. Bennet is an English gentleman living in Hertfordshire with his overbearing wife and five daughters. If Mr. Bennet dies their house will be inherited by a distant cousin whom they have never met, so the family's future happiness and security is dependent on the daughters making good marriages.",
+                "rating": 7.8,
+                "year": 2005,
+                "tagline": "A romance ahead of its time.",
+                "thumb": "/library/metadata/7515/thumb/1548948964",
+                "art": "/library/metadata/7515/art/1548948964",
+                "duration": 7697899,
+                "originallyAvailableAt": "2005-09-16",
+                "addedAt": 1548948948,
+                "updatedAt": 1548948964,
+                "globalViewCount": "2",
+                "primaryExtraKey": "/library/metadata/7516",
+                "ratingImage": "imdb://image.rating",
+                "userCount": "1",
+                "Media": [
+                    {
+                        "id": 9177,
+                        "duration": 7697899,
+                        "bitrate": 9763,
+                        "width": 1920,
+                        "height": 816,
+                        "aspectRatio": 2.35,
+                        "audioChannels": 6,
+                        "audioCodec": "dca",
+                        "videoCodec": "h264",
+                        "videoResolution": "1080",
+                        "container": "mkv",
+                        "videoFrameRate": "24p",
+                        "audioProfile": "dts",
+                        "videoProfile": "high",
+                        "Part": [
+                            {
+                                "id": 9210,
+                                "key": "/library/parts/9210/1260455312/file.mkv",
+                                "duration": 7697899,
+                                "file": "/media/Movies/Pride & Prejudice (2005)/Pride & Prejudice (2005) Bluray-1080p.mkv",
+                                "size": 9394529497,
+                                "audioProfile": "dts",
+                                "container": "mkv",
+                                "videoProfile": "high"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Drama"
+                    },
+                    {
+                        "tag": "Romance"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Joe Wright"
+                    }
+                ],
+                "Writer": [
+                    {
+                        "tag": "Deborah Moggach"
+                    }
+                ],
+                "Country": [
+                    {
+                        "tag": "France"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "Brenda Blethyn"
+                    },
+                    {
+                        "tag": "Carey Mulligan"
+                    },
+                    {
+                        "tag": "Claudie Blakley"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22110937
+                    }
+                ]
+            },
+            {
+                "ratingKey": "7533",
+                "key": "/library/metadata/7533",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "Malpaso Productions",
+                "type": "movie",
+                "title": "A Star Is Born",
+                "titleSort": "Star Is Born",
+                "contentRating": "R",
+                "summary": "Seasoned musician Jackson Maine discovers—and falls in love with—struggling artist Ally. She has just about given up on her dream to make it big as a singer—until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
+                "rating": 9,
+                "audienceRating": 8.1,
+                "viewOffset": 1316000,
+                "lastViewedAt": 1549231098,
+                "year": 2018,
+                "thumb": "/library/metadata/7533/thumb/1549025320",
+                "art": "/library/metadata/7533/art/1549025320",
+                "duration": 8145152,
+                "originallyAvailableAt": "2018-10-03",
+                "addedAt": 1549025303,
+                "updatedAt": 1549025320,
+                "audienceRatingImage": "rottentomatoes://image.rating.upright",
+                "chapterSource": "media",
+                "globalViewCount": "2",
+                "primaryExtraKey": "/library/metadata/7538",
+                "ratingImage": "rottentomatoes://image.rating.ripe",
+                "userCount": "2",
+                "Media": [
+                    {
+                        "id": 9197,
+                        "duration": 8145152,
+                        "bitrate": 13830,
+                        "width": 1920,
+                        "height": 800,
+                        "aspectRatio": 2.35,
+                        "audioChannels": 6,
+                        "audioCodec": "ac3",
+                        "videoCodec": "h264",
+                        "videoResolution": "1080",
+                        "container": "mkv",
+                        "videoFrameRate": "24p",
+                        "videoProfile": "high",
+                        "Part": [
+                            {
+                                "id": 9230,
+                                "key": "/library/parts/9230/1549036547/file.mkv",
+                                "duration": 8145152,
+                                "file": "/media/Movies/A.Star.is.Born.2018.HC.HDRip.XviD.AC3-EVO/A Star Is Born (2018) Bluray-1080p.mkv",
+                                "size": 14080562992,
+                                "container": "mkv",
+                                "videoProfile": "high"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Drama"
+                    },
+                    {
+                        "tag": "Music"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Bradley Cooper"
+                    }
+                ],
+                "Writer": [
+                    {
+                        "tag": "Bradley Cooper"
+                    },
+                    {
+                        "tag": "Eric Roth"
+                    }
+                ],
+                "Country": [
+                    {
+                        "tag": "USA"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "Alec Baldwin"
+                    },
+                    {
+                        "tag": "Andrew Dice Clay"
+                    },
+                    {
+                        "tag": "Anthony LoGerfo"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22099864
+                    },
+                    {
+                        "id": 22110937
+                    }
+                ]
+            },
+            {
+                "ratingKey": "8110",
+                "key": "/library/metadata/8110",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "Focus Features",
+                "type": "movie",
+                "title": "Won't You Be My Neighbor?",
+                "contentRating": "PG-13",
+                "summary": "Fred Rogers used puppets and play to explore complex social issues: race, disability, equality and tragedy, helping form the American concept of childhood. He spoke directly to children and they responded enthusiastically. Yet today, his impact is unclear. Have we lived up to Fred's ideal of good neighbors?",
+                "rating": 9.9,
+                "audienceRating": 9.5,
+                "year": 2018,
+                "tagline": "A little kindness makes a world of difference.",
+                "thumb": "/library/metadata/8110/thumb/1549773390",
+                "art": "/library/metadata/8110/art/1549773390",
+                "duration": 5667168,
+                "originallyAvailableAt": "2018-06-08",
+                "addedAt": 1549773376,
+                "updatedAt": 1549773390,
+                "audienceRatingImage": "rottentomatoes://image.rating.upright",
+                "chapterSource": "media",
+                "globalViewCount": "2",
+                "primaryExtraKey": "/library/metadata/8111",
+                "ratingImage": "rottentomatoes://image.rating.ripe",
+                "userCount": "2",
+                "Media": [
+                    {
+                        "id": 9956,
+                        "duration": 5667168,
+                        "bitrate": 11597,
+                        "width": 1920,
+                        "height": 1080,
+                        "aspectRatio": 1.78,
+                        "audioChannels": 6,
+                        "audioCodec": "dca",
+                        "videoCodec": "h264",
+                        "videoResolution": "1080",
+                        "container": "mkv",
+                        "videoFrameRate": "24p",
+                        "audioProfile": "dts",
+                        "videoProfile": "high",
+                        "Part": [
+                            {
+                                "id": 9989,
+                                "key": "/library/parts/9989/1538066727/file.mkv",
+                                "duration": 5667168,
+                                "file": "/media/Movies/Won't You Be My Neighbor! (2018)/Won't You Be My Neighbor! (2018) Bluray-1080p.mkv",
+                                "size": 8215337283,
+                                "audioProfile": "dts",
+                                "container": "mkv",
+                                "videoProfile": "high"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Biography"
+                    },
+                    {
+                        "tag": "Documentary"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Morgan Neville"
+                    }
+                ],
+                "Country": [
+                    {
+                        "tag": "USA"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "Al Gore"
+                    },
+                    {
+                        "tag": "Betty Aberlin"
+                    },
+                    {
+                        "tag": "Betty Seamans"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22099864
+                    },
+                    {
+                        "id": 22110937
+                    }
+                ]
+            },
+            {
+                "ratingKey": "5091",
+                "key": "/library/metadata/5091",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "HBO Sports",
+                "type": "movie",
+                "title": "Andre the Giant",
+                "summary": "An ambitious and wide-ranging documentary exploring Andre’s upbringing in France, his celebrated career in WWE, and his forays in the entertainment world.",
+                "rating": 7.2,
+                "year": 2018,
+                "tagline": "Even bigger than you imagined",
+                "thumb": "/library/metadata/5091/thumb/1550786534",
+                "art": "/library/metadata/5091/art/1550786534",
+                "duration": 5059655,
+                "originallyAvailableAt": "2018-04-10",
+                "addedAt": 1548827224,
+                "updatedAt": 1550786534,
+                "globalViewCount": "1",
+                "userCount": "2",
+                "Media": [
+                    {
+                        "id": 5937,
+                        "duration": 5059655,
+                        "bitrate": 4652,
+                        "width": 1280,
+                        "height": 720,
+                        "aspectRatio": 1.78,
+                        "audioChannels": 2,
+                        "audioCodec": "aac",
+                        "videoCodec": "h264",
+                        "videoResolution": "720",
+                        "container": "mp4",
+                        "videoFrameRate": "NTSC",
+                        "optimizedForStreaming": 1,
+                        "audioProfile": "lc",
+                        "has64bitOffsets": false,
+                        "videoProfile": "main",
+                        "Part": [
+                            {
+                                "id": 5970,
+                                "key": "/library/parts/5970/1523735052/file.mp4",
+                                "duration": 5059655,
+                                "file": "/media/Movies/Andre.The.Giant.HBO.Documentary.2018.720p.HDTV.x264-NWCHD.mp4",
+                                "size": 2942152141,
+                                "audioProfile": "lc",
+                                "container": "mp4",
+                                "has64bitOffsets": false,
+                                "optimizedForStreaming": true,
+                                "videoProfile": "main"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Documentary"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Jason Hehir"
+                    }
+                ],
+                "Country": [
+                    {
+                        "tag": "USA"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "André the Giant"
+                    },
+                    {
+                        "tag": "Andy Warhol"
+                    },
+                    {
+                        "tag": "Arnold Schwarzenegger"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22099864
+                    },
+                    {
+                        "id": 22110937
+                    }
+                ]
+            },
+            {
+                "ratingKey": "5093",
+                "key": "/library/metadata/5093",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "Scott Rudin Productions",
+                "type": "movie",
+                "title": "Mid90s",
+                "contentRating": "R",
+                "summary": "Stevie is a sweet 13-year-old about to explode. His mom is loving and attentive, but a little too forthcoming about her romantic life. His big brother is a taciturn and violent bully. So Stevie searches his working-class Los Angeles suburb for somewhere to belong. He finds it at the Motor Avenue skate shop.",
+                "rating": 7.5,
+                "year": 2018,
+                "tagline": "fall. get back up.",
+                "thumb": "/library/metadata/5093/thumb/1550818878",
+                "art": "/library/metadata/5093/art/1550818878",
+                "duration": 5121963,
+                "originallyAvailableAt": "2018-10-19",
+                "addedAt": 1548827224,
+                "updatedAt": 1550818878,
+                "globalViewCount": "1",
+                "primaryExtraKey": "/library/metadata/5120",
+                "ratingImage": "imdb://image.rating",
+                "userCount": "2",
+                "Media": [
+                    {
+                        "id": 5939,
+                        "duration": 5121963,
+                        "bitrate": 2277,
+                        "width": 1424,
+                        "height": 1072,
+                        "aspectRatio": 1.33,
+                        "audioChannels": 2,
+                        "audioCodec": "aac",
+                        "videoCodec": "h264",
+                        "videoResolution": "1080",
+                        "container": "mp4",
+                        "videoFrameRate": "24p",
+                        "optimizedForStreaming": 1,
+                        "audioProfile": "lc",
+                        "has64bitOffsets": false,
+                        "videoProfile": "high",
+                        "Part": [
+                            {
+                                "id": 5972,
+                                "key": "/library/parts/5972/1547967096/file.mp4",
+                                "duration": 5121963,
+                                "file": "/media/Movies/Mid90s.2018.1080p.WEBRip.x264-[YTS.AM].mp4",
+                                "size": 1457652294,
+                                "audioProfile": "lc",
+                                "container": "mp4",
+                                "has64bitOffsets": false,
+                                "optimizedForStreaming": true,
+                                "videoProfile": "high"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Comedy"
+                    },
+                    {
+                        "tag": "Drama"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Jonah Hill"
+                    }
+                ],
+                "Writer": [
+                    {
+                        "tag": "Jonah Hill"
+                    }
+                ],
+                "Country": [
+                    {
+                        "tag": "USA"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "Alexa Demie"
+                    },
+                    {
+                        "tag": "Ama Elsesser"
+                    },
+                    {
+                        "tag": "Fig Camila Abner"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22099864
+                    },
+                    {
+                        "id": 22110937
+                    }
+                ]
+            },
+            {
+                "ratingKey": "7867",
+                "key": "/library/metadata/7867",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "Independent Television Service (ITVS)",
+                "type": "movie",
+                "title": "Minding the Gap",
+                "summary": "Three young men bond together to escape volatile families in their Rust Belt hometown. As they face adult responsibilities, unexpected revelations threaten their decade-long friendship.",
+                "rating": 10,
+                "audienceRating": 9.7,
+                "year": 2018,
+                "thumb": "/library/metadata/7867/thumb/1549172353",
+                "art": "/library/metadata/7867/art/1549172353",
+                "duration": 5597056,
+                "originallyAvailableAt": "2018-01-21",
+                "addedAt": 1549172331,
+                "updatedAt": 1549172353,
+                "audienceRatingImage": "rottentomatoes://image.rating.upright",
+                "globalViewCount": "1",
+                "primaryExtraKey": "/library/metadata/7869",
+                "ratingImage": "rottentomatoes://image.rating.ripe",
+                "userCount": "2",
+                "Media": [
+                    {
+                        "id": 9569,
+                        "duration": 5597056,
+                        "bitrate": 5885,
+                        "width": 1920,
+                        "height": 1080,
+                        "aspectRatio": 1.78,
+                        "audioChannels": 2,
+                        "audioCodec": "aac",
+                        "videoCodec": "h264",
+                        "videoResolution": "1080",
+                        "container": "mkv",
+                        "videoFrameRate": "24p",
+                        "audioProfile": "he-aac",
+                        "videoProfile": "high",
+                        "Part": [
+                            {
+                                "id": 9602,
+                                "key": "/library/parts/9602/1534848996/file.mkv",
+                                "duration": 5597056,
+                                "file": "/media/Movies/Minding the Gap (2018)/Minding the Gap (2018) WEBDL-1080p.mkv",
+                                "size": 4117190836,
+                                "audioProfile": "he-aac",
+                                "container": "mkv",
+                                "videoProfile": "high"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Documentary"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Bing Liu"
+                    }
+                ],
+                "Country": [
+                    {
+                        "tag": "USA"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "Bing Liu"
+                    },
+                    {
+                        "tag": "Keire Johnson"
+                    },
+                    {
+                        "tag": "Mengyue Bolen"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22099864
+                    },
+                    {
+                        "id": 22110937
+                    }
+                ]
+            },
+            {
+                "ratingKey": "7873",
+                "key": "/library/metadata/7873",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "Sundance Productions",
+                "type": "movie",
+                "title": "Momentum Generation",
+                "contentRating": "TV-14",
+                "summary": "In the 1990s, a motley band of teen surfers from the north shore of Oahu brought professional surfing to new heights. But as their stars rose, the competition threatened to tear their group apart.",
+                "rating": 10,
+                "audienceRating": 10,
+                "viewOffset": 125534,
+                "lastViewedAt": 1549207915,
+                "year": 2018,
+                "thumb": "/library/metadata/7873/thumb/1549182421",
+                "art": "/library/metadata/7873/art/1549182421",
+                "duration": 6259757,
+                "originallyAvailableAt": "2018-04-21",
+                "addedAt": 1549182400,
+                "updatedAt": 1549182421,
+                "audienceRatingImage": "rottentomatoes://image.rating.upright",
+                "globalViewCount": "1",
+                "primaryExtraKey": "/library/metadata/7874",
+                "ratingImage": "rottentomatoes://image.rating.ripe",
+                "userCount": "2",
+                "Media": [
+                    {
+                        "id": 9577,
+                        "duration": 6259757,
+                        "bitrate": 10086,
+                        "width": 1920,
+                        "height": 1080,
+                        "aspectRatio": 1.78,
+                        "audioChannels": 6,
+                        "audioCodec": "eac3",
+                        "videoCodec": "h264",
+                        "videoResolution": "1080",
+                        "container": "mkv",
+                        "videoFrameRate": "24p",
+                        "videoProfile": "high",
+                        "Part": [
+                            {
+                                "id": 9610,
+                                "key": "/library/parts/9610/1549180163/file.mkv",
+                                "duration": 6259757,
+                                "file": "/media/Movies/Momentum Generation (2018)/Momentum Generation (2018) WEBDL-1080p.mkv",
+                                "size": 7892133771,
+                                "container": "mkv",
+                                "videoProfile": "high"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Documentary"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Jeff Zimbalist"
+                    },
+                    {
+                        "tag": "Michael Zimbalist"
+                    }
+                ],
+                "Writer": [
+                    {
+                        "tag": "Jeff Zimbalist"
+                    },
+                    {
+                        "tag": "Michael Zimbalist"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "Kelly Slater"
+                    },
+                    {
+                        "tag": "Rob Machado"
+                    },
+                    {
+                        "tag": "Ross Williams"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22099864
+                    },
+                    {
+                        "id": 22110937
+                    }
+                ]
+            },
+            {
+                "ratingKey": "8011",
+                "key": "/library/metadata/8011",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "Fox Searchlight Pictures",
+                "type": "movie",
+                "title": "(500) Days of Summer",
+                "titleSort": "500) Days of Summer",
+                "contentRating": "PG-13",
+                "summary": "Tom, greeting-card writer and hopeless romantic, is caught completely off-guard when his girlfriend, Summer, suddenly dumps him. He reflects on their 500 days together to try to figure out where their love affair went sour, and in doing so, Tom rediscovers his true passions in life.",
+                "rating": 8.5,
+                "audienceRating": 8.4,
+                "year": 2009,
+                "tagline": "This is not a love story. This is a story about love.",
+                "thumb": "/library/metadata/8011/thumb/1549256140",
+                "art": "/library/metadata/8011/art/1549256140",
+                "duration": 5704576,
+                "originallyAvailableAt": "2009-07-17",
+                "addedAt": 1549256124,
+                "updatedAt": 1549256140,
+                "audienceRatingImage": "rottentomatoes://image.rating.upright",
+                "chapterSource": "media",
+                "globalViewCount": "1",
+                "primaryExtraKey": "/library/metadata/8012",
+                "ratingImage": "rottentomatoes://image.rating.ripe",
+                "userCount": "2",
+                "Media": [
+                    {
+                        "id": 9820,
+                        "duration": 5704576,
+                        "bitrate": 13165,
+                        "width": 1920,
+                        "height": 800,
+                        "aspectRatio": 2.35,
+                        "audioChannels": 6,
+                        "audioCodec": "dca",
+                        "videoCodec": "h264",
+                        "videoResolution": "1080",
+                        "container": "mkv",
+                        "videoFrameRate": "24p",
+                        "audioProfile": "dts",
+                        "videoProfile": "high",
+                        "Part": [
+                            {
+                                "id": 9853,
+                                "key": "/library/parts/9853/1473225884/file.mkv",
+                                "duration": 5704576,
+                                "file": "/media/Movies/(500) Days of Summer (2009)/(500) Days of Summer (2009) Bluray-1080p Proper.mkv",
+                                "size": 9387578029,
+                                "audioProfile": "dts",
+                                "container": "mkv",
+                                "videoProfile": "high"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Comedy"
+                    },
+                    {
+                        "tag": "Drama"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Marc Webb"
+                    }
+                ],
+                "Writer": [
+                    {
+                        "tag": "Michael H. Weber"
+                    },
+                    {
+                        "tag": "Scott Neustadter"
+                    }
+                ],
+                "Country": [
+                    {
+                        "tag": "USA"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "Alejandro Estornel"
+                    },
+                    {
+                        "tag": "Alexandra Nicole Hulme"
+                    },
+                    {
+                        "tag": "Anthony Marciona"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22099864
+                    },
+                    {
+                        "id": 22110937
+                    }
+                ]
+            },
+            {
+                "ratingKey": "8687",
+                "key": "/library/metadata/8687",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "Sender Films",
+                "type": "movie",
+                "title": "The Dawn Wall",
+                "titleSort": "Dawn Wall",
+                "contentRating": "Not Rated",
+                "summary": "In the middle of Yosemite National Park towers El Capitan, a huge block of granite whose smoothest side, the Dawn Wall, is said to be the most difficult rock climb in the world. Tommy Caldwell didn’t see inhospitable terrain, but rather a puzzle almost a kilometer tall. In The Dawn Wall, we follow him and Kevin Jorgeson in their historic ascent to the summit.",
+                "rating": 10,
+                "audienceRating": 9.8,
+                "year": 2018,
+                "thumb": "/library/metadata/8687/thumb/1550449456",
+                "art": "/library/metadata/8687/art/1550449456",
+                "duration": 6009462,
+                "originallyAvailableAt": "2018-10-04",
+                "addedAt": 1550449436,
+                "updatedAt": 1550449456,
+                "audienceRatingImage": "rottentomatoes://image.rating.upright",
+                "chapterSource": "media",
+                "globalViewCount": "1",
+                "primaryExtraKey": "/library/metadata/8688",
+                "ratingImage": "rottentomatoes://image.rating.ripe",
+                "userCount": "2",
+                "Media": [
+                    {
+                        "id": 10626,
+                        "duration": 6009462,
+                        "bitrate": 9374,
+                        "width": 1920,
+                        "height": 1080,
+                        "aspectRatio": 1.78,
+                        "audioChannels": 6,
+                        "audioCodec": "ac3",
+                        "videoCodec": "h264",
+                        "videoResolution": "1080",
+                        "container": "mkv",
+                        "videoFrameRate": "24p",
+                        "videoProfile": "high",
+                        "Part": [
+                            {
+                                "id": 10659,
+                                "key": "/library/parts/10659/1543768110/file.mkv",
+                                "duration": 6009462,
+                                "file": "/media/Movies/The Dawn Wall (2018)/The Dawn Wall (2017) Bluray-1080p.mkv",
+                                "size": 7041795928,
+                                "container": "mkv",
+                                "videoProfile": "high"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Adventure"
+                    },
+                    {
+                        "tag": "Biography"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Josh Lowell"
+                    },
+                    {
+                        "tag": "Peter Mortimer"
+                    }
+                ],
+                "Country": [
+                    {
+                        "tag": "Austria"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "John Branch"
+                    },
+                    {
+                        "tag": "Kevin Jorgeson"
+                    },
+                    {
+                        "tag": "Tommy Caldwell"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22099864
+                    },
+                    {
+                        "id": 22110937
+                    }
+                ]
+            },
+            {
+                "ratingKey": "8722",
+                "key": "/library/metadata/8722",
+                "librarySectionTitle": "Movies",
+                "librarySectionID": 2,
+                "librarySectionKey": "/library/sections/2",
+                "studio": "Significant Productions",
+                "type": "movie",
+                "title": "Fruitvale Station",
+                "contentRating": "R",
+                "summary": "The true story of Oscar, a 22-year-old Bay Area resident, who crosses paths with friends, enemies, family, and strangers on the last day of 2008.",
+                "rating": 9.4,
+                "audienceRating": 8.7,
+                "year": 2013,
+                "tagline": "Every step brings you closer to the edge",
+                "thumb": "/library/metadata/8722/thumb/1550635108",
+                "art": "/library/metadata/8722/art/1550635108",
+                "duration": 5101099,
+                "originallyAvailableAt": "2013-07-25",
+                "addedAt": 1550635094,
+                "updatedAt": 1550635108,
+                "audienceRatingImage": "rottentomatoes://image.rating.upright",
+                "globalViewCount": "1",
+                "primaryExtraKey": "/library/metadata/8723",
+                "ratingImage": "rottentomatoes://image.rating.ripe",
+                "userCount": "2",
+                "Media": [
+                    {
+                        "id": 10661,
+                        "duration": 5101099,
+                        "bitrate": 11038,
+                        "width": 1920,
+                        "height": 1080,
+                        "aspectRatio": 1.78,
+                        "audioChannels": 6,
+                        "audioCodec": "dca",
+                        "videoCodec": "h264",
+                        "videoResolution": "1080",
+                        "container": "mkv",
+                        "videoFrameRate": "24p",
+                        "audioProfile": "dts",
+                        "videoProfile": "high",
+                        "Part": [
+                            {
+                                "id": 10694,
+                                "key": "/library/parts/10694/1387622855/file.mkv",
+                                "duration": 5101099,
+                                "file": "/media/Movies/Fruitvale Station (2013)/Fruitvale Station (2013) Bluray-1080p.mkv",
+                                "size": 7038422589,
+                                "audioProfile": "dts",
+                                "container": "mkv",
+                                "videoProfile": "high"
+                            }
+                        ]
+                    }
+                ],
+                "Genre": [
+                    {
+                        "tag": "Biography"
+                    },
+                    {
+                        "tag": "Drama"
+                    }
+                ],
+                "Director": [
+                    {
+                        "tag": "Ryan Coogler"
+                    }
+                ],
+                "Writer": [
+                    {
+                        "tag": "Ryan Coogler"
+                    }
+                ],
+                "Country": [
+                    {
+                        "tag": "USA"
+                    }
+                ],
+                "Role": [
+                    {
+                        "tag": "Ahna O'Reilly"
+                    },
+                    {
+                        "tag": "Ariana Neal"
+                    },
+                    {
+                        "tag": "Caroline Lesley"
+                    }
+                ],
+                "User": [
+                    {
+                        "id": 22099864
+                    },
+                    {
+                        "id": 22110937
+                    }
+                ]
+            }
+        ]
+    }
+},
   sectionsRaw: {
     MediaContainer: {
       size: 2,

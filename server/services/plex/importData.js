@@ -34,8 +34,6 @@ const importLibraries = async () => {
   });
 };
 
-// Get section ids from database
-//
 const importMostWatched = async () => {
   const sectionKeys = await models.PlexSection.findAll().then(sections => {
     return sections.map(section => section.key.toString());
@@ -63,7 +61,7 @@ const importLibrary = async sectionKey => {
 
 const updateLibrary = libraryData => {
   return Promise.map(libraryData, data => {
-    return models.PlexLibrary.update(
+    return models.PlexLibrary.upsert(
       {
         title: data.title,
         type: data.type,

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import parser from 'xml2json';
-import buildUrlLibrary from 'build-url';
+import buildUrlPackage from 'build-url';
 
 const formatResponse = response => {
   const xmlResponse = response.headers['content-type'].includes('xml');
@@ -17,7 +17,7 @@ const buildUrl = function(urlParams) {
     delete params.host;
     const urlHash = params;
 
-    return buildUrlLibrary(host, urlHash);
+    return buildUrlPackage(host, urlHash);
   } catch (error) {
     console.log(error);
     return error;
