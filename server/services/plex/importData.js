@@ -29,8 +29,8 @@ const createSections = sections => {
 
 const importLibraries = async () => {
   const sections = await plexApi.getSections();
-  sections.forEach(async section => {
-    await importLibrary(section.key);
+  return Promise.map(sections, section => {
+    return importLibrary(section.key);
   });
 };
 
@@ -46,7 +46,6 @@ const importLibrary = async sectionId => {
     sectionId,
   });
   const dbLibraryData = await createLibrary(libraryData);
-  console.log(dbLibraryData);
   return dbLibraryData;
 };
 
@@ -78,27 +77,25 @@ const updateLibrary = libraryData => {
 };
 
 const createLibrary = libraryData => {
-  return Promise.try(() => {
-    libraryData.forEach(data => {
-      models.PlexLibrary.upsert(
-        {
-          title: data.title,
-          type: data.type,
-          views: data.views,
-          rating_key: data.ratingKey,
-          metadata_path: data.key,
-          summary: data.summary,
-          rating: data.rating,
-          year: data.year,
-          genre: JSON.stringify(data.Genre),
+  return Promise.map(libraryData, sectionLibraryData => {
+    models.PlexLibrary.upsert(
+      {
+        title: sectionLibraryData.title,
+        type: sectionLibraryData.type,
+        views: sectionLibraryData.views,
+        rating_key: sectionLibraryData.ratingKey,
+        meta_data_path: sectionLibraryData.key,
+        summary: sectionLibraryData.summary,
+        rating: sectionLibraryData.rating,
+        year: sectionLibraryData.year,
+        genre: JSON.stringify(sectionLibraryData.Genre),
+      },
+      {
+        where: {
+          title: sectionLibraryData.title,
         },
-        {
-          where: {
-            title: data.title,
-          },
-        },
-      );
-    });
+      },
+    );
   }).catch(err => console.log(err));
 };
 

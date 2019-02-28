@@ -40,13 +40,19 @@ describe('ImportData', () => {
     });
   });
 
-  // describe('GET /plex/import/libraries', () => {
-  //   it('should find and store libraries in the database', async () => {
-  //     nocks.plexSections();
-  //     nocks.plexLibrary();
-  //     const response = await importData.importLibraries();
-  //     const library = await models.PlexLibrary.findAll();
-  //     library.should.be.length(52);
-  //   });
-  // });
+  describe('GET /plex/import/libraries', () => {
+    it('should find and store libraries in the database', async () => {
+      nocks.plexSections();
+      nocks.plexLibrary();
+      await importData.importLibraries();
+      const library = await models.PlexLibrary.findAll();
+      library.should.be.length(56);
+
+      nocks.plexSections();
+      nocks.plexLibrary();
+      await importData.importLibraries();
+      const librarySecondRequest = await models.PlexLibrary.findAll();
+      librarySecondRequest.should.be.length(56);
+    });
+  });
 });
