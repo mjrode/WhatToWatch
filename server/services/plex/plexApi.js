@@ -46,17 +46,34 @@ const getLibraryDataBySectionUrlParams = function(options) {
 };
 
 const getUsers = async function() {
-  const urlParams = getUsersUrlParams();
-  const getUsersUrl = helpers.buildUrl(urlParams);
-  const response = await helpers.request(getUsersUrl);
-  return response.MediaContainer.User;
+  try {
+    const urlParams = getUsersUrlParams();
+    const getUsersUrl = helpers.buildUrl(urlParams);
+    const response = await helpers.request(getUsersUrl);
+    return response.MediaContainer.User;
+  } catch (error) {
+    return {
+      code: error.status,
+      message: error.statusText,
+      url: error.config.url,
+    };
+  }
 };
 
 const getMostWatched = async function(options) {
-  const urlParams = mostWatchedUrlParams(options);
-  const mostWatchedUrl = helpers.buildUrl(urlParams);
-  const response = await helpers.request(mostWatchedUrl);
-  return response.MediaContainer.Metadata;
+  try {
+    const urlParams = mostWatchedUrlParams(options);
+    const mostWatchedUrl = helpers.buildUrl(urlParams);
+    const response = await helpers.request(mostWatchedUrl);
+    return response.MediaContainer.Metadata;
+  } catch (error) {
+    console.log(error);
+    return {
+      code: error.status,
+      message: error.statusText,
+      url: error.config.url,
+    };
+  }
 };
 
 const getSections = async function() {
@@ -66,7 +83,11 @@ const getSections = async function() {
     const response = await helpers.request(getSectionsUrl);
     return response.MediaContainer.Directory;
   } catch (error) {
-    return error;
+    return {
+      code: error.status,
+      message: error.statusText,
+      url: error.config.url,
+    };
   }
 };
 
@@ -77,7 +98,11 @@ const getLibraryDataBySection = async function(options) {
     const response = await helpers.request(getLibraryDataBySectionUrl);
     return response.MediaContainer.Metadata;
   } catch (error) {
-    return error;
+    return {
+      code: error.status,
+      message: error.statusText,
+      url: error.config.url,
+    };
   }
 };
 

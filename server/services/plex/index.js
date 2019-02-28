@@ -17,9 +17,13 @@ const getUsers = async (req, res) => {
 };
 
 const getMostWatched = async (req, res) => {
-  const options = req.query;
-  const mostWatched = await plexApi.getMostWatched(options);
-  res.json(mostWatched);
+  try {
+    const options = req.query;
+    const mostWatched = await plexApi.getMostWatched(options);
+    res.json(mostWatched);
+  } catch (error) {
+    res.json(error);
+  }
 };
 
 const getSections = async (req, res) => {
