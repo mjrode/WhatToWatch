@@ -1,8 +1,0 @@
-{
-  "presets": ["node8"],
-  "env": {
-    "test": {
-      "plugins": ["istanbul"]
-    }
-  }
-}
