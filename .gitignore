@@ -5,3 +5,10 @@ node_modules
 dist
 npm-debug.log
 coverage
+.nycrc
+.npmignore
+.eslinstrc.js
+.DS_Store
+.prettierignore
+.prettierrc.json
+.sequelizerc

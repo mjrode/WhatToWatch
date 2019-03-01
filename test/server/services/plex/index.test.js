@@ -101,8 +101,8 @@ describe('Library Data', () => {
         .request(app)
         .get('/api/users?X-Plex-Token')
         .end((err, res) => {
-          console.log('error-mike--', res);
           res.should.have.status(404);
+          console.log(res.body);
           done();
         });
     });

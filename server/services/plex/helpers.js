@@ -50,4 +50,14 @@ const request = async function(url) {
   });
 };
 
-export default {formatResponse, buildUrl, request};
+const handleError = (res, method) => err => {
+  console.log('Error in', method);
+  console.log(err);
+  const {code, message} = err.responseData || {
+    code: 500,
+    message: 'An unknown error occurred.',
+  };
+  res.status(code).json({message});
+};
+
+export default {formatResponse, buildUrl, request, handleError};

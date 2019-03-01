@@ -1,6 +1,7 @@
 import plexApi from './plexApi';
 import importData from './importData';
 import auth from './auth';
+import helpers from './helpers';
 
 const getAuthToken = async (req, res) => {
   const {username} = req.query;
@@ -16,7 +17,7 @@ const getUsers = async (req, res) => {
     const users = await plexApi.getUsers();
     res.json(users);
   } catch (error) {
-    res.json(error);
+    helpers.handleError(res, getUsers.name);
   }
 };
 
