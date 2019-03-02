@@ -1,6 +1,6 @@
 _This is still in development. If you would like to help contribute feel free to check out any of the open issues._
 
-# recommend
+# Recommend
 
 ## TV Show and Movie recommendations
 
