@@ -7,6 +7,9 @@ const formatResponse = response => {
   if (xmlResponse) {
     return JSON.parse(parser.toJson(response.data));
   }
+  if (response.config.url.includes('tastedive')) {
+    return response.data.Similar.Results;
+  }
   return response.data;
 };
 

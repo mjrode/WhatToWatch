@@ -3,10 +3,8 @@ import helpers from '../helpers';
 
 const similarMedia = async (req, res) => {
   try {
-    console.log('I MADE IT');
     const {mediaName} = req.query;
     const {mediaType} = req.query;
-    console.log(mediaName, mediaType);
     const response = await tdawApi.similarMedia(mediaName, mediaType);
     res.json(response);
   } catch (error) {

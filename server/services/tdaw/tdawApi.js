@@ -17,9 +17,8 @@ const similarMedia = async function(mediaName, mediaType) {
   try {
     const urlParams = tdawMediaUrl(mediaName, mediaType);
     const mediaUrl = helpers.buildUrl(urlParams);
-    console.log(mediaUrl);
     const response = await helpers.request(mediaUrl);
-    return response;
+    return response.Results;
   } catch (error) {
     console.log(error);
     return {

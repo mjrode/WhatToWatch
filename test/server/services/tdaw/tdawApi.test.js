@@ -32,6 +32,6 @@ describe('tdawApi', () => {
     const urlParams = tdawApi.tdawMediaUrl('New Girl', 'show');
     const url = helpers.buildUrl(urlParams);
     const result = await helpers.request(url);
-    result.should.deep.equal(tdawResponses.newGirl);
+    result.should.deep.equal(tdawResponses.newGirl.Similar.Results);
   });
 });
