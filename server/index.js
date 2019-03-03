@@ -2,6 +2,7 @@ import express from 'express';
 import {json, urlencoded} from 'body-parser';
 import {sequelize} from './db/models';
 import plex from './routes/plex.route';
+import tdaw from './routes/tdaw.route';
 
 export default () => {
   const server = express();
@@ -18,6 +19,7 @@ export default () => {
 
     // Set up routes
     server.use('/plex', plex);
+    server.use('/tdaw', tdaw);
 
     return server;
   };

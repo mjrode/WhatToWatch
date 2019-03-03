@@ -1,5 +1,5 @@
 import nock from 'nock';
-import plexResponses from './mocks/plexResponses';
+import plexResponses from '../../../mocks/plexResponses';
 import plexApi from '../../../../server/services/plex/plexApi';
 import helpers from '../../../../server/services/helpers';
 import * as nocks from '../../../nocks';

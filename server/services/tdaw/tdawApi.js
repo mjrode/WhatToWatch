@@ -1,25 +1,27 @@
 import config from '../../../config';
 import helpers from '../helpers';
 
-const mediaUrl = function(mediaName, type) {
+const tdawMediaUrl = function(mediaName, mediaType) {
   return {
     host: config.tdaw.tdawApiUrl,
     queryParams: {
       q: mediaName,
       k: config.tdaw.token,
       info: 1,
-      type,
+      mediaType,
     },
   };
 };
 
-const similarMedia = async function() {
+const similarMedia = async function(mediaName, mediaType) {
   try {
-    const urlParams = mediaUrl();
+    const urlParams = tdawMediaUrl(mediaName, mediaType);
     const mediaUrl = helpers.buildUrl(urlParams);
+    console.log(mediaUrl);
     const response = await helpers.request(mediaUrl);
     return response;
   } catch (error) {
+    console.log(error);
     return {
       code: error.status,
       message: error.statusText,
@@ -28,4 +30,4 @@ const similarMedia = async function() {
   }
 };
 
-export default {similarMedia, mediaUrl};
+export default {similarMedia, tdawMediaUrl};

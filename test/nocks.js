@@ -1,14 +1,15 @@
 import nock from 'nock';
-import responses from './server/services/plex/mocks/plexResponses';
+import plexResponses from './mocks/plexResponses';
+import tdawResponses from './mocks/tdawResponses';
 
-const usersResponse = `${__dirname}/server/services/plex/mocks/getUsersResponse.xml`;
-const authResponse = `${__dirname}/server/services/plex/mocks/authResponse.xml`;
-const invalidRequestResponse = `${__dirname}/server/services/plex/mocks/error.html`;
+const usersResponse = `${__dirname}/mocks/getUsersResponse.xml`;
+const authResponse = `${__dirname}/mocks/authResponse.xml`;
+const invalidRequestResponse = `${__dirname}/mocks/error.html`;
 
 export const plexSections = () => {
   nock('https://plex.mjrflix.com')
     .get('/library/sections?X-Plex-Token=testPlexApiToken')
-    .reply(200, responses.sectionsRaw, {
+    .reply(200, plexResponses.sectionsRaw, {
       'Content-Type': 'text/json',
     });
 };
@@ -16,7 +17,7 @@ export const plexSections = () => {
 export const plexLibrary = () => nock('https://plex.mjrflix.com')
   .persist()
   .get(url => url.includes('/library/sections/'))
-  .reply(200, responses.getLibraryDataBySectionRaw, {
+  .reply(200, plexResponses.getLibraryDataBySectionRaw, {
     'Content-Type': 'text/json',
   });
 
@@ -30,7 +31,15 @@ export const mostWatched = () => {
   nock('https://plex.mjrflix.com')
     .persist()
     .get(uri => uri.includes('/library/all/top?type='))
-    .reply(200, responses.mostWatchedRawTV, {
+    .reply(200, plexResponses.mostWatchedRawTV, {
+      'Content-Type': 'text/json',
+    });
+};
+
+export const newGirlTdaw = () => {
+  nock('https://tastedive.com/api/similar')
+    .get(uri => uri.includes('New'))
+    .reply(200, tdawResponses.newGirl, {
       'Content-Type': 'text/json',
     });
 };
@@ -40,7 +49,7 @@ export const mostWatchedByAccount = () => {
     .get(
       '/library/all/top?accountId=22099864&type=2&limit=10&X-Plex-Token=testPlexApiToken',
     )
-    .reply(200, responses.mostWatchedByAccountRaw, {
+    .reply(200, plexResponses.mostWatchedByAccountRaw, {
       'Content-Type': 'text/json',
     });
 };

@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import * as nocks from '../../../nocks';
-import responses from './mocks/plexResponses';
+import responses from '../../../mocks/plexResponses';
 import app from '../../../../index';
 
 chai.use(chaiHttp);
