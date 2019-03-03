@@ -1,5 +1,5 @@
 import config from '../../../config';
-import helpers from './helpers';
+import helpers from '../helpers';
 
 const getUsersUrlParams = function() {
   return {

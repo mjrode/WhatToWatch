@@ -7,8 +7,13 @@ const env = process.env.NODE_ENV || 'local';
 
 const envConfig = require(`./${env}`).default;
 const plexConfig = require('./plex').default;
+const tdawConfig = require('./tdaw').default;
 
 const defaultConfig = {
   env,
 };
-export default {server: _.merge(defaultConfig, envConfig), plex: plexConfig};
+export default {
+  server: _.merge(defaultConfig, envConfig),
+  plex: plexConfig,
+  tdaw: tdawConfig,
+};
