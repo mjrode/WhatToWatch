@@ -17,12 +17,12 @@ describe('tdawApi', () => {
       },
     });
   });
-});
 
-it('returns url', () => {
-  const urlParams = tdawApi.mediaUrl('New Girl', 'show');
-  const url = helpers.buildUrl(urlParams);
-  url.should.equal(
-    'https://tastedive.com/api/similar?q=New%20Girl&k=testTdawToken&info=1&type=show',
-  );
+  it('returns url', () => {
+    const urlParams = tdawApi.mediaUrl('New Girl', 'show');
+    const url = helpers.buildUrl(urlParams);
+    url.should.equal(
+      'https://tastedive.com/api/similar?q=New%20Girl&k=testTdawToken&info=1&type=show',
+    );
+  });
 });
