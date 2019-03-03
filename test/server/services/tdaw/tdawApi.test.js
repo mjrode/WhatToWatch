@@ -6,7 +6,7 @@ import * as nocks from '../../../nocks';
 
 describe('tdawApi', () => {
   it('return tdaw url object', () => {
-    const result = tdawApi.mediaUrl('New Girl');
+    const result = tdawApi.mediaUrl('New Girl', 'show');
     result.should.deep.equal({
       host: 'https://tastedive.com/api/similar',
       queryParams: {
@@ -20,9 +20,9 @@ describe('tdawApi', () => {
 });
 
 it('returns url', () => {
-  const urlParams = tdawApi.mediaUrl('New Girl');
+  const urlParams = tdawApi.mediaUrl('New Girl', 'show');
   const url = helpers.buildUrl(urlParams);
   url.should.equal(
-    'https://tastedive.com/api/similar?q=new+girl%2C+the+office&k=329666-mjrflix-OO8GSDR7&info=1&type=show',
+    'https://tastedive.com/api/similar?q=New%20Girl&k=testTdawToken&info=1&type=show',
   );
 });
