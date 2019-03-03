@@ -9,7 +9,6 @@ describe('tdawApi', () => {
     const result = tdawApi.mediaUrl('New Girl');
     result.should.deep.equal({
       host: 'https://tastedive.com/api/similar',
-      path: '?',
       queryParams: {
         type: 'show',
         info: 1,
@@ -20,8 +19,10 @@ describe('tdawApi', () => {
   });
 });
 
-// it('returns url', () => {
-//   const urlParams = plexApi.getUsersUrlParams();
-//   const url = helpers.buildUrl(urlParams);
-//   url.should.equal('https://plex.tv/api/users?X-Plex-Token=testPlexApiToken');
-// });
+it('returns url', () => {
+  const urlParams = tdawApi.mediaUrl('New Girl');
+  const url = helpers.buildUrl(urlParams);
+  url.should.equal(
+    'https://tastedive.com/api/similar?q=new+girl%2C+the+office&k=329666-mjrflix-OO8GSDR7&info=1&type=show',
+  );
+});

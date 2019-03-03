@@ -4,12 +4,11 @@ import helpers from '../helpers';
 const mediaUrl = function(mediaName) {
   return {
     host: config.tdaw.tdawApiUrl,
-    path: '?',
     queryParams: {
-    k: config.tdaw.token,
+      q: mediaName,
+      k: config.tdaw.token,
       info: 1,
       type: 'show',
-      q: mediaName,
     },
   };
 };
