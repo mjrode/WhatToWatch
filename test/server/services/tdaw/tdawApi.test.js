@@ -1,4 +1,3 @@
-import nock from 'nock';
 import tdawResponses from '../../../mocks/tdawResponses';
 import tdawApi from '../../../../server/services/tdaw/tdawApi';
 import helpers from '../../../../server/services/helpers';
