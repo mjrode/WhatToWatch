@@ -12,6 +12,14 @@ const similarMedia = async (req, res) => {
   }
 };
 
+const mostWatched = async (req, res) => {
+  console.log('was i called');
+  const response = await tdawApi.mostWatched();
+  console.log(response);
+  res.json(response);
+};
+
 export default {
   similarMedia,
+  mostWatched,
 };

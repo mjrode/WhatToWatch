@@ -20,9 +20,13 @@ const buildUrl = function(urlParams) {
     delete params.host;
     const urlHash = params;
 
+    console.log('hash', urlHash);
+
+    if (typeof urlHash !== 'object') {
+      throw new Error(`Invalid urlParams: ${urlHash}`);
+    }
     return buildUrlPackage(host, urlHash);
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
@@ -37,16 +41,16 @@ const request = async function(url) {
         return resolve(formatResponse(response));
       })
       .catch(error => {
-        console.log(error);
         if (error.response) {
-          console.log('Status Error--', error.response.status);
-          console.log('Headers Error--', error.response.headers);
+          console.log('Error: Status--', error.response.status);
+          console.log('Error: Headers--', error.response.headers);
           return reject(error.response);
         }
         if (error.request) {
-          console.log('Request Error--', error.request);
+          // eslint-disable-next-line no-underscore-dangle
+          console.log('Error: Request Path--', error.request._options.path);
         } else {
-          console.log('Error', error.message);
+          console.log('Error:', error.message);
         }
         return reject(error);
       });
@@ -55,7 +59,6 @@ const request = async function(url) {
 
 const handleError = (res, method) => err => {
   console.log('Error in', method);
-  console.log(err);
   const {code, message} = err.responseData || {
     code: 500,
     message: 'An unknown error occurred.',

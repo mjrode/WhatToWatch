@@ -22,6 +22,17 @@ describe('Users', () => {
           done();
         });
     });
+
+    it('should handle request error', (done) => {
+      chai
+        .request(app)
+        .get('/plex/users')
+        .end((err, res) => {
+          res.should.have.status(500);
+          res.body.message.should.equal('An unknown error occurred.');
+          done();
+        });
+    });
   });
 });
 
@@ -102,6 +113,7 @@ describe('Library Data', () => {
         .get('/api/users?X-Plex-Token')
         .end((err, res) => {
           res.should.have.status(404);
+          res.text.should.equal('Page Not Found');
           done();
         });
     });

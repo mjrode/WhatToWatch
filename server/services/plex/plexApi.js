@@ -51,11 +51,7 @@ const getUsers = async function() {
     const response = await helpers.request(getUsersUrl);
     return response.MediaContainer.User;
   } catch (error) {
-    return {
-      code: error.status,
-      message: error.statusText,
-      url: error.config.url,
-    };
+    return error;
   }
 };
 
@@ -97,6 +93,7 @@ const getLibraryDataBySection = async function({sectionId}) {
     const response = await helpers.request(getLibraryDataBySectionUrl);
     return response.MediaContainer.Metadata;
   } catch (error) {
+    console.log('caught error', error);
     return {
       code: error.status,
       message: error.statusText,

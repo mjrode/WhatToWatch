@@ -1,5 +1,6 @@
 import config from '../../../config';
 import helpers from '../helpers';
+import models from '../../db/models';
 
 const tdawMediaUrl = function(mediaName, mediaType) {
   return {
@@ -18,7 +19,7 @@ const similarMedia = async function(mediaName, mediaType) {
     const urlParams = tdawMediaUrl(mediaName, mediaType);
     const mediaUrl = helpers.buildUrl(urlParams);
     const response = await helpers.request(mediaUrl);
-    return response.Results;
+    return response;
   } catch (error) {
     console.log(error);
     return {
@@ -29,4 +30,11 @@ const similarMedia = async function(mediaName, mediaType) {
   }
 };
 
-export default {similarMedia, tdawMediaUrl};
+const mostWatched = async () => {
+  return models.PlexLibrary.findAll({
+    order: [['views', 'DESC']],
+    limit: 10,
+  });
+};
+
+export default {similarMedia, tdawMediaUrl, mostWatched};

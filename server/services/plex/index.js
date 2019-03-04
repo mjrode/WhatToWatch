@@ -12,13 +12,13 @@ const getAuthToken = async (req, res) => {
   });
 };
 
-const getUsers = async (req, res) => {
-  try {
-    const users = await plexApi.getUsers();
-    res.json(users);
-  } catch (error) {
-    helpers.handleError(res, getUsers.name);
-  }
+const getUsers = (req, res) => {
+  plexApi
+    .getUsers()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(helpers.handleError(res, getUsers.name));
 };
 
 const getMostWatched = async (req, res) => {

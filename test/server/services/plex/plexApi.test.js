@@ -21,6 +21,12 @@ describe('plexApi', () => {
     url.should.equal('https://plex.tv/api/users?X-Plex-Token=testPlexApiToken');
   });
 
+  it('handles error when building url', () => {
+    const urlParams = 'invalid params';
+    const url = helpers.buildUrl(urlParams);
+    url.message.should.equal('Invalid urlParams: invalid params');
+  });
+
   it('returns users', async () => {
     nocks.plexUsers();
 
@@ -44,4 +50,17 @@ describe('plexApi', () => {
       plexResponses.getLibraryDataBySectionRaw.MediaContainer.Metadata,
     );
   });
+
+  // it.only('handles error if passed incorrect parameters', async (done) => {
+  //   try {
+  //     await plexApi.getLibraryDataBySection('incorrect param');
+  //   } catch (error) {
+  //     console.log('CAUGHTEM', error);
+  //     error.code.should.equal(401);
+  //     error.message.should.equal('Unauthorized');
+  //     error.code.should.equal(
+  //       'https://plex.mjrflix.com/library/sections/undefined/all?X-Plex-Token=testPlexApiToken',
+  //     );
+  //   }
+  // });
 });
