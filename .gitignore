@@ -12,3 +12,4 @@ coverage
 .prettierignore
 .prettierrc.json
 .sequelizerc
+config/local.js
