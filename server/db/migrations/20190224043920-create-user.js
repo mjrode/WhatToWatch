@@ -13,6 +13,9 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING,
       },
+      googleId: {
+        type: Sequelize.STRING,
+      },
       email: {
         type: Sequelize.STRING,
         unique: true,

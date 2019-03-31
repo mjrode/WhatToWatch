@@ -1,22 +1,29 @@
 import {Router} from 'express';
 import passport from 'passport';
-import authService from '../services/auth';
 
 const router = Router();
 
-router.get('/google', authService.getAuthToken);
+router.get(
+  '/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+  }),
+  (req, res) => {
+    res.redirect('/');
+  },
+);
 
-router.get('/users', plexService.getUsers);
+router.get('/google/callback', passport.authenticate('google'), (req, res) => {
+  res.redirect('/');
+});
 
-router.get('/most-watched', plexService.getMostWatched);
-router.get('/import/most-watched', plexService.importMostWatched);
+router.get('/api/current_user', (req, res) => {
+  res.send(req.user);
+});
 
-router.get('/sections', plexService.getSections);
-router.get('/import/sections', plexService.importSections);
-
-router.get('/library/:id', plexService.getLibraryDataBySection);
-router.get('/import/libraries', plexService.importLibraries);
-
-router.get('/import/all', plexService.importAll);
+router.get('/api/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 export default router;
