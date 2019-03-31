@@ -9,16 +9,21 @@ const env = process.env.NODE_ENV || 'development';
 const config = configs[env];
 const capitalize = string => string[0].toUpperCase() + string.slice(1);
 
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  {
-    ...config,
-    operatorsAliases: false,
-    logging: false,
-  },
-);
+const sequelize = (() => {
+  if (process.env.DATABASE_URL) {
+    // the application is executed on Heroku ... use the postgres database
+    return new Sequelize(process.env.DATABASE_URL, {
+      dialect: 'postgres',
+      protocol: 'postgres',
+    });
+  } else {
+    return new Sequelize(config.database, config.username, config.password, {
+      ...config,
+      operatorsAliases: false,
+      logging: false,
+    });
+  }
+})();
 
 const db = fs
   .readdirSync(__dirname)
