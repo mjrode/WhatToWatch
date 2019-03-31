@@ -11,10 +11,12 @@
     "db:drop": "babel-node ./scripts/db/drop",
     "db:migrate": "babel-node ./scripts/db/migrate",
     "db:rollback": "babel-node ./scripts/db/rollback",
-    "dev": "nodemon --exec babel-node --inspect index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "debug": "nodemon --exec babel-node --inspect index.js",
     "db:reset": "NODE_ENV=test npx sequelize db:migrate:undo:all &&  NODE_ENV=test npx sequelize db:migrate && npx sequelize db:migrate:undo:all && npx sequelize db:migrate",
-    "start": "nodemon --exec babel-node index.js"
+    "start": "nodemon --exec babel-node index.js",
+    "server": "nodemon --exec babel-node index.js",
+    "client": "npm run start --prefix client"
   },
   "nyc": {
     "reporter": [
@@ -34,6 +36,7 @@
     "btoa": "^1.2.1",
     "build-url": "^1.3.2",
     "child-process-promise": "^2.2.1",
+    "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "cross-env": "^5.2.0",
     "custom-env": "^1.0.0",
@@ -60,12 +63,6 @@
     "babel-preset-node8": "^1.2.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
-    "eslint": "5.13.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "4.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-prefer-arrow": "^1.1.4",
-    "eslint-plugin-prettier": "3.0.1",
     "faker": "^4.1.0",
     "husky": "1.3.1",
     "i": "^0.3.6",
