@@ -38,12 +38,6 @@ export default () => {
     server.use('/tdaw', tdaw);
     server.use('/auth', auth);
 
-    server.get('*', function(req, res, next) {
-      const err = new Error('Page Not Found');
-      err.statusCode = 404;
-      next(err);
-    });
-
     if (process.env.NODE_ENV === 'production') {
       server.use(express.static('client/build'));
       const path = require('path');
@@ -51,6 +45,12 @@ export default () => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
       });
     }
+
+    server.get('*', function(req, res, next) {
+      const err = new Error('Page Not Found');
+      err.statusCode = 404;
+      next(err);
+    });
     // eslint-disable-next-line no-unused-vars
     server.use(function(err, req, res, next) {
       console.error(err.message); // Log error message in our server's console
