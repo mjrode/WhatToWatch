@@ -15,9 +15,11 @@ class Header extends Component {
         );
       default:
         return [
-          // <li key="3" style={{margin: '0 10px'}}>
-          // Hi, {this.props.auth.firstName}
-          // </li>,
+          <li key="3" style={{margin: '0 10px'}}>
+            <Link to="/plex/auth" className="waves-effect waves-light btn">
+              <i className="material-icons left">live_tv</i>Import Plex
+            </Link>
+          </li>,
           <li key="2" style={{margin: '0 10px'}}>
             <a href="/auth/logout">Logout</a>
           </li>,
@@ -29,7 +31,7 @@ class Header extends Component {
       <nav>
         <div className="nav-wrapper" style={{margin: '0 10px'}}>
           <Link to={this.props.auth ? '/' : '/'} className="left brand-logo">
-            Plex-Rec
+            PlexRec
           </Link>
           <ul className="right">{this.renderContent()}</ul>
         </div>
