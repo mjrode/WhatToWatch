@@ -2,7 +2,9 @@ import express from 'express';
 import {json, urlencoded} from 'body-parser';
 // eslint-disable-next-line import/named
 import passport from 'passport';
+import cookieSession from 'cookie-session';
 import {sequelize} from './db/models';
+import keys from '../config';
 import plex from './routes/plex.route';
 import tdaw from './routes/tdaw.route';
 import auth from './routes/auth.route';
@@ -20,6 +22,13 @@ export default () => {
     // Returns middleware that parses json
     server.use(json());
     server.use(urlencoded({extended: true}));
+
+    server.use(
+      cookieSession({
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        keys: [keys.server.cookieKey],
+      }),
+    );
 
     server.use(passport.initialize());
     server.use(passport.session());

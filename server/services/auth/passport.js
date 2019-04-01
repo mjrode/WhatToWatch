@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('../../../config');
+import keys from '../../../config';
 
 import models from '../../db/models';
 
@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  models.User.find(id).then(user => {
+  models.User.findByPk(id).then(user => {
     done(null, user);
   });
 });
@@ -17,8 +17,8 @@ passport.deserializeUser((id, done) => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: keys.default.server.googleClientID,
-      clientSecret: keys.default.server.googleClientSecret,
+      clientID: keys.server.googleClientID,
+      clientSecret: keys.server.googleClientSecret,
       callbackURL: '/auth/google/callback',
       proxy: true,
     },
