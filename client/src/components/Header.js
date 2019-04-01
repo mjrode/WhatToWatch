@@ -14,16 +14,20 @@ class Header extends Component {
           </li>
         );
       default:
-        return [
-          <li key="3" style={{margin: '0 10px'}}>
-            <Link to="/plex/auth" className="waves-effect waves-light btn">
-              <i className="material-icons left">live_tv</i>Import Plex
-            </Link>
-          </li>,
+        if (!this.props.auth.plexToken) {
+          return (
+            <li key="3" style={{margin: '0 10px'}}>
+              <Link to="/app/plex" className="waves-effect waves-light btn">
+                <i className="material-icons left">live_tv</i>Import Plex
+              </Link>
+            </li>
+          );
+        }
+        return (
           <li key="2" style={{margin: '0 10px'}}>
             <a href="/auth/logout">Logout</a>
-          </li>,
-        ];
+          </li>
+        );
     }
   }
   render() {

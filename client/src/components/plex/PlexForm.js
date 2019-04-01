@@ -1,13 +1,34 @@
 import React, {Component} from 'react';
-import {reduxForm} from 'redux-form';
+import {reduxForm, Field} from 'redux-form';
 
 class PlexForm extends Component {
   render() {
+    const {handleSubmit} = this.props;
     return (
-      <div style={{textAlign: 'center'}}>
-        <h1>Import your Plex library!</h1>
-        We will then be able to analyze your files and suggest new Movies and Tv
-        shows based on what you watch.
+      <div className="row">
+        <form className="col s12" onSubmit={handleSubmit}>
+          <div class="row">
+            <div class="input-field col s12">
+              <label htmlFor="username">Username</label>
+              <Field type="text" name="username" component="input" />
+            </div>
+          </div>
+
+          <Field
+            name="password"
+            component="input"
+            type="password"
+            placeholder="Password"
+          />
+          <button
+            class="btn waves-effect waves-light"
+            type="submit"
+            name="action"
+          >
+            Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </form>
       </div>
     );
   }

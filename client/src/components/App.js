@@ -23,7 +23,7 @@ class App extends Component {
               <Header />
               <Route exact path="/" component={Landing} />
               <Route exact path="/surveys" component={Dashboard} />
-              <Route path="/plex/auth" component={ImportPlex} />
+              <Route path="/app/plex" component={ImportPlex} />
             </div>
           </BrowserRouter>
         </div>

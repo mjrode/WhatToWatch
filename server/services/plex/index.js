@@ -7,14 +7,15 @@ const getAuthToken = async (req, res) => {
   const {username} = req.query;
   const {password} = req.query;
 
-  auth(username, password).then(data => {
-    return res.json(data);
-  });
+  const token = await auth(username, password);
+  req.user.plexToken = token;
+  const user = await req.user.save();
+  return res.json(user);
 };
 
 const getUsers = (req, res) => {
   plexApi
-    .getUsers()
+    .getUsers(req.user.plexToken)
     .then(users => {
       res.json(users);
     })

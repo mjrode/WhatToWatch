@@ -1,12 +1,12 @@
 import config from '../../../config';
 import helpers from '../helpers';
 
-const getUsersUrlParams = function() {
+const getUsersUrlParams = function(token) {
   return {
     host: config.plex.plexApiUrl,
     path: '/users',
     queryParams: {
-      'X-Plex-Token': config.plex.token,
+      'X-Plex-Token': config.plex.token || token,
     },
   };
 };
@@ -44,9 +44,9 @@ const getLibraryDataBySectionUrlParams = function(sectionId) {
   };
 };
 
-const getUsers = async function() {
+const getUsers = async function(token) {
   try {
-    const urlParams = getUsersUrlParams();
+    const urlParams = getUsersUrlParams(token);
     const getUsersUrl = helpers.buildUrl(urlParams);
     const response = await helpers.request(getUsersUrl);
     return response.MediaContainer.User;

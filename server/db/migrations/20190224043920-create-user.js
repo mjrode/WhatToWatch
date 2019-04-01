@@ -20,6 +20,9 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
+      plexToken: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
