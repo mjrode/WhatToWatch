@@ -1,19 +1,27 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {connect} from 'react-redux';
-import * as actions from '../actions';
+import axios from 'axios';
 
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
-import ImportPlex from './plex/PlexNew';
+import PlexForm from './plex/PlexForm';
 // const Dashboard = () => <h2>Dashboard</h2>;
 // const SurveyNew = () => <h2>SurveyNew</h2>;
 
 class App extends Component {
+  state = {user: {}};
   componentDidMount() {
-    this.props.fetchUser();
+    this.fetchUser();
   }
+
+  fetchUser = async () => {
+    const res = await axios.get('/auth/current_user');
+    this.setState({user: res.data});
+    console.log(res.data);
+    return res;
+  };
+
   render() {
     return (
       <div>
@@ -23,7 +31,11 @@ class App extends Component {
               <Header />
               <Route exact path="/" component={Landing} />
               <Route exact path="/surveys" component={Dashboard} />
-              <Route path="/app/plex" component={ImportPlex} />
+
+              <Route
+                path="/app/plex"
+                render={props => <PlexForm user={this.state.user} />}
+              />
             </div>
           </BrowserRouter>
         </div>
@@ -32,7 +44,4 @@ class App extends Component {
   }
 }
 
-export default connect(
-  null,
-  actions,
-)(App);
+export default App;

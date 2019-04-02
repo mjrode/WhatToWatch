@@ -6,7 +6,7 @@ import helpers from '../helpers';
 const getAuthToken = async (req, res) => {
   const {username} = req.query;
   const {password} = req.query;
-
+  console.log('Mikes stuff', username, password);
   const token = await auth(username, password);
   req.user.plexToken = token;
   const user = await req.user.save();
@@ -34,6 +34,7 @@ const getMostWatched = async (req, res) => {
 
 const getSections = async (req, res) => {
   try {
+    console.log('mikeyy', req.user);
     const sections = await plexApi.getSections();
     res.json(sections);
   } catch (error) {

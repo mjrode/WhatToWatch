@@ -18,7 +18,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "debug": "nodemon --exec babel-node --inspect index.js",
     "db:reset": "NODE_ENV=test npx sequelize db:migrate:undo:all &&  NODE_ENV=test npx sequelize db:migrate && npx sequelize db:migrate:undo:all && npx sequelize db:migrate",
-    "start": "babel-node index.js",
+    "start": "nodemon --exec babel-node index.js",
     "server": "nodemon --exec babel-node index.js",
     "client": "npm run start --prefix client",
     "heroku-postbuild": "npm install && NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"

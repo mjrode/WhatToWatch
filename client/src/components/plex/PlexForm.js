@@ -1,39 +1,84 @@
-import React, {Component} from 'react';
-import {reduxForm, Field} from 'redux-form';
+import React from 'react';
+import axios from 'axios';
 
-class PlexForm extends Component {
+class PlexForm extends React.Component {
+  state = {username: '', password: '', section_data: ''};
+
+  onFormSubmit = event => {
+    event.preventDefault();
+    this.getPlexToken(this.state);
+  };
+
+  getPlexToken = async params => {
+    const res = await axios.get('/plex/auth', {params});
+    return res;
+  };
+
+  fetchSections = async params => {
+    const res = await axios.get('/plex/library/sections');
+    console.log(res);
+    this.setState({section_data: res.data});
+  };
+
   render() {
-    const {handleSubmit} = this.props;
-    return (
-      <div className="row">
-        <form className="col s12" onSubmit={handleSubmit}>
-          <div class="row">
-            <div class="input-field col s12">
-              <label htmlFor="username">Username</label>
-              <Field type="text" name="username" component="input" />
-            </div>
-          </div>
-
-          <Field
-            name="password"
-            component="input"
-            type="password"
-            placeholder="Password"
-          />
+    console.log(this.props.user);
+    if (this.props.user.plexToken) {
+      return (
+        <div className="input-field col s6">
           <button
-            class="btn waves-effect waves-light"
+            onClick={this.fetchSections}
+            className="btn waves-effect waves-light"
             type="submit"
             name="action"
           >
-            Submit
-            <i class="material-icons right">send</i>
+            Fetch Users
+            <i className="material-icons right">send</i>
           </button>
+          <div>{this.state.section_data}</div>
+        </div>
+      );
+    }
+    return (
+      <div className="row">
+        <form onSubmit={this.onFormSubmit} className="col s12">
+          <div className="row">
+            <div className="input-field col s6">
+              <i className="material-icons prefix">account_circle</i>
+              <input
+                id="username"
+                type="text"
+                className="validate"
+                value={this.state.username}
+                onChange={e => this.setState({username: e.target.value})}
+              />
+              <label htmlFor="username">Plex Username</label>
+            </div>
+            <div className="input-field col s6">
+              <i className="material-icons prefix">lock_open</i>
+              <input
+                id="password"
+                type="password"
+                className="validate"
+                value={this.state.password}
+                onChange={e => this.setState({password: e.target.value})}
+              />
+              <label htmlFor="password">password</label>
+            </div>
+          </div>
+          <div className="input-field col s6">
+            <button
+              className="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              Submit
+              <i className="material-icons right">send</i>
+            </button>
+          </div>
         </form>
       </div>
     );
   }
 }
 
-export default reduxForm({
-  form: 'plexForm',
-})(PlexForm);
+export default PlexForm;
