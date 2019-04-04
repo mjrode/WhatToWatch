@@ -20,6 +20,9 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
+      plexServerUrl: {
+        type: Sequelize.STRING,
+      },
       plexToken: {
         type: Sequelize.STRING,
       },

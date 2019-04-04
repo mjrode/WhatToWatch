@@ -8,14 +8,14 @@ const getAuthToken = async (req, res) => {
   const {password} = req.query;
   console.log('Mikes stuff', username, password);
   const token = await auth(username, password);
-  req.user.plexToken = token;
-  const user = await req.user.save();
-  return res.json(user);
+  // req.user.plexToken = token;
+  // const user = await req.user.save();
+  return res.json(token);
 };
 
 const getUsers = (req, res) => {
   plexApi
-    .getUsers(req.user.plexToken)
+    .getUsers()
     .then(users => {
       res.json(users);
     })
@@ -34,7 +34,6 @@ const getMostWatched = async (req, res) => {
 
 const getSections = async (req, res) => {
   try {
-    console.log('mikeyy', req.user);
     const sections = await plexApi.getSections();
     res.json(sections);
   } catch (error) {

@@ -34,9 +34,9 @@ export default () => {
     server.use(passport.session());
 
     // Set up routes
-    server.use('/plex', plex);
-    server.use('/tdaw', tdaw);
-    server.use('/auth', auth);
+    server.use('/api/plex', plex);
+    server.use('/api/tdaw', tdaw);
+    server.use('/api/auth', auth);
 
     if (process.env.NODE_ENV === 'production') {
       server.use(express.static('client/build'));

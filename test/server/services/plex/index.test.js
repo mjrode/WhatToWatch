@@ -8,13 +8,13 @@ chai.use(chaiHttp);
 const should = chai.should();
 
 describe('Users', () => {
-  describe('GET plex/users', async () => {
-    it('should get all plex users', (done) => {
+  describe('GET /api/plex/users', async () => {
+    it('should get all plex users', done => {
       nocks.plexUsers();
 
       chai
         .request(app)
-        .get('/plex/users')
+        .get('/api/plex/users')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -23,10 +23,10 @@ describe('Users', () => {
         });
     });
 
-    it('should handle request error', (done) => {
+    it('should handle request error', done => {
       chai
         .request(app)
-        .get('/plex/users')
+        .get('/api/plex/users')
         .end((err, res) => {
           res.should.have.status(500);
           res.body.message.should.equal('An unknown error occurred.');
@@ -38,12 +38,12 @@ describe('Users', () => {
 
 describe('Most Watched', () => {
   describe('GET plex/most-watched?:sectionKey', async () => {
-    it('should return most watched history', (done) => {
+    it('should return most watched history', done => {
       nocks.mostWatched();
 
       chai
         .request(app)
-        .get('/plex/most-watched?sectionKey=2')
+        .get('/api/plex/most-watched?sectionKey=2')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -54,12 +54,12 @@ describe('Most Watched', () => {
   });
 
   describe('GET plex/most-watched?:accountId&:sectionKey', async () => {
-    it('should return most watched history per account', (done) => {
+    it('should return most watched history per account', done => {
       nocks.mostWatchedByAccount();
 
       chai
         .request(app)
-        .get('/plex/most-watched?accountId=22099864&sectionKey=2')
+        .get('/api/plex/most-watched?accountId=22099864&sectionKey=2')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -72,11 +72,11 @@ describe('Most Watched', () => {
 
 describe('Sections', () => {
   describe('GET plex/sections', async () => {
-    it('should get sections', (done) => {
+    it('should get sections', done => {
       nocks.plexSections();
       chai
         .request(app)
-        .get('/plex/sections')
+        .get('/api/plex/sections')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -89,11 +89,11 @@ describe('Sections', () => {
 
 describe('Library Data', () => {
   describe('GET plex/library?sectionId=3', async () => {
-    it('should fetch library', (done) => {
+    it('should fetch library', done => {
       nocks.plexLibrary();
       chai
         .request(app)
-        .get('/plex/library/3')
+        .get('/api/plex/library/3')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -106,7 +106,7 @@ describe('Library Data', () => {
   });
 
   describe('GET plex/library?sectionId=3', async () => {
-    it('should return error upon failure', (done) => {
+    it('should return error upon failure', done => {
       nocks.invalidRequest();
       chai
         .request(app)
