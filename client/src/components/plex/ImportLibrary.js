@@ -4,14 +4,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
-import styles from './css';
+import styles from '../css';
 import axios from 'axios';
 
 class ImportLibrary extends Component {
   importPlexLibrary = async params => {
-    const res = await axios.get('/api/plex/import/all');
-    console.log(res);
-    return res;
+    await axios.get('/api/plex/import/all');
+    window.location.reload();
   };
 
   render() {

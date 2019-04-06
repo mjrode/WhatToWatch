@@ -26,15 +26,20 @@ class MediaList extends Component {
               alt="pic"
               className="circle"
             />
-            <span className="title">{show.title}</span>
+
+            <span className="title">
+              <h5>{show.title}</h5>
+            </span>
+
             <p>
               {show.summary}
               <br />
-              Views: {show.views}
+              <a href="#!" className="collection-item">
+                <span className="new badge" data-badge-caption="Views">
+                  {show.views}
+                </span>
+              </a>
             </p>
-            <a href="#!" className="secondary-content">
-              <i className="material-icons">grade</i>
-            </a>
           </li>
         </ul>
       );

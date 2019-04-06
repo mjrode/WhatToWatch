@@ -106,7 +106,6 @@ const updateLibrary = libraryData => {
         type: data.type,
         views: data.globalViewCount,
         rating_key: data.ratingKey,
-        poster_path: data.key,
         summary: data.summary,
         rating: data.rating,
         year: data.year,

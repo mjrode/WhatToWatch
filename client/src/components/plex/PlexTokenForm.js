@@ -5,8 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
 import './PlexTokenForm.css';
-import Modal from './Modal';
-import styles from './css';
+import Modal from '../Modal';
+import styles from '../css';
 
 class PlexTokenForm extends React.Component {
   state = {email: '', password: '', plexUrl: ''};
@@ -18,8 +18,8 @@ class PlexTokenForm extends React.Component {
 
   getPlexToken = async params => {
     const res = await axios.get('/api/plex/token', {params});
-    console.log(res);
-    return res;
+    console.log('plex-tok---', res);
+    window.location.reload();
   };
 
   render() {

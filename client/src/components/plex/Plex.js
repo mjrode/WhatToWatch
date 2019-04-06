@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PlexTokenForm from './PlexTokenForm';
 import ImportLibrary from './ImportLibrary';
-import MediaList from './MediaList';
+import MediaList from '../MediaList';
 
 class Plex extends Component {
   render() {

@@ -5,7 +5,7 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import Hero from './Hero';
-import Plex from './Plex';
+import Plex from './plex/Plex';
 
 class App extends Component {
   componentDidMount() {
