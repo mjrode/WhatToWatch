@@ -16,7 +16,7 @@ const getTvPosters = async user => {
   try {
     console.log('Called Get Posters');
     const mostWatched = await models.PlexLibrary.findAll({
-      where: {UserId: user.id, type: 'show', views: {[Op.gt]: 0}},
+      where: {user_id: user.id, type: 'show', views: {[Op.gt]: 0}},
     });
 
     console.log(mostWatched);
@@ -48,7 +48,7 @@ const createSections = (sections, user) => {
         title: section.title,
         type: section.type,
         key: section.key,
-        UserId: user.id,
+        user_id: user.id,
       },
       {
         where: {
@@ -124,12 +124,12 @@ const updateLibrary = libraryData => {
 };
 
 const createLibrary = (libraryData, user) => {
-  const userId = user.id;
+  const user_id = user.id;
   return Promise.map(libraryData, sectionLibraryData => {
     return models.PlexLibrary.upsert(
       {
         title: sectionLibraryData.title,
-        UserId: userId,
+        user_id: user_id,
         type: sectionLibraryData.type,
         views: sectionLibraryData.views,
         rating_key: sectionLibraryData.ratingKey,
