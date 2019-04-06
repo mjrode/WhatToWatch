@@ -1,6 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import axios from 'axios';
-
 class PlexForm extends React.Component {
   state = {username: '', password: '', section_data: ''};
 
@@ -21,8 +21,8 @@ class PlexForm extends React.Component {
   };
 
   render() {
-    console.log(this.props.user);
-    if (this.props.user.plexToken) {
+    console.log(this.props.auth);
+    if (this.props.auth.plexToken) {
       return (
         <div className="input-field col s6">
           <button
@@ -39,46 +39,52 @@ class PlexForm extends React.Component {
       );
     }
     return (
-      <div className="row">
-        <form onSubmit={this.onFormSubmit} className="col s12">
-          <div className="row">
-            <div className="input-field col s6">
-              <i className="material-icons prefix">account_circle</i>
-              <input
-                id="username"
-                type="text"
-                className="validate"
-                value={this.state.username}
-                onChange={e => this.setState({username: e.target.value})}
-              />
-              <label htmlFor="username">Plex Username</label>
+      <div className="section">
+        <div className="row">
+          <form onSubmit={this.onFormSubmit} className="col s12">
+            <div className="row">
+              <div className="input-field col s6">
+                <i className="material-icons prefix">account_circle</i>
+                <input
+                  id="username"
+                  type="text"
+                  className="validate"
+                  value={this.state.username}
+                  onChange={e => this.setState({username: e.target.value})}
+                />
+                <label htmlFor="username">Plex Username</label>
+              </div>
+              <div className="input-field col s6">
+                <i className="material-icons prefix">lock_open</i>
+                <input
+                  id="password"
+                  type="password"
+                  className="validate"
+                  value={this.state.password}
+                  onChange={e => this.setState({password: e.target.value})}
+                />
+                <label htmlFor="password">password</label>
+              </div>
             </div>
             <div className="input-field col s6">
-              <i className="material-icons prefix">lock_open</i>
-              <input
-                id="password"
-                type="password"
-                className="validate"
-                value={this.state.password}
-                onChange={e => this.setState({password: e.target.value})}
-              />
-              <label htmlFor="password">password</label>
+              <button
+                className="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Submit
+                <i className="material-icons right">send</i>
+              </button>
             </div>
-          </div>
-          <div className="input-field col s6">
-            <button
-              className="btn waves-effect waves-light"
-              type="submit"
-              name="action"
-            >
-              Submit
-              <i className="material-icons right">send</i>
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }
 }
 
-export default PlexForm;
+function mapStateToProps({auth}) {
+  return {auth};
+}
+
+export default connect(mapStateToProps)(PlexForm);

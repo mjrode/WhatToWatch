@@ -36,6 +36,7 @@ export default () => {
     // Set up routes
     server.use('/api/plex', plex);
     server.use('/api/tdaw', tdaw);
+    server.use('/auth', auth);
     server.use('/api/auth', auth);
 
     if (process.env.NODE_ENV === 'production') {

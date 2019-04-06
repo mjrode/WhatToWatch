@@ -10,7 +10,11 @@ class PlexNew extends Component {
   render() {
     console.log(this.props.auth);
     if (!this.props.auth.plexToken) {
-      return <PlexForm onSubmit={this.submit} />;
+      return (
+        <div class="valign-wrapper">
+          <PlexForm onSubmit={this.submit} />
+        </div>
+      );
     }
 
     return <PlexActions />;

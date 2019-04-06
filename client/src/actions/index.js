@@ -1,8 +1,9 @@
 import axios from 'axios';
 import {FETCH_USER, FETCH_PLEX_TOKEN} from './types';
 
+// Action Creators
 export const fetchUser = () => async dispatch => {
-  const res = await axios.get('/auth/current_user');
+  const res = await axios.get('/api/auth/current_user');
   dispatch({type: FETCH_USER, payload: res.data});
 };
 
