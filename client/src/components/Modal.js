@@ -91,8 +91,8 @@ class CustomizedDialogDemo extends React.Component {
           <DialogContent>
             <Typography gutterBottom>
               We need to make a request to fetch a token which will allow us to
-              get a list of your most watched media. We will never store you
-              Plex password or make any changes to your plex server. This is an
+              get a list of your most watched media. We will never store your
+              Plex password or make any changes to your Plex server. This is an
               open source project and you can view the code&nbsp;
               <a href="https://github.com/mjrode/recommend"> here.</a>
             </Typography>

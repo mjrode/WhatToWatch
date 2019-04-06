@@ -10,9 +10,6 @@ class MediaCard extends Component {
     const show = this.props.media;
     return (
       <div className="col s12 ">
-        <div className="header">
-          <Header text={show.title} />
-        </div>
         <div className="card medium horizontal">
           <div className="card-image">
             <img
@@ -23,6 +20,9 @@ class MediaCard extends Component {
           </div>
           <div className="card-stacked">
             <div className="card-content">
+              <div className="header">
+                <Header text={show.title} />
+              </div>
               <p>{show.summary}</p>
             </div>
             <div className="card-action">

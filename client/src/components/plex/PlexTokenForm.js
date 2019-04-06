@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
 import './PlexTokenForm.css';
 import Modal from '../Modal';
+import TextHeader from '../helpers/Header';
 import styles from '../css';
 
 class PlexTokenForm extends React.Component {
@@ -18,7 +19,6 @@ class PlexTokenForm extends React.Component {
 
   getPlexToken = async params => {
     const res = await axios.get('/api/plex/token', {params});
-    console.log('plex-tok---', res);
     window.location.reload();
   };
 
@@ -28,7 +28,7 @@ class PlexTokenForm extends React.Component {
       return (
         <div>
           <div>
-            <h2>You need to be logged in to do that.</h2>
+            <TextHeader text="You need to be logged in to do that" />
           </div>
         </div>
       );
@@ -39,10 +39,13 @@ class PlexTokenForm extends React.Component {
           <div className={classes.heroUnit}>
             <div className={classes.heroContentSmall}>
               <div className="section center-align">
-                <h3 className={classes.shrinkTopMargin}>Fetch Plex Token</h3>
-                <div className="center">
+                <div className="center right">
                   <Modal />
                 </div>
+                <h3 className={classes.shrinkTopMargin}>
+                  <TextHeader text="Fetch Plex Token" />
+                </h3>
+                <hr />
               </div>
               <div className="section center-align">
                 <div className="row">

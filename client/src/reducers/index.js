@@ -4,5 +4,5 @@ import plexReducer from './plexReducer';
 
 export default combineReducers({
   auth: authReducer,
-  media: plexReducer,
+  plex: plexReducer,
 });

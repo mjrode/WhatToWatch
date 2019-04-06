@@ -19,7 +19,7 @@ class Hero extends Component {
     }
     return (
       <a href="/api/auth/google" className="waves-effect waves-light btn-large">
-        <i className="material-icons left">live_tv</i> Login with Google
+        <i className="material-icons left">group</i> Login with Google
       </a>
     );
   };

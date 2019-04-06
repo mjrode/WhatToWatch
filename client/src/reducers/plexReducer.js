@@ -6,7 +6,7 @@ export default function(state = '', action) {
     case FETCH_PLEX_TOKEN:
       return action.payload || false;
     case FETCH_MEDIA:
-      return action.payload;
+      return action.payload || false;
     default:
       return state;
   }
