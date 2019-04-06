@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-import axios from 'axios';
 import * as actions from '../actions';
 
 import Header from './Header';
@@ -23,7 +22,7 @@ class App extends Component {
               <Header />
               <Route exact path="/" component={Hero} />
 
-              <Route path="/create-account" component={CreateAccount} />
+              <Route path="/plex-token" component={CreateAccount} />
               <Route path="/form" component={PlexForm} />
             </div>
           </BrowserRouter>

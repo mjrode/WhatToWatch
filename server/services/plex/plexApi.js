@@ -13,7 +13,7 @@ const getUsersUrlParams = function(token) {
 
 const getSectionsUrlParams = function() {
   return {
-    host: config.plex.plexServerUrl,
+    host: config.plex.plexUrl,
     path: '/library/sections',
     queryParams: {
       'X-Plex-Token': config.plex.token,
@@ -23,7 +23,7 @@ const getSectionsUrlParams = function() {
 
 const mostWatchedUrlParams = function(accountId, sectionKey, limit = 10) {
   return {
-    host: config.plex.plexServerUrl,
+    host: config.plex.plexUrl,
     path: '/library/all/top',
     queryParams: {
       ...(accountId && {accountId}),
@@ -36,7 +36,7 @@ const mostWatchedUrlParams = function(accountId, sectionKey, limit = 10) {
 
 const getLibraryDataBySectionUrlParams = function(sectionId) {
   return {
-    host: config.plex.plexServerUrl,
+    host: config.plex.plexUrl,
     path: `/library/sections/${sectionId}/all`,
     queryParams: {
       'X-Plex-Token': config.plex.token,

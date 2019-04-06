@@ -3,7 +3,7 @@ import plexService from '../services/plex';
 
 const router = Router();
 
-router.get('/auth', plexService.getAuthToken);
+router.get('/token', plexService.getAuthToken);
 
 router.get('/users', plexService.getUsers);
 

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       lastName: DataTypes.STRING,
       googleId: DataTypes.STRING,
       email: {type: DataTypes.STRING, unique: true},
-      plexServerUrl: DataTypes.STRING,
+      plexUrl: DataTypes.STRING,
       plexToken: DataTypes.STRING,
     },
     {},

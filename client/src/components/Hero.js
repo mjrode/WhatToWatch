@@ -37,10 +37,10 @@ class Hero extends Component {
                 </Typography>
                 <div className="center-align">
                   <Link
-                    to="/app/plex"
+                    to="/plex-token"
                     className="waves-effect waves-light btn-large"
                   >
-                    <i className="material-icons left">live_tv</i>Sign In
+                    <i className="material-icons left">live_tv</i>Get Started
                   </Link>
                 </div>
               </div>

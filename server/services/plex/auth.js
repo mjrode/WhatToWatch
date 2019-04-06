@@ -18,9 +18,13 @@ const encryptUserCreds = (username, password) => {
 };
 
 const fetchToken = async (username, password) => {
-  const res = await request.post(urlParams(username, password));
-  const token = res.match(rxAuthToken)[1];
-  return token;
+  try {
+    const res = await request.post(urlParams(username, password));
+    const token = res.match(rxAuthToken)[1];
+    return token;
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export default fetchToken;

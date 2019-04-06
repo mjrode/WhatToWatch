@@ -1,16 +1,25 @@
 import plexApi from './plexApi';
 import importData from './importData';
 import auth from './auth';
+import models from '../../db/models';
 import helpers from '../helpers';
 
 const getAuthToken = async (req, res) => {
-  const {username} = req.query;
-  const {password} = req.query;
-  console.log('Mikes stuff', username, password);
-  const token = await auth(username, password);
-  // req.user.plexToken = token;
-  // const user = await req.user.save();
-  return res.json(token);
+  try {
+    const {email, password, plexUrl} = req.query;
+    const plexToken = await auth(email, password);
+    const [rowsUpdate, updatedUser] = await models.User.update(
+      {plexUrl, plexToken},
+      {returning: true, where: {googleId: req.user.googleId}},
+    );
+    console.log('updatedUser', updatedUser);
+    console.log('token', plexToken);
+
+    return res.json(updatedUser);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(201).json(error.message);
+  }
 };
 
 const getUsers = (req, res) => {
