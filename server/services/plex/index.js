@@ -12,12 +12,9 @@ const getAuthToken = async (req, res) => {
       {plexUrl, plexToken},
       {returning: true, where: {googleId: req.user.googleId}},
     );
-    console.log('updatedUser', updatedUser);
-    console.log('token', plexToken);
 
     return res.json(updatedUser);
   } catch (error) {
-    console.log(error.message);
     return res.status(201).json(error.message);
   }
 };

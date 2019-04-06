@@ -55,6 +55,7 @@ const importMostWatchedData = async sectionKey => {
 };
 
 const importLibrary = async sectionKey => {
+  console.log('section-key', sectionKey);
   const libraryData = await plexApi.getLibraryDataBySection({
     sectionKey,
   });

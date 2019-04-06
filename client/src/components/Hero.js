@@ -10,7 +10,7 @@ import styles from './css';
 class Hero extends Component {
   render() {
     const {classes} = this.props;
-    if (this.props.auth) {
+    if (!this.props.auth.length !== 0) {
       return (
         <React.Fragment>
           <CssBaseline />

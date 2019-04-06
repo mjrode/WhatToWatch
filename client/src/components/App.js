@@ -5,8 +5,7 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import Hero from './Hero';
-import CreateAccount from './CreateAccount';
-import PlexForm from './plex/PlexForm';
+import Plex from './Plex';
 
 class App extends Component {
   componentDidMount() {
@@ -22,8 +21,7 @@ class App extends Component {
               <Header />
               <Route exact path="/" component={Hero} />
 
-              <Route path="/plex-token" component={CreateAccount} />
-              <Route path="/form" component={PlexForm} />
+              <Route path="/plex" component={Plex} />
             </div>
           </BrowserRouter>
         </div>

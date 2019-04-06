@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
-import './CreateAccount.css';
+import './PlexTokenForm.css';
 import Modal from './Modal';
 import styles from './css';
 
-class CreateAccount extends React.Component {
+class PlexTokenForm extends React.Component {
   state = {email: '', password: '', plexUrl: ''};
 
   onFormSubmit = event => {
@@ -118,7 +118,7 @@ class CreateAccount extends React.Component {
   }
 }
 
-CreateAccount.propTypes = {
+PlexTokenForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
@@ -126,4 +126,4 @@ function mapStateToProps({auth}) {
   return {auth};
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(CreateAccount));
+export default connect(mapStateToProps)(withStyles(styles)(PlexTokenForm));

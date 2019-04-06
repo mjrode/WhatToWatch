@@ -87,9 +87,10 @@ const getSections = async function() {
   }
 };
 
-const getLibraryDataBySection = async function({sectionId}) {
+const getLibraryDataBySection = async function({sectionKey}) {
   try {
-    const urlParams = getLibraryDataBySectionUrlParams(sectionId);
+    console.log('sectionId--', sectionKey);
+    const urlParams = getLibraryDataBySectionUrlParams(sectionKey);
     const getLibraryDataBySectionUrl = helpers.buildUrl(urlParams);
     const response = await helpers.request(getLibraryDataBySectionUrl);
     return response.MediaContainer.Metadata;
