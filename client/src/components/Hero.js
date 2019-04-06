@@ -37,7 +37,7 @@ class Hero extends Component {
                 </Typography>
                 <div className="center-align">
                   <Link
-                    to="/plex-token"
+                    to="/plex"
                     className="waves-effect waves-light btn-large"
                   >
                     <i className="material-icons left">live_tv</i>Get Started

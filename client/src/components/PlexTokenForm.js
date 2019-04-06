@@ -22,12 +22,6 @@ class PlexTokenForm extends React.Component {
     return res;
   };
 
-  fetchSections = async params => {
-    const res = await axios.get('/plex/library/sections');
-    console.log(res);
-    this.setState({section_data: res.data});
-  };
-
   render() {
     const {classes} = this.props;
     if (!this.props.auth) {

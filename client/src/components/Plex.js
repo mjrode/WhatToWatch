@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-import * as actions from '../actions';
 import PlexTokenForm from './PlexTokenForm';
 import ImportLibrary from './ImportLibrary';
+import MediaList from './MediaList';
 
 class Plex extends Component {
   render() {
@@ -17,6 +16,7 @@ class Plex extends Component {
     return (
       <div>
         <ImportLibrary />
+        <MediaList />
       </div>
     );
   }

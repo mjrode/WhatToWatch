@@ -1,20 +1,54 @@
 import Promise from 'bluebird';
 import plexApi from './plexApi';
 import models from '../../db/models';
+import config from '../../../config';
+import MovieDb from 'moviedb-promise';
+import {Op} from 'sequelize';
+const mdb = new MovieDb(config.server.movieApiKey);
 
-const importSections = async () => {
+const importSections = async user => {
   const sections = await plexApi.getSections();
-  const dbSections = await createSections(sections);
+  const dbSections = await createSections(sections, user);
   return dbSections;
 };
 
-const createSections = sections => {
+const getTvPosters = async user => {
+  try {
+    console.log('Called Get Posters');
+    const mostWatched = await models.PlexLibrary.findAll({
+      where: {UserId: user.id, type: 'show', views: {[Op.gt]: 0}},
+    });
+
+    console.log(mostWatched);
+    const imageUrls = await mostWatched.map(async show => {
+      console.log('title', show.title);
+      const res = await mdb.searchTv({query: show.title});
+      console.log('request-movie', res.results[0].poster_path);
+      return models.PlexLibrary.update(
+        {
+          poster_path: res.results[0].poster_path,
+        },
+        {
+          where: {title: show.title},
+        },
+      );
+    });
+
+    console.log('mike--', imageUrls);
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+};
+
+const createSections = (sections, user) => {
   return Promise.map(sections, section => {
     return models.PlexSection.upsert(
       {
         title: section.title,
         type: section.type,
         key: section.key,
+        UserId: user.id,
       },
       {
         where: {
@@ -30,10 +64,10 @@ const createSections = sections => {
   });
 };
 
-const importLibraries = async () => {
+const importLibraries = async user => {
   const sections = await plexApi.getSections();
   return Promise.map(sections, section => {
-    return importLibrary(section.key);
+    return importLibrary(section.key, user);
   });
 };
 
@@ -41,7 +75,7 @@ const importMostWatched = async () => {
   // const sectionKeys = await models.PlexSection.findAll().then(sections => {
   //   return sections.map(section => section.key.toString());
   // });
-  const sectionKeys = [1, 2, 3];
+  const sectionKeys = [1, 2];
   return Promise.map(sectionKeys, sectionKey => {
     return importMostWatchedData(sectionKey);
   }).catch(err => {
@@ -55,12 +89,12 @@ const importMostWatchedData = async sectionKey => {
   return mostWatchedDbData;
 };
 
-const importLibrary = async sectionKey => {
-  console.log('section-key', sectionKey);
+const importLibrary = async (sectionKey, user) => {
+  console.log('user--', user);
   const libraryData = await plexApi.getLibraryDataBySection({
     sectionKey,
   });
-  const dbLibraryData = await createLibrary(libraryData);
+  const dbLibraryData = await createLibrary(libraryData, user);
   return dbLibraryData;
 };
 
@@ -72,7 +106,7 @@ const updateLibrary = libraryData => {
         type: data.type,
         views: data.globalViewCount,
         rating_key: data.ratingKey,
-        metadata_path: data.key,
+        poster_path: data.key,
         summary: data.summary,
         rating: data.rating,
         year: data.year,
@@ -89,11 +123,13 @@ const updateLibrary = libraryData => {
   });
 };
 
-const createLibrary = libraryData => {
+const createLibrary = (libraryData, user) => {
+  const userId = user.id;
   return Promise.map(libraryData, sectionLibraryData => {
     return models.PlexLibrary.upsert(
       {
         title: sectionLibraryData.title,
+        UserId: userId,
         type: sectionLibraryData.type,
         views: sectionLibraryData.views,
         rating_key: sectionLibraryData.ratingKey,
@@ -112,4 +148,9 @@ const createLibrary = libraryData => {
   }).catch(err => console.log(err));
 };
 
-export default {importSections, importLibraries, importMostWatched};
+export default {
+  importSections,
+  importLibraries,
+  importMostWatched,
+  getTvPosters,
+};

@@ -20,7 +20,7 @@ module.exports = {
       rating_key: {
         type: Sequelize.INTEGER,
       },
-      metadata_path: {
+      poster_path: {
         type: Sequelize.STRING,
       },
       summary: {

@@ -3,7 +3,7 @@ import nock from 'nock';
 import app from '../../../../index';
 import importData from '../../../../server/services/plex/importData';
 import models from '../../../../server/db/models';
-import { seed, truncate } from '../../../../server/db/scripts';
+import {seed, truncate} from '../../../../server/db/scripts';
 import * as nocks from '../../../nocks';
 
 describe('ImportData', () => {
@@ -71,7 +71,7 @@ describe('ImportData', () => {
         data => data.dataValues.title === 'New Girl',
       );
       newGirl[0].dataValues.views.should.eq(74);
-      newGirl[0].dataValues.metadata_path.should.eq(
+      newGirl[0].dataValues.poster_path.should.eq(
         '/library/metadata/5485/children',
       );
       libraryMostWatched.should.be.length(56);

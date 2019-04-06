@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       views: DataTypes.INTEGER,
       rating_key: DataTypes.INTEGER,
-      metadata_path: DataTypes.STRING,
+      poster_path: DataTypes.STRING,
       summary: DataTypes.TEXT,
       rating: DataTypes.FLOAT,
       year: DataTypes.INTEGER,

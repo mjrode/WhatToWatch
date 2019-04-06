@@ -73,10 +73,12 @@ const importMostWatched = async (req, res) => {
 };
 
 const importAll = async (req, res) => {
-  await importData.importSections();
-  await importData.importLibraries();
-  const data = await importData.importMostWatched();
-  res.json(data);
+  await importData.importSections(req.user);
+  await importData.importLibraries(req.user);
+  await importData.importMostWatched(req.user);
+  const images = await importData.getTvPosters(req.user);
+
+  res.json(images);
 };
 
 export default {
