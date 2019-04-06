@@ -8,47 +8,24 @@ import {connect} from 'react-redux';
 import styles from './css';
 
 class Hero extends Component {
-  render() {
-    const {classes} = this.props;
-    if (!this.props.auth.length !== 0) {
+  callToAction = () => {
+    console.log('hero - props auth', this.props.auth.size);
+    if (this.props.auth.email) {
       return (
-        <React.Fragment>
-          <CssBaseline />
-          <main>
-            <div className={classes.heroUnit}>
-              <div className={classes.heroContent}>
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="textPrimary"
-                  gutterBottom
-                >
-                  PlexRex
-                </Typography>
-                <Typography
-                  variant="h6"
-                  align="center"
-                  color="textSecondary"
-                  paragraph
-                >
-                  Media recommendations based on your most watched Plex TV and
-                  Movies.
-                </Typography>
-                <div className="center-align">
-                  <Link
-                    to="/plex"
-                    className="waves-effect waves-light btn-large"
-                  >
-                    <i className="material-icons left">live_tv</i>Get Started
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </main>
-        </React.Fragment>
+        <Link to="/plex" className="waves-effect waves-light btn-large">
+          <i className="material-icons left">live_tv</i>Get Started
+        </Link>
       );
     }
+    return (
+      <a href="/api/auth/google" className="waves-effect waves-light btn-large">
+        <i className="material-icons left">live_tv</i> Login with Google
+      </a>
+    );
+  };
+
+  render() {
+    const {classes} = this.props;
 
     return (
       <React.Fragment>
@@ -63,7 +40,11 @@ class Hero extends Component {
                 color="textPrimary"
                 gutterBottom
               >
-                PlexRex
+                <img
+                  className="responsive-img"
+                  src={process.env.PUBLIC_URL + '/icons/logo.png'}
+                  alt="logo"
+                />
               </Typography>
               <Typography
                 variant="h6"
@@ -74,15 +55,7 @@ class Hero extends Component {
                 Media recommendations based on your most watched Plex TV and
                 Movies.
               </Typography>
-              <div className="center-align">
-                <a
-                  href="/api/auth/google"
-                  className="waves-effect waves-light btn-large"
-                >
-                  <i className="material-icons left">live_tv</i> Login with
-                  Google
-                </a>
-              </div>
+              <div className="center-align">{this.callToAction()}</div>
             </div>
           </div>
         </main>

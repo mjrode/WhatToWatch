@@ -29,6 +29,7 @@ class Header extends Component {
           <Link to={this.props.auth ? '/' : '/'} className="left brand-logo">
             PlexRex
           </Link>
+
           <ul className="right">{this.renderContent()}</ul>
         </div>
       </nav>

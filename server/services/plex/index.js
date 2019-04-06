@@ -76,7 +76,7 @@ const importAll = async (req, res) => {
   await importData.importSections(req.user);
   await importData.importLibraries(req.user);
   await importData.importMostWatched(req.user);
-  const images = await importData.getTvPosters(req.user);
+  const images = await importData.importTvPosters(req.user);
 
   res.json(images);
 };

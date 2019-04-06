@@ -12,18 +12,14 @@ const importSections = async user => {
   return dbSections;
 };
 
-const getTvPosters = async user => {
+const importTvPosters = async user => {
   try {
-    console.log('Called Get Posters');
     const mostWatched = await models.PlexLibrary.findAll({
       where: {UserId: user.id, type: 'show', views: {[Op.gt]: 0}},
     });
 
-    console.log(mostWatched);
     const imageUrls = await mostWatched.map(async show => {
-      console.log('title', show.title);
       const res = await mdb.searchTv({query: show.title});
-      console.log('request-movie', res.results[0].poster_path);
       return models.PlexLibrary.update(
         {
           poster_path: res.results[0].poster_path,
@@ -33,10 +29,7 @@ const getTvPosters = async user => {
         },
       );
     });
-
-    console.log('mike--', imageUrls);
   } catch (error) {
-    console.log(error);
     return error.message;
   }
 };
@@ -151,5 +144,5 @@ export default {
   importSections,
   importLibraries,
   importMostWatched,
-  getTvPosters,
+  importTvPosters,
 };

@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import styles from './css';
 import axios from 'axios';
+import MediaCard from './MediaCard';
 
 class MediaList extends Component {
   state = {tvShowList: []};
@@ -19,29 +20,9 @@ class MediaList extends Component {
   render() {
     const mediaList = this.state.tvShowList.map(show => {
       return (
-        <ul className="collection" key={show.title}>
-          <li className="collection-item avatar">
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
-              alt="pic"
-              className="circle"
-            />
-
-            <span className="title">
-              <h5>{show.title}</h5>
-            </span>
-
-            <p>
-              {show.summary}
-              <br />
-              <a href="#!" className="collection-item">
-                <span className="new badge" data-badge-caption="Views">
-                  {show.views}
-                </span>
-              </a>
-            </p>
-          </li>
-        </ul>
+        <div className="row" key={show.title}>
+          <MediaCard media={show} />
+        </div>
       );
     });
     return <div>{mediaList}</div>;
