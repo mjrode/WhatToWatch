@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import styles from './css';
+import styles from '../css/materialize.css';
 
 class Hero extends Component {
   callToAction = () => {

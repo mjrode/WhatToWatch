@@ -4,7 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import TextHeader from '../helpers/Header';
-import styles from '../css';
+import styles from '../../css/materialize.css.js';
+import '../../css/materialize.css';
 import * as actions from '../../actions';
 
 class ImportPlexLibrary extends Component {
@@ -14,7 +15,7 @@ class ImportPlexLibrary extends Component {
       <div>
         <React.Fragment>
           <CssBaseline />
-          <main>
+          <main className="padding-bottom-5">
             <div className={classes.heroUnit}>
               <div className={classes.heroContent}>
                 <TextHeader text="Most Watched TV Shows" />

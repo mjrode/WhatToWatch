@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import styles from './../css';
+import styles from '../../css/materialize.css';
 
 class Header extends Component {
   render() {

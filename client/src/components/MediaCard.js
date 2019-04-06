@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import Header from './helpers/Header';
-import styles from './css';
+import styles from '../css/materialize.css';
 
 class MediaCard extends Component {
   render() {

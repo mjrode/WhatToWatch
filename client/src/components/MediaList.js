@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
-import styles from './css';
+import styles from '../css/materialize.css.js';
 import axios from 'axios';
 import MediaCard from './MediaCard';
 
