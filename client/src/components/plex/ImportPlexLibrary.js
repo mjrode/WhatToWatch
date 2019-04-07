@@ -15,24 +15,11 @@ class ImportPlexLibrary extends Component {
   render() {
     const {classes} = this.props;
     return (
-      <div>
-        <React.Fragment>
-          <CssBaseline />
-          <main className="padding-bottom-5">
-            <div className={classes.heroUnit}>
-              <div className={classes.heroContent}>
-                <img
-                  className="responsive-img"
-                  src={
-                    process.env.PUBLIC_URL + '/icons/facebook_cover_photo_2.png'
-                  }
-                  alt="logo"
-                />
-              </div>
-            </div>
-          </main>
-        </React.Fragment>
-      </div>
+      <img
+        className="responsive-img"
+        src={process.env.PUBLIC_URL + '/icons/facebook_cover_photo_2.png'}
+        alt="logo"
+      />
     );
   }
 }
