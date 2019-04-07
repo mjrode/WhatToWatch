@@ -73,12 +73,15 @@ const importMostWatched = async (req, res) => {
 };
 
 const importAll = async (req, res) => {
-  await importData.importSections(req.user);
-  await importData.importLibraries(req.user);
-  await importData.importMostWatched(req.user);
-  const images = await importData.importTvPosters(req.user);
-
-  res.json(images);
+  try {
+    await importData.importSections(req.user);
+    await importData.importLibraries(req.user);
+    await importData.importMostWatched(req.user);
+    await importData.importTvPosters(req.user);
+    res.json('Successfully imported/updated data');
+  } catch (error) {
+    res.json(error);
+  }
 };
 
 export default {

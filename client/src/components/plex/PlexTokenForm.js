@@ -42,9 +42,9 @@ class PlexTokenForm extends React.Component {
                 <div className="center right">
                   <Modal />
                 </div>
-                <h3 className={classes.shrinkTopMargin}>
+                <div className={classes.shrinkTopMargin}>
                   <TextHeader text="Fetch Plex Token" />
-                </h3>
+                </div>
                 <hr />
               </div>
               <div className="section center-align">

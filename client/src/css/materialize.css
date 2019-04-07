@@ -7,5 +7,17 @@
 }
 
 .padding-bottom-5 {
-  padding-bottom: 5em
+  padding-bottom: 5em;
+}
+
+.hide-mobile {
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+.hide-desktop {
+  @media not all and (max-width: 480px) {
+    display: none;
+  }
 }

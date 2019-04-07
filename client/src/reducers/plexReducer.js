@@ -1,12 +1,20 @@
-import {FETCH_PLEX_TOKEN, FETCH_MEDIA} from '../actions/types';
+import {types} from '../actions/index';
 
-export default function(state = '', action) {
+export const initialState = {
+  loading: false,
+  plexToken: '',
+  mediaResponse: [],
+};
+export default function(state = initialState, action) {
   console.log('Action!', action);
+  console.log('State!!', state);
   switch (action.type) {
-    case FETCH_PLEX_TOKEN:
-      return action.payload || false;
-    case FETCH_MEDIA:
-      return action.payload || false;
+    case types.FETCH_PLEX_TOKEN:
+      return action.payload.plexToken || false;
+    case types.FETCH_MEDIA_RESPONSE:
+      return action.payload.mediaResponse || false;
+    case types.SET_LOADING:
+      return {...state, loading: action.payload};
     default:
       return state;
   }

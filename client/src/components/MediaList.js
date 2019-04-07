@@ -5,9 +5,10 @@ import {connect} from 'react-redux';
 import styles from '../css/materialize.css.js';
 import axios from 'axios';
 import MediaCard from './MediaCard';
+import * as actions from '../actions';
 
 class MediaList extends Component {
-  state = {tvShowList: []};
+  state = {tvShowList: [], loading: false};
 
   componentDidMount() {
     this.getMostWatched();
@@ -18,6 +19,7 @@ class MediaList extends Component {
   };
 
   render() {
+    console.log('My state--', this.state);
     const mediaList = this.state.tvShowList.map(show => {
       return (
         <div className="row" key={show.title}>
@@ -33,8 +35,12 @@ MediaList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({auth}) {
-  return {auth};
+function mapStateToProps({plex}) {
+  console.log('plex props', plex);
+  return {loading: plex.loading};
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(MediaList));
+export default connect(
+  mapStateToProps,
+  actions,
+)(withStyles(styles)(MediaList));
