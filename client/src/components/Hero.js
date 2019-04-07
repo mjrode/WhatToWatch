@@ -42,7 +42,9 @@ class Hero extends Component {
               >
                 <img
                   className="responsive-img"
-                  src={process.env.PUBLIC_URL + '/icons/logo.png'}
+                  src={
+                    process.env.PUBLIC_URL + '/icons/facebook_cover_photo_2.png'
+                  }
                   alt="logo"
                 />
               </Typography>

@@ -9,6 +9,9 @@ import '../../css/materialize.css';
 import * as actions from '../../actions';
 
 class ImportPlexLibrary extends Component {
+  componentDidMount() {
+    this.props.fetchMedia();
+  }
   render() {
     const {classes} = this.props;
     return (
@@ -18,16 +21,13 @@ class ImportPlexLibrary extends Component {
           <main className="padding-bottom-5">
             <div className={classes.heroUnit}>
               <div className={classes.heroContent}>
-                <TextHeader text="Most Watched TV Shows" />
-                <div className="center-align">
-                  <button
-                    onClick={this.props.fetchMedia}
-                    className="waves-effect waves-light btn-large"
-                  >
-                    <i className="material-icons left">live_tv</i> Update/Import
-                    Library
-                  </button>
-                </div>
+                <img
+                  className="responsive-img"
+                  src={
+                    process.env.PUBLIC_URL + '/icons/facebook_cover_photo_2.png'
+                  }
+                  alt="logo"
+                />
               </div>
             </div>
           </main>
