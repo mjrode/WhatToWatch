@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import Header from './helpers/Header';
 import styles from '../css/materialize.css';
+import {Link} from 'react-router-dom';
 
 class MediaCard extends Component {
   render() {
@@ -30,7 +31,13 @@ class MediaCard extends Component {
                     <p>{show.summary}</p>
                   </div>
                   <div className="card-action">
-                    <a href="www.google.com">Similar Shows</a>
+                    <Link
+                      to="/similar"
+                      className="waves-effect waves-light btn-large right"
+                    >
+                      <i className="material-icons left">live_tv</i>Similar
+                      Shows
+                    </Link>
                   </div>
                 </div>
               </div>

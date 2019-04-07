@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
 import '../../css/materialize.css';
-import Modal from '../Modal';
+import InfoModal from '../InfoModal';
 import TextHeader from '../helpers/Header';
 import styles from '../../css/materialize.css';
 
@@ -40,7 +40,7 @@ class PlexTokenForm extends React.Component {
             <div className={classes.heroContentSmall}>
               <div className="section center-align">
                 <div className="center right">
-                  <Modal />
+                  <InfoModal />
                 </div>
                 <div className={classes.shrinkTopMargin}>
                   <TextHeader text="Fetch Plex Token" />
