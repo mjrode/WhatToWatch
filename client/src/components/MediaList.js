@@ -6,6 +6,8 @@ import styles from '../css/materialize.css.js';
 import axios from 'axios';
 import MediaCard from './MediaCard';
 import * as actions from '../actions';
+import {BrowserRouter, Route} from 'react-router-dom';
+import Similar from './plex/Similar';
 
 class MediaList extends Component {
   state = {tvShowList: [], loading: false};
@@ -19,10 +21,13 @@ class MediaList extends Component {
   };
 
   render() {
-    console.log('My state--', this.state);
     const mediaList = this.state.tvShowList.map(show => {
       return (
         <div className="row" key={show.title}>
+          <Route
+            path="/plex/similar"
+            render={props => <Similar {...props} show={show} />}
+          />
           <MediaCard media={show} />
         </div>
       );
@@ -36,7 +41,6 @@ MediaList.propTypes = {
 };
 
 function mapStateToProps({plex}) {
-  console.log('plex props', plex);
   return {loading: plex.loading};
 }
 

@@ -23,7 +23,7 @@ class Header extends Component {
   }
   render() {
     return (
-      <nav>
+      <nav style={{backgroundColor: '#f9a1bc'}}>
         <div className="nav-wrapper" style={{margin: '0 10px'}}>
           <Link to={this.props.auth ? '/' : '/'} className="left brand-logo">
             PlexRex

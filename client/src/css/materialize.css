@@ -21,3 +21,7 @@
     display: none;
   }
 }
+
+.Button:hover {
+  background-color: rgb(98, 87, 113);
+}

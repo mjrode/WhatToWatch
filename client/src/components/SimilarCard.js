@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
+import {withStyles} from '@material-ui/core/styles';
+import {connect} from 'react-redux';
 import Header from './helpers/Header';
 import styles from '../css/materialize.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 class MediaCard extends Component {
   render() {
+    console.log('ccccccccc', this.props.media);
     const show = this.props.media;
     const isMobile = window.innerWidth < 480;
     if (!isMobile) {
@@ -15,31 +16,29 @@ class MediaCard extends Component {
           <div className="row hide-mobile">
             <div className="col s12 ">
               <div className="card medium horizontal">
-                <div
-                  className="card-image"
-                  style={{
-                    boxShadow:
-                      '0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)'
-                  }}
-                >
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
+                <div class="video-container">
+                  <iframe
+                    width="853"
+                    title={this.title}
+                    height="480"
+                    src={this.yUrl}
                     alt="pic"
-                    className="circle"
+                    frameborder="0"
+                    allowfullscreen
                   />
                 </div>
+
                 <div className="card-stacked">
                   <div className="card-content">
                     <div className="header">
-                      <Header text={show.title} />
+                      <Header text={show.Name} />
                     </div>
-                    <p>{show.summary}</p>
+                    <p>{show.wTeaser}</p>
                   </div>
                   <div className="card-action">
                     <Link
                       to="/plex/similar"
-                      className="waves-effect waves-light btn-large right Button"
-                      style={{ backgroundColor: '#f9a1bc' }}
+                      className="waves-effect waves-light btn-large right"
                     >
                       <i className="material-icons left">live_tv</i>Similar
                       Shows
@@ -62,10 +61,10 @@ class MediaCard extends Component {
                 alt="pic"
                 className="responsive-img"
               />
-              <span className="card-title">{show.title}</span>
+              <span className="card-title">{show.name}</span>
             </div>
             <div className="card-content">
-              <p>{show.summary}</p>
+              <p>{show.wTeaser}</p>
             </div>
             <div className="card-action">
               <a href="#">This is a link</a>
@@ -78,11 +77,11 @@ class MediaCard extends Component {
 }
 
 MediaCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps({auth}) {
+  return {auth};
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(MediaCard));

@@ -5,7 +5,6 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import ImportPlexLibrary from './ImportPlexLibrary';
 import MediaList from '../MediaList';
 
-
 class Plex extends Component {
   render() {
     if (!this.props.auth.plexToken) {
@@ -18,8 +17,8 @@ class Plex extends Component {
     return (
       <div>
         <ImportPlexLibrary />
+
         <MediaList />
-        
       </div>
     );
   }

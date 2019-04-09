@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {withStyles} from '@material-ui/core/styles';
-import {connect} from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import TextHeader from '../helpers/Header';
 import styles from '../../css/materialize.css.js';
 import '../../css/materialize.css';
@@ -13,7 +13,7 @@ class ImportPlexLibrary extends Component {
     this.props.fetchMedia();
   }
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
     return (
       <img
         className="responsive-img"
@@ -25,14 +25,14 @@ class ImportPlexLibrary extends Component {
 }
 
 ImportPlexLibrary.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({auth}) {
-  return {auth};
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(
   mapStateToProps,
-  actions,
+  actions
 )(withStyles(styles)(ImportPlexLibrary));
