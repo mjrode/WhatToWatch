@@ -3,6 +3,7 @@ export const types = {
   SET_LOADING: 'set_loading',
   FETCH_USER: 'fetch_user',
   FETCH_MEDIA_RESPONSE: 'fetch_media_response',
+  GET_MOST_WATCHED: 'get_most_watched',
 };
 
 export const setLoading = loading => dispatch => {
@@ -18,8 +19,12 @@ export const fetchUser = () => async dispatch => {
 export const fetchMedia = () => async dispatch => {
   dispatch({type: types.SET_LOADING, payload: true});
   const res = await axios.get('/api/plex/import/all');
-  console.log('action res', res);
   dispatch({type: types.FETCH_MEDIA_RESPONSE, payload: res.data});
+};
+
+export const getMostWatched = params => async dispatch => {
+  const res = await axios.get('/api/recommend/most-watched');
+  dispatch({type: types.GET_MOST_WATCHED, payload: res.data});
 };
 
 // export const fetchPlexToken = (
