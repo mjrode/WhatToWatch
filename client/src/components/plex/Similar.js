@@ -8,24 +8,30 @@ import SimilarCard from './../SimilarCard';
 import * as actions from '../../actions';
 
 class Similar extends Component {
+  state = {
+    shows: [],
+  };
   componentDidMount() {
     this.getSimilar();
   }
 
   getSimilar = async () => {
-    const params = {mediaName: this.props.show.title, mediaType: 'show'};
+    console.log('Similar', this.props.match.params.show);
+    const params = {mediaName: this.props.match.params.show, mediaType: 'show'};
+    // const res = 'This is a show';
     const res = await axios.get('/api/tdaw/similar', {params});
-    console.log('similarres', res);
-    this.shows = res.data;
+    const shows = res.data.filter(shows => shows.Type === 'show');
+    console.log('similarres', res.data);
+    this.setState({shows: shows});
+    console.log('new state', this.state);
   };
 
   render() {
-    console.log('My state mikey--', this.shows);
-    if (this.shows) {
-      const mediaList = this.shows.map(show => {
+    if (this.state.shows.length > 0) {
+      console.log('call me', this.state);
+      const mediaList = this.state.shows.map(show => {
         return (
           <div>
-            <h1>Hello</h1>
             <div className="row" key={show.title}>
               <SimilarCard media={show} />
             </div>
@@ -37,10 +43,6 @@ class Similar extends Component {
     return <div>Loading</div>;
   }
 }
-
-Similar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 function mapStateToProps({plex}) {
   return {loading: plex.loading};

@@ -15,7 +15,7 @@ class MediaCard extends Component {
         <div>
           <div className="row hide-mobile">
             <div className="col s12 ">
-              <div className="card medium horizontal">
+              <div className="card medium horizontal large-card-height">
                 <div class="video-container">
                   <iframe
                     width="853"
@@ -33,16 +33,17 @@ class MediaCard extends Component {
                     <div className="header">
                       <Header text={show.Name} />
                     </div>
+                    <div className="video-container">
+                      <iframe
+                        width={853}
+                        height={700}
+                        src={show.yUrl}
+                        frameBorder={0}
+                        allowFullScreen
+                      />
+                    </div>
+
                     <p>{show.wTeaser}</p>
-                  </div>
-                  <div className="card-action">
-                    <Link
-                      to="/plex/similar"
-                      className="waves-effect waves-light btn-large right"
-                    >
-                      <i className="material-icons left">live_tv</i>Similar
-                      Shows
-                    </Link>
                   </div>
                 </div>
               </div>
@@ -66,9 +67,7 @@ class MediaCard extends Component {
             <div className="card-content">
               <p>{show.wTeaser}</p>
             </div>
-            <div className="card-action">
-              <a href="#">This is a link</a>
-            </div>
+            <div className="card-action" />
           </div>
         </div>
       </div>

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import {withStyles} from '@material-ui/core/styles';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import styles from '../css/materialize.css';
 
 class Hero extends Component {
@@ -25,7 +25,7 @@ class Hero extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
 
     return (
       <React.Fragment>
@@ -67,11 +67,11 @@ class Hero extends Component {
 }
 
 Hero.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps({auth}) {
+  return {auth};
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(Hero));

@@ -6,38 +6,29 @@ import styles from '../css/materialize.css.js';
 import axios from 'axios';
 import MediaCard from './MediaCard';
 import * as actions from '../actions';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Link} from 'react-router-dom';
 import Similar from './plex/Similar';
 
 class MediaList extends Component {
   componentDidMount() {
     this.props.getMostWatched();
     console.log(this.state);
-    console.log('props', this.props.tvShowList);
+    console.log('props', this.props);
   }
-  // getMostWatched = async params => {
-  //   const res = await axios.get('/api/recommend/most-watched');
-  //   this.setState({tvShowList: res.data});
-  // };
 
   render() {
-    console.log('RENDER---', this.props.tvShowList);
     if (this.props.tvShowList) {
+      console.log('loaded props', this.props);
       const mediaList = this.props.tvShowList.map(show => {
-        console.log('show-------', show);
         return (
           <div className="row" key={show.title}>
-            <Route
-              path="/plex/similar"
-              render={props => <Similar {...props} show={show} />}
-            />
             <MediaCard media={show} />
           </div>
         );
       });
       return <div>{mediaList}</div>;
     }
-    return <div>Loading</div>;
+    return <div>Loading...</div>;
   }
 }
 
@@ -46,7 +37,6 @@ MediaList.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log('WHAT AMI!', state);
   return {
     loading: state.plex.loading,
     plexToken: state.plex.plexToken,

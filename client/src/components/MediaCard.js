@@ -37,7 +37,7 @@ class MediaCard extends Component {
                   </div>
                   <div className="card-action">
                     <Link
-                      to="/plex/similar"
+                      to={`/similar/${show.title}`}
                       className="waves-effect waves-light btn-large right Button"
                       style={{backgroundColor: '#f9a1bc'}}
                     >
@@ -69,7 +69,7 @@ class MediaCard extends Component {
             </div>
             <div className="card-action">
               <Link
-                to="/plex/similar"
+                to={`/plex/similar/${show.title}`}
                 className="waves-effect waves-light btn-large right Button"
                 style={{backgroundColor: '#f9a1bc'}}
               >
