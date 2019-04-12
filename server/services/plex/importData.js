@@ -7,7 +7,7 @@ import {Op} from 'sequelize';
 const mdb = new MovieDb(config.server.movieApiKey);
 
 const importSections = async user => {
-  const sections = await plexApi.getSections();
+  const sections = await plexApi.getSections(user);
   const dbSections = await createSections(sections, user);
   return dbSections;
 };
@@ -58,35 +58,37 @@ const createSections = (sections, user) => {
 };
 
 const importLibraries = async user => {
-  const sections = await plexApi.getSections();
+  const sections = await plexApi.getSections(user);
   return Promise.map(sections, section => {
     return importLibrary(section.key, user);
   });
 };
 
-const importMostWatched = async () => {
+const importMostWatched = async user => {
   // const sectionKeys = await models.PlexSection.findAll().then(sections => {
   //   return sections.map(section => section.key.toString());
   // });
   const sectionKeys = [1, 2];
   return Promise.map(sectionKeys, sectionKey => {
-    return importMostWatchedData(sectionKey);
+    return importMostWatchedData(sectionKey, user);
   }).catch(err => {
     console.log(err);
   });
 };
 
-const importMostWatchedData = async sectionKey => {
-  const mostWatchedData = await plexApi.getMostWatched({sectionKey});
+const importMostWatchedData = async (sectionKey, user) => {
+  const mostWatchedData = await plexApi.getMostWatched({sectionKey}, user);
   const mostWatchedDbData = await updateLibrary(mostWatchedData);
   return mostWatchedDbData;
 };
 
 const importLibrary = async (sectionKey, user) => {
-  console.log('user--', user);
-  const libraryData = await plexApi.getLibraryDataBySection({
-    sectionKey,
-  });
+  const libraryData = await plexApi.getLibraryDataBySection(
+    {
+      sectionKey,
+    },
+    user,
+  );
   const dbLibraryData = await createLibrary(libraryData, user);
   return dbLibraryData;
 };

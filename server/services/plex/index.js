@@ -6,8 +6,9 @@ import helpers from '../helpers';
 
 const getAuthToken = async (req, res) => {
   try {
-    const {email, password, plexUrl} = req.query;
-    const plexToken = await auth(email, password);
+    const {email, password} = req.query;
+    const plexToken = await auth.fetchToken(email, password);
+    const plexUrl = await auth.plexUrl(plexToken);
     const [rowsUpdate, updatedUser] = await models.User.update(
       {plexUrl, plexToken},
       {returning: true, where: {googleId: req.user.googleId}},
@@ -21,7 +22,7 @@ const getAuthToken = async (req, res) => {
 
 const getUsers = (req, res) => {
   plexApi
-    .getUsers()
+    .getUsers(req.user)
     .then(users => {
       res.json(users);
     })
@@ -31,7 +32,7 @@ const getUsers = (req, res) => {
 const getMostWatched = async (req, res) => {
   try {
     const options = req.query;
-    const mostWatched = await plexApi.getMostWatched(options);
+    const mostWatched = await plexApi.getMostWatched(options, req.user);
     res.json(mostWatched);
   } catch (error) {
     res.json(error);
@@ -40,7 +41,7 @@ const getMostWatched = async (req, res) => {
 
 const getSections = async (req, res) => {
   try {
-    const sections = await plexApi.getSections();
+    const sections = await plexApi.getSections(req.user);
     res.json(sections);
   } catch (error) {
     res.json(error);
@@ -50,7 +51,7 @@ const getSections = async (req, res) => {
 const getLibraryDataBySection = async (req, res) => {
   try {
     const options = {sectionId: req.params.id};
-    const sections = await plexApi.getLibraryDataBySection(options);
+    const sections = await plexApi.getLibraryDataBySection(options, req.user);
     res.json(sections);
   } catch (error) {
     res.json(error);
@@ -58,22 +59,23 @@ const getLibraryDataBySection = async (req, res) => {
 };
 
 const importSections = async (req, res) => {
-  const sections = await importData.importSections();
+  const sections = await importData.importSections(req.user);
   res.json(sections);
 };
 
 const importLibraries = async (req, res) => {
-  const libraries = await importData.importLibraries();
+  const libraries = await importData.importLibraries(req.user);
   res.json(libraries);
 };
 
 const importMostWatched = async (req, res) => {
-  const libraries = await importData.importMostWatched();
+  const libraries = await importData.importMostWatched(req.user);
   res.json(libraries);
 };
 
 const importAll = async (req, res) => {
   try {
+    console.log('user', req.user);
     await importData.importSections(req.user);
     await importData.importLibraries(req.user);
     await importData.importMostWatched(req.user);

@@ -10,7 +10,7 @@ import TextHeader from '../helpers/Header';
 import styles from '../../css/materialize.css';
 
 class PlexTokenForm extends React.Component {
-  state = {email: '', password: '', plexUrl: ''};
+  state = {email: '', password: ''};
 
   onFormSubmit = event => {
     event.preventDefault();
@@ -62,20 +62,7 @@ class PlexTokenForm extends React.Component {
                         />
                       </div>
                     </div>
-                    <div className="row no-bottom-margin">
-                      <div className="input-field col m8 offset-m2 s12">
-                        <p>Plex Server URL</p>
-                        <input
-                          id="plexUrl"
-                          type="text"
-                          className="validate center-align"
-                          value={this.state.plexUrl}
-                          onChange={e =>
-                            this.setState({plexUrl: e.target.value})
-                          }
-                        />
-                      </div>
-                    </div>
+
                     <div className="row no-bottom-margin">
                       <div className="input-field col m8 offset-m2 s12">
                         <p>Plex Password</p>
