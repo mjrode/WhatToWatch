@@ -8,7 +8,7 @@ const formatResponse = response => {
     return JSON.parse(parser.toJson(response.data));
   }
   if (response.config.url.includes('tastedive')) {
-    console.log('taste dive response', response.data);
+    console.log('taste dive response', response.data.Similar.Results[0]);
     return response.data.Similar.Results;
   }
   return response.data;

@@ -7,6 +7,7 @@ import {sequelize} from './db/models';
 import keys from '../config';
 import plex from './routes/plex.route';
 import tdaw from './routes/tdaw.route';
+import movieDb from './routes/movieDb.route';
 import auth from './routes/auth.route';
 import recommend from './routes/recommend.route';
 require('./services/auth/passport');
@@ -37,6 +38,7 @@ export default () => {
     // Set up routes
     server.use('/api/plex', plex);
     server.use('/api/tdaw', tdaw);
+    server.use('/api/moviedb', movieDb);
     server.use('/api/recommend', recommend);
     server.use('/auth', auth);
     server.use('/api/auth', auth);

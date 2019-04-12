@@ -21,7 +21,6 @@ const similarMedia = async function(mediaName, mediaType) {
     const response = await helpers.request(mediaUrl);
     return response;
   } catch (error) {
-    console.log(error);
     return {
       code: error.status,
       message: error.statusText,
@@ -37,4 +36,49 @@ const mostWatched = async () => {
   });
 };
 
-export default {similarMedia, tdawMediaUrl, mostWatched};
+const qlooMediaId = async (mediaName, mediaType) => {
+  const params = {
+    host:
+      'https://qsz08t9vtl.execute-api.us-east-1.amazonaws.com/production/search',
+    queryParams: {query: mediaName},
+  };
+
+  const formattedMediaType = mediaTypeMapping()[mediaType];
+
+  const response = await helpers.request(helpers.buildUrl(params));
+
+  const filteredResponse = response.results.filter(results =>
+    results.categories.includes(formattedMediaType),
+  );
+
+  return filteredResponse[0].id;
+};
+
+const mediaTypeMapping = () => {
+  return {tv: 'tv/shows', movie: 'film/movies'};
+};
+
+const qlooMedia = async (mediaId, mediaType) => {
+  // recs?category=tv/shows&sample=70AB59C0-789F-4E11-B72D-FE09BF76901E&prioritize_indomain=False
+  const formattedMediaType = mediaTypeMapping()[mediaType];
+  const params = {
+    host:
+      'https://qsz08t9vtl.execute-api.us-east-1.amazonaws.com/production/recs',
+    queryParams: {
+      category: formattedMediaType,
+      sample: mediaId,
+      prioritize_indomain: 'False',
+    },
+  };
+
+  const response = await helpers.request(helpers.buildUrl(params));
+  console.log(response);
+  return response;
+};
+export default {
+  similarMedia,
+  tdawMediaUrl,
+  mostWatched,
+  qlooMediaId,
+  qlooMedia,
+};
