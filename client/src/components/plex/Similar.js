@@ -16,14 +16,12 @@ class Similar extends Component {
   }
 
   getSimilar = async () => {
-    console.log('Similar', this.props.match.params.show);
-    const params = {mediaName: this.props.match.params.show, mediaType: 'show'};
-    // const res = 'This is a show';
-    const res = await axios.get('/api/tdaw/similar', {params});
-    const shows = res.data.filter(shows => shows.Type === 'show');
-    console.log('similarres', res.data);
+    const params = {showName: this.props.match.params.show};
+    const res = await axios.get('/api/moviedb/tv/similar', {params});
+    console.log('sim res', res);
+    const shows = res.data;
+    console.log('shows', shows);
     this.setState({shows: shows});
-    console.log('new state', this.state);
   };
 
   render() {
@@ -32,7 +30,7 @@ class Similar extends Component {
       const mediaList = this.state.shows.map(show => {
         return (
           <div>
-            <div className="row" key={show.title}>
+            <div className="row" key={show.name}>
               <SimilarCard media={show} />
             </div>
           </div>

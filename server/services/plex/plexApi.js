@@ -75,6 +75,7 @@ const getSections = async function() {
   try {
     const urlParams = getSectionsUrlParams();
     const getSectionsUrl = helpers.buildUrl(urlParams);
+    console.log('sectionsUrl---', getSectionsUrl);
     const response = await helpers.request(getSectionsUrl);
     console.log('mike', response);
     return response.MediaContainer.Directory;

@@ -49,6 +49,7 @@ const request = async function(url) {
         }
         if (error.request) {
           // eslint-disable-next-line no-underscore-dangle
+          console.log(error);
           console.log('Error: Request Path--', error.request._options.path);
         } else {
           console.log('Error:', error.message);

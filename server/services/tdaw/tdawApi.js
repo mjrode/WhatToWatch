@@ -29,13 +29,6 @@ const similarMedia = async function(mediaName, mediaType) {
   }
 };
 
-const mostWatched = async () => {
-  return models.PlexLibrary.findAll({
-    order: [['views', 'DESC']],
-    limit: 10,
-  });
-};
-
 const qlooMediaId = async (mediaName, mediaType) => {
   const params = {
     host:
@@ -78,7 +71,6 @@ const qlooMedia = async (mediaId, mediaType) => {
 export default {
   similarMedia,
   tdawMediaUrl,
-  mostWatched,
   qlooMediaId,
   qlooMedia,
 };

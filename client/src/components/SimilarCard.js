@@ -15,35 +15,31 @@ class MediaCard extends Component {
         <div>
           <div className="row hide-mobile">
             <div className="col s12 ">
-              <div className="card medium horizontal large-card-height">
-                <div class="video-container">
-                  <iframe
-                    width="853"
-                    title={this.title}
-                    height="480"
-                    src={this.yUrl}
+              <div className="card medium horizontal">
+                <div
+                  className="card-image"
+                  style={{
+                    boxShadow:
+                      '0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)',
+                  }}
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
                     alt="pic"
-                    frameborder="0"
-                    allowfullscreen
+                    className="circle"
                   />
                 </div>
-
                 <div className="card-stacked">
                   <div className="card-content">
                     <div className="header">
-                      <Header text={show.Name} />
+                      <Header text={show.name} />
                     </div>
-                    <div className="video-container">
-                      <iframe
-                        width={853}
-                        height={700}
-                        src={show.yUrl}
-                        frameBorder={0}
-                        allowFullScreen
-                      />
-                    </div>
-
-                    <p>{show.wTeaser}</p>
+                    <p>{show.overview}</p>
+                  </div>
+                  <div className="card-action">
+                    <i className="material-icons left">live_tv</i>Rating:
+                    {` ${show.vote_average}`} Popularity:{' '}
+                    {` ${show.popularity}`}
                   </div>
                 </div>
               </div>
@@ -56,18 +52,29 @@ class MediaCard extends Component {
       <div className="row hide-desktop">
         <div className="col s12 m12">
           <div className="card ">
-            <div className="card-image ">
+            <div
+              className="card-image"
+              style={{
+                boxShadow:
+                  '0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)',
+              }}
+            >
               <img
                 src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
                 alt="pic"
-                className="responsive-img"
+                className="circle"
               />
-              <span className="card-title">{show.name}</span>
             </div>
             <div className="card-content">
-              <p>{show.wTeaser}</p>
+              <p>{show.overview}</p>
             </div>
-            <div className="card-action" />
+            <div className="card-action">
+              {' '}
+              <div className="card-action">
+                <i className="material-icons left">live_tv</i>Rating:
+                {` ${show.vote_average}`} Popularity: {` ${show.popularity}`}
+              </div>
+            </div>
           </div>
         </div>
       </div>

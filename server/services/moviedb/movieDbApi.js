@@ -22,9 +22,7 @@ const searchTv = async showName => {
 
 const similarTV = async showId => {
   try {
-    console.log('showID', showId);
     const response = await mdb.tvSimilar({id: showId});
-    console.log(response);
     return response;
   } catch (error) {
     helpers.handleError(error, 'searchTv');
