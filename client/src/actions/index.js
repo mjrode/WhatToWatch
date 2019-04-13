@@ -38,6 +38,8 @@ export const addSeries = params => async dispatch => {
   dispatch({type: types.CURRENT_SHOW, payload: params.showName});
   const res = await axios.get('/api/sonarr/series/add', {params});
   dispatch({type: types.SET_LOADING, payload: false});
-  toast(res.data);
+  res.data.title
+    ? toast('Successfully added: ' + res.data.title)
+    : toast(res.data);
   dispatch({type: types.ADD_SERIES, payload: res.data});
 };

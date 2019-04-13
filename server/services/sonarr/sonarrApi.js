@@ -35,10 +35,8 @@ const addSeries = async (showName, user) => {
       json: true,
     };
 
-    // const res = await request.post(params);
-    // return res;
-    console.log('mike--', body.title);
-    return body.title;
+    const res = await request.post(params);
+    return res;
   } catch (error) {
     console.log(error);
     return error.errorMessage;
