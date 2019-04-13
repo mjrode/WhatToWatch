@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {connect} from 'react-redux';
@@ -25,13 +26,7 @@ class PlexTokenForm extends React.Component {
   render() {
     const {classes} = this.props;
     if (!this.props.auth) {
-      return (
-        <div>
-          <div>
-            <TextHeader text="You need to be logged in to do that" />
-          </div>
-        </div>
-      );
+      return <Redirect to="/" />;
     } else if (this.props.auth) {
       return (
         <React.Fragment>
