@@ -44,6 +44,7 @@ class MediaCard extends Component {
                       <i className="material-icons left">live_tv</i>Similar
                       Shows
                     </Link>
+                    {show.views} Views
                   </div>
                 </div>
               </div>
