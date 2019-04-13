@@ -1,5 +1,6 @@
 import movieDbApi from './movieDbApi';
 import models from '../../db/models';
+import sonarrService from '../sonarr/sonarrApi';
 import helpers from '../helpers';
 import {Op} from 'sequelize';
 
@@ -13,12 +14,15 @@ const similarTv = async (req, res) => {
   const {showName} = req.query;
   const searchResponse = await movieDbApi.searchTv(showName);
   const similarResponse = await movieDbApi.similarTV(searchResponse.id);
-  const library = await models.PlexLibrary.findAll({
-    userId: req.user.id,
-    type: 'show',
-  });
+  const library = await sonarrService.getSeries(req.user);
+  const jsonLibrary = JSON.parse(library);
+  // const library = await models.PlexLibrary.findAll({
+  // userId: req.user.id,
+  // type: 'show',
+  // });
   // Use Sonarr list instead
-  const libraryTitles = library.map(show => show.title.toLowerCase());
+  const libraryTitles = jsonLibrary.map(show => show.title.toLowerCase());
+  console.log('titles', libraryTitles);
   const filteredResponse = similarResponse.results.filter(
     show => !libraryTitles.includes(show.name.toLowerCase()),
   );

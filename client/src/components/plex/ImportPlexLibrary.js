@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import styles from '../../css/materialize.css.js';
@@ -7,11 +6,10 @@ import '../../css/materialize.css';
 import * as actions from '../../actions';
 
 class ImportPlexLibrary extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchMedia();
   }
   render() {
-    const {classes} = this.props;
     return (
       <img
         className="responsive-img"
@@ -21,10 +19,6 @@ class ImportPlexLibrary extends Component {
     );
   }
 }
-
-ImportPlexLibrary.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 function mapStateToProps({auth}) {
   return {auth};

@@ -24,4 +24,5 @@ const getSeries = async (req, res) => {
 export default {
   search,
   addSeries,
+  getSeries,
 };

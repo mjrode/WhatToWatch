@@ -26,23 +26,22 @@ class Similar extends Component {
       return <Redirect to="/" />;
     }
     if (this.state.shows.length > 0) {
-      const mediaList = this.state.shows.map(show => {
-        return (
-          <div>
-            <div className="row" key={show.name}>
-              <SimilarCard media={show} />
-            </div>
-          </div>
-        );
+      const mediaList = this.state.shows.map((show, index) => {
+        return <SimilarCard media={show} key={index} />;
       });
       return <div>{mediaList}</div>;
     }
-    return <div>Loading</div>;
+
+    return (
+      <div className="progress">
+        <div className="indeterminate" />
+      </div>
+    );
   }
 }
 
-function mapStateToProps({plex, auth}) {
-  return {loading: plex.loading, auth};
+function mapStateToProps({plex, auth, sonarr}) {
+  return {loading: plex.loading, auth, sonarrAddSeries: sonarr.sonarrAddSeries};
 }
 
 export default connect(

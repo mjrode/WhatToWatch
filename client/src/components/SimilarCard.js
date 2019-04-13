@@ -4,35 +4,38 @@ import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import Header from './helpers/Header';
 import styles from '../css/materialize.css';
-import axios from 'axios';
-import {ToastContainer, toast} from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
+import * as actions from '../actions';
 import 'react-toastify/dist/ReactToastify.css';
-import {Link} from 'react-router-dom';
 
 class MediaCard extends Component {
-  state = {response: ''};
-  addSeries = async () => {
-    const params = {showName: this.props.media.name};
-    const res = await axios.get('/api/sonarr/series/add', {params});
-    const response =
-      typeof res.data === 'string'
-        ? res.data
-        : 'Successfully added ' + res.data.title;
-    this.setState({response: response});
-  };
+  renderContent() {
+    if (
+      this.props.loading &&
+      this.props.currentShow === this.props.media.name
+    ) {
+      return (
+        <div className="progress">
+          <div className="indeterminate" />
+        </div>
+      );
+    }
+  }
+  renderToast() {
+    if (this.props.currentShow === this.props.media.name) {
+      return <ToastContainer />;
+    }
+  }
 
   render() {
     const show = this.props.media;
     const isMobile = window.innerWidth < 480;
-    console.log(this.state);
-    if (this.state.response.length > 1) {
-      toast(this.state.response);
-    }
     if (!isMobile) {
       return (
         <div>
+          {this.renderToast()}
+          {this.renderContent()}
           <div className="row hide-mobile">
-            <ToastContainer />
             <div className="col s12 ">
               <div className="card medium horizontal">
                 <div
@@ -60,12 +63,16 @@ class MediaCard extends Component {
                       Rating: {` ${show.vote_average} `}| Popularity:{' '}
                       {` ${show.popularity}`}
                     </h6>
+
                     <button
                       className="waves-effect waves-light btn-large right Button margin-left"
                       style={{backgroundColor: '#f9a1bc'}}
                       type="submit"
                       name="action"
-                      onClick={this.addSeries}
+                      key={show.name}
+                      onClick={() =>
+                        this.props.addSeries({showName: show.name})
+                      }
                     >
                       Add to Sonarr
                       <i className="material-icons right">send</i>
@@ -80,6 +87,7 @@ class MediaCard extends Component {
     }
     return (
       <div className="row hide-desktop">
+        <ToastContainer />
         <div className="col s12 m12">
           <div className="card ">
             <div
@@ -103,6 +111,17 @@ class MediaCard extends Component {
               <div className="card-action">
                 <i className="material-icons left">live_tv</i>Rating:
                 {` ${show.vote_average}`} Popularity: {` ${show.popularity}`}
+                <button
+                  className="waves-effect waves-light btn-large right Button margin-left"
+                  style={{backgroundColor: '#f9a1bc'}}
+                  type="submit"
+                  name="action"
+                  key={show.name}
+                  onClick={() => this.props.addSeries({showName: show.name})}
+                >
+                  Add to Sonarr
+                  <i className="material-icons right">send</i>
+                </button>
               </div>
             </div>
           </div>
@@ -116,8 +135,15 @@ MediaCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({auth}) {
-  return {auth};
+function mapStateToProps(state) {
+  return {
+    loading: state.sonarr.loading,
+    sonarrAddSeries: state.sonarr.sonarrAddSeries,
+    currentShow: state.plex.currentShow,
+  };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(MediaCard));
+export default connect(
+  mapStateToProps,
+  actions,
+)(withStyles(styles)(MediaCard));

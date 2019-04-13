@@ -6,7 +6,7 @@ import * as actions from '../actions';
 import Header from './Header';
 import Hero from './Hero';
 import Plex from './plex/Plex';
-import Similar from './Similar';
+import SimilarList from './SimilarList';
 
 class App extends Component {
   componentDidMount() {
@@ -21,11 +21,10 @@ class App extends Component {
             <div className="container">
               <Header />
               <Route exact path="/" component={Hero} />
-
               <Route path="/most-watched" component={Plex} />
               <Route
                 path="/similar/:show"
-                render={props => <Similar {...props} />}
+                render={props => <SimilarList {...props} />}
               />
             </div>
           </BrowserRouter>

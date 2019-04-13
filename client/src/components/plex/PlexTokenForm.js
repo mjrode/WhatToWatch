@@ -6,12 +6,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
 import '../../css/materialize.css';
-import InfoModal from '../InfoModal';
 import TextHeader from '../helpers/Header';
 import styles from '../../css/materialize.css';
 
 class PlexTokenForm extends React.Component {
-  state = {email: '', password: ''};
+  state = {email: '', password: '', sonarrUrl: '', sonarrApiKey: ''};
 
   onFormSubmit = event => {
     event.preventDefault();
@@ -19,7 +18,7 @@ class PlexTokenForm extends React.Component {
   };
 
   getPlexToken = async params => {
-    const res = await axios.get('/api/plex/token', {params});
+    await axios.get('/api/plex/token', {params});
     window.location.reload();
   };
 
@@ -34,11 +33,8 @@ class PlexTokenForm extends React.Component {
           <div className={classes.heroUnit}>
             <div className={classes.heroContentSmall}>
               <div className="section center-align">
-                <div className="center right">
-                  <InfoModal />
-                </div>
                 <div className={classes.shrinkTopMargin}>
-                  <TextHeader text="Fetch Plex Token" />
+                  <TextHeader text="Connect to Plex and Sonarr" />
                 </div>
                 <hr />
               </div>
@@ -72,6 +68,37 @@ class PlexTokenForm extends React.Component {
                         />
                       </div>
                     </div>
+
+                    <div className="row no-bottom-margin">
+                      <div className="input-field col m8 offset-m2 s12">
+                        <p>Sonarr Url</p>
+                        <input
+                          id="sonarrUrl"
+                          type="text"
+                          className="validate center-align"
+                          value={this.state.sonarrUrl}
+                          onChange={e =>
+                            this.setState({sonarrUrl: e.target.value})
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="row no-bottom-margin">
+                      <div className="input-field col m8 offset-m2 s12">
+                        <p>Sonarr Api Key</p>
+                        <input
+                          id="sonarrApiKey"
+                          type="text"
+                          className="validate center-align"
+                          value={this.state.sonarrApiKey}
+                          onChange={e =>
+                            this.setState({sonarrApiKey: e.target.value})
+                          }
+                        />
+                      </div>
+                    </div>
+
                     <div className="row">
                       <div className="col s12">
                         <div className="center-align">

@@ -6,11 +6,11 @@ import helpers from '../helpers';
 
 const getAuthToken = async (req, res) => {
   try {
-    const {email, password} = req.query;
+    const {email, password, sonarrUrl, sonarrApiKey} = req.query;
     const plexToken = await auth.fetchToken(email, password);
     const plexUrl = await auth.plexUrl(plexToken);
     const [rowsUpdate, updatedUser] = await models.User.update(
-      {plexUrl, plexToken},
+      {plexUrl, plexToken, sonarrUrl, sonarrApiKey},
       {returning: true, where: {googleId: req.user.googleId}},
     );
 
@@ -35,6 +35,7 @@ const getMostWatched = async (req, res) => {
     const mostWatched = await plexApi.getMostWatched(options, req.user);
     res.json(mostWatched);
   } catch (error) {
+    console.log('mike', error);
     res.json(error);
   }
 };

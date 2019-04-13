@@ -6,7 +6,8 @@ import request from 'request-promise';
 const search = async (showName, user) => {
   try {
     const params = {
-      uri: user.sonarrUrl + '/api/series/lookup',
+      baseUrl: user.sonarrUrl,
+      uri: '/api/series/lookup',
       headers: {'x-api-key': user.sonarrApiKey},
       qs: {
         term: showName,
@@ -34,10 +35,13 @@ const addSeries = async (showName, user) => {
       json: true,
     };
 
-    const res = await request.post(params);
-    return res;
+    // const res = await request.post(params);
+    // return res;
+    console.log('mike--', body.title);
+    return body.title;
   } catch (error) {
-    return error.error[0].errorMessage;
+    console.log(error);
+    return error.errorMessage;
   }
 };
 
@@ -50,4 +54,13 @@ const getRootFolder = async user => {
   return res;
 };
 
-export default {search, addSeries};
+const getSeries = async user => {
+  const params = {
+    uri: user.sonarrUrl + '/api/series',
+    headers: {'x-api-key': user.sonarrApiKey},
+  };
+  const res = await request(params);
+  return res;
+};
+
+export default {search, addSeries, getSeries};

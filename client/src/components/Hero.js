@@ -10,28 +10,27 @@ import '../css/materialize.css';
 
 class Hero extends Component {
   callToAction = () => {
-    console.log('hero - props auth', this.props.auth.size);
     if (this.props.auth.email) {
       return (
         <div>
-          <row>
+          <div className="row">
             <Link
               to="/most-watched"
-              className="waves-effect waves-light btn-large margin-bottom-button min-button-width"
+              className="waves-effect waves-light btn-large min-button-width"
             >
               <i className="material-icons left ">live_tv</i>
               Most Watched
             </Link>
             <br />
-          </row>
-          <row>
+          </div>
+          <div className="row">
             <Link
               to="/popular"
-              className="waves-effect waves-light btn-large margin-bottom-button min-button-width"
+              className="waves-effect waves-light btn-large min-button-width"
             >
               <i className="material-icons left">show_chart</i>Popular TV
             </Link>
-          </row>
+          </div>
         </div>
       );
     }
