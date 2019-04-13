@@ -25,7 +25,6 @@ const addShow = async (showName, user) => {
     const body = await search(showName, user);
     body.profileId = 1;
     const rootFolder = await getRootFolder(user);
-    console.log('mike---', JSON.parse(rootFolder)[0].path);
     body.rootFolderPath = JSON.parse(rootFolder)[0].path;
     const params = {
       baseUrl: user.sonarrUrl,
@@ -35,12 +34,9 @@ const addShow = async (showName, user) => {
       json: true,
     };
 
-    console.log(params);
     const res = await request.post(params);
-    console.log(res);
     return res;
   } catch (error) {
-    console.log('error--', error);
     return error.error[0].errorMessage;
   }
 };
