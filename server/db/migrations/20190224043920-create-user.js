@@ -26,6 +26,12 @@ module.exports = {
       plexToken: {
         type: Sequelize.STRING,
       },
+      sonarrUrl: {
+        type: Sequelize.STRING,
+      },
+      sonarrApiKey: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

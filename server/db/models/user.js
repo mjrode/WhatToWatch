@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       email: {type: DataTypes.STRING, unique: true},
       plexUrl: DataTypes.STRING,
       plexToken: DataTypes.STRING,
+      sonarrUrl: DataTypes.STRING,
+      sonarrApiKey: DataTypes.STRING,
     },
     {},
   );

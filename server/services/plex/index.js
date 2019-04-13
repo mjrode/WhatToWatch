@@ -75,7 +75,6 @@ const importMostWatched = async (req, res) => {
 
 const importAll = async (req, res) => {
   try {
-    console.log('user', req.user);
     await importData.importSections(req.user);
     await importData.importLibraries(req.user);
     await importData.importMostWatched(req.user);

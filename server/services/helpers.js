@@ -43,6 +43,7 @@ const request = async function(url) {
       })
       .catch(error => {
         if (error.response) {
+          console.log('Error: Response --', error.response);
           console.log('Error: Status--', error.response.status);
           console.log('Error: Headers--', error.response.headers);
           return reject(error.response);

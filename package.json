@@ -62,6 +62,7 @@
     "passport-local": "^1.0.0",
     "pg": "^7.8.0",
     "plex-api": "^5.2.1",
+    "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "sequelize": "^4.42.0",
     "sequelize-cli": "^5.4.0",
