@@ -17,6 +17,7 @@ const similarTv = async (req, res) => {
     userId: req.user.id,
     type: 'show',
   });
+  // Use Sonarr list instead
   const libraryTitles = library.map(show => show.title.toLowerCase());
   const filteredResponse = similarResponse.results.filter(
     show => !libraryTitles.includes(show.name.toLowerCase()),

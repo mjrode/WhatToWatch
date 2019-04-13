@@ -1,13 +1,32 @@
 .no-bottom-margin {
   margin-bottom: 0px;
 }
-
+.min-button-width {
+  min-width: 15em;
+}
 .margin-spacing {
   margin: 3em 0;
 }
 
 .padding-bottom-5 {
   padding-bottom: 5em;
+}
+
+.margin-left {
+  margin-left: 3em;
+}
+
+.abs {
+  position: absolute;
+ }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.margin-bottom-button {
+  margin-bottom: 2em
 }
 
 .hide-mobile {
@@ -28,4 +47,9 @@
 
 .large-card-height{
   height: auto !important;  
+}
+
+
+.robots{
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif
 }

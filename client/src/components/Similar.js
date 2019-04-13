@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
-import styles from '../../css/materialize.css.js';
+import styles from '../css/materialize.css.js';
 import axios from 'axios';
-import SimilarCard from './../SimilarCard';
-import * as actions from '../../actions';
-import TextHeader from '../helpers/Header';
+import SimilarCard from './SimilarCard';
+import * as actions from '../actions';
 class Similar extends Component {
   state = {
     shows: [],
@@ -18,9 +17,7 @@ class Similar extends Component {
   getSimilar = async () => {
     const params = {showName: this.props.match.params.show};
     const res = await axios.get('/api/moviedb/tv/similar', {params});
-    console.log('sim res', res);
     const shows = res.data;
-    console.log('shows', shows);
     this.setState({shows: shows});
   };
 
@@ -29,7 +26,6 @@ class Similar extends Component {
       return <Redirect to="/" />;
     }
     if (this.state.shows.length > 0) {
-      console.log('call me', this.state);
       const mediaList = this.state.shows.map(show => {
         return (
           <div>

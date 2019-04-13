@@ -15,9 +15,14 @@ class Header extends Component {
         );
       default:
         return (
-          <li key="2" style={{margin: '0 10px'}}>
-            <a href="/api/auth/logout">Logout</a>
-          </li>
+          <div>
+            <li key="1" style={{margin: '0 10px'}}>
+              <Link to={'/most-watched'}>Most Watched</Link>
+            </li>
+            <li key="2" style={{margin: '0 10px'}}>
+              <a href="/api/auth/logout">Logout</a>
+            </li>
+          </div>
         );
     }
   }

@@ -20,7 +20,7 @@ const search = async (showName, user) => {
   }
 };
 
-const addShow = async (showName, user) => {
+const addSeries = async (showName, user) => {
   try {
     const body = await search(showName, user);
     body.profileId = 1;
@@ -50,4 +50,4 @@ const getRootFolder = async user => {
   return res;
 };
 
-export default {search, addShow};
+export default {search, addSeries};

@@ -4,6 +4,6 @@ import sonarrService from '../services/sonarr';
 const router = Router();
 
 router.get('/search', sonarrService.search);
-router.get('/add-show', sonarrService.addShow);
+router.get('/series/add', sonarrService.addSeries);
 
 export default router;

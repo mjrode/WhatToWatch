@@ -4,6 +4,8 @@ import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import Header from './helpers/Header';
 import styles from '../css/materialize.css';
+import '../css/materialize.css';
+
 import {Link} from 'react-router-dom';
 class MediaCard extends Component {
   render() {
@@ -44,7 +46,7 @@ class MediaCard extends Component {
                       <i className="material-icons left">live_tv</i>Similar
                       Shows
                     </Link>
-                    {show.views} Views
+                    <h5 className="robots">{show.views} Views</h5>
                   </div>
                 </div>
               </div>
@@ -63,15 +65,14 @@ class MediaCard extends Component {
                 alt="pic"
                 className="responsive-img"
               />
-              <span className="card-title">{show.title}</span>
             </div>
             <div className="card-content">
               <p>{show.summary}</p>
             </div>
-            <div className="card-action">
+            <div className="card-action flex-center">
               <Link
-                to={`/plex/similar/${show.title}`}
-                className="waves-effect waves-light btn-large right Button"
+                to={`/similar/${show.title}`}
+                className="waves-effect waves-light btn-large center Button"
                 style={{backgroundColor: '#f9a1bc'}}
               >
                 <i className="material-icons left">live_tv</i>Similar Shows

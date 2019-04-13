@@ -6,15 +6,33 @@ import {withStyles} from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import styles from '../css/materialize.css';
+import '../css/materialize.css';
 
 class Hero extends Component {
   callToAction = () => {
     console.log('hero - props auth', this.props.auth.size);
     if (this.props.auth.email) {
       return (
-        <Link to="/plex" className="waves-effect waves-light btn-large">
-          <i className="material-icons left">live_tv</i>Get Started
-        </Link>
+        <div>
+          <row>
+            <Link
+              to="/most-watched"
+              className="waves-effect waves-light btn-large margin-bottom-button min-button-width"
+            >
+              <i className="material-icons left ">live_tv</i>
+              Most Watched
+            </Link>
+            <br />
+          </row>
+          <row>
+            <Link
+              to="/popular"
+              className="waves-effect waves-light btn-large margin-bottom-button min-button-width"
+            >
+              <i className="material-icons left">show_chart</i>Popular TV
+            </Link>
+          </row>
+        </div>
       );
     }
     return (

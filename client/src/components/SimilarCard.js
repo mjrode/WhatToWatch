@@ -7,13 +7,13 @@ import styles from '../css/materialize.css';
 import axios from 'axios';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {Link} from 'react-router-dom';
 
 class MediaCard extends Component {
   state = {response: ''};
-  addShow = async () => {
+  addSeries = async () => {
     const params = {showName: this.props.media.name};
-    const res = await axios.get('/api/sonarr/add-show', {params});
-    console.log(res);
+    const res = await axios.get('/api/sonarr/series/add', {params});
     const response =
       typeof res.data === 'string'
         ? res.data
@@ -56,14 +56,16 @@ class MediaCard extends Component {
                     <p>{show.overview}</p>
                   </div>
                   <div className="card-action">
-                    <i className="material-icons left">live_tv</i>Rating:
-                    {` ${show.vote_average}`} Popularity:{' '}
-                    {` ${show.popularity}`}
+                    <h6 className="robots abs">
+                      Rating: {` ${show.vote_average} `}| Popularity:{' '}
+                      {` ${show.popularity}`}
+                    </h6>
                     <button
-                      className="btn-large waves-effect waves-light center-align"
+                      className="waves-effect waves-light btn-large right Button margin-left"
+                      style={{backgroundColor: '#f9a1bc'}}
                       type="submit"
                       name="action"
-                      onClick={this.addShow}
+                      onClick={this.addSeries}
                     >
                       Add to Sonarr
                       <i className="material-icons right">send</i>

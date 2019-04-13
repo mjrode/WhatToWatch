@@ -10,13 +10,18 @@ const search = async (req, res) => {
   res.json(response);
 };
 
-const addShow = async (req, res) => {
+const addSeries = async (req, res) => {
   const {showName} = req.query;
-  const response = await sonarrApi.addShow(showName, req.user);
+  const response = await sonarrApi.addSeries(showName, req.user);
+  res.json(response);
+};
+
+const getSeries = async (req, res) => {
+  const response = await sonarrApi.getSeries(req.user);
   res.json(response);
 };
 
 export default {
   search,
-  addShow,
+  addSeries,
 };

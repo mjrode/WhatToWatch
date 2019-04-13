@@ -9,13 +9,10 @@ import * as actions from '../actions';
 class MediaList extends Component {
   componentDidMount() {
     this.props.getMostWatched();
-    console.log(this.state);
-    console.log('props', this.props);
   }
 
   render() {
     if (this.props.tvShowList) {
-      console.log('loaded props', this.props);
       const mediaList = this.props.tvShowList.map(show => {
         return (
           <div className="row" key={show.title}>
