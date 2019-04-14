@@ -7,6 +7,7 @@ import Header from './Header';
 import Hero from './Hero';
 import Plex from './plex/Plex';
 import SimilarList from './SimilarList';
+import PopularList from './PopularList';
 
 class App extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class App extends Component {
                 path="/similar/:show"
                 render={props => <SimilarList {...props} />}
               />
+              <Route path="/popular" component={PopularList} />
             </div>
           </BrowserRouter>
         </div>

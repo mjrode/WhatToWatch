@@ -6,10 +6,10 @@ import Header from './helpers/Header';
 import styles from '../css/materialize.css';
 import {ToastContainer} from 'react-toastify';
 import * as actions from '../actions';
-import 'react-toastify/dist/ReactToastify.css';
 import {Link} from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
-class MediaCard extends Component {
+class PopularCard extends Component {
   renderContent() {
     if (
       this.props.loading &&
@@ -125,7 +125,7 @@ class MediaCard extends Component {
   }
 }
 
-MediaCard.propTypes = {
+PopularCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
@@ -140,4 +140,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   actions,
-)(withStyles(styles)(MediaCard));
+)(withStyles(styles)(PopularCard));

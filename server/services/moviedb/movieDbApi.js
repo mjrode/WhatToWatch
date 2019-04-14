@@ -4,6 +4,15 @@ import models from '../../db/models';
 import MovieDb from 'moviedb-promise';
 const mdb = new MovieDb(config.server.movieApiKey);
 
+const popularTv = async () => {
+  try {
+    const response = await mdb.miscPopularTvs();
+    return response;
+  } catch (error) {
+    helpers.handleError(error, 'popularTv');
+  }
+};
+
 const searchTv = async showName => {
   try {
     const response = await mdb.searchTv({
@@ -29,4 +38,4 @@ const similarTV = async showId => {
   }
 };
 
-export default {searchTv, similarTV};
+export default {searchTv, similarTV, popularTv};

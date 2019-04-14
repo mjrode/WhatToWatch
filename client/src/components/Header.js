@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-
+import '../css/materialize.css';
 class Header extends Component {
   renderContent() {
+    const isMobile = window.innerWidth < 480;
     switch (this.props.auth) {
       case null:
         return;
@@ -14,16 +15,21 @@ class Header extends Component {
           </li>
         );
       default:
-        return (
-          <div>
-            <li key="1" style={{margin: '0 10px'}}>
-              <Link to={'/most-watched'}>Most Watched</Link>
-            </li>
-            <li key="2" style={{margin: '0 10px'}}>
-              <a href="/api/auth/logout">Logout</a>
-            </li>
-          </div>
-        );
+        if (!isMobile) {
+          return (
+            <div className="hide-mobile">
+              <li key="1" style={{margin: '0 10px'}}>
+                <Link to={'/most-watched'}>Most Watched</Link>
+              </li>
+              <li key="2" style={{margin: '0 10px'}}>
+                <Link to={'/popular'}>Popular</Link>
+              </li>
+              <li key="3" style={{margin: '0 10px'}}>
+                <a href="/api/auth/logout">Logout</a>
+              </li>
+            </div>
+          );
+        }
     }
   }
   render() {

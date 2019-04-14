@@ -8,6 +8,10 @@ const getAuthToken = async (req, res) => {
   try {
     const {email, password, sonarrUrl, sonarrApiKey} = req.query;
     const plexToken = await auth.fetchToken(email, password);
+    console.log('plex token', plexToken.includes('401'));
+    if (plexToken.includes('401')) {
+      return res.json('Invalid username or password.');
+    }
     const plexUrl = await auth.plexUrl(plexToken);
     const [rowsUpdate, updatedUser] = await models.User.update(
       {plexUrl, plexToken, sonarrUrl, sonarrApiKey},
@@ -16,6 +20,7 @@ const getAuthToken = async (req, res) => {
 
     return res.json(updatedUser);
   } catch (error) {
+    console.log('error in auth', error);
     return res.status(201).json(error.message);
   }
 };

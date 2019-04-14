@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PlexTokenForm from './PlexTokenForm';
+import {Link} from 'react-router-dom';
 import ImportPlexLibrary from './ImportPlexLibrary';
 import MediaList from '../MediaList';
 
@@ -20,6 +21,14 @@ class Plex extends Component {
       <div>
         <ImportPlexLibrary />
         <MediaList />
+        <div className="row flex-center">
+          <Link
+            to="/"
+            className="waves-effect waves-light btn-large min-button-width"
+          >
+            <i className="material-icons left">send</i>Get Started
+          </Link>
+        </div>
       </div>
     );
   }

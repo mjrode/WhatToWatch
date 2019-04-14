@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 import Header from './helpers/Header';
 import styles from '../css/materialize.css';
 import '../css/materialize.css';
-
 import {Link} from 'react-router-dom';
+
 class MediaCard extends Component {
   render() {
     const show = this.props.media;

@@ -10,7 +10,14 @@ import TextHeader from '../helpers/Header';
 import styles from '../../css/materialize.css';
 
 class PlexTokenForm extends React.Component {
-  state = {email: '', password: '', sonarrUrl: '', sonarrApiKey: ''};
+  state = {
+    email: '',
+    password: '',
+    sonarrUrl: '',
+    sonarrApiKey: '',
+    errorMessage: '',
+    redirect: false,
+  };
 
   onFormSubmit = event => {
     event.preventDefault();
@@ -18,8 +25,13 @@ class PlexTokenForm extends React.Component {
   };
 
   getPlexToken = async params => {
-    await axios.get('/api/plex/token', {params});
-    window.location.reload();
+    const res = await axios.get('/api/plex/token', {params});
+    console.log('response', res.data);
+    if (res.data.includes('Invalid')) {
+      this.setState({errorMessage: res.data});
+    } else {
+      window.location.reload();
+    }
   };
 
   render() {
@@ -37,6 +49,9 @@ class PlexTokenForm extends React.Component {
                   <TextHeader text="Connect to Plex and Sonarr" />
                 </div>
                 <hr />
+                <div className="flex-center">
+                  <h5 className="robots center ">{this.state.errorMessage}</h5>
+                </div>
               </div>
               <div className="section center-align">
                 <div className="row">

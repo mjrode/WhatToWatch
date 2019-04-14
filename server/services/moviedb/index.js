@@ -10,6 +10,17 @@ const searchTv = async (req, res) => {
   res.json(response);
 };
 
+const popularTv = async (req, res) => {
+  const response = await movieDbApi.popularTv();
+  const library = await sonarrService.getSeries(req.user);
+  const jsonLibrary = JSON.parse(library);
+  const libraryTitles = jsonLibrary.map(show => show.title.toLowerCase());
+  const filteredResponse = response.results.filter(
+    show => !libraryTitles.includes(show.name.toLowerCase()),
+  );
+  res.json(filteredResponse);
+};
+
 const similarTv = async (req, res) => {
   const {showName} = req.query;
   const searchResponse = await movieDbApi.searchTv(showName);
@@ -22,7 +33,6 @@ const similarTv = async (req, res) => {
   // });
   // Use Sonarr list instead
   const libraryTitles = jsonLibrary.map(show => show.title.toLowerCase());
-  console.log('titles', libraryTitles);
   const filteredResponse = similarResponse.results.filter(
     show => !libraryTitles.includes(show.name.toLowerCase()),
   );
@@ -32,4 +42,5 @@ const similarTv = async (req, res) => {
 export default {
   searchTv,
   similarTv,
+  popularTv,
 };
