@@ -71,8 +71,7 @@ class Hero extends Component {
                 color="textSecondary"
                 paragraph
               >
-                Media recommendations based on your most watched Plex TV and
-                Movies.
+                Media recommendations based on your most watched Plex TV.
               </Typography>
               <div className="center-align">{this.callToAction()}</div>
             </div>

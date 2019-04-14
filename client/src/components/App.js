@@ -10,6 +10,7 @@ import Plex from './plex/Plex';
 import PlexPin from './plex/PlexPin';
 import SimilarList from './SimilarList';
 import PopularList from './PopularList';
+import PlexTokenForm from './plex/PlexTokenForm';
 
 ReactGA.initialize('UA-138294820-1');
 
@@ -27,6 +28,7 @@ class App extends Component {
             <div className="container">
               <Header />
               <Route exact path="/" component={Hero} />
+              <Route exact path="/sonarr" component={PlexTokenForm} />
               <Route exact path="/plex-pin" component={PlexPin} />
               <Route path="/most-watched" component={Plex} />
               <Route

@@ -27,7 +27,28 @@ class MediaCard extends Component {
       return <ToastContainer />;
     }
   }
-
+  renderButton(show) {
+    if (this.props.sonarrApiKey && this.props.sonarrUrl) {
+      return (
+        <button
+          className="waves-effect waves-light btn-large right Button margin-left"
+          style={{backgroundColor: '#f9a1bc'}}
+          type="submit"
+          name="action"
+          key={show.name}
+          onClick={() => this.props.addSeries({showName: show.name})}
+        >
+          Add to Sonarr
+          <i className="material-icons right">send</i>
+        </button>
+      );
+    }
+    return (
+      <Link to="/sonarr" className="waves-effect waves-light btn-large right">
+        <i className="material-icons right">send</i>Link Sonarr
+      </Link>
+    );
+  }
   render() {
     const show = this.props.media;
     const isMobile = window.innerWidth < 480;
@@ -65,19 +86,7 @@ class MediaCard extends Component {
                       {` ${show.popularity}`}
                     </h6>
 
-                    <button
-                      className="waves-effect waves-light btn-large right Button margin-left"
-                      style={{backgroundColor: '#f9a1bc'}}
-                      type="submit"
-                      name="action"
-                      key={show.name}
-                      onClick={() =>
-                        this.props.addSeries({showName: show.name})
-                      }
-                    >
-                      Add to Sonarr
-                      <i className="material-icons right">send</i>
-                    </button>
+                    {this.renderButton(show)}
                   </div>
                 </div>
               </div>
@@ -134,6 +143,8 @@ function mapStateToProps(state) {
     loading: state.sonarr.loading,
     sonarrAddSeries: state.sonarr.sonarrAddSeries,
     currentShow: state.plex.currentShow,
+    sonarrUrl: state.auth.sonarrUrl,
+    sonarrApiKey: state.auth.sonarrApiKey,
   };
 }
 

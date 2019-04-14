@@ -12,8 +12,8 @@ class Plex extends Component {
     }
     if (!this.props.auth.plexToken) {
       return (
-        <div>
-          <PlexTokenForm />
+        <div className="progress">
+          <div className="indeterminate" />
         </div>
       );
     }

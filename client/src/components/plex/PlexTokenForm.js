@@ -36,6 +36,9 @@ class PlexTokenForm extends React.Component {
 
   render() {
     const {classes} = this.props;
+    if (this.props.auth.sonarrUrl && this.props.auth.sonarrApiKey) {
+      return <Redirect to="/" />;
+    }
     if (!this.props.auth) {
       return <Redirect to="/" />;
     } else if (this.props.auth) {
@@ -46,7 +49,7 @@ class PlexTokenForm extends React.Component {
             <div className={classes.heroContentSmall}>
               <div className="section center-align">
                 <div className={classes.shrinkTopMargin}>
-                  <TextHeader text="Connect to Plex and Sonarr" />
+                  <TextHeader text="Connect to Sonarr" />
                 </div>
                 <hr />
                 <div className="flex-center">
@@ -56,34 +59,6 @@ class PlexTokenForm extends React.Component {
               <div className="section center-align">
                 <div className="row">
                   <form onSubmit={this.onFormSubmit} className="col s12">
-                    <div className="row no-bottom-margin">
-                      <div className="input-field col m8 offset-m2 s12">
-                        <p>Plex Email</p>
-                        <input
-                          id="email"
-                          type="text"
-                          className="validate center-align"
-                          value={this.state.email}
-                          onChange={e => this.setState({email: e.target.value})}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="row no-bottom-margin">
-                      <div className="input-field col m8 offset-m2 s12">
-                        <p>Plex Password</p>
-                        <input
-                          id="password"
-                          type="password"
-                          className="validate center-align"
-                          value={this.state.password}
-                          onChange={e =>
-                            this.setState({password: e.target.value})
-                          }
-                        />
-                      </div>
-                    </div>
-
                     <div className="row no-bottom-margin">
                       <div className="input-field col m8 offset-m2 s12">
                         <p>Sonarr Url</p>

@@ -7,15 +7,9 @@ import request from 'request-promise';
 
 const getAuthToken = async (req, res) => {
   try {
-    const {email, password, sonarrUrl, sonarrApiKey} = req.query;
-    const plexToken = await auth.fetchToken(email, password);
-    console.log('plex token', plexToken.includes('401'));
-    if (plexToken.includes('401')) {
-      return res.json('Invalid username or password.');
-    }
-    const plexUrl = await auth.plexUrl(plexToken);
+    const {sonarrUrl, sonarrApiKey} = req.query;
     const [rowsUpdate, updatedUser] = await models.User.update(
-      {plexUrl, plexToken, sonarrUrl, sonarrApiKey},
+      {sonarrUrl, sonarrApiKey},
       {returning: true, where: {googleId: req.user.googleId}},
     );
 

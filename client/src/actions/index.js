@@ -57,11 +57,11 @@ const createPoller = (interval, initialDelay) => {
   return fn => {
     window.clearTimeout(timeoutId);
     poller = () => {
-      timeoutId = window.setTimeout(poller, 2000);
+      timeoutId = window.setTimeout(poller, 1000);
       return fn();
     };
     if (initialDelay) {
-      return (timeoutId = window.setTimeout(poller, 2000));
+      return (timeoutId = window.setTimeout(poller, 1000));
     }
     return poller();
   };
