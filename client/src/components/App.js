@@ -10,12 +10,11 @@ import Plex from './plex/Plex';
 import SimilarList from './SimilarList';
 import PopularList from './PopularList';
 
-function initializeReactGA() {
-  ReactGA.initialize('UA-138294820-1');
-  ReactGA.pageview('/homepage');
-}
+ReactGA.initialize('UA-138294820-1');
+
 class App extends Component {
   componentDidMount() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     this.props.fetchUser();
   }
 
