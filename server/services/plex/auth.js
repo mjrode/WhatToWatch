@@ -78,19 +78,21 @@ const checkPlexPin = async (pinId, user) => {
 
 const getPlexUrl = async (plexToken, user) => {
   try {
+    console.log('Madeit', user);
     const res = await request.get(plexUrlParams(plexToken, user));
+    console.log('Madeit', res);
     let formattedResponse = JSON.parse(parser.toJson(res)).MediaContainer
       .Server;
     if (!Array.isArray(formattedResponse)) {
       formattedResponse = [formattedResponse];
     }
     console.log('formatted response', formattedResponse);
-    const server = formattedResponse.arr.slice(-1)[0];
+    const server = formattedResponse.slice(-1)[0];
     console.log('server', server);
     await models.User.update(
       {
         plexToken: plexToken.trim(),
-        plexUrl: `http://${server[0].address}:${server[0].port}`.trim(),
+        plexUrl: `http://${server.address}:${server.port}`.trim(),
       },
       {where: {googleId: user.googleId}},
     );
