@@ -76,20 +76,7 @@ const checkPlexPin = async (pinId, user) => {
   }
 };
 
-const getPlexUrl = async (user, token) => {
-  const params = {
-    url: `https://plex.tv/pms/:/ip`,
-    headers: {
-      'X-Plex-Client-Identifier': user.googleId,
-    },
-  };
-  const plexUrl = await request.get(params);
-  console.log('plex url--', plexUrl);
-  const fullPlexUrl = await plexPort(token, plexUrl, user);
-  return fullPlexUrl;
-};
-
-const plexPort = async (plexToken, plexUrl, user) => {
+const getPlexUrl = async (plexToken, user) => {
   try {
     const res = await request.get(plexUrlParams(plexToken, user));
     let formattedResponse = JSON.parse(parser.toJson(res)).MediaContainer
@@ -98,10 +85,7 @@ const plexPort = async (plexToken, plexUrl, user) => {
       formattedResponse = [formattedResponse];
     }
     console.log('formatted response', formattedResponse);
-    console.log('url--', plexUrl);
-    const server = formattedResponse.filter(
-      server => server.address.toString().trim() === plexUrl.toString().trim(),
-    );
+    const server = formattedResponse.arr.slice(-1)[0];
     console.log('server', server);
     await models.User.update(
       {
@@ -118,4 +102,4 @@ const plexPort = async (plexToken, plexUrl, user) => {
   }
 };
 
-export default {fetchToken, plexPort, getPlexPin, checkPlexPin, getPlexUrl};
+export default {fetchToken, getPlexPin, checkPlexPin, getPlexUrl};

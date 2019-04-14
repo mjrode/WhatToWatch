@@ -42,7 +42,7 @@ const checkPlexPin = async (req, res) => {
     if (token.nil) {
       return res.json(null);
     }
-    await auth.getPlexUrl(req.user, token);
+    await auth.getPlexUrl(req.user);
     return res.json(token);
   } catch (error) {
     console.log('error in auth', error);
