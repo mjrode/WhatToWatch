@@ -29,10 +29,10 @@ const fetchToken = async (username, password) => {
   }
 };
 
-const plexUrlParams = plexToken => ({
+const plexUrlParams = (plexToken, user) => ({
   url: 'https://plex.tv/pms/servers.xml',
   headers: {
-    'X-Plex-Client-Identifier': uuid(),
+    'X-Plex-Client-Identifier': user.googleId,
     'X-Plex-Token': plexToken,
   },
 });
@@ -84,14 +84,14 @@ const getPlexUrl = async (user, token) => {
     },
   };
   const plexUrl = await request.get(params);
-
+  console.log('plex url--', plexUrl);
   const fullPlexUrl = await plexPort(token, plexUrl, user);
   return fullPlexUrl;
 };
 
 const plexPort = async (plexToken, plexUrl, user) => {
   try {
-    const res = await request.get(plexUrlParams(plexToken));
+    const res = await request.get(plexUrlParams(plexToken, user));
     let formattedResponse = JSON.parse(parser.toJson(res)).MediaContainer
       .Server;
     if (!Array.isArray(formattedResponse)) {
