@@ -4,6 +4,8 @@ import plexService from '../services/plex';
 const router = Router();
 
 router.get('/token', plexService.getAuthToken);
+router.get('/plex-pin', plexService.getPlexPin);
+router.get('/check-plex-pin', plexService.checkPlexPin);
 
 router.get('/users', plexService.getUsers);
 

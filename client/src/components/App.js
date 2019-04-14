@@ -7,6 +7,7 @@ import ReactGA from 'react-ga';
 import Header from './Header';
 import Hero from './Hero';
 import Plex from './plex/Plex';
+import PlexPin from './plex/PlexPin';
 import SimilarList from './SimilarList';
 import PopularList from './PopularList';
 
@@ -26,6 +27,7 @@ class App extends Component {
             <div className="container">
               <Header />
               <Route exact path="/" component={Hero} />
+              <Route exact path="/plex-pin" component={PlexPin} />
               <Route path="/most-watched" component={Plex} />
               <Route
                 path="/similar/:show"

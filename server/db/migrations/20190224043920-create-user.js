@@ -26,6 +26,9 @@ module.exports = {
       plexToken: {
         type: Sequelize.STRING,
       },
+      plexPinId: {
+        type: Sequelize.STRING,
+      },
       sonarrUrl: {
         type: Sequelize.STRING,
       },

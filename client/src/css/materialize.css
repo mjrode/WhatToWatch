@@ -25,6 +25,11 @@
   justify-content: center;
 }
 
+.code {
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
 .margin-bottom-button {
   margin-bottom: 2em
 }

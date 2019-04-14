@@ -14,7 +14,7 @@ router.get(
 );
 
 router.get('/google/callback', passport.authenticate('google'), (req, res) => {
-  res.redirect('/most-watched');
+  res.redirect('/plex-pin');
 });
 
 router.get('/current_user', (req, res) => {

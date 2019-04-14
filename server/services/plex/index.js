@@ -3,6 +3,7 @@ import importData from './importData';
 import auth from './auth';
 import models from '../../db/models';
 import helpers from '../helpers';
+import request from 'request-promise';
 
 const getAuthToken = async (req, res) => {
   try {
@@ -19,6 +20,36 @@ const getAuthToken = async (req, res) => {
     );
 
     return res.json(updatedUser);
+  } catch (error) {
+    console.log('error in auth', error);
+    return res.status(201).json(error.message);
+  }
+};
+
+const getPlexPin = async (req, res) => {
+  try {
+    const pinRes = await auth.getPlexPin(req.user);
+    const plexPinId = pinRes.pin.id['$t'];
+    await models.User.update(
+      {plexPinId},
+      {where: {googleId: req.user.googleId}},
+    );
+    const pinCode = pinRes.pin.code;
+    return res.json(pinCode);
+  } catch (error) {
+    console.log('error in auth', error);
+    return res.status(201).json(error.message);
+  }
+};
+
+const checkPlexPin = async (req, res) => {
+  try {
+    const token = await auth.checkPlexPin(req.user.plexPinId, req.user);
+    if (token.nil) {
+      return res.json(null);
+    }
+    await auth.getPlexUrl(req.user, token);
+    return res.json(token);
   } catch (error) {
     console.log('error in auth', error);
     return res.status(201).json(error.message);
@@ -101,4 +132,6 @@ export default {
   importLibraries,
   importMostWatched,
   importAll,
+  getPlexPin,
+  checkPlexPin,
 };
