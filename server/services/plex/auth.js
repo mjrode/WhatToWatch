@@ -84,6 +84,9 @@ const getPlexUrl = async (plexToken, user) => {
     if (!Array.isArray(formattedResponse)) {
       formattedResponse = [formattedResponse];
     }
+    formattedResponse.filter(server => {
+      server.accessToken === plexToken;
+    });
     console.log('formatted response', formattedResponse);
     const server = formattedResponse.slice(-1)[0];
     console.log('server', server);

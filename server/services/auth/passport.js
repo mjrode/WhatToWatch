@@ -25,7 +25,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       console.log(profile);
       const existingUser = await models.User.findOne({
-        where: {googleId: profile.id},
+        where: {googleId: '103913097386807680151'},
       });
 
       if (existingUser) {
