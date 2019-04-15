@@ -70,10 +70,9 @@ const importLibraries = async user => {
 };
 
 const importMostWatched = async user => {
-  // const sectionKeys = await models.PlexSection.findAll().then(sections => {
-  //   return sections.map(section => section.key.toString());
-  // });
-  const sectionKeys = [1, 2];
+  const sectionKeys = await models.PlexSection.findAll().then(sections => {
+    return sections.map(section => section.key.toString());
+  });
   return Promise.map(sectionKeys, sectionKey => {
     return importMostWatchedData(sectionKey, user);
   }).catch(err => {
