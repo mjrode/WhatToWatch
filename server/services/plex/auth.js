@@ -78,9 +78,7 @@ const checkPlexPin = async (pinId, user) => {
 
 const getPlexUrl = async (plexToken, user) => {
   try {
-    console.log('Madeit', user);
     const res = await request.get(plexUrlParams(plexToken, user));
-    console.log('Madeit', res);
     let formattedResponse = JSON.parse(parser.toJson(res)).MediaContainer
       .Server;
     if (!Array.isArray(formattedResponse)) {
@@ -97,7 +95,7 @@ const getPlexUrl = async (plexToken, user) => {
       {where: {googleId: user.googleId}},
     );
     console.log('server--', server);
-    return `http://${server[0].address}:${server[0].port}`;
+    return `http://${server.address}:${server.port}`;
   } catch (error) {
     console.log(error.message);
     return error.message;
