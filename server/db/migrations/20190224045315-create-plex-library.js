@@ -1,6 +1,6 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('PlexLibraries', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('PlexLibraries', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -50,6 +50,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    return queryInterface.addIndex('PlexLibraries', ['UserId', 'title']);
   },
   // eslint-disable-next-line no-unused-vars
   down: (queryInterface, Sequelize) => {
