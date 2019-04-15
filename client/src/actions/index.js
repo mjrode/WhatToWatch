@@ -36,6 +36,8 @@ export const fetchMedia = () => async dispatch => {
 export const getMostWatched = params => async dispatch => {
   dispatch({type: types.SET_LOADING, payload: true});
   const res = await axios.get('/api/recommend/most-watched');
+  console.log('TCL: res', res);
+
   dispatch({type: types.SET_LOADING, payload: false});
   dispatch({type: types.GET_MOST_WATCHED, payload: res.data});
 };

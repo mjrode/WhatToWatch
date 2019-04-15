@@ -18,14 +18,17 @@ const importTvPosters = async user => {
       where: {UserId: user.id, type: 'show', views: {[Op.gt]: 0}},
     });
 
+    console.log('TCL: mostWatched', mostWatched);
+    console.log('TCL: mostWatched', mostWatched);
     const imageUrls = await mostWatched.map(async show => {
       const res = await mdb.searchTv({query: show.title});
+      console.log('TCL: res', res);
       return models.PlexLibrary.update(
         {
           poster_path: res.results[0].poster_path,
         },
         {
-          where: {title: show.title},
+          where: {UserId: user.id, title: show.title},
         },
       );
     });
@@ -45,6 +48,7 @@ const createSections = (sections, user) => {
       },
       {
         where: {
+          UserId: user.id,
           title: section.title,
         },
         returning: true,
@@ -78,7 +82,7 @@ const importMostWatched = async user => {
 
 const importMostWatchedData = async (sectionKey, user) => {
   const mostWatchedData = await plexApi.getMostWatched({sectionKey}, user);
-  const mostWatchedDbData = await updateLibrary(mostWatchedData);
+  const mostWatchedDbData = await updateLibrary(mostWatchedData, user);
   return mostWatchedDbData;
 };
 
@@ -93,7 +97,7 @@ const importLibrary = async (sectionKey, user) => {
   return dbLibraryData;
 };
 
-const updateLibrary = libraryData => {
+const updateLibrary = (libraryData, user) => {
   return Promise.map(libraryData, data => {
     return models.PlexLibrary.upsert(
       {
@@ -102,12 +106,14 @@ const updateLibrary = libraryData => {
         views: data.globalViewCount,
         rating_key: data.ratingKey,
         summary: data.summary,
+        UserId: user.id,
         rating: data.rating,
         year: data.year,
         genre: JSON.stringify(data.Genre),
       },
       {
         where: {
+          UserId: user.id,
           title: data.title,
         },
       },
@@ -128,6 +134,7 @@ const createLibrary = (libraryData, user) => {
         views: sectionLibraryData.views,
         rating_key: sectionLibraryData.ratingKey,
         meta_data_path: sectionLibraryData.key,
+        UserId: user.id,
         summary: sectionLibraryData.summary,
         rating: sectionLibraryData.rating,
         year: sectionLibraryData.year,
@@ -135,6 +142,7 @@ const createLibrary = (libraryData, user) => {
       },
       {
         where: {
+          UserId: user.id,
           title: sectionLibraryData.title,
         },
       },
