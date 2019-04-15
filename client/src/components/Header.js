@@ -37,7 +37,7 @@ class Header extends Component {
       <nav style={{backgroundColor: '#f9a1bc'}}>
         <div className="nav-wrapper" style={{margin: '0 10px'}}>
           <Link to={this.props.auth ? '/' : '/'} className="left brand-logo">
-            PlexRex
+          WhatToWatch
           </Link>
 
           <ul className="right">{this.renderContent()}</ul>

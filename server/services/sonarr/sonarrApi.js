@@ -26,6 +26,7 @@ const addSeries = async (showName, user) => {
     const body = await search(showName, user);
     body.profileId = 1;
     const rootFolder = await getRootFolder(user);
+    console.log(rootFolder);
     body.rootFolderPath = JSON.parse(rootFolder)[0].path;
     const params = {
       baseUrl: user.sonarrUrl,
