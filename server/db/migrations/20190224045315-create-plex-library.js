@@ -50,7 +50,9 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    return queryInterface.addIndex('PlexLibraries', ['UserId', 'title']);
+    return queryInterface.addIndex('PlexLibraries', ['UserId', 'title'], {
+      unique: true,
+    });
   },
   // eslint-disable-next-line no-unused-vars
   down: (queryInterface, Sequelize) => {

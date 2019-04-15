@@ -32,7 +32,9 @@ module.exports = {
         },
       },
     });
-    return queryInterface.addIndex('PlexSections', ['UserId', 'title']);
+    return queryInterface.addIndex('PlexSections', ['UserId', 'title'], {
+      unique: true,
+    });
   },
   // eslint-disable-next-line no-unused-vars
   down: (queryInterface, Sequelize) => {
