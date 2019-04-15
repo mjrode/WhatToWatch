@@ -25,6 +25,21 @@ const popularTv = async (req, res) => {
   res.json(filteredResponse);
 };
 
+const topRatedTv = async (req, res) => {
+  const response = await movieDbApi.topRatedTv();
+  // const library = await sonarrService.getSeries(req.user);
+  // const jsonLibrary = JSON.parse(library);
+  const jsonLibrary = await models.PlexLibrary.findAll({
+    userId: req.user.id,
+    type: 'show',
+  });
+  const libraryTitles = jsonLibrary.map(show => show.title.toLowerCase());
+  const filteredResponse = response.results.filter(
+    show => !libraryTitles.includes(show.name.toLowerCase()),
+  );
+  res.json(filteredResponse);
+};
+
 const similarTv = async (req, res) => {
   const {showName} = req.query;
   const searchResponse = await movieDbApi.searchTv(showName);
@@ -48,4 +63,5 @@ export default {
   searchTv,
   similarTv,
   popularTv,
+  topRatedTv,
 };

@@ -13,6 +13,15 @@ const popularTv = async () => {
   }
 };
 
+const topRatedTv = async () => {
+  try {
+    const response = await mdb.miscTopRatedTvs();
+    return response;
+  } catch (error) {
+    helpers.handleError(error, 'miscTopRatedTvs');
+  }
+};
+
 const searchTv = async showName => {
   try {
     const response = await mdb.searchTv({
@@ -38,4 +47,4 @@ const similarTV = async showId => {
   }
 };
 
-export default {searchTv, similarTV, popularTv};
+export default {searchTv, similarTV, popularTv, topRatedTv};

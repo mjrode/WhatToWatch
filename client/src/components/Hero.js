@@ -31,6 +31,14 @@ class Hero extends Component {
               <i className="material-icons left">show_chart</i>Popular TV
             </Link>
           </div>
+          <div className="row">
+            <Link
+              to="/top-rated"
+              className="waves-effect waves-light btn-large min-button-width"
+            >
+              <i className="material-icons left">star_border</i>Top Rated TV
+            </Link>
+          </div>
         </div>
       );
     }

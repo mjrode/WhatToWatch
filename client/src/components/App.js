@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
-import ReactGA from 'react-ga';
-import createHistory from 'history/createBrowserHistory';
 
 import Header from './Header';
 import Hero from './Hero';
@@ -12,13 +10,8 @@ import PlexPin from './plex/PlexPin';
 import SimilarList from './SimilarList';
 import PopularList from './PopularList';
 import PlexTokenForm from './plex/PlexTokenForm';
+import TopRatedList from './TopRatedList';
 
-const history = createHistory();
-ReactGA.initialize('UA-138294820-1');
-history.listen((location, action) => {
-  ReactGA.pageview(location.pathname + location.search);
-  console.log(location.pathname);
-});
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -40,6 +33,7 @@ class App extends Component {
                 render={props => <SimilarList {...props} />}
               />
               <Route path="/popular" component={PopularList} />
+              <Route path="/top-rated" component={TopRatedList} />
             </div>
           </BrowserRouter>
         </div>
