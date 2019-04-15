@@ -27,6 +27,7 @@ export const fetchPin = () => async dispatch => {
 
 export const fetchMedia = () => async dispatch => {
   dispatch({type: types.SET_LOADING, payload: true});
+  console.log('I WAS CALLED MIKE--');
   const res = await axios.get('/api/plex/import/all');
   console.log('fetchMedia', res);
   dispatch({type: types.SET_LOADING, payload: false});

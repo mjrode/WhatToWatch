@@ -38,6 +38,7 @@ const importTvPosters = async user => {
 };
 
 const createSections = (sections, user) => {
+  console.log('Creating Sections');
   return Promise.map(sections, section => {
     return models.PlexSection.upsert(
       {

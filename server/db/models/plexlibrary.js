@@ -12,7 +12,14 @@ module.exports = (sequelize, DataTypes) => {
       year: DataTypes.INTEGER,
       genre: DataTypes.STRING,
     },
-    {},
+    {
+      indexes: [
+        {
+          unique: true,
+          fields: ['title', 'UserId'],
+        },
+      ],
+    },
   );
   // eslint-disable-next-line no-unused-vars
   PlexLibrary.associate = function(models) {
