@@ -81,15 +81,16 @@ const getPlexUrl = async (plexToken, user) => {
     const res = await request.get(plexUrlParams(plexToken, user));
     let formattedResponse = JSON.parse(parser.toJson(res)).MediaContainer
       .Server;
+
     if (!Array.isArray(formattedResponse)) {
       formattedResponse = [formattedResponse];
     }
-    formattedResponse.filter(server => {
-      server.accessToken === plexToken;
-    });
-    console.log('formatted response', formattedResponse);
+    formattedResponse.reduce((acc, other) =>
+      acc.createdAt > other.createdAt ? acc : other,
+    );
+
     const server = formattedResponse.slice(-1)[0];
-    console.log('server', server);
+
     await models.User.update(
       {
         plexToken: plexToken.trim(),

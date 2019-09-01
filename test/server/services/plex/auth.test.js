@@ -4,7 +4,7 @@ import app from '../../../../index';
 
 describe('Users', () => {
   describe('GET /api/plex/auth', async () => {
-    it.only('should get plex auth token', done => {
+    it('should get plex auth token', done => {
       nocks.auth();
 
       chai

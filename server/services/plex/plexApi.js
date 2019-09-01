@@ -78,9 +78,7 @@ const getSections = async function(user) {
   try {
     const urlParams = getSectionsUrlParams(user);
     const getSectionsUrl = helpers.buildUrl(urlParams);
-    console.log('sec -url', getSectionsUrl);
     const response = await helpers.request(getSectionsUrl);
-    console.log('mike-', response);
     return response.MediaContainer.Directory;
   } catch (error) {
     return {
@@ -97,6 +95,7 @@ const getLibraryDataBySection = async function({sectionKey}, user) {
     const urlParams = getLibraryDataBySectionUrlParams(sectionKey, user);
     const getLibraryDataBySectionUrl = helpers.buildUrl(urlParams);
     const response = await helpers.request(getLibraryDataBySectionUrl);
+    console.log('library-data-by-section---', response.MediaContainer.Metadata);
     return response.MediaContainer.Metadata;
   } catch (error) {
     console.log('caught error', error);

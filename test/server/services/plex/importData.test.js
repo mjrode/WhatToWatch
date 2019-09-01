@@ -18,7 +18,7 @@ describe('ImportData', () => {
   });
 
   describe('GET /plex/import/sections', () => {
-    it('should find and store sections in the database', async () => {
+    it.only('should find and store sections in the database', async () => {
       nocks.plexSections();
       await importData.importSections();
       const sections = await models.PlexSection.findAll();
@@ -41,7 +41,7 @@ describe('ImportData', () => {
   });
 
   describe('GET /plex/import/libraries', () => {
-    it('should find and store libraries in the database', async () => {
+    it.only('should find and store libraries in the database', async () => {
       nocks.plexSections();
       nocks.plexLibrary();
       await importData.importLibraries();
@@ -57,7 +57,7 @@ describe('ImportData', () => {
   });
 
   describe('GET /plex/import/most-watched', () => {
-    it('should find and store libraries in the database', async () => {
+    it.only('should find and store libraries in the database', async () => {
       nocks.plexSections();
       nocks.plexLibrary();
       await importData.importLibraries();

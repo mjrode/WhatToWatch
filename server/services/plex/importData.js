@@ -18,11 +18,8 @@ const importTvPosters = async user => {
       where: {UserId: user.id, type: 'show', views: {[Op.gt]: 0}},
     });
 
-    console.log('TCL: mostWatched', mostWatched);
-    console.log('TCL: mostWatched', mostWatched);
     const imageUrls = await mostWatched.map(async show => {
       const res = await mdb.searchTv({query: show.title});
-      console.log('TCL: res', res);
       return models.PlexLibrary.update(
         {
           poster_path: res.results[0].poster_path,
