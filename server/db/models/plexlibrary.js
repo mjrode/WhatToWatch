@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
   const PlexLibrary = sequelize.define(
     'PlexLibrary',

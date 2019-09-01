@@ -88,12 +88,11 @@ const init = () =>
 const truncate = model =>
   models[model]
     .destroy({
-      where: {},
-      force: true,
-      paranoid: false,
+      truncate: {cascade: true},
     })
-    .catch(() => {
+    .catch(e => {
       console.log('Error truncating', model);
+      console.log(e);
       process.exit(EXIT_CODE);
     });
 
