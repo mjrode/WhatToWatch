@@ -84,7 +84,6 @@ const getSections = async function(user) {
     return {
       code: error.status,
       message: error.statusText,
-      url: error.config.url,
     };
   }
 };

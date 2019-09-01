@@ -7,21 +7,36 @@ import {seed, truncate} from '../../../../server/db/scripts';
 import * as nocks from '../../../nocks';
 
 describe('ImportData', () => {
-  before(() => {
-    truncate('User');
-    seed('User');
+  before(async () => {
+    await truncate('User');
+    await truncate('PlexLibrary');
+    await truncate('PlexSection');
+    await seed('User');
+    await seed('PlexSection');
   });
-  after(() => {
-    truncate('User');
-    truncate('PlexLibrary');
-    truncate('PlexSection');
-  });
+  after(() => {});
 
   describe('GET /plex/import/sections', () => {
     it.only('should find and store sections in the database', async () => {
       nocks.plexSections();
-      await importData.importSections();
+
+      const user = await models.User.findOne({
+        where: {googleId: '101111197386111111151'},
+      });
+
+      const sectionsBeforeUpdate = await models.PlexSection.findOne({
+        UserId: 1,
+        type: 'show',
+        title: 'TV Shows',
+      });
+
+      sectionsBeforeUpdate.dataValues.title.should.eq('TV Shows');
+      sectionsBeforeUpdate.dataValues.type.should.eq('show');
+      sectionsBeforeUpdate.dataValues.key.should.eq(4);
+
+      await importData.importSections(user);
       const sections = await models.PlexSection.findAll();
+
       const movies = sections.filter(
         data => data.dataValues.title === 'Movies',
       );
@@ -41,7 +56,7 @@ describe('ImportData', () => {
   });
 
   describe('GET /plex/import/libraries', () => {
-    it.only('should find and store libraries in the database', async () => {
+    it('should find and store libraries in the database', async () => {
       nocks.plexSections();
       nocks.plexLibrary();
       await importData.importLibraries();
@@ -57,7 +72,7 @@ describe('ImportData', () => {
   });
 
   describe('GET /plex/import/most-watched', () => {
-    it.only('should find and store libraries in the database', async () => {
+    it('should find and store libraries in the database', async () => {
       nocks.plexSections();
       nocks.plexLibrary();
       await importData.importLibraries();

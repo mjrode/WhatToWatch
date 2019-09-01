@@ -3,7 +3,7 @@ import {json, urlencoded} from 'body-parser';
 // eslint-disable-next-line import/named
 import passport from 'passport';
 import cookieSession from 'cookie-session';
-import {sequelize} from './db/models';
+import models from './db/models';
 import keys from '../config';
 import plex from './routes/plex.route';
 import tdaw from './routes/tdaw.route';
@@ -75,12 +75,8 @@ export default () => {
 
     const port = server.get('port') || 8080;
     console.log('mike--', port);
-
-    sequelize.sync({force: true}).then(() => {
-      server.listen(port, () => {
-        console.log(`Express server listening on - http://${hostname}:${port}`);
-      });
-    });
+    models.User.findAll().then(user => console.log(user));
+    models.Sequelize.Op;
   };
 
   process.on('unhandledRejection', (reason, p) => {

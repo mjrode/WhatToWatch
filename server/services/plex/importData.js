@@ -6,6 +6,32 @@ import MovieDb from 'moviedb-promise';
 import {Op} from 'sequelize';
 const mdb = new MovieDb(config.server.movieApiKey);
 
+const updateOrCreate = (model, where, newItem, beforeCreate) => {
+  // Try to find record using findOne
+  return model.findOne({where}).then(item => {
+    if (!item) {
+      // Item doesn't exist, so we create it
+
+      // Custom promise to add more data to the record
+      // Being saved (optional)
+      Promise.resolve(beforeCreate).then(() =>
+        model
+          .create(newItem, {returning: true, plain: true, raw: true})
+          .then(item => ({item, created: true})),
+      );
+    }
+
+    // Item already exists, so we update it
+    return model
+      .update(
+        newItem,
+        {where: where},
+        {returning: true, plain: true, raw: true},
+      )
+      .then(item => ({item, created: false}));
+  });
+};
+
 const importSections = async user => {
   const sections = await plexApi.getSections(user);
   const dbSections = await createSections(sections, user);
@@ -34,29 +60,27 @@ const importTvPosters = async user => {
   }
 };
 
-const createSections = (sections, user) => {
-  console.log('Creating Sections');
-  return Promise.map(sections, section => {
-    return models.PlexSection.upsert(
+const createSections = async (sections, user) => {
+  const updatedSections = await Promise.map(sections, section => {
+    const newSection = {
+      title: section.title,
+      type: section.type,
+      key: section.key,
+      UserId: user.id,
+    };
+    return updateOrCreate(
+      models.PlexSection,
       {
         title: section.title,
         type: section.type,
-        key: section.key,
         UserId: user.id,
       },
-      {
-        where: {
-          UserId: user.id,
-          title: section.title,
-        },
-        returning: true,
-        plain: true,
-        raw: true,
-      },
+      newSection,
     );
   }).catch(err => {
     console.log(err);
   });
+  return updatedSections;
 };
 
 const importLibraries = async user => {
