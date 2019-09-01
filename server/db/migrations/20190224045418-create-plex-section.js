@@ -24,16 +24,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      UserId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-      },
-    });
-    return queryInterface.addIndex('PlexSections', ['UserId', 'title'], {
-      unique: true,
     });
   },
   // eslint-disable-next-line no-unused-vars

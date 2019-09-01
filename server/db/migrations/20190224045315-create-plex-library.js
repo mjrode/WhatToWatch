@@ -34,13 +34,6 @@ module.exports = {
       genre: {
         type: Sequelize.STRING,
       },
-      UserId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -49,9 +42,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    });
-    return queryInterface.addIndex('PlexLibraries', ['UserId', 'title'], {
-      unique: true,
     });
   },
   // eslint-disable-next-line no-unused-vars
