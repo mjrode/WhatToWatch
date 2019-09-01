@@ -37,29 +37,37 @@ const importTvPosters = async user => {
   }
 };
 
-const createSections = (sections, user) => {
-  console.log('Creating Sections');
-  return Promise.map(sections, section => {
-    return models.PlexSection.upsert(
-      {
-        title: section.title,
-        type: section.type,
-        key: section.key,
-        UserId: user.id,
-      },
-      {
-        where: {
-          UserId: user.id,
-          title: section.title,
-        },
-        returning: true,
-        plain: true,
-        raw: true,
-      },
+const createSections = async (sections, user) => {
+  try {
+    return Promise.all(
+      sections.map(async section => {
+        const dbSection = await models.PlexSection.findOne({
+          where: {
+            UserId: user.id,
+            title: section.title,
+          },
+        });
+        if (dbSection) {
+          await dbSection.update({
+            title: section.title,
+            type: section.type,
+            key: section.key,
+            UserId: user.id,
+          });
+        } else {
+          await models.PlexSection.create({
+            title: section.title,
+            type: section.type,
+            key: section.key,
+            UserId: user.id,
+          });
+        }
+      }),
     );
-  }).catch(err => {
-    console.log(err);
-  });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
 const importLibraries = async user => {
@@ -82,7 +90,7 @@ const importMostWatched = async user => {
 
 const importMostWatchedData = async (sectionKey, user) => {
   const mostWatchedData = await plexApi.getMostWatched({sectionKey}, user);
-  const mostWatchedDbData = await updateLibrary(mostWatchedData, user);
+  const mostWatchedDbData = await updateOrCreateLibrary(mostWatchedData, user);
   return mostWatchedDbData;
 };
 
@@ -93,61 +101,51 @@ const importLibrary = async (sectionKey, user) => {
     },
     user,
   );
-  const dbLibraryData = await createLibrary(libraryData, user);
+  const dbLibraryData = await updateOrCreateLibrary(libraryData, user);
   return dbLibraryData;
 };
 
-const updateLibrary = (libraryData, user) => {
-  return Promise.map(libraryData, data => {
-    return models.PlexLibrary.upsert(
-      {
-        title: data.title,
-        type: data.type,
-        views: data.globalViewCount,
-        rating_key: data.ratingKey,
-        summary: data.summary,
-        UserId: user.id,
-        rating: data.rating,
-        year: data.year,
-        genre: JSON.stringify(data.Genre),
-      },
-      {
-        where: {
-          UserId: user.id,
-          title: data.title,
-        },
-      },
+const updateOrCreateLibrary = async (libraryData, user) => {
+  try {
+    return Promise.all(
+      libraryData.map(async data => {
+        const media = await models.PlexLibrary.findOne({
+          where: {
+            UserId: user.id,
+            title: sectionLibraryData.title,
+          },
+        });
+        if (media) {
+          await media.update({
+            title: data.title,
+            type: data.type,
+            views: data.globalViewCount,
+            rating_key: data.ratingKey,
+            summary: data.summary,
+            UserId: user.id,
+            rating: data.rating,
+            year: data.year,
+            genre: JSON.stringify(data.Genre),
+          });
+        } else {
+          await models.PlexLibrary.create({
+            title: data.title,
+            type: data.type,
+            views: data.globalViewCount,
+            rating_key: data.ratingKey,
+            summary: data.summary,
+            UserId: user.id,
+            rating: data.rating,
+            year: data.year,
+            genre: JSON.stringify(data.Genre),
+          });
+        }
+      }),
     );
-  }).catch(err => {
-    console.log(err);
-  });
-};
-
-const createLibrary = (libraryData, user) => {
-  const userId = user.id;
-  return Promise.map(libraryData, sectionLibraryData => {
-    return models.PlexLibrary.upsert(
-      {
-        title: sectionLibraryData.title,
-        UserId: userId,
-        type: sectionLibraryData.type,
-        views: sectionLibraryData.views,
-        rating_key: sectionLibraryData.ratingKey,
-        meta_data_path: sectionLibraryData.key,
-        UserId: user.id,
-        summary: sectionLibraryData.summary,
-        rating: sectionLibraryData.rating,
-        year: sectionLibraryData.year,
-        genre: JSON.stringify(sectionLibraryData.Genre),
-      },
-      {
-        where: {
-          UserId: user.id,
-          title: sectionLibraryData.title,
-        },
-      },
-    );
-  }).catch(err => console.log(err));
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
 export default {
