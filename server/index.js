@@ -73,7 +73,8 @@ export default () => {
   const start = () => {
     const hostname = server.get('hostname');
 
-    const port = server.get('port');
+    const port = server.get('port') || 8080;
+    console.log('mike--', port);
 
     sequelize.sync({force: true}).then(() => {
       server.listen(port, () => {
