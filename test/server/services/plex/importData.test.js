@@ -11,13 +11,15 @@ describe('ImportData', () => {
     await truncate('User');
     await truncate('PlexLibrary');
     await truncate('PlexSection');
-    await seed('User');
+    await seed('User', 'Users');
     await seed('PlexSection');
+    await seed('PlexSection', 'PlexSections');
+    await seed('PlexLibrary');
   });
   after(() => {});
 
   describe('GET /plex/import/sections', () => {
-    it.only('should find and store sections in the database', async () => {
+    it.only('should find and store sections in the database for the user that is passed in', async () => {
       nocks.plexSections();
 
       const user = await models.User.findOne({
@@ -25,9 +27,11 @@ describe('ImportData', () => {
       });
 
       const sectionsBeforeUpdate = await models.PlexSection.findOne({
-        UserId: 1,
-        type: 'show',
-        title: 'TV Shows',
+        where: {
+          UserId: 1,
+          type: 'show',
+          title: 'TV Shows',
+        },
       });
 
       sectionsBeforeUpdate.dataValues.title.should.eq('TV Shows');
@@ -38,58 +42,102 @@ describe('ImportData', () => {
       const sections = await models.PlexSection.findAll();
 
       const movies = sections.filter(
-        data => data.dataValues.title === 'Movies',
+        data =>
+          data.dataValues.title === 'Movies' &&
+          data.dataValues.UserId === user.id,
       );
+
       movies[0].dataValues.title.should.eq('Movies');
-      movies[0].dataValues.type.should.eq('movie');
+      movies[0].dataValues.type.should.eq('movie User 1');
       movies[0].dataValues.key.should.eq(2);
 
       const tvShows = sections.filter(
-        data => data.dataValues.title === 'TV Shows',
+        data =>
+          data.dataValues.title === 'TV Shows' &&
+          data.dataValues.UserId === user.id,
       );
       tvShows[0].dataValues.title.should.eq('TV Shows');
-      tvShows[0].dataValues.type.should.eq('show');
+      tvShows[0].dataValues.type.should.eq('show User 1');
       tvShows[0].dataValues.key.should.eq(3);
 
-      sections.should.be.length(2);
+      sections.should.be.length(4);
     });
   });
 
   describe('GET /plex/import/libraries', () => {
-    it('should find and store libraries in the database', async () => {
-      nocks.plexSections();
-      nocks.plexLibrary();
-      await importData.importLibraries();
-      const library = await models.PlexLibrary.findAll();
-      library.should.be.length(56);
+    it.only('should find and store libraries in the database for the user that is passed in', async () => {
+      const libraryBeforeImport = await models.PlexLibrary.findAll();
+      libraryBeforeImport.should.be.length(10);
+
+      const user = await models.User.findOne({
+        where: {googleId: '101111197386111111151'},
+      });
+
+      const movieBeforeUpdate = await models.PlexLibrary.findOne({
+        where: {
+          title: 'Big Time in Hollywood, FL',
+          UserId: 1,
+        },
+      });
+
+      movieBeforeUpdate.dataValues.title.should.eq('Big Time in Hollywood, FL');
+      movieBeforeUpdate.dataValues.type.should.eq('show before import');
+
+      const testUserLibrary = await models.PlexLibrary.findAll({
+        where: {UserId: 999},
+      });
+
+      testUserLibrary.should.be.length(9);
 
       nocks.plexSections();
       nocks.plexLibrary();
-      await importData.importLibraries();
+      await importData.importLibraries(user);
+      const library = await models.PlexLibrary.findAll();
+      library.should.be.length(65);
+
+      nocks.plexSections();
+      nocks.plexLibrary();
+      await importData.importLibraries(user);
       const librarySecondRequest = await models.PlexLibrary.findAll();
-      librarySecondRequest.should.be.length(56);
+      librarySecondRequest.should.be.length(65);
+
+      const movieAfterUpdate = await models.PlexLibrary.findOne({
+        where: {
+          title: 'Big Time in Hollywood, FL',
+          UserId: 1,
+        },
+      });
+
+      movieAfterUpdate.dataValues.title.should.eq('Big Time in Hollywood, FL');
+      movieAfterUpdate.dataValues.type.should.eq('show');
+
+      const testUserLibraryAfterImport = await models.PlexLibrary.findAll({
+        where: {UserId: 999},
+      });
+
+      testUserLibraryAfterImport.should.be.length(9);
     });
   });
 
   describe('GET /plex/import/most-watched', () => {
-    it('should find and store libraries in the database', async () => {
+    it.only('should find and store libraries in the database', async () => {
+      const user = await models.User.findOne({
+        where: {googleId: '101111197386111111151'},
+      });
+
       nocks.plexSections();
       nocks.plexLibrary();
-      await importData.importLibraries();
+      await importData.importLibraries(user);
       const library = await models.PlexLibrary.findAll();
-      library.should.be.length(56);
+      library.should.be.length(65);
 
       nocks.mostWatched();
-      await importData.importMostWatched();
-      const libraryMostWatched = await models.PlexLibrary.findAll();
-      const newGirl = libraryMostWatched.filter(
-        data => data.dataValues.title === 'New Girl',
-      );
-      newGirl[0].dataValues.views.should.eq(74);
-      newGirl[0].dataValues.poster_path.should.eq(
-        '/library/metadata/5485/children',
-      );
-      libraryMostWatched.should.be.length(56);
+      await importData.importMostWatched(user);
+      const newGirl = await models.PlexLibrary.findOne({
+        where: {UserId: user.id, title: 'New Girl'},
+      });
+      newGirl.dataValues.views.should.eq(74);
+      library.should.be.length(65);
     });
   });
 });

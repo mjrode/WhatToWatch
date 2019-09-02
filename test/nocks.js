@@ -14,17 +14,18 @@ export const plexSections = () => {
     });
 };
 
-export const plexLibrary = () => nock('https://plex.mjrflix.com')
-  .persist()
-  .get(url => url.includes('/library/sections/'))
-  .reply(200, plexResponses.getLibraryDataBySectionRaw, {
-    'Content-Type': 'text/json',
-  });
+export const plexLibrary = () =>
+  nock('https://plex.mjrflix.com')
+    .persist()
+    .get(url => url.includes('/library/sections/3'))
+    .reply(200, plexResponses.getLibraryDataBySectionRaw, {
+      'Content-Type': 'text/json',
+    });
 
 export const plexUsers = () => {
   nock('https://plex.tv')
     .get('/api/users?X-Plex-Token=testPlexApiToken')
-    .replyWithFile(200, usersResponse, { 'Content-Type': 'text/xml' });
+    .replyWithFile(200, usersResponse, {'Content-Type': 'text/xml'});
 };
 
 export const mostWatched = () => {
