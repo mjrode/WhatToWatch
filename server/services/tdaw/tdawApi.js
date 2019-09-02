@@ -49,9 +49,11 @@ const similarMedia = async function(req, mediaName, mediaType) {
 };
 
 const getShowData = async filteredResponse => {
-  return await Promise.all(
+  const showData = await Promise.all(
     filteredResponse.map(show => movieDbApi.searchTv(show.Name)),
   );
+  console.log('mapped show data', showData);
+  return showData.filter(obj => obj);
 };
 
 const qlooMediaId = async (mediaName, mediaType) => {

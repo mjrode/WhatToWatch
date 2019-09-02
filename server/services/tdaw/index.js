@@ -13,18 +13,7 @@ const similarMedia = async (req, res) => {
       media,
     );
     console.log('tdaw response test--', response);
-
-    const jsonLibrary = await models.PlexLibrary.findAll({
-      userId: req.user.id,
-      type: 'show',
-    });
-    // Use Sonarr list instead
-    const libraryTitles = jsonLibrary.map(show => show.title.toLowerCase());
-    const filteredResponse = response.filter(
-      show => !libraryTitles.includes(show.name.toLowerCase()),
-    );
-    console.log('final----response', filteredResponse);
-    res.json(filteredResponse);
+    res.json(response);
   } catch (error) {
     helpers.handleError(res, tdawApi.name);
   }
