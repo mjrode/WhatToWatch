@@ -14,6 +14,12 @@ const formatResponse = response => {
   return response.data;
 };
 
+const fixedEncodeURIComponent = str => {
+  return encodeURIComponent(str).replace(/[!'()*]/g, c => {
+    return '%' + c.charCodeAt(0).toString(16);
+  });
+};
+
 const buildUrl = function(urlParams) {
   try {
     const params = urlParams;
@@ -69,4 +75,10 @@ const handleError = (res, method) => err => {
   res.status(code).json({message});
 };
 
-export default {formatResponse, buildUrl, request, handleError};
+export default {
+  formatResponse,
+  buildUrl,
+  request,
+  handleError,
+  fixedEncodeURIComponent,
+};

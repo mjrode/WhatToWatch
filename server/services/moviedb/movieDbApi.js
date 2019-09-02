@@ -34,7 +34,6 @@ const searchTv = async showName => {
       showName.toLowerCase(),
     );
     console.log('string similarity', stringSim);
-    console.log('Search TV response', response.results[0].original_name);
     const show = response.results.filter(
       result =>
         stringSimilarity.compareTwoStrings(
@@ -43,6 +42,7 @@ const searchTv = async showName => {
         ) > 0.75,
     )[0];
 
+    console.log('movie db api search', show);
     return show;
   } catch (error) {
     helpers.handleError(error, 'searchTv');

@@ -1,11 +1,30 @@
 import tdawApi from './tdawApi';
+import models from '../../db/models';
 import helpers from '../helpers';
 
 const similarMedia = async (req, res) => {
   try {
-    const {mediaName, mediaType} = req.query;
-    const response = await tdawApi.similarMedia(mediaName, mediaType);
-    res.json(response);
+    const {showName} = req.query;
+    console.log('Show name', showName);
+    const media = 'show';
+    const response = await tdawApi.similarMedia(
+      req,
+      showName.replace(/[{()}]/g, ''),
+      media,
+    );
+    console.log('tdaw response test--', response);
+
+    const jsonLibrary = await models.PlexLibrary.findAll({
+      userId: req.user.id,
+      type: 'show',
+    });
+    // Use Sonarr list instead
+    const libraryTitles = jsonLibrary.map(show => show.title.toLowerCase());
+    const filteredResponse = response.filter(
+      show => !libraryTitles.includes(show.name.toLowerCase()),
+    );
+    console.log('final----response', filteredResponse);
+    res.json(filteredResponse);
   } catch (error) {
     helpers.handleError(res, tdawApi.name);
   }

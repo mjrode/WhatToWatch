@@ -1,6 +1,7 @@
 import config from '../../../config';
 import helpers from '../helpers';
 import models from '../../db/models';
+import movieDbApi from '../moviedb/movieDbApi';
 
 const tdawMediaUrl = function(mediaName, mediaType) {
   return {
@@ -14,12 +15,30 @@ const tdawMediaUrl = function(mediaName, mediaType) {
   };
 };
 
-const similarMedia = async function(mediaName, mediaType) {
+const similarMedia = async function(req, mediaName, mediaType) {
   try {
+    console.log('mediatype', mediaType);
     const urlParams = tdawMediaUrl(mediaName, mediaType);
     const mediaUrl = helpers.buildUrl(urlParams);
-    const response = await helpers.request(mediaUrl);
-    return response;
+    const similarResponse = await helpers.request(mediaUrl);
+    console.log('TCL: tdaw -> similarResponse', similarResponse);
+
+    const jsonLibrary = await models.PlexLibrary.findAll({
+      userId: req.user.id,
+      type: 'show',
+    });
+
+    // Use Sonarr list instead
+    const libraryTitles = jsonLibrary.map(show => show.title.toLowerCase());
+
+    const filteredResponse = await similarResponse.filter(
+      show => !libraryTitles.includes(show.Name.toLowerCase()),
+    );
+
+    console.log('filteredResponse ---', filteredResponse);
+    const movieDbInfo = await getShowData(filteredResponse);
+    console.log('movieDbInfo', movieDbInfo);
+    return movieDbInfo;
   } catch (error) {
     return {
       code: error.status,
@@ -27,6 +46,12 @@ const similarMedia = async function(mediaName, mediaType) {
       url: error.config.url,
     };
   }
+};
+
+const getShowData = async filteredResponse => {
+  return await Promise.all(
+    filteredResponse.map(show => movieDbApi.searchTv(show.Name)),
+  );
 };
 
 const qlooMediaId = async (mediaName, mediaType) => {
