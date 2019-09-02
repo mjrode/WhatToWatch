@@ -43,6 +43,7 @@ const topRatedTv = async (req, res) => {
 const similarTv = async (req, res) => {
   const {showName} = req.query;
   const searchResponse = await movieDbApi.searchTv(showName);
+  console.log('TCL: similarTv -> similarResponse', searchResponse);
   const similarResponse = await movieDbApi.similarTV(searchResponse.id);
   console.log('TCL: similarTv -> similarResponse', similarResponse);
   // const library = await sonarrService.getSeries(req.user);

@@ -7,20 +7,15 @@ import {Op} from 'sequelize';
 const mdb = new MovieDb(config.server.movieApiKey);
 
 const updateOrCreate = async (model, where, newItem, beforeCreate) => {
-  // Try to find record using findOne
   const item = await model.findOne({where});
   if (!item) {
-    // Item doesn't exist, so we create it
-
     const createItem = await model.create(newItem, {
       returning: true,
       plain: true,
       raw: true,
     });
-
     return {createItem, created: true};
   } else {
-    // Item already exists, so we update it
     const updatedItem = await model.update(
       newItem,
       {where: where},

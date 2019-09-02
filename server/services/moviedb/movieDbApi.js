@@ -2,6 +2,8 @@ import config from '../../../config';
 import helpers from '../helpers';
 import models from '../../db/models';
 import MovieDb from 'moviedb-promise';
+import stringSimilarity from 'string-similarity';
+
 const mdb = new MovieDb(config.server.movieApiKey);
 
 const popularTv = async () => {
@@ -27,9 +29,18 @@ const searchTv = async showName => {
     const response = await mdb.searchTv({
       query: showName,
     });
-
+    const stringSim = await stringSimilarity.compareTwoStrings(
+      response.results[0].original_name.toLowerCase(),
+      showName.toLowerCase(),
+    );
+    console.log('string similarity', stringSim);
+    console.log('Search TV response', response.results[0].original_name);
     const show = response.results.filter(
-      result => result.original_name.toLowerCase() === showName.toLowerCase(),
+      result =>
+        stringSimilarity.compareTwoStrings(
+          result.original_name.toLowerCase(),
+          showName.toLowerCase(),
+        ) > 0.75,
     )[0];
 
     return show;

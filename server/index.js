@@ -74,9 +74,11 @@ export default () => {
     const hostname = server.get('hostname');
 
     const port = server.get('port') || 8080;
-    console.log('mike--', port);
-    models.User.findAll().then(user => console.log(user));
+
     models.Sequelize.Op;
+    server.listen(port, () => {
+      console.log(`Express server listening on - http://${hostname}:${port}`);
+    });
   };
 
   process.on('unhandledRejection', (reason, p) => {
