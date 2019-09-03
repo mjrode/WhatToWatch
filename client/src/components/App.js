@@ -6,6 +6,7 @@ import * as actions from '../actions';
 import Header from './Header';
 import Hero from './Hero';
 import Plex from './plex/Plex';
+import Admin from './Admin';
 import PlexPin from './plex/PlexPin';
 import SimilarList from './SimilarList';
 import PopularList from './PopularList';
@@ -27,6 +28,7 @@ class App extends Component {
               <Route exact path="/" component={Hero} />
               <Route exact path="/sonarr" component={PlexTokenForm} />
               <Route exact path="/plex-pin" component={PlexPin} />
+              <Route path="/admin" component={Admin} />
               <Route path="/most-watched" component={Plex} />
               <Route
                 path="/similar/:show"

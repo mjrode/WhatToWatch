@@ -35,6 +35,7 @@ class Plex extends Component {
 }
 
 function mapStateToProps({auth, plex}) {
+  console.log('plex props', auth)
   return {auth, mediaResponse: plex.mediaResponse};
 }
 

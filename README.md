@@ -10,6 +10,30 @@ _This is still in development. If you would like to help contribute feel free to
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system
 
+## Installing
+Clone the repository
+
+`git clone git@github.com:mjrode/WhatToWatch.git`
+
+ cd into the new directory
+
+ `cd WhatToWatch`
+
+## Server (run from the root directory)
+
+Install dependencies
+
+ `npm install`
+
+Install npx to easily run migrations
+`npm install -g npx`
+
+
+Create database, test database, and run the migrations
+`npx sequelize db:create`
+`NODE_ENV=test npx sequelize db:create`
+`npm run db:reset`
+
 ## Prerequisites
 * **Required Keys**
   #### Rename `example.env` to `.env` and update the test tokens with your tokens
@@ -31,32 +55,18 @@ These instructions will get you a copy of the project up and running on your loc
   [TasteDive](https://tastedive.com/read/api)
     * `TDAW_API_TOKEN`
 
+## Running the tests
+  `npm test`
 
-## Installing
-Clone the repository
+## Client (run from WhatToWatch/client)
+  # install dependencies
+  `npm install`
 
-`git clone git@github.com:mjrode/WhatToWatch.git`
-
- cd into the new directory
-
- `cd WhatToWatch`
-
-Install dependencies
-
- `npm install`
-
-Create database and run the migrations
-
-`node server/db/scripts/setup.js`
-
+## Run application 
 Concurrently run the frontend and backend servers
 
 `npm run dev`
 
-## Running the tests
-  `npm test`
-
 ## Built With
-
 * [Node](www.example.com)
 * [React](www.example.com)
