@@ -10,6 +10,7 @@ import tdaw from './routes/tdaw.route';
 import movieDb from './routes/movieDb.route';
 import sonarr from './routes/sonarr.route';
 import auth from './routes/auth.route';
+import admin from './routes/admin.route';
 import recommend from './routes/recommend.route';
 require('./services/auth/passport');
 
@@ -44,6 +45,7 @@ export default () => {
     server.use('/api/recommend', recommend);
     server.use('/auth', auth);
     server.use('/api/auth', auth);
+    server.use('/api/admin', admin);
 
     if (process.env.NODE_ENV === 'production') {
       server.use(express.static('client/build'));

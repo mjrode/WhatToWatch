@@ -6,49 +6,50 @@ import * as actions from './../actions';
 import Typography from '@material-ui/core/Typography';
 
 class Admin extends Component {
-   async componentDidMount() {
+  async componentDidMount() {
     await this.props.fetchUsers();
     console.log('mike--', this.props.auth)
+  }
+
+  renderUsers() {
+    if (this.props.auth.users) {
+      const usersList = this.props.auth.users.map(user => {
+        return (
+          <Typography
+            variant="h2"
+            key={user.email}
+            align="center"
+            color="textSecondary"
+            paragraph
+            className="z-depth-2 code"
+          >
+            {user.email}
+          </Typography>
+        )
+      })
+      return <div>{usersList}</div>
+    }
   }
   render() {
     if (!this.props) {
       return;
     }
-    if (!this.props.auth.admin) {
-      console.log('where are my props', this.props)
+
+    if (!this.props.auth.user || !this.props.auth.user.admin) {
+      console.log('where are my props', this.props.auth)
       return <div><p>Checking for admin rights..</p></div>
     }
-      console.log(this.props.auth);
-      return (
-        <div>
-          <HeroSimple />
+    console.log(this.props.auth);
+    return (
+      <div>
+        <HeroSimple />
 
-          <div className="row flex-center">
-            <Typography
-              variant="h4"
-              align="center"
-              color="textSecondary"
-              paragraph
-            >
-              Select a user to login as &nbsp;
-              <a href="https://plex.tv/link" target="_blank">
-                plex.com/link.
-              </a>
-            </Typography>
-          </div>
-          <div className=" flex-center ">
-            <Typography
-              variant="h2"
-              align="center"
-              color="textSecondary"
-              paragraph
-              className="z-depth-2 code"
-            >
-              A list of users
-            </Typography>
-          </div>
+        <div className="row flex-center">
+          {this.renderUsers()}
         </div>
-      );
+
+      </div>
+    );
   }
 }
 

@@ -22,7 +22,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const fetchUsers = () => async dispatch => {
-  const res = await axios.get('/api/admin/current_user');
+  const res = await axios.get('/api/admin/users');
   dispatch({ type: types.FETCH_USERS, payload: res.data });
 };
 

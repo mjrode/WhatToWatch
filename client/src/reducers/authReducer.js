@@ -1,4 +1,4 @@
-import {types} from '../actions/index';
+import { types } from '../actions/index';
 
 export const initialState = {
   loading: false,
@@ -7,17 +7,17 @@ export const initialState = {
   users: '',
 };
 
-export default function(state = {}, action) {
-  console.log('action - payload', action.payload);
+export default function (state = {}, action) {
+  console.log('action - payload', action.type);
   switch (action.type) {
     case types.FETCH_USER:
-      return action.payload || false;
+      return { ...state, user: action.payload };
     case types.FETCH_USERS:
-      return action.payload || false;
+      return { ...state, users: action.payload };
     case types.FETCH_PIN:
-      return {...state, plexPin: action.payload};
+      return { ...state, plexPin: action.payload };
     case types.CHECK_PLEX_PIN:
-      return {...state, plexToken: action.payload};
+      return { ...state, plexToken: action.payload };
     default:
       return state;
   }
