@@ -61,6 +61,7 @@
     "onchange": "^6.0.0",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
+    "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",

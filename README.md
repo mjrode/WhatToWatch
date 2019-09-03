@@ -58,8 +58,8 @@ Create database, test database, and run the migrations
 ## Running the tests
   `npm test`
 
-## Client (run from WhatToWatch/client)
-  # install dependencies
+# Client (run from WhatToWatch/client)
+  ## install dependencies
   `npm install`
 
 ## Run application 

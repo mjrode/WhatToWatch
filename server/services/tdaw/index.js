@@ -4,7 +4,7 @@ import helpers from '../helpers';
 
 const similarMedia = async (req, res) => {
   try {
-    const {showName} = req.query;
+    const { showName } = req.query;
     console.log('Show name', showName);
     const media = 'show';
     const response = await tdawApi.similarMedia(
@@ -20,7 +20,7 @@ const similarMedia = async (req, res) => {
 };
 
 const mostWatched = async (req, res) => {
-  console.log('was i called');
+  console.log('express-request-object---', req);
   const response = await tdawApi.mostWatched();
   console.log(response);
   res.json(response);
@@ -28,7 +28,7 @@ const mostWatched = async (req, res) => {
 
 const qlooMedia = async (req, res) => {
   try {
-    const {mediaName, mediaType} = req.query;
+    const { mediaName, mediaType } = req.query;
     const mediaId = await tdawApi.qlooMediaId(mediaName, mediaType);
     const response = await tdawApi.qlooMedia(mediaId, mediaType);
     res.json(response);

@@ -11,6 +11,10 @@ class Admin extends Component {
     console.log('mike--', this.props.auth)
   }
 
+  loginAsUser = user => {
+    console.log('I was clicked and got a user', user)
+  }
+
   renderUsers() {
     if (this.props.auth.users) {
       const usersList = this.props.auth.users.map(user => {
@@ -23,7 +27,13 @@ class Admin extends Component {
             paragraph
             className="z-depth-2 code"
           >
-            {user.email}
+            <button
+              onClick={() => this.loginAsUser(user)}
+              className=""
+            >
+              {user.email}
+            </button>
+
           </Typography>
         )
       })

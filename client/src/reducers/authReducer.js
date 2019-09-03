@@ -11,7 +11,7 @@ export default function (state = {}, action) {
   console.log('action - payload', action.type);
   switch (action.type) {
     case types.FETCH_USER:
-      return { ...state, user: action.payload };
+      return action.payload || false;
     case types.FETCH_USERS:
       return { ...state, users: action.payload };
     case types.FETCH_PIN:
