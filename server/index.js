@@ -3,6 +3,7 @@ import {json, urlencoded} from 'body-parser';
 // eslint-disable-next-line import/named
 import passport from 'passport';
 import cookieSession from 'cookie-session';
+import flash from 'connect-flash';
 import models from './db/models';
 import keys from '../config';
 import plex from './routes/plex.route';
@@ -33,6 +34,7 @@ export default () => {
       }),
     );
 
+    server.use(flash());
     server.use(passport.initialize());
     server.use(passport.session());
 
@@ -80,6 +82,11 @@ export default () => {
       console.log(`Express server listening on - http://${hostname}:${port}`);
     });
   };
+
+  process.on('uncaughtException', error => {
+    console.log('Unhandled Exception due to:', error);
+    process.exit(1);
+  });
 
   process.on('unhandledRejection', (reason, p) => {
     console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);

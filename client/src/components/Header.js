@@ -10,9 +10,14 @@ class Header extends Component {
         return;
       case false:
         return (
-          <li>
-            <a href="/api/auth/google">Login With Google</a>
-          </li>
+          <div className="signUp">
+            <li>
+              <a href="/api/auth/google">Login With Google</a>
+            </li>
+            <li>
+              <Link to={'/sign-up'}>Sign Up</Link>
+            </li>
+          </div>
         );
       default:
         if (!isMobile) {
@@ -37,7 +42,7 @@ class Header extends Component {
       <nav style={{backgroundColor: '#f9a1bc'}}>
         <div className="nav-wrapper" style={{margin: '0 10px'}}>
           <Link to={this.props.auth ? '/' : '/'} className="left brand-logo">
-          WhatToWatch
+            WhatToWatch
           </Link>
 
           <ul className="right">{this.renderContent()}</ul>
