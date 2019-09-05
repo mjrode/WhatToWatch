@@ -3,42 +3,42 @@ import plexApi from './plexApi';
 import models from '../../db/models';
 import config from '../../../config';
 import MovieDb from 'moviedb-promise';
-import { Op } from 'sequelize';
+import {Op} from 'sequelize';
 const mdb = new MovieDb(config.server.movieApiKey);
 
 const updateOrCreate = async (model, where, newItem, beforeCreate) => {
-  const item = await model.findOne({ where });
+  const item = await model.findOne({where});
   if (!item) {
     const createItem = await model.create(newItem, {
       returning: true,
       plain: true,
       raw: true,
     });
-    return { createItem, created: true };
+    return {createItem, created: true};
   } else {
     const updatedItem = await model.update(
       newItem,
-      { where: where },
-      { returning: true, plain: true, raw: true },
+      {where: where},
+      {returning: true, plain: true, raw: true},
     );
-    return { item, created: false };
+    return {item, created: false};
   }
 };
 
 const importTvPosters = async user => {
   try {
     const mostWatched = await models.PlexLibrary.findAll({
-      where: { UserId: user.id, type: 'show', views: { [Op.gt]: 0 } },
+      where: {UserId: user.id, type: 'show', views: {[Op.gt]: 0}},
     });
 
     const imageUrls = await mostWatched.map(async show => {
-      const res = await mdb.searchTv({ query: show.title });
+      const res = await mdb.searchTv({query: show.title});
       return models.PlexLibrary.update(
         {
           poster_path: res.results[0].poster_path,
         },
         {
-          where: { UserId: user.id, title: show.title },
+          where: {UserId: user.id, title: show.title},
         },
       );
     });
@@ -49,6 +49,7 @@ const importTvPosters = async user => {
 
 const importSections = async user => {
   const sections = await plexApi.getSections(user);
+  console.log('getSections response', sections);
   const dbSections = await createSections(sections, user);
   return dbSections;
 };
@@ -70,7 +71,7 @@ const createSections = async (sections, user) => {
       newSection,
     );
   }).catch(err => {
-    console.log(err);
+    console.log('create section error', err);
   });
   return updatedSections;
 };
@@ -132,7 +133,9 @@ const importMostWatched = async user => {
 };
 
 const importMostWatchedData = async (sectionKey, user) => {
-  const mostWatchedData = await plexApi.getMostWatched({ sectionKey }, user);
+  const mostWatchedData = await plexApi.getMostWatched({sectionKey}, user);
+  console.log('most watched data', mostWatchedData);
+
   const mostWatchedDbData = await updateLibrary(mostWatchedData, user);
   return mostWatchedDbData;
 };
@@ -159,7 +162,7 @@ const updateLibrary = async (libraryData, user) => {
       newData,
     );
   }).catch(err => {
-    console.log(err);
+    console.log('Unable to import most watched', err);
   });
 };
 
