@@ -13,29 +13,34 @@ router.get(
   },
 );
 
-router.post(
-  '/login',
-  function(req, res, next) {
-    console.log('Request params', req.params);
-    console.log('Request body', req.body);
-    console.log('Request query', req.query);
-    next();
-  },
-  passport.authenticate('local', {
-    failureRedirect: '/sign-up',
-    failureFlash: true,
-  }),
-  function(req, res) {
-    console.log('res', res.body);
-    res.redirect('/');
-  },
-);
+router.post('/sign-up', function(req, res, next) {
+  passport.authenticate('local-signup', function(err, user, info) {
+    if (err) {
+      console.log('sign up error', err);
+      return next(err);
+    }
+    if (!user) {
+      console.log('no user returned', info);
+      return res.json({message: info.message});
+    }
+    console.log('user found', user);
+    res.json(user);
+  })(req, res, next);
+});
+
+router.post('/login', passport.authenticate('local-login'), function(req, res) {
+  // If this function gets called, authentication was successful.
+  // `req.user` contains the authenticated user.
+  console.log('User in session', req.user);
+  res.redirect('/');
+});
 
 router.get('/google/callback', passport.authenticate('google'), (req, res) => {
   res.redirect('/plex-pin');
 });
 
 router.get('/current_user', (req, res) => {
+  console.log('current user', req.user);
   res.send(req.user);
 });
 

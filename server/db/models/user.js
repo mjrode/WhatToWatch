@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       sonarrUrl: DataTypes.STRING,
       sonarrApiKey: DataTypes.STRING,
       admin: DataTypes.BOOLEAN,
+      password: DataTypes.STRING,
     },
     {},
   );

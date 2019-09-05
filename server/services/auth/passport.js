@@ -7,62 +7,114 @@ import keys from '../../../config';
 import models from '../../db/models';
 
 passport.serializeUser((user, done) => {
+  console.log('serial', user);
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
+  console.log('deserial', id);
   models.User.findByPk(id).then(user => {
     done(null, user);
   });
 });
 
-// passport.use(
-//   new LocalStrategy(
-//     {usernameField: 'email', passwordField: 'password'},
-//     async (email, password, done) => {
-//       try {
-//         console.log('Made it to passport', email);
-//         const existingUser = await User.findOne({email: email});
-//         if (existingUser) {
-//           done(null, existingUser);
-//         }
-//         if (!user) {
-//           done(null, false, {message: 'Incorrect username.'});
-//         }
-//         if (!user.validPassword(password)) {
-//           done(null, false, {message: 'Incorrect password.'});
-//         }
-//         const hashedPassword = generateHash(password);
-//         const user = await models.User.create({
-//           email: email,
-//           password: hashedPassword,
-//         });
-
-//         done(null, user);
-//       } catch (error) {
-//         console.log('passport error', error);
-//         done(error);
-//       }
-//     },
-//   ),
-// );
+const generateHash = password => {
+  return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+};
 
 passport.use(
+  'local-signup',
   new LocalStrategy(
-    {usernameField: 'email', passwordField: 'password'},
-    function(username, password, done) {
-      User.findOne({email: email}, function(err, user) {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          return done(null, false, {message: 'Incorrect email.'});
-        }
-        if (!user.validPassword(password)) {
-          return done(null, false, {message: 'Incorrect password.'});
-        }
-        return done(null, user);
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+
+    async function(email, password, done) {
+      console.log('passport - signup', email);
+      const exisitingUser = await models.User.findOne({
+        where: {email: email},
+        returning: true,
+        plain: true,
+        raw: true,
       });
+      if (exisitingUser) {
+        return done(null, false, {
+          message: 'That email is already taken',
+        });
+      }
+      const userPassword = generateHash(password);
+
+      const data = {
+        email: email,
+        password: userPassword,
+      };
+
+      console.log('user data before save', data);
+      const newUser = models.User.create(data, {
+        returning: true,
+        plain: true,
+        raw: true,
+      }).then(function(newUser, created) {
+        if (!newUser) {
+          return done(null, false);
+        }
+
+        if (newUser) {
+          console.log('new user created', newUser);
+          return done(null, newUser);
+        }
+      });
+    },
+  ),
+);
+
+//LOCAL SIGNIN
+passport.use(
+  'local-login',
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+
+    function(email, password, done) {
+      var isValidPassword = function(userpass, password) {
+        return bCrypt.compareSync(password, userpass);
+      };
+
+      models.User.findOne({
+        where: {
+          email: email,
+        },
+        returning: true,
+        plain: true,
+        raw: true,
+      })
+        .then(function(user) {
+          if (!user) {
+            return done(null, false, {
+              message: 'Email does not exist',
+            });
+          }
+
+          if (!isValidPassword(user.password, password)) {
+            return done(null, false, {
+              message: 'Incorrect password.',
+            });
+          }
+
+          console.log('user sent to serialize', user.id);
+
+          return done(null, user);
+        })
+        .catch(function(err) {
+          console.log('Error:', err);
+
+          return done(null, false, {
+            message: 'Something went wrong with your Signin',
+          });
+        });
     },
   ),
 );
@@ -96,8 +148,3 @@ passport.use(
     },
   ),
 );
-
-// should export to commonUtils file
-const generateHash = string => {
-  return bCrypt.hashSync(string, bCrypt.genSaltSync(8), null);
-};

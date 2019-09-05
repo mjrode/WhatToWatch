@@ -54,6 +54,14 @@ class Hero extends Component {
         </div>
         <div className="row">
           <Link
+            to="/login"
+            className="waves-effect waves-light btn-large min-button-width"
+          >
+            <i className="material-icons left">show_chart</i>Login
+          </Link>
+        </div>
+        <div className="row">
+          <Link
             to="/sign-up"
             className="waves-effect waves-light btn-large min-button-width"
           >

@@ -85,9 +85,9 @@ export default () => {
     });
   };
 
-  process.on('uncaughtException', error => {
-    console.log('Unhandled Exception due to:', error);
-    process.exit(1);
+  process.on('SIGINT', function() {
+    console.log('SIGINT');
+    process.exit();
   });
 
   process.on('unhandledRejection', (reason, p) => {

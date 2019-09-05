@@ -13,6 +13,7 @@ import PopularList from './PopularList';
 import PlexTokenForm from './plex/PlexTokenForm';
 import TopRatedList from './TopRatedList';
 import SignUp from './auth/SignUp';
+import Login from './auth/Login';
 
 class App extends Component {
   componentDidMount() {
@@ -29,6 +30,7 @@ class App extends Component {
               <Route exact path="/" component={Hero} />
               <Route exact path="/sonarr" component={PlexTokenForm} />
               <Route exact path="/sign-up" component={SignUp} />
+              <Route exact path="/login" component={Login} />
               <Route exact path="/plex-pin" component={PlexPin} />
               <Route path="/admin" component={Admin} />
               <Route path="/most-watched" component={Plex} />

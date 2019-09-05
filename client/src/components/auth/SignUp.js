@@ -13,8 +13,6 @@ class SignUp extends React.Component {
   state = {
     email: '',
     password: '',
-    errorMessage: '',
-    redirect: false,
   };
 
   onFormSubmit = event => {
@@ -25,14 +23,13 @@ class SignUp extends React.Component {
 
   signUpUser = async params => {
     console.log('params', params);
-    const res = await axios.post('/api/auth/login', {params});
-    if (res.data.includes('Invalid')) {
-      console.log('signup response', res);
-      this.setState({errorMessage: res.data});
-    } else {
-      console.log('signup response', res);
-      window.location.reload();
-    }
+    const res = await axios({
+      method: 'post',
+      url: '/api/auth/sign-up',
+      data: params,
+    });
+    console.log('signup response', res);
+    window.location.reload();
   };
 
   render() {
