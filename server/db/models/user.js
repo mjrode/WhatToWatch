@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       plexToken: DataTypes.STRING,
       sonarrUrl: DataTypes.STRING,
       sonarrApiKey: DataTypes.STRING,
+      admin: DataTypes.BOOLEAN,
     },
     {},
   );

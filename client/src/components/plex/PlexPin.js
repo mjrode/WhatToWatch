@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import HeroSimple from '../HeroSimple';
 import * as actions from '../../actions';
 import Typography from '@material-ui/core/Typography';
@@ -18,7 +18,7 @@ class PlexPin extends Component {
       return <Redirect to="/most-watched" />;
     }
     if (!this.props.auth.plexToken) {
-      console.log(this.props.auth);
+      console.log('mike--', this.props.auth);
       return (
         <div>
           <HeroSimple />
@@ -65,9 +65,9 @@ class PlexPin extends Component {
   }
 }
 
-function mapStateToProps({auth}) {
+function mapStateToProps({ auth }) {
   console.log('auth state to prop', auth);
-  return {auth};
+  return { auth };
 }
 
 export default connect(

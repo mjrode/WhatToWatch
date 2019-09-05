@@ -3,6 +3,7 @@ import axios from 'axios';
 export const types = {
   SET_LOADING: 'set_loading',
   FETCH_USER: 'fetch_user',
+  FETCH_USERS: 'fetch_users',
   FETCH_MEDIA_RESPONSE: 'fetch_media_response',
   GET_MOST_WATCHED: 'get_most_watched',
   ADD_SERIES: 'add_series',
@@ -18,6 +19,11 @@ export const setLoading = loading => dispatch => {
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/auth/current_user');
   dispatch({type: types.FETCH_USER, payload: res.data});
+};
+
+export const fetchUsers = () => async dispatch => {
+  const res = await axios.get('/api/admin/users');
+  dispatch({ type: types.FETCH_USERS, payload: res.data });
 };
 
 export const fetchPin = () => async dispatch => {

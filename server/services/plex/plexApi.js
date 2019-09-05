@@ -1,7 +1,7 @@
 import config from '../../../config';
 import helpers from '../helpers';
 
-const getUsersUrlParams = function(user) {
+const getUsersUrlParams = function (user) {
   return {
     host: user.plexUrl,
     path: '/users',
@@ -11,7 +11,7 @@ const getUsersUrlParams = function(user) {
   };
 };
 
-const getSectionsUrlParams = function(user) {
+const getSectionsUrlParams = function (user) {
   return {
     host: user.plexUrl,
     path: '/library/sections',
@@ -21,20 +21,20 @@ const getSectionsUrlParams = function(user) {
   };
 };
 
-const mostWatchedUrlParams = function(accountId, sectionKey, limit = 10, user) {
+const mostWatchedUrlParams = function (accountId, sectionKey, limit = 10, user) {
   return {
     host: user.plexUrl,
     path: '/library/all/top',
     queryParams: {
-      ...(accountId && {accountId}),
-      ...(sectionKey && {type: sectionKey}),
-      ...(limit && {limit}),
+      ...(accountId && { accountId }),
+      ...(sectionKey && { type: sectionKey }),
+      ...(limit && { limit }),
       'X-Plex-Token': user.plexToken,
     },
   };
 };
 
-const getLibraryDataBySectionUrlParams = function(sectionId, user) {
+const getLibraryDataBySectionUrlParams = function (sectionId, user) {
   return {
     host: user.plexUrl,
     path: `/library/sections/${sectionId}/all`,
@@ -44,7 +44,7 @@ const getLibraryDataBySectionUrlParams = function(sectionId, user) {
   };
 };
 
-const getUsers = async function(user) {
+const getUsers = async function (user) {
   try {
     const urlParams = getUsersUrlParams(user);
     const getUsersUrl = helpers.buildUrl(urlParams);
@@ -55,14 +55,15 @@ const getUsers = async function(user) {
   }
 };
 
-const getMostWatched = async function(
-  {accountId, sectionKey, limit = 10},
+const getMostWatched = async function (
+  { accountId, sectionKey, limit = 10 },
   user,
 ) {
   try {
     const urlParams = mostWatchedUrlParams(accountId, sectionKey, limit, user);
     const mostWatchedUrl = helpers.buildUrl(urlParams);
     const response = await helpers.request(mostWatchedUrl);
+    console.log('most-watched-raw-response---', response)
     return response.MediaContainer.Metadata;
   } catch (error) {
     console.log(error);
@@ -74,7 +75,7 @@ const getMostWatched = async function(
   }
 };
 
-const getSections = async function(user) {
+const getSections = async function (user) {
   try {
     const urlParams = getSectionsUrlParams(user);
     const getSectionsUrl = helpers.buildUrl(urlParams);
@@ -88,7 +89,7 @@ const getSections = async function(user) {
   }
 };
 
-const getLibraryDataBySection = async function({sectionKey}, user) {
+const getLibraryDataBySection = async function ({ sectionKey }, user) {
   try {
     console.log('sectionId--', sectionKey);
     const urlParams = getLibraryDataBySectionUrlParams(sectionKey, user);
