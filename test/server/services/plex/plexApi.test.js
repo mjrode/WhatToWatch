@@ -18,7 +18,9 @@ describe('plexApi', () => {
   it('returns url', () => {
     const urlParams = plexApi.getUsersUrlParams();
     const url = helpers.buildUrl(urlParams);
-    url.should.equal('https://plex.tv/api/users?X-Plex-Token=testPlexApiToken');
+    url.should.equal(
+      'https://plex.tv/api/users?X-Plex-Token=testPlexApiToken',
+    );
   });
 
   it('handles error when building url', () => {
@@ -45,13 +47,16 @@ describe('plexApi', () => {
 
   it('returns library data by sectionId', async () => {
     nocks.plexLibrary();
-    const result = await plexApi.getLibraryDataBySection({ sectionId: 2 });
+    const result = await plexApi.getLibraryDataBySection({
+      sectionId: 2,
+    });
     result.should.deep.equal(
-      plexResponses.getLibraryDataBySectionRaw.MediaContainer.Metadata,
+      plexResponses.getLibraryDataBySectionRaw.MediaContainer
+        .Metadata,
     );
   });
 
-  // it.only('handles error if passed incorrect parameters', async (done) => {
+  // it('handles error if passed incorrect parameters', async (done) => {
   //   try {
   //     await plexApi.getLibraryDataBySection('incorrect param');
   //   } catch (error) {

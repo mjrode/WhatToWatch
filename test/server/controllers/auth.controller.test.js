@@ -39,7 +39,7 @@ describe('auth.controller', () => {
   });
 
   describe('GET /api/auth/google', async () => {
-    it.only('should not find the current user in the database before auth', done => {
+    it('should not find the current user in the database before auth', done => {
       const userLookup = models.User.findOne({
         where: { email: 'michaelrode44@gmail.com' },
       });
@@ -50,7 +50,7 @@ describe('auth.controller', () => {
 
     describe('When a user successfully auths with google', () => {
       describe('The user has not previously registered', () => {
-        it.only('should create a new user record in the datbase and return the user record', done => {
+        it('should create a new user record in the datbase and return the user record', done => {
           let strategy = passport._strategies['google'];
 
           strategy._token_response = {
