@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import passport from 'passport';
 
 const router = Router();
@@ -9,7 +9,7 @@ router.get(
     scope: ['profile', 'email'],
   }),
   (req, res) => {
-    res.redirect('/');
+    res.send(req.user);
   },
 );
 
@@ -21,23 +21,30 @@ router.post('/sign-up', function(req, res, next) {
     }
     if (!user) {
       console.log('no user returned', info);
-      return res.json({message: info.message});
+      return res.json({ message: info.message });
     }
     console.log('user found', user);
     res.json(user);
   })(req, res, next);
 });
 
-router.post('/login', passport.authenticate('local-login'), function(req, res) {
+router.post('/login', passport.authenticate('local-login'), function(
+  req,
+  res,
+) {
   // If this function gets called, authentication was successful.
   // `req.user` contains the authenticated user.
   console.log('User in session', req.user);
   res.redirect('/');
 });
 
-router.get('/google/callback', passport.authenticate('google'), (req, res) => {
-  res.redirect('/plex-pin');
-});
+router.get(
+  '/google/callback',
+  passport.authenticate('google'),
+  (req, res) => {
+    res.send(req.user);
+  },
+);
 
 router.get('/current_user', (req, res) => {
   console.log('current user', req.user);

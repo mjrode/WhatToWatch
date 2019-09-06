@@ -98,6 +98,7 @@
     "nyc": "^14.1.1",
     "prettier": "1.18.2",
     "sequelize-test-helpers": "^1.1.2",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "timekeeper": "^2.2.0"
   }
 }

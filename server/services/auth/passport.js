@@ -1,18 +1,21 @@
 const bCrypt = require('bcrypt-nodejs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+const GoogleStrategy =
+  process.env.NODE_ENV == 'test'
+    ? require('passport-mocked').Strategy
+    : require('passport-google-oauth20').Strategy;
+
 import keys from '../../../config';
 
 import models from '../../db/models';
 
 passport.serializeUser((user, done) => {
-  console.log('serial', user);
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  console.log('deserial', id);
   models.User.findByPk(id).then(user => {
     done(null, user);
   });
@@ -33,7 +36,7 @@ passport.use(
     async function(email, password, done) {
       console.log('passport - signup', email);
       const exisitingUser = await models.User.findOne({
-        where: {email: email},
+        where: { email: email },
         returning: true,
         plain: true,
         raw: true,
@@ -120,6 +123,7 @@ passport.use(
 );
 
 passport.use(
+  'google',
   new GoogleStrategy(
     {
       clientID: keys.server.googleClientID,
@@ -128,9 +132,8 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       const existingUser = await models.User.findOne({
-        where: {googleId: profile.id},
+        where: { googleId: profile.id },
       });
 
       if (existingUser) {
@@ -143,7 +146,6 @@ passport.use(
         email: profile.emails[0].value,
         googleId: profile.id,
       });
-      console.log('mikes user', user);
       done(null, user);
     },
   ),

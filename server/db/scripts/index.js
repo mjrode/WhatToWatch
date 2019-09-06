@@ -1,11 +1,11 @@
 // @ts-nocheck
 /* istanbul ignore file */
-import {exec} from 'child_process';
+import { exec } from 'child_process';
 import models from '../models';
 import seeds from '../seeders';
-import {test as config} from '../config/config';
+import { test as config } from '../config/config';
 
-const {username, host, database} = config;
+const { username, host, database } = config;
 
 const EXIT_CODE = 168;
 
@@ -88,7 +88,7 @@ const init = () =>
 const truncate = model =>
   models[model]
     .destroy({
-      truncate: {cascade: true},
+      truncate: { restartIdentity: true, cascade: true },
     })
     .catch(e => {
       console.log('Error truncating', model);
@@ -105,4 +105,4 @@ const seed = (model, collection = model) => {
   });
 };
 
-export {init, truncate, seed, cleanUp};
+export { init, truncate, seed, cleanUp };

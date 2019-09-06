@@ -122,9 +122,13 @@ const createLibrary = async (libraryData, user) => {
 };
 
 const importMostWatched = async user => {
-  const sectionKeys = await models.PlexSection.findAll().then(sections => {
+  console.log('here4444');
+  const sectionKeys = await models.PlexSection.findAll({
+    where: {userId: user.id},
+  }).then(sections => {
     return sections.map(section => section.key.toString());
   });
+  console.log('importMostWatched section keys----', sectionKeys);
   return Promise.map(sectionKeys, sectionKey => {
     return importMostWatchedData(sectionKey, user);
   }).catch(err => {

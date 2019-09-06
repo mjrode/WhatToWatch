@@ -60,6 +60,7 @@ const getMostWatched = async function(
   user,
 ) {
   try {
+    console.log('section key mike --', sectionKey);
     const urlParams = mostWatchedUrlParams(accountId, sectionKey, limit, user);
     const mostWatchedUrl = helpers.buildUrl(urlParams);
     const response = await helpers.request(mostWatchedUrl);
