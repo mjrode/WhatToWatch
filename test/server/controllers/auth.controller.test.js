@@ -4,6 +4,7 @@ import app from '../../../index';
 import passport from 'passport';
 import tk from 'timekeeper';
 import { seed, truncate } from '../../../server/db/scripts';
+import models from './../../../server/db/models';
 
 describe('auth.controller', () => {
   before(async () => {
@@ -38,49 +39,59 @@ describe('auth.controller', () => {
   });
 
   describe('GET /api/auth/google', async () => {
+    it.only('should not find the current user in the database before auth', done => {
+      const userLookup = models.User.findOne({
+        where: { email: 'michaelrode44@gmail.com' },
+      });
+      done();
+
+      userLookup.should.be.empty;
+    });
+
     describe('When a user successfully auths with google', () => {
-      it.only('should create and return a user', done => {
-        let strategy = passport._strategies['google'];
-        console.log('strats--', passport._strategies);
+      describe('The user has not previously registered', () => {
+        it.only('should create a new user record in the datbase and return the user record', done => {
+          let strategy = passport._strategies['google'];
 
-        strategy._token_response = {
-          access_token: 'at-1234',
-          expires_in: 3600,
-        };
+          strategy._token_response = {
+            access_token: 'at-1234',
+            expires_in: 3600,
+          };
 
-        strategy._profile = {
-          id: '103913097386807680151',
-          displayName: 'Michael Rode',
-          name: { familyName: 'Rode', givenName: 'Michael' },
-          emails: [
-            { value: 'michaelrode44@gmail.com', verified: true },
-          ],
-          provider: 'google',
-        };
+          strategy._profile = {
+            id: '103913097386807680151',
+            displayName: 'Michael Rode',
+            name: { familyName: 'Rode', givenName: 'Michael' },
+            emails: [
+              { value: 'michaelrode44@gmail.com', verified: true },
+            ],
+            provider: 'google',
+          };
 
-        chai
-          .request(app)
-          .get('/api/auth/google')
-          .end((err, res) => {
-            res.should.have.status(200);
-            delete res.body.id;
-            res.body.should.deep.equal({
-              firstName: 'Michael',
-              lastName: 'Rode',
-              email: 'michaelrode44@gmail.com',
-              googleId: '103913097386807680151',
-              updatedAt: '2012-03-02T11:38:49.321Z',
-              createdAt: '2012-03-02T11:38:49.321Z',
-              plexUrl: null,
-              plexToken: null,
-              plexPinId: null,
-              sonarrUrl: null,
-              sonarrApiKey: null,
-              admin: null,
-              password: null,
+          chai
+            .request(app)
+            .get('/api/auth/google')
+            .end((err, res) => {
+              res.should.have.status(200);
+              delete res.body.id;
+              res.body.should.deep.equal({
+                firstName: 'Michael',
+                lastName: 'Rode',
+                email: 'michaelrode44@gmail.com',
+                googleId: '103913097386807680151',
+                updatedAt: '2012-03-02T11:38:49.321Z',
+                createdAt: '2012-03-02T11:38:49.321Z',
+                plexUrl: null,
+                plexToken: null,
+                plexPinId: null,
+                sonarrUrl: null,
+                sonarrApiKey: null,
+                admin: null,
+                password: null,
+              });
+              done();
             });
-            done();
-          });
+        });
       });
     });
   });
