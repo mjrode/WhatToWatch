@@ -9,6 +9,8 @@ router.get(
     scope: ['profile', 'email'],
   }),
   (req, res) => {
+    console.log('mike--', req.text);
+    console.log('mike--', req.status);
     res.send(req.user);
   },
 );

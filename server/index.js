@@ -1,5 +1,5 @@
 import express from 'express';
-import {json, urlencoded} from 'body-parser';
+import { json, urlencoded } from 'body-parser';
 // eslint-disable-next-line import/named
 import passport from 'passport';
 import cookieSession from 'cookie-session';
@@ -26,7 +26,7 @@ export default () => {
 
     // Returns middleware that parses json
     server.use(json());
-    server.use(urlencoded({extended: true}));
+    server.use(urlencoded({ extended: true }));
 
     server.use(
       cookieSession({
@@ -54,7 +54,13 @@ export default () => {
       const path = require('path');
       server.get('*', (req, res) => {
         res.sendFile(
-          path.resolve(__dirname, '..', 'client', 'build', 'index.html'),
+          path.resolve(
+            __dirname,
+            '..',
+            'client',
+            'build',
+            'index.html',
+          ),
         );
       });
     }
@@ -81,7 +87,9 @@ export default () => {
 
     models.Sequelize.Op;
     server.listen(port, () => {
-      console.log(`Express server listening on - http://${hostname}:${port}`);
+      console.log(
+        `Express server listening on - http://${hostname}:${port}`,
+      );
     });
   };
 
@@ -91,8 +99,13 @@ export default () => {
   });
 
   process.on('unhandledRejection', (reason, p) => {
-    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    console.log(
+      'Unhandled Rejection at: Promise',
+      p,
+      'reason:',
+      reason,
+    );
   });
 
-  return {create, start};
+  return { create, start };
 };

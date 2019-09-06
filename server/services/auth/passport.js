@@ -127,14 +127,17 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      const existingUser = await models.User.findOne({
-        where: { googleId: profile.id },
-      });
+      try {
+        const existingUser = await models.User.findOne({
+          where: { googleId: profile.id },
+        });
 
-      if (existingUser) {
-        return done(null, existingUser);
+        if (existingUser) {
+          return done(null, existingUser);
+        }
+      } catch (e) {
+        done(e);
       }
-
       const user = await models.User.create({
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,

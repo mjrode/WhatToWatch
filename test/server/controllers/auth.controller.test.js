@@ -72,7 +72,7 @@ describe.only('auth.controller', () => {
       });
 
       describe('When a user successfully auths with google', () => {
-        it('should create a new user record in the datbase and return the user record', done => {
+        it('should create a new user record in the database and return the user record', done => {
           let strategy = passport._strategies['google'];
 
           strategy._token_response = {
@@ -97,6 +97,34 @@ describe.only('auth.controller', () => {
               res.should.have.status(200);
               delete res.body.id;
               res.body.should.deep.equal(userProfile());
+              done();
+            });
+        });
+        it.only('should fail to create a new user record in the datbase if passed invalid information', done => {
+          let strategy = passport._strategies['google'];
+
+          strategy._token_response = {
+            access_token: 'at-1234',
+            expires_in: 3600,
+          };
+
+          strategy._profile = {
+            displayName: 'Michael Rode',
+            name: { familyName: 'Rode', givenName: 'Michael' },
+            emails: [
+              { value: 'michaelrode44@gmail.com', verified: true },
+            ],
+            provider: 'google',
+          };
+
+          chai
+            .request(app)
+            .get('/api/auth/google')
+            .then(res => {
+              res.statusCode.should.equal(500);
+              res.text.should.equal(
+                "Cannot read property 'id' of undefined",
+              );
               done();
             });
         });
