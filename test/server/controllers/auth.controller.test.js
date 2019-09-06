@@ -6,7 +6,9 @@ import tk from 'timekeeper';
 import { seed, truncate } from '../../../server/db/scripts';
 import models from './../../../server/db/models';
 
-describe('auth.controller', () => {
+var expect = require('chai').expect;
+
+describe.only('auth.controller', () => {
   before(async () => {
     tk.freeze(new Date(1330688329321));
     await truncate('User');
@@ -38,18 +40,38 @@ describe('auth.controller', () => {
     });
   });
 
-  describe('GET /api/auth/google', async () => {
-    it('should not find the current user in the database before auth', done => {
-      const userLookup = models.User.findOne({
-        where: { email: 'michaelrode44@gmail.com' },
+  const userProfile = () => {
+    return {
+      firstName: 'Michael',
+      lastName: 'Rode',
+      email: 'michaelrode44@gmail.com',
+      googleId: '103913097386807680151',
+      updatedAt: '2012-03-02T11:38:49.321Z',
+      createdAt: '2012-03-02T11:38:49.321Z',
+      plexUrl: null,
+      plexToken: null,
+      plexPinId: null,
+      sonarrUrl: null,
+      sonarrApiKey: null,
+      admin: null,
+      password: null,
+    };
+  };
+
+  const formatDbResponse = record => {
+    return JSON.parse(JSON.stringify(record.get({ plain: true })));
+  };
+
+  describe('a request is made to GET /api/auth/google', () => {
+    describe('and the user has not previously registered', () => {
+      it('should not find the current user in the database before auth', async () => {
+        const dbUser = await models.User.findOne({
+          where: { email: 'michaelrode44@gmail.com' },
+        });
+        expect(dbUser).to.be.null;
       });
-      done();
 
-      userLookup.should.be.empty;
-    });
-
-    describe('When a user successfully auths with google', () => {
-      describe('The user has not previously registered', () => {
+      describe('When a user successfully auths with google', () => {
         it('should create a new user record in the datbase and return the user record', done => {
           let strategy = passport._strategies['google'];
 
@@ -74,21 +96,62 @@ describe('auth.controller', () => {
             .end((err, res) => {
               res.should.have.status(200);
               delete res.body.id;
-              res.body.should.deep.equal({
-                firstName: 'Michael',
-                lastName: 'Rode',
-                email: 'michaelrode44@gmail.com',
-                googleId: '103913097386807680151',
-                updatedAt: '2012-03-02T11:38:49.321Z',
-                createdAt: '2012-03-02T11:38:49.321Z',
-                plexUrl: null,
-                plexToken: null,
-                plexPinId: null,
-                sonarrUrl: null,
-                sonarrApiKey: null,
-                admin: null,
-                password: null,
-              });
+              res.body.should.deep.equal(userProfile());
+              done();
+            });
+        });
+
+        it('should find the current user in the database after auth', async () => {
+          const dbUser = await models.User.findOne({
+            where: { email: 'michaelrode44@gmail.com' },
+          });
+          const jsonUser = formatDbResponse(dbUser);
+          delete jsonUser.id;
+          jsonUser.should.deep.equal(userProfile());
+        });
+      });
+    });
+  });
+
+  describe('GET /api/auth/sign-up', async () => {
+    it('should not find the current user in the database before auth', async () => {
+      const dbUser = await models.User.findOne({
+        where: { email: 'michaelrode@gmail.com' },
+      });
+      expect(dbUser).to.be.null;
+    });
+
+    describe('When a user successfully auths with google', () => {
+      describe('and the user has not previously registered', () => {
+        it('should create a new user record in the datbase and return the user record', done => {
+          const localUserProfile = () => {
+            return {
+              firstName: null,
+              lastName: null,
+              email: 'mike.rodde@gmail.com',
+              googleId: null,
+              updatedAt: '2012-03-02T11:38:49.321Z',
+              createdAt: '2012-03-02T11:38:49.321Z',
+              plexUrl: null,
+              plexToken: null,
+              plexPinId: null,
+              sonarrUrl: null,
+              sonarrApiKey: null,
+              admin: null,
+            };
+          };
+          chai
+            .request(app)
+            .post('/api/auth/sign-up')
+            .send({
+              email: 'mike.rodde@gmail.com',
+              password: 'password',
+            })
+            .end((err, res) => {
+              res.should.have.status(200);
+              delete res.body.id;
+              delete res.body.password;
+              res.body.should.deep.equal(localUserProfile());
               done();
             });
         });

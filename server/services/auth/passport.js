@@ -34,7 +34,6 @@ passport.use(
     },
 
     async function(email, password, done) {
-      console.log('passport - signup', email);
       const exisitingUser = await models.User.findOne({
         where: { email: email },
         returning: true,
@@ -53,7 +52,6 @@ passport.use(
         password: userPassword,
       };
 
-      console.log('user data before save', data);
       const newUser = models.User.create(data, {
         returning: true,
         plain: true,
@@ -64,7 +62,6 @@ passport.use(
         }
 
         if (newUser) {
-          console.log('new user created', newUser);
           return done(null, newUser);
         }
       });
@@ -106,8 +103,6 @@ passport.use(
               message: 'Incorrect password.',
             });
           }
-
-          console.log('user sent to serialize', user.id);
 
           return done(null, user);
         })
