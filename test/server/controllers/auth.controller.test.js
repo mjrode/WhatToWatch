@@ -8,7 +8,7 @@ import models from './../../../server/db/models';
 
 var expect = require('chai').expect;
 
-describe.only('auth.controller', () => {
+describe('auth.controller', () => {
   before(async () => {
     tk.freeze(new Date(1330688329321));
     await truncate('User');
@@ -100,7 +100,7 @@ describe.only('auth.controller', () => {
               done();
             });
         });
-        it.only('should fail to create a new user record in the datbase if passed invalid information', done => {
+        it('should fail to create a new user record in the database if passed invalid information', done => {
           let strategy = passport._strategies['google'];
 
           strategy._token_response = {
@@ -112,7 +112,7 @@ describe.only('auth.controller', () => {
             displayName: 'Michael Rode',
             name: { familyName: 'Rode', givenName: 'Michael' },
             emails: [
-              { value: 'michaelrode44@gmail.com', verified: true },
+              { value: 'michaelrod@gmail.com', verified: true },
             ],
             provider: 'google',
           };
@@ -151,7 +151,7 @@ describe.only('auth.controller', () => {
 
     describe('When a user successfully auths with google', () => {
       describe('and the user has not previously registered', () => {
-        it('should create a new user record in the datbase and return the user record', done => {
+        it('should create a new user record in the database and return the user record', done => {
           const localUserProfile = () => {
             return {
               firstName: null,
@@ -180,6 +180,33 @@ describe.only('auth.controller', () => {
               delete res.body.id;
               delete res.body.password;
               res.body.should.deep.equal(localUserProfile());
+              done();
+            });
+        });
+
+        it('should fail to create a new user record in the database when missing required params', done => {
+          chai
+            .request(app)
+            .post('/api/auth/sign-up')
+            .send({
+              email: 'mike.rodde@gmail.com',
+            })
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.message.should.equal('Missing credentials');
+              done();
+            });
+        });
+        it('should handle and error returned from the server', done => {
+          chai
+            .request(app)
+            .post('/api/auth/sign-up')
+            .send({
+              email: 'mike.rodde@gmail.com',
+            })
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.message.should.equal('Missing credentials');
               done();
             });
         });

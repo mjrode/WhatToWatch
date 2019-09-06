@@ -136,7 +136,7 @@ passport.use(
           return done(null, existingUser);
         }
       } catch (e) {
-        done(e);
+        return done(e);
       }
       const user = await models.User.create({
         firstName: profile.name.givenName,
