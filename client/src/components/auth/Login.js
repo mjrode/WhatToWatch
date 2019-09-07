@@ -29,7 +29,6 @@ class Login extends React.Component {
       data: params,
     });
     console.log('login response', res.data);
-    window.location.reload();
   };
 
   render() {

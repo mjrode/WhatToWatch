@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {connect} from 'react-redux';
-import {withStyles} from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
 import '../../css/materialize.css';
 import TextHeader from '../helpers/Header';
 import styles from '../../css/materialize.css';
@@ -29,11 +29,10 @@ class SignUp extends React.Component {
       data: params,
     });
     console.log('signup response', res);
-    window.location.reload();
   };
 
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
     if (this.props.auth) {
       return <Redirect to="/" />;
     } else if (!this.props.auth) {
@@ -48,12 +47,17 @@ class SignUp extends React.Component {
                 </div>
                 <hr />
                 <div className="flex-center">
-                  <h5 className="robots center ">{this.state.errorMessage}</h5>
+                  <h5 className="robots center ">
+                    {this.state.errorMessage}
+                  </h5>
                 </div>
               </div>
               <div className="section center-align">
                 <div className="row">
-                  <form onSubmit={this.onFormSubmit} className="col s12">
+                  <form
+                    onSubmit={this.onFormSubmit}
+                    className="col s12"
+                  >
                     <div className="row no-bottom-margin">
                       <div className="input-field col m8 offset-m2 s12">
                         <p>Email</p>
@@ -62,7 +66,9 @@ class SignUp extends React.Component {
                           type="text"
                           className="validate center-align"
                           value={this.state.email}
-                          onChange={e => this.setState({email: e.target.value})}
+                          onChange={e =>
+                            this.setState({ email: e.target.value })
+                          }
                         />
                       </div>
                     </div>
@@ -76,7 +82,9 @@ class SignUp extends React.Component {
                           className="validate center-align"
                           value={this.state.password}
                           onChange={e =>
-                            this.setState({password: e.target.value})
+                            this.setState({
+                              password: e.target.value,
+                            })
                           }
                         />
                       </div>
@@ -91,7 +99,9 @@ class SignUp extends React.Component {
                             name="action"
                           >
                             Register
-                            <i className="material-icons right">send</i>
+                            <i className="material-icons right">
+                              send
+                            </i>
                           </button>
                         </div>
                       </div>
@@ -111,8 +121,8 @@ SignUp.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({auth}) {
-  return {auth};
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(SignUp));

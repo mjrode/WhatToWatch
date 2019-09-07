@@ -1,79 +1,24 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core/styles';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import styles from '../css/materialize.css';
+import TvListButtons from './buttons/TvList';
+import AuthButtons from './buttons/Auth';
 import '../css/materialize.css';
 
 class Hero extends Component {
   callToAction = () => {
     if (this.props.auth.email) {
-      return (
-        <div>
-          <div className="row">
-            <Link
-              to="/most-watched"
-              className="waves-effect waves-light btn-large min-button-width"
-            >
-              <i className="material-icons left ">live_tv</i>
-              Most Watched
-            </Link>
-            <br />
-          </div>
-          <div className="row">
-            <Link
-              to="/popular"
-              className="waves-effect waves-light btn-large min-button-width"
-            >
-              <i className="material-icons left">show_chart</i>Popular TV
-            </Link>
-          </div>
-          <div className="row">
-            <Link
-              to="/top-rated"
-              className="waves-effect waves-light btn-large min-button-width"
-            >
-              <i className="material-icons left">star_border</i>Top Rated TV
-            </Link>
-          </div>
-        </div>
-      );
+      return <TvListButtons />;
     }
-    return (
-      <div>
-        <div className="row">
-          <a
-            href="/api/auth/google"
-            className="waves-effect waves-light btn-large min-button-width"
-          >
-            <i className="material-icons left">group</i> Login with Google
-          </a>
-        </div>
-        <div className="row">
-          <Link
-            to="/login"
-            className="waves-effect waves-light btn-large min-button-width"
-          >
-            <i className="material-icons left">show_chart</i>Login
-          </Link>
-        </div>
-        <div className="row">
-          <Link
-            to="/sign-up"
-            className="waves-effect waves-light btn-large min-button-width"
-          >
-            <i className="material-icons left">show_chart</i>SignUp
-          </Link>
-        </div>
-      </div>
-    );
+    return <AuthButtons />;
   };
 
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -91,7 +36,8 @@ class Hero extends Component {
                 <img
                   className="responsive-img"
                   src={
-                    process.env.PUBLIC_URL + '/icons/facebook_cover_photo_2.png'
+                    process.env.PUBLIC_URL +
+                    '/icons/facebook_cover_photo_2.png'
                   }
                   alt="logo"
                 />
@@ -102,9 +48,12 @@ class Hero extends Component {
                 color="textSecondary"
                 paragraph
               >
-                Media recommendations based on your most watched Plex TV.
+                Media recommendations based on your most watched Plex
+                TV.
               </Typography>
-              <div className="center-align">{this.callToAction()}</div>
+              <div className="center-align">
+                {this.callToAction()}
+              </div>
             </div>
           </div>
         </main>
@@ -117,8 +66,8 @@ Hero.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({auth}) {
-  return {auth};
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(Hero));

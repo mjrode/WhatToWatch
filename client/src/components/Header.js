@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../css/materialize.css';
 class Header extends Component {
   renderContent() {
@@ -12,10 +12,7 @@ class Header extends Component {
         return (
           <div className="signUp">
             <li>
-              <a href="/api/auth/google">Login With Google</a>
-            </li>
-            <li>
-              <Link to={'/sign-up'}>Sign Up</Link>
+              <Link to={'/'}>Login / Register</Link>
             </li>
           </div>
         );
@@ -23,13 +20,13 @@ class Header extends Component {
         if (!isMobile) {
           return (
             <div className="hide-mobile">
-              <li key="1" style={{margin: '0 10px'}}>
+              <li key="1" style={{ margin: '0 10px' }}>
                 <Link to={'/most-watched'}>Most Watched</Link>
               </li>
-              <li key="2" style={{margin: '0 10px'}}>
+              <li key="2" style={{ margin: '0 10px' }}>
                 <Link to={'/popular'}>Popular</Link>
               </li>
-              <li key="3" style={{margin: '0 10px'}}>
+              <li key="3" style={{ margin: '0 10px' }}>
                 <a href="/api/auth/logout">Logout</a>
               </li>
             </div>
@@ -39,9 +36,12 @@ class Header extends Component {
   }
   render() {
     return (
-      <nav style={{backgroundColor: '#f9a1bc'}}>
-        <div className="nav-wrapper" style={{margin: '0 10px'}}>
-          <Link to={this.props.auth ? '/' : '/'} className="left brand-logo">
+      <nav style={{ backgroundColor: '#f9a1bc' }}>
+        <div className="nav-wrapper" style={{ margin: '0 10px' }}>
+          <Link
+            to={this.props.auth ? '/' : '/'}
+            className="left brand-logo"
+          >
             WhatToWatch
           </Link>
 
@@ -52,8 +52,8 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps({auth}) {
-  return {auth};
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(mapStateToProps)(Header);
