@@ -71,6 +71,57 @@ passport.use(
 
 //LOCAL SIGNIN
 passport.use(
+  'fake-session',
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+
+    function(email, admin, done) {
+      var isValidPassword = function(email, admin) {
+        return admin === true;
+      };
+
+      console.log('email');
+      models.User.findOne({
+        where: {
+          email: email,
+        },
+        returning: true,
+        plain: true,
+        raw: true,
+      })
+        .then(function(user) {
+          if (!user) {
+            return done(null, false, {
+              message: 'Email does not exist',
+            });
+          }
+          console.log('email and admin', email, admin);
+
+          if (!isValidPassword(email, admin)) {
+            return done(null, false, {
+              message: 'Incorrect password.',
+            });
+          }
+
+          console.log('login user email', user.email);
+          return done(null, user);
+        })
+        .catch(function(err) {
+          console.log('Error:', err);
+
+          return done(null, false, {
+            message: 'Something went wrong with your Signin',
+          });
+        });
+    },
+  ),
+);
+
+//LOCAL SIGNIN
+passport.use(
   'local-login',
   new LocalStrategy(
     {

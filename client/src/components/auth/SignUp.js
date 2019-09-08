@@ -26,6 +26,7 @@ class SignUp extends React.Component {
     console.log('signUpUserState', this.state);
     const res = await this.props.signUpUser(this.state);
     console.log('res', this.props.auth);
+    console.log('res', this.props.auth);
   };
 
   render() {

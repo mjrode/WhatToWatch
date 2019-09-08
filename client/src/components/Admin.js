@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import HeroSimple from './HeroSimple';
 import * as actions from './../actions';
@@ -7,13 +8,26 @@ import Typography from '@material-ui/core/Typography';
 
 class Admin extends Component {
   async componentDidMount() {
+    await this.props.fetchUser();
     await this.props.fetchUsers();
-    console.log('mike--', this.props.auth)
+    console.log('users--', this.props.auth.users);
+    console.log('user--', this.props.auth.user);
   }
 
-  loginAsUser = user => {
-    console.log('I was clicked and got a user', user)
-  }
+  loginAsUser = async userForSignIn => {
+    console.log('I was clicked and got a user', userForSignIn);
+
+    console.log('params', userForSignIn);
+    const res = await axios({
+      method: 'post',
+      url: '/api/auth/fake-session',
+      data: {
+        email: userForSignIn.email,
+        password: this.props.auth.admin,
+      },
+    });
+    console.log('login response', res.data);
+  };
 
   renderUsers() {
     if (this.props.auth.users) {
@@ -33,11 +47,10 @@ class Admin extends Component {
             >
               {user.email}
             </button>
-
           </Typography>
-        )
-      })
-      return <div>{usersList}</div>
+        );
+      });
+      return <div>{usersList}</div>;
     }
   }
   render() {
@@ -45,30 +58,31 @@ class Admin extends Component {
       return;
     }
 
-    if (!this.props.auth.user || !this.props.auth.user.admin) {
-      console.log('where are my props', this.props.auth)
-      return <div><p>Checking for admin rights..</p></div>
+    if (!this.props.auth.admin) {
+      console.log('checking for admin rights', this.props.auth);
+      return (
+        <div>
+          <p>Checking for admin rights..</p>
+        </div>
+      );
     }
     console.log(this.props.auth);
     return (
       <div>
         <HeroSimple />
 
-        <div className="row flex-center">
-          {this.renderUsers()}
-        </div>
-
+        <div className="row flex-center">{this.renderUsers()}</div>
       </div>
     );
   }
 }
 
 function mapStateToProps({ auth }) {
-  console.log('plex props', auth)
+  console.log('plex props', auth);
   return { auth };
 }
 
 export default connect(
   mapStateToProps,
   actions,
-)(Admin)
+)(Admin);
