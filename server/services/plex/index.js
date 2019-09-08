@@ -7,10 +7,10 @@ import request from 'request-promise';
 
 const getAuthToken = async (req, res) => {
   try {
-    const {sonarrUrl, sonarrApiKey} = req.query;
+    const { sonarrUrl, sonarrApiKey } = req.query;
     const [rowsUpdate, updatedUser] = await models.User.update(
-      {sonarrUrl, sonarrApiKey},
-      {returning: true, where: {googleId: req.user.googleId}},
+      { sonarrUrl, sonarrApiKey },
+      { returning: true, where: { googleId: req.user.googleId } },
     );
 
     return res.json(updatedUser);
@@ -25,8 +25,8 @@ const getPlexPin = async (req, res) => {
     const pinRes = await auth.getPlexPin(req.user);
     const plexPinId = pinRes.pin.id['$t'];
     await models.User.update(
-      {plexPinId},
-      {where: {googleId: req.user.googleId}},
+      { plexPinId },
+      { where: { googleId: req.user.googleId } },
     );
     const pinCode = pinRes.pin.code;
     return res.json(pinCode);
@@ -38,7 +38,10 @@ const getPlexPin = async (req, res) => {
 
 const checkPlexPin = async (req, res) => {
   try {
-    const token = await auth.checkPlexPin(req.user.plexPinId, req.user);
+    const token = await auth.checkPlexPin(
+      req.user.plexPinId,
+      req.user,
+    );
     if (token.nil) {
       return res.json(null);
     }
@@ -63,7 +66,10 @@ const getUsers = (req, res) => {
 const getMostWatched = async (req, res) => {
   try {
     const options = req.query;
-    const mostWatched = await plexApi.getMostWatched(options, req.user);
+    const mostWatched = await plexApi.getMostWatched(
+      options,
+      req.user,
+    );
     res.json(mostWatched);
   } catch (error) {
     console.log('mike', error);
@@ -82,8 +88,11 @@ const getSections = async (req, res) => {
 
 const getLibraryDataBySection = async (req, res) => {
   try {
-    const options = {sectionId: req.params.id};
-    const sections = await plexApi.getLibraryDataBySection(options, req.user);
+    const options = { sectionId: req.params.id };
+    const sections = await plexApi.getLibraryDataBySection(
+      options,
+      req.user,
+    );
     res.json(sections);
   } catch (error) {
     res.json(error);
@@ -106,7 +115,11 @@ const importMostWatched = async (req, res) => {
 };
 
 const importAll = async (req, res) => {
-  console.log('Beginning to import all data for req.user');
+  console.log(
+    'Beginning to import all data for req.user',
+    req.user.email,
+    req.user.id,
+  );
   try {
     await importData.importSections(req.user);
     await importData.importLibraries(req.user);
