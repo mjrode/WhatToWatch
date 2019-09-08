@@ -12,6 +12,7 @@ import keys from '../../../config';
 import models from '../../db/models';
 
 passport.serializeUser((user, done) => {
+  console.log('serialize', user.id);
   done(null, user.id);
 });
 
@@ -51,7 +52,7 @@ passport.use(
         email: email,
         password: userPassword,
       };
-
+      console.log('data', data);
       const newUser = models.User.create(data, {
         returning: true,
         plain: true,
@@ -60,8 +61,8 @@ passport.use(
         if (!newUser) {
           return done(null, false);
         }
-
         if (newUser) {
+          console.log('new user email', newUser.email);
           return done(null, newUser);
         }
       });
@@ -127,16 +128,13 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      try {
-        const existingUser = await models.User.findOne({
-          where: { googleId: profile.id },
-        });
+      const email = profile.emails ? profile.emails[0].value : null;
 
-        if (existingUser) {
-          return done(null, existingUser);
-        }
-      } catch (e) {
-        return done(e);
+      const existingUser = await models.User.findOne({
+        where: { email },
+      });
+      if (existingUser) {
+        return done(null, existingUser);
       }
       const user = await models.User.create({
         firstName: profile.name.givenName,

@@ -8,22 +8,24 @@ router.get(
   passport.authenticate('google', {
     scope: ['profile', 'email'],
   }),
-  (req, res) => {
-    console.log('mike--', req.text);
-    console.log('mike--', req.status);
-    res.send(req.user);
-  },
 );
 
 router.post('/sign-up', function(req, res, next) {
   passport.authenticate('local-signup', function(err, user, info) {
+    console.log('user', user.email);
     if (err) {
       return next(err);
     }
     if (!user) {
       return res.json({ message: info.message });
     }
-    res.json(user);
+    req.login(user, function(err) {
+      if (err) {
+        console.log(err);
+      }
+      console.log('req user email signup', req.user.email);
+      res.send({ email: req.user.email });
+    });
   })(req, res, next);
 });
 
@@ -37,13 +39,14 @@ router.post('/login', passport.authenticate('local-login'), function(
 router.get(
   '/google/callback',
   passport.authenticate('google'),
-  (req, res) => {
-    res.send(req.user);
+  function(req, res) {
+    console.log('yumm cookies response', req.session);
+    res.redirect('/plex-pin' + `?email=${req.user.email}`);
   },
 );
 
 router.get('/current_user', (req, res) => {
-  console.log('current user', req.user);
+  console.log('current user session', req.session);
   res.send(req.user);
 });
 

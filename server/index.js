@@ -3,7 +3,7 @@ import { json, urlencoded } from 'body-parser';
 // eslint-disable-next-line import/named
 import passport from 'passport';
 import cookieSession from 'cookie-session';
-import flash from 'connect-flash';
+import cookieParser from 'cookie-parser';
 import models from './db/models';
 import keys from '../config';
 import plex from './routes/plex.route';
@@ -28,14 +28,14 @@ export default () => {
     server.use(json());
     server.use(urlencoded({ extended: true }));
 
+    server.use(cookieParser(keys.server.cookieKey));
     server.use(
       cookieSession({
+        name: 'session',
         maxAge: 30 * 24 * 60 * 60 * 1000,
         keys: [keys.server.cookieKey],
       }),
     );
-
-    server.use(flash());
     server.use(passport.initialize());
     server.use(passport.session());
 
@@ -66,13 +66,35 @@ export default () => {
     }
 
     server.get('*', function(req, res, next) {
-      const err = new Error('Page Not Found');
-      err.statusCode = 404;
-      next(err);
+      if (process.env.NODE_ENV === 'test') {
+        console.log('index headers', req.headers);
+        console.log('index headers', req.query);
+        console.log('index headers', req.body);
+
+        if (req.query.email) {
+          models.User.findOne({
+            where: { email: req.query.email },
+            raw: true,
+            plain: true,
+          }).then(user => {
+            console.log('proxy user', user);
+            res.status(302).send(user);
+          });
+        } else {
+          res.status(302).send(req.body);
+        }
+      } else {
+        const err = new Error(
+          `Page Not Found at route ${req.originalUrl}`,
+        );
+        err.statusCode = 404;
+        next(err);
+      }
     });
     // eslint-disable-next-line no-unused-vars
     server.use(function(err, req, res, next) {
-      console.error(err.message); // Log error message in our server's console
+      console.error('error caught in server/index', err.message); // Log error message in our server's console
+
       // eslint-disable-next-line no-param-reassign
       if (!err.statusCode) err.statusCode = 500; // If err has no specified error code, set error code to 'Internal Server Error (500)'
       res.status(err.statusCode).send(err.message); // All HTTP requests must have a response, so let's send back an error with its status code and message
