@@ -5,21 +5,6 @@ import models from '../../db/models';
 import helpers from '../helpers';
 import { Op } from 'sequelize';
 
-const getAuthToken = async (req, res) => {
-  try {
-    const { sonarrUrl, sonarrApiKey } = req.query;
-    const [rowsUpdate, updatedUser] = await models.User.update(
-      { sonarrUrl, sonarrApiKey },
-      { returning: true, where: { googleId: req.user.email } },
-    );
-
-    return res.json(updatedUser);
-  } catch (error) {
-    console.log('error in auth', error);
-    return res.status(201).json(error.message);
-  }
-};
-
 const getPlexPin = async (req, res) => {
   try {
     const pinRes = await auth.getPlexPin(req.user);
@@ -132,7 +117,6 @@ const importAll = async (req, res) => {
 };
 
 export default {
-  getAuthToken,
   getUsers,
   getMostWatched,
   getSections,

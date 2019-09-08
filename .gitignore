@@ -10,6 +10,7 @@ coverage
 .eslinstrc.js
 .DS_Store
 .prettierignore
+*.log
 .prettierrc.json
 .sequelizerc
 *.dump
