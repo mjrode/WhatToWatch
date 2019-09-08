@@ -14,24 +14,6 @@ const generateHash = password => {
   return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
 };
 
-const userProfile = () => {
-  return {
-    firstName: 'Michael',
-    lastName: 'Rode',
-    email: 'michaelrode44@gmail.com',
-    googleId: '103913097386807680151',
-    updatedAt: '2012-03-02T11:38:49.321Z',
-    createdAt: '2012-03-02T11:38:49.321Z',
-    plexUrl: null,
-    plexToken: null,
-    plexPinId: null,
-    sonarrUrl: null,
-    sonarrApiKey: null,
-    admin: null,
-    password: null,
-  };
-};
-
 const fetchUserAndFormat = email => {
   return models.User.findOne({
     where: { email },

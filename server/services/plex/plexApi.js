@@ -1,54 +1,6 @@
 import config from '../../../config';
 import helpers from '../helpers';
 
-const getUsersUrlParams = function(user) {
-  return {
-    host: user.plexUrl,
-    path: '/users',
-    queryParams: {
-      'X-Plex-Token': user.plexToken,
-    },
-  };
-};
-
-const getSectionsUrlParams = function(user) {
-  return {
-    host: user.plexUrl,
-    path: '/library/sections',
-    queryParams: {
-      'X-Plex-Token': user.plexToken,
-    },
-  };
-};
-
-const mostWatchedUrlParams = function(
-  accountId,
-  sectionKey,
-  limit = 10,
-  user,
-) {
-  return {
-    host: user.plexUrl,
-    path: '/library/all/top',
-    queryParams: {
-      ...(accountId && { accountId }),
-      ...(sectionKey && { type: sectionKey }),
-      ...(limit && { limit }),
-      'X-Plex-Token': user.plexToken,
-    },
-  };
-};
-
-const getLibraryDataBySectionUrlParams = function(sectionId, user) {
-  return {
-    host: user.plexUrl,
-    path: `/library/sections/${sectionId}/all`,
-    queryParams: {
-      'X-Plex-Token': user.plexToken,
-    },
-  };
-};
-
 const getUsers = async function(user) {
   try {
     const urlParams = getUsersUrlParams(user);
@@ -60,34 +12,14 @@ const getUsers = async function(user) {
   }
 };
 
-const getMostWatched = async function(
-  { accountId, sectionKey, limit = 10 },
-  user,
-) {
-  try {
-    console.log('section key mike --', sectionKey);
-    const urlParams = mostWatchedUrlParams(
-      accountId,
-      sectionKey,
-      limit,
-      user,
-    );
-    const mostWatchedUrl = helpers.buildUrl(urlParams);
-    const response = await helpers.request(mostWatchedUrl);
-    console.log('most-watched-raw-response---', response);
-    if (response.MediaContainer.Metadata) {
-      return response.MediaContainer.Metadata;
-    } else {
-      return [];
-    }
-  } catch (error) {
-    console.log('getMostWatched plexAPI error', error);
-    return {
-      code: error.status,
-      message: error.statusText,
-      url: error.config.url,
-    };
-  }
+const getUsersUrlParams = function(user) {
+  return {
+    host: user.plexUrl,
+    path: '/users',
+    queryParams: {
+      'X-Plex-Token': user.plexToken,
+    },
+  };
 };
 
 const getSections = async function(user) {
@@ -102,6 +34,16 @@ const getSections = async function(user) {
       message: error.statusText,
     };
   }
+};
+
+const getSectionsUrlParams = function(user) {
+  return {
+    host: user.plexUrl,
+    path: '/library/sections',
+    queryParams: {
+      'X-Plex-Token': user.plexToken,
+    },
+  };
 };
 
 const getLibraryDataBySection = async function({ sectionKey }, user) {
@@ -123,6 +65,63 @@ const getLibraryDataBySection = async function({ sectionKey }, user) {
       url: error.config.url,
     };
   }
+};
+
+const getLibraryDataBySectionUrlParams = function(sectionId, user) {
+  return {
+    host: user.plexUrl,
+    path: `/library/sections/${sectionId}/all`,
+    queryParams: {
+      'X-Plex-Token': user.plexToken,
+    },
+  };
+};
+
+const getMostWatched = async function(
+  { accountId, sectionKey, limit = 10 },
+  user,
+) {
+  try {
+    console.log('section key mike --', sectionKey);
+    const urlParams = mostWatchedUrlParams(
+      accountId,
+      sectionKey,
+      limit,
+      user,
+    );
+    const mostWatchedUrl = helpers.buildUrl(urlParams);
+    const response = await helpers.request(mostWatchedUrl);
+    if (response.MediaContainer.Metadata) {
+      return response.MediaContainer.Metadata;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.log('getMostWatched plexAPI error', error);
+    return {
+      code: error.status,
+      message: error.statusText,
+      url: error.config.url,
+    };
+  }
+};
+
+const mostWatchedUrlParams = function(
+  accountId,
+  sectionKey,
+  limit = 10,
+  user,
+) {
+  return {
+    host: user.plexUrl,
+    path: '/library/all/top',
+    queryParams: {
+      ...(accountId && { accountId }),
+      ...(sectionKey && { type: sectionKey }),
+      ...(limit && { limit }),
+      'X-Plex-Token': user.plexToken,
+    },
+  };
 };
 
 export default {

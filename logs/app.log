@@ -1,0 +1,215 @@
+{"error":{},"level":"error","message":"uncaughtException: morgan is not defined\nReferenceError: morgan is not defined\n    at Object.use [as create] (/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js:44:12)\n    at Object.create (/Users/mike.rode/Code/projects/Javascript/recommend/index.js:5:8)\n    at Module._compile (module.js:635:30)\n    at Module._compile (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:99:24)\n    at Module._extensions..js (module.js:646:10)\n    at Object.newLoader [as .js] (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:104:7)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at Object.<anonymous> (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js:234:23)\n    at Module._compile (module.js:635:30)\n    at Object.Module._extensions..js (module.js:646:10)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at startup (bootstrap_node.js:187:16)\n    at bootstrap_node.js:608:3","stack":"ReferenceError: morgan is not defined\n    at Object.use [as create] (/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js:44:12)\n    at Object.create (/Users/mike.rode/Code/projects/Javascript/recommend/index.js:5:8)\n    at Module._compile (module.js:635:30)\n    at Module._compile (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:99:24)\n    at Module._extensions..js (module.js:646:10)\n    at Object.newLoader [as .js] (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:104:7)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at Object.<anonymous> (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js:234:23)\n    at Module._compile (module.js:635:30)\n    at Object.Module._extensions..js (module.js:646:10)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at startup (bootstrap_node.js:187:16)\n    at bootstrap_node.js:608:3","exception":true,"date":"Sun Sep 08 2019 16:54:20 GMT-0500 (CDT)","process":{"pid":11738,"uid":502,"gid":501,"cwd":"/Users/mike.rode/Code/projects/Javascript/recommend","execPath":"/usr/local/bin/node","version":"v8.9.3","argv":["node","/Users/mike.rode/Code/projects/Javascript/recommend/index.js"],"memoryUsage":{"rss":108621824,"heapTotal":87617536,"heapUsed":53440800,"external":397554}},"os":{"loadavg":[2.18896484375,2.00830078125,2.00732421875],"uptime":261186},"trace":[{"column":12,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js","function":"Object.use [as create]","line":44,"method":"use [as create]","native":false},{"column":8,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/index.js","function":"Object.create","line":5,"method":"create","native":false},{"column":30,"file":"module.js","function":"Module._compile","line":635,"method":"_compile","native":false},{"column":24,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js","function":"Module._compile","line":99,"method":"_compile","native":false},{"column":10,"file":"module.js","function":"Module._extensions..js","line":646,"method":".js","native":false},{"column":7,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js","function":"Object.newLoader [as .js]","line":104,"method":"js]","native":false},{"column":32,"file":"module.js","function":"Module.load","line":554,"method":"load","native":false},{"column":12,"file":"module.js","function":"tryModuleLoad","line":497,"method":null,"native":false},{"column":3,"file":"module.js","function":"Module._load","line":489,"method":"_load","native":false},{"column":10,"file":"module.js","function":"Module.runMain","line":676,"method":"runMain","native":false},{"column":23,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js","function":null,"line":234,"method":null,"native":false},{"column":30,"file":"module.js","function":"Module._compile","line":635,"method":"_compile","native":false},{"column":10,"file":"module.js","function":"Module._extensions..js","line":646,"method":".js","native":false},{"column":32,"file":"module.js","function":"Module.load","line":554,"method":"load","native":false},{"column":12,"file":"module.js","function":"tryModuleLoad","line":497,"method":null,"native":false},{"column":3,"file":"module.js","function":"Module._load","line":489,"method":"_load","native":false},{"column":10,"file":"module.js","function":"Module.runMain","line":676,"method":"runMain","native":false},{"column":16,"file":"bootstrap_node.js","function":"startup","line":187,"method":null,"native":false},{"column":3,"file":"bootstrap_node.js","function":null,"line":608,"method":null,"native":false}]}
+{"error":{},"level":"error","message":"uncaughtException: morgan is not defined\nReferenceError: morgan is not defined\n    at Object.use [as create] (/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js:45:12)\n    at Object.create (/Users/mike.rode/Code/projects/Javascript/recommend/index.js:5:8)\n    at Module._compile (module.js:635:30)\n    at Module._compile (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:99:24)\n    at Module._extensions..js (module.js:646:10)\n    at Object.newLoader [as .js] (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:104:7)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at Object.<anonymous> (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js:234:23)\n    at Module._compile (module.js:635:30)\n    at Object.Module._extensions..js (module.js:646:10)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at startup (bootstrap_node.js:187:16)\n    at bootstrap_node.js:608:3","stack":"ReferenceError: morgan is not defined\n    at Object.use [as create] (/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js:45:12)\n    at Object.create (/Users/mike.rode/Code/projects/Javascript/recommend/index.js:5:8)\n    at Module._compile (module.js:635:30)\n    at Module._compile (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:99:24)\n    at Module._extensions..js (module.js:646:10)\n    at Object.newLoader [as .js] (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:104:7)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at Object.<anonymous> (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js:234:23)\n    at Module._compile (module.js:635:30)\n    at Object.Module._extensions..js (module.js:646:10)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at startup (bootstrap_node.js:187:16)\n    at bootstrap_node.js:608:3","exception":true,"date":"Sun Sep 08 2019 16:54:42 GMT-0500 (CDT)","process":{"pid":11751,"uid":502,"gid":501,"cwd":"/Users/mike.rode/Code/projects/Javascript/recommend","execPath":"/usr/local/bin/node","version":"v8.9.3","argv":["node","/Users/mike.rode/Code/projects/Javascript/recommend/index.js"],"memoryUsage":{"rss":109260800,"heapTotal":88666112,"heapUsed":61761440,"external":1321490}},"os":{"loadavg":[1.962890625,1.97314453125,1.99365234375],"uptime":261208},"trace":[{"column":12,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js","function":"Object.use [as create]","line":45,"method":"use [as create]","native":false},{"column":8,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/index.js","function":"Object.create","line":5,"method":"create","native":false},{"column":30,"file":"module.js","function":"Module._compile","line":635,"method":"_compile","native":false},{"column":24,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js","function":"Module._compile","line":99,"method":"_compile","native":false},{"column":10,"file":"module.js","function":"Module._extensions..js","line":646,"method":".js","native":false},{"column":7,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js","function":"Object.newLoader [as .js]","line":104,"method":"js]","native":false},{"column":32,"file":"module.js","function":"Module.load","line":554,"method":"load","native":false},{"column":12,"file":"module.js","function":"tryModuleLoad","line":497,"method":null,"native":false},{"column":3,"file":"module.js","function":"Module._load","line":489,"method":"_load","native":false},{"column":10,"file":"module.js","function":"Module.runMain","line":676,"method":"runMain","native":false},{"column":23,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js","function":null,"line":234,"method":null,"native":false},{"column":30,"file":"module.js","function":"Module._compile","line":635,"method":"_compile","native":false},{"column":10,"file":"module.js","function":"Module._extensions..js","line":646,"method":".js","native":false},{"column":32,"file":"module.js","function":"Module.load","line":554,"method":"load","native":false},{"column":12,"file":"module.js","function":"tryModuleLoad","line":497,"method":null,"native":false},{"column":3,"file":"module.js","function":"Module._load","line":489,"method":"_load","native":false},{"column":10,"file":"module.js","function":"Module.runMain","line":676,"method":"runMain","native":false},{"column":16,"file":"bootstrap_node.js","function":"startup","line":187,"method":null,"native":false},{"column":3,"file":"bootstrap_node.js","function":null,"line":608,"method":null,"native":false}]}
+{"error":{},"level":"error","message":"uncaughtException: morgan is not defined\nReferenceError: morgan is not defined\n    at Object.use [as create] (/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js:44:12)\n    at Object.create (/Users/mike.rode/Code/projects/Javascript/recommend/index.js:5:8)\n    at Module._compile (module.js:635:30)\n    at Module._compile (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:99:24)\n    at Module._extensions..js (module.js:646:10)\n    at Object.newLoader [as .js] (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:104:7)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at Object.<anonymous> (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js:234:23)\n    at Module._compile (module.js:635:30)\n    at Object.Module._extensions..js (module.js:646:10)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at startup (bootstrap_node.js:187:16)\n    at bootstrap_node.js:608:3","stack":"ReferenceError: morgan is not defined\n    at Object.use [as create] (/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js:44:12)\n    at Object.create (/Users/mike.rode/Code/projects/Javascript/recommend/index.js:5:8)\n    at Module._compile (module.js:635:30)\n    at Module._compile (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:99:24)\n    at Module._extensions..js (module.js:646:10)\n    at Object.newLoader [as .js] (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:104:7)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at Object.<anonymous> (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js:234:23)\n    at Module._compile (module.js:635:30)\n    at Object.Module._extensions..js (module.js:646:10)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Function.Module.runMain (module.js:676:10)\n    at startup (bootstrap_node.js:187:16)\n    at bootstrap_node.js:608:3","exception":true,"date":"Sun Sep 08 2019 16:54:46 GMT-0500 (CDT)","process":{"pid":11763,"uid":502,"gid":501,"cwd":"/Users/mike.rode/Code/projects/Javascript/recommend","execPath":"/usr/local/bin/node","version":"v8.9.3","argv":["node","/Users/mike.rode/Code/projects/Javascript/recommend/index.js"],"memoryUsage":{"rss":109383680,"heapTotal":86044672,"heapUsed":53846040,"external":246075}},"os":{"loadavg":[2.3662109375,2.05615234375,2.02294921875],"uptime":261212},"trace":[{"column":12,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js","function":"Object.use [as create]","line":44,"method":"use [as create]","native":false},{"column":8,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/index.js","function":"Object.create","line":5,"method":"create","native":false},{"column":30,"file":"module.js","function":"Module._compile","line":635,"method":"_compile","native":false},{"column":24,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js","function":"Module._compile","line":99,"method":"_compile","native":false},{"column":10,"file":"module.js","function":"Module._extensions..js","line":646,"method":".js","native":false},{"column":7,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js","function":"Object.newLoader [as .js]","line":104,"method":"js]","native":false},{"column":32,"file":"module.js","function":"Module.load","line":554,"method":"load","native":false},{"column":12,"file":"module.js","function":"tryModuleLoad","line":497,"method":null,"native":false},{"column":3,"file":"module.js","function":"Module._load","line":489,"method":"_load","native":false},{"column":10,"file":"module.js","function":"Module.runMain","line":676,"method":"runMain","native":false},{"column":23,"file":"/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js","function":null,"line":234,"method":null,"native":false},{"column":30,"file":"module.js","function":"Module._compile","line":635,"method":"_compile","native":false},{"column":10,"file":"module.js","function":"Module._extensions..js","line":646,"method":".js","native":false},{"column":32,"file":"module.js","function":"Module.load","line":554,"method":"load","native":false},{"column":12,"file":"module.js","function":"tryModuleLoad","line":497,"method":null,"native":false},{"column":3,"file":"module.js","function":"Module._load","line":489,"method":"_load","native":false},{"column":10,"file":"module.js","function":"Module.runMain","line":676,"method":"runMain","native":false},{"column":16,"file":"bootstrap_node.js","function":"startup","line":187,"method":null,"native":false},{"column":3,"file":"bootstrap_node.js","function":null,"line":608,"method":null,"native":false}]}
+{"message":"::ffff:127.0.0.1 - - [08/Sep/2019:21:55:14 +0000] \"GET /api/auth/current_user HTTP/1.1\" 200 346 \"http://localhost:3000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [08/Sep/2019:21:55:22 +0000] \"GET /api/auth/logout HTTP/1.1\" 302 46 \"http://localhost:3000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [08/Sep/2019:21:55:22 +0000] \"GET /api/auth/current_user HTTP/1.1\" 200 - \"http://localhost:3000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
+{"message":"GET /api/auth/current_user 200 - - 3.378 ms\n","level":"info"}
+{"message":"GET /api/auth/google 302 0 - 2.359 ms\n","level":"info"}
+{"message":"GET /api/auth/google/callback?code=4/qwFsi-qH1g1a2zs6oqFYDa75qrucUAu4pWyXq3ZzHIqFVBBndxm-bCemcPmn9sO-cWu1wAXLXMrCFlPGSUaQgvc&scope=email+profile+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&authuser=0&session_state=4f4b522b062d2bfd9e6cbeaef334e83d220ef001..5db9&prompt=none 302 122 - 504.712 ms\n","level":"info"}
+{"message":"GET /api/auth/current_user 200 359 - 2.267 ms\n","level":"info"}
+{"message":"GET /api/recommend/most-watched 200 6222 - 58.823 ms\n","level":"info"}
+{"message":"GET /api/plex/plex-pin 200 6 - 1289.626 ms\n","level":"info"}
+{"message":"GET /api/plex/import/all 304 - - 1422.938 ms\n","level":"info"}
+{"message":"GET /api/plex/check-plex-pin 200 138 - 617.098 ms\n","level":"info"}
+{"message":"GET /api/auth/current_user 200 358 - 7.675 ms\n","level":"info"}
+{"message":"GET /api/recommend/most-watched 200 6222 - 21.083 ms\n","level":"info"}
+{"message":"GET /api/plex/import/all 304 - - 969.189 ms\n","level":"info"}
+{"message":"GET /api/auth/current_user 304 - - 9.788 ms\n","level":"info"}
+{"message":"GET /api/auth/current_user 304 - - 4.896 ms\n","level":"info"}
+{"message":"GET /api/auth/current_user 304 - - 4.815 ms\n","level":"info"}
+{"message":"GET /api/auth/current_user 304 - - 0.981 ms\n","level":"info"}
+{"message":"GET /api/recommend/most-watched 200 6222 - 13.119 ms\n","level":"info"}
+{"message":"GET /api/plex/import/all 304 - - 1087.381 ms\n","level":"info"}
+{"message":"GET /api/moviedb/tv/similar?showName=The+Office+(US) 200 8086 - 1125.852 ms\n","level":"info"}
+undefined [32minfo[39m: GET /api/auth/google 302 0 - 3.247 ms
+
+undefined [32minfo[39m: GET /api/auth/google/callback?code=4/qwFxXAMWYpryYYqucyyNl2y1OZjXVWpgKTE3UBLlAlmceMDGVDKVTDOeXiZ9HTEc7qmIFo9D1_4XujjD9W6KTxc&scope=email+profile+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&authuser=0&session_state=4621fbf1bb493cbfb5e43489b42eddc2d862ce40..4c6d&prompt=none 302 122 - 408.032 ms
+
+undefined [32minfo[39m: GET /api/auth/current_user 200 358 - 3.091 ms
+
+undefined [32minfo[39m: GET /api/recommend/most-watched 200 6222 - 19.679 ms
+
+undefined [32minfo[39m: GET /api/plex/plex-pin 200 6 - 976.689 ms
+
+undefined [32minfo[39m: GET /api/plex/import/all 304 - - 1056.709 ms
+
+undefined [32minfo[39m: GET /api/plex/check-plex-pin 304 - - 510.291 ms
+
+undefined [31merror[39m: uncaughtException: listen EADDRINUSE :::8080
+Error: listen EADDRINUSE :::8080
+    at Object._errnoException (util.js:1024:11)
+    at _exceptionWithHostPort (util.js:1046:20)
+    at Server.setupListenHandle [as _listen2] (net.js:1351:14)
+    at listenInCluster (net.js:1392:12)
+    at Server.listen (net.js:1476:7)
+    at Function.listen (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/express/lib/application.js:618:24)
+    at Object.listen [as start] (/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js:115:12)
+    at Object.start (/Users/mike.rode/Code/projects/Javascript/recommend/index.js:6:8)
+    at Module._compile (module.js:635:30)
+    at Module._compile (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:99:24)
+    at Module._extensions..js (module.js:646:10)
+    at Object.newLoader [as .js] (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:104:7)
+    at Module.load (module.js:554:32)
+    at tryModuleLoad (module.js:497:12)
+    at Function.Module._load (module.js:489:3)
+    at Function.Module.runMain (module.js:676:10)
+    at Object.<anonymous> (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js:234:23)
+    at Module._compile (module.js:635:30)
+    at Object.Module._extensions..js (module.js:646:10)
+    at Module.load (module.js:554:32)
+    at tryModuleLoad (module.js:497:12)
+    at Function.Module._load (module.js:489:3)
+    at Function.Module.runMain (module.js:676:10)
+    at startup (bootstrap_node.js:187:16)
+    at bootstrap_node.js:608:3
+2019-09-08 17:06:33 [31merror[39m: uncaughtException: listen EADDRINUSE :::8080
+Error: listen EADDRINUSE :::8080
+    at Object._errnoException (util.js:1024:11)
+    at _exceptionWithHostPort (util.js:1046:20)
+    at Server.setupListenHandle [as _listen2] (net.js:1351:14)
+    at listenInCluster (net.js:1392:12)
+    at Server.listen (net.js:1476:7)
+    at Function.listen (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/express/lib/application.js:618:24)
+    at Object.listen [as start] (/Users/mike.rode/Code/projects/Javascript/recommend/server/index.js:115:12)
+    at Object.start (/Users/mike.rode/Code/projects/Javascript/recommend/index.js:6:8)
+    at Module._compile (module.js:635:30)
+    at Module._compile (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:99:24)
+    at Module._extensions..js (module.js:646:10)
+    at Object.newLoader [as .js] (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/pirates/lib/index.js:104:7)
+    at Module.load (module.js:554:32)
+    at tryModuleLoad (module.js:497:12)
+    at Function.Module._load (module.js:489:3)
+    at Function.Module.runMain (module.js:676:10)
+    at Object.<anonymous> (/Users/mike.rode/Code/projects/Javascript/recommend/node_modules/@babel/node/lib/_babel-node.js:234:23)
+    at Module._compile (module.js:635:30)
+    at Object.Module._extensions..js (module.js:646:10)
+    at Module.load (module.js:554:32)
+    at tryModuleLoad (module.js:497:12)
+    at Function.Module._load (module.js:489:3)
+    at Function.Module.runMain (module.js:676:10)
+    at startup (bootstrap_node.js:187:16)
+    at bootstrap_node.js:608:3
+undefined [32minfo[39m: GET /api/auth/current_user 200 358 - 7.255 ms
+
+undefined [32minfo[39m: GET /api/recommend/most-watched 200 6222 - 17.323 ms
+
+undefined [32minfo[39m: GET /api/plex/import/all 304 - - 1062.371 ms
+
+undefined [32minfo[39m: GET /api/auth/current_user 304 - - 0.605 ms
+
+undefined [32minfo[39m: GET /api/recommend/most-watched 200 6222 - 13.148 ms
+
+undefined [32minfo[39m: GET /api/plex/import/all 304 - - 1006.804 ms
+
+{"message":"GET /api/auth/current_user 200 358 - 5.315 ms\n","level":"\u001b[32minfo\u001b[39m","timestamp":"2019-09-08T22:23:29.468Z"}
+{"message":"GET /api/recommend/most-watched 200 6222 - 13.246 ms\n","level":"\u001b[32minfo\u001b[39m","timestamp":"2019-09-08T22:23:29.540Z"}
+{"message":"GET /api/plex/import/all 304 - - 1130.461 ms\n","level":"\u001b[32minfo\u001b[39m","timestamp":"2019-09-08T22:23:30.643Z"}
+2019-09-08T22:24:52.142Z [undefined] [32minfo[39m: GET /api/auth/current_user 200 358 - 4.561 ms
+
+2019-09-08T22:24:52.200Z [undefined] [32minfo[39m: GET /api/recommend/most-watched 200 6222 - 9.169 ms
+
+2019-09-08T22:24:53.188Z [undefined] [32minfo[39m: GET /api/plex/import/all 304 - - 1007.007 ms
+
+2019-09-08T22:32:42.562Z [HTTP] [32minfo[39m: [0mGET /api/auth/current_user [36m304 [0m5.099 ms - -[0m
+
+2019-09-08T22:32:42.617Z [HTTP] [32minfo[39m: [0mGET /api/recommend/most-watched [32m200 [0m11.102 ms - 6222[0m
+
+2019-09-08T22:32:44.402Z [HTTP] [32minfo[39m: [0mGET /api/plex/import/all [32m200 [0m1805.892 ms - 36[0m
+
+2019-09-08T22:32:46.872Z [HTTP] [32minfo[39m: [0mGET /api/auth/current_user [36m304 [0m0.547 ms - -[0m
+
+2019-09-08T22:32:46.923Z [HTTP] [32minfo[39m: [0mGET /api/recommend/most-watched [32m200 [0m8.148 ms - 6222[0m
+
+2019-09-08T22:32:47.689Z [HTTP] [32minfo[39m: [0mGET /api/plex/import/all [36m304 [0m777.892 ms - -[0m
+
+2019-09-08T22:37:26.720Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:37:26 GMT] "GET /api/auth/current_user HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:37:26.776Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:37:26 GMT] "GET /api/recommend/most-watched HTTP/1.1" 200 6222 "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:37:27.800Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:37:27 GMT] "GET /api/plex/import/all HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:39:04.105Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:39:04 GMT] "GET /api/auth/current_user HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:39:04.187Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:39:04 GMT] "GET /api/recommend/most-watched HTTP/1.1" 200 6222 "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:39:05.069Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:39:05 GMT] "GET /api/plex/import/all HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:39:24.830Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:39:24 GMT] "GET /api/auth/current_user HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:39:24.920Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:39:24 GMT] "GET /api/recommend/most-watched HTTP/1.1" 200 6222 "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:39:25.917Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:39:25 GMT] "GET /api/plex/import/all HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:39:35.416Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:39:35 GMT] "GET /api/auth/current_user HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:39:35.486Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:39:35 GMT] "GET /api/recommend/most-watched HTTP/1.1" 200 6222 "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:39:36.392Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:39:36 GMT] "GET /api/plex/import/all HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:40:39.911Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:40:39 GMT] "GET /api/auth/current_user HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:40:40.010Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:40:40 GMT] "GET /api/recommend/most-watched HTTP/1.1" 200 6222 "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:40:41.342Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:40:41 GMT] "GET /api/plex/import/all HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:40:46.680Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:40:46 GMT] "GET /api/auth/current_user HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:40:46.722Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:40:46 GMT] "GET /api/recommend/most-watched HTTP/1.1" 200 6222 "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:40:47.681Z [HTTP] [32minfo[39m: ::ffff:127.0.0.1 - - [Sun, 08 Sep 2019 22:40:47 GMT] "GET /api/plex/import/all HTTP/1.1" 304 - "http://localhost:3000/most-watched" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+
+2019-09-08T22:41:32.867Z [HTTP] [32minfo[39m: GET /api/auth/current_user 304 - - 6.599 ms
+
+2019-09-08T22:41:32.934Z [HTTP] [32minfo[39m: GET /api/recommend/most-watched 200 6222 - 13.605 ms
+
+2019-09-08T22:41:33.845Z [HTTP] [32minfo[39m: GET /api/plex/import/all 304 - - 935.372 ms
+
+2019-09-08T22:42:32.565Z [HTTP] [32minfo[39m: GET /api/auth/current_user 200 358 - - 4.718 ms
+
+2019-09-08T22:42:32.615Z [HTTP] [32minfo[39m: GET /api/recommend/most-watched 200 6222 - - 8.280 ms
+
+2019-09-08T22:42:33.817Z [HTTP] [32minfo[39m: GET /api/plex/import/all 304 - - - 1221.683 ms
+
+2019-09-08T22:42:36.117Z [HTTP] [32minfo[39m: GET /api/auth/current_user 304 - - - 0.810 ms
+
+2019-09-08T22:42:36.176Z [HTTP] [32minfo[39m: GET /api/recommend/most-watched 200 6222 - - 4.943 ms
+
+2019-09-08T22:42:37.007Z [HTTP] [32minfo[39m: GET /api/plex/import/all 304 - - - 837.968 ms
+
+2019-09-08T22:42:58.114Z [HTTP] [32minfo[39m: GET /api/auth/current_user 200 358 - - 4.674 ms
+
+2019-09-08T22:42:58.165Z [HTTP] [32minfo[39m: GET /api/recommend/most-watched 200 6222 - - 8.245 ms
+
+2019-09-08T22:42:59.100Z [HTTP] [32minfo[39m: GET /api/plex/import/all - - - - - ms
+
+2019-09-08T22:42:59.295Z [HTTP] [32minfo[39m: GET /api/auth/current_user 304 - - - 0.470 ms
+
+2019-09-08T22:42:59.346Z [HTTP] [32minfo[39m: GET /api/recommend/most-watched 200 6222 - - 4.730 ms
+
+2019-09-08T22:43:00.556Z [HTTP] [32minfo[39m: GET /api/plex/import/all 200 36 - - 1217.777 ms
+
+2019-09-08T22:43:05.820Z [HTTP] [32minfo[39m: GET /api/auth/current_user 304 - - - 0.819 ms
+
+2019-09-08T22:43:05.896Z [HTTP] [32minfo[39m: GET /api/recommend/most-watched 200 6222 - - 32.416 ms
+
+2019-09-08T22:43:06.677Z [HTTP] [32minfo[39m: GET /api/plex/import/all 304 - - - 785.139 ms
+
+2019-09-08T22:50:10.831Z [HTTP] [32minfo[39m: Method GET Url /api/auth/current_user Status 304 ContentLength - - 21.001 ms
+
+2019-09-08T22:50:10.901Z [HTTP] [32minfo[39m: Method GET Url /api/recommend/most-watched Status 200 ContentLength 6222 - 13.798 ms
+
+2019-09-08T22:50:12.088Z [HTTP] [32minfo[39m: Method GET Url /api/plex/import/all Status 304 ContentLength - - 1220.374 ms
+
+2019-09-08T22:50:51.525Z [HTTP] [32minfo[39m: Method GET Url /api/auth/current_user Status 200 ContentLength 358 - Response Time: 4.933 ms
+
+2019-09-08T22:50:51.582Z [HTTP] [32minfo[39m: Method GET Url /api/recommend/most-watched Status 200 ContentLength 6222 - Response Time: 30.063 ms
+
+2019-09-08T22:50:52.607Z [HTTP] [32minfo[39m: Method GET Url /api/plex/import/all Status 304 ContentLength - - Response Time: 1048.356 ms
+
+2019-09-08T22:52:45.991Z [HTTP] [32minfo[39m: Method: GET URL: /api/auth/current_user Status: 200 Content Length: 358 Request Header: - Response Header: - Response Time: 4.616 ms
+
+2019-09-08T22:52:46.052Z [HTTP] [32minfo[39m: Method: GET URL: /api/recommend/most-watched Status: 200 Content Length: 6222 Request Header: - Response Header: - Response Time: 11.991 ms
+
+2019-09-08T22:52:47.081Z [HTTP] [32minfo[39m: Method: GET URL: /api/plex/import/all Status: 200 Content Length: 36 Request Header: - Response Header: - Response Time: 1052.819 ms
+

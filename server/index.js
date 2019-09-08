@@ -4,6 +4,7 @@ import { json, urlencoded } from 'body-parser';
 import passport from 'passport';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
 import models from './db/models';
 import keys from '../config';
 import plex from './routes/plex.route';
@@ -13,6 +14,8 @@ import sonarr from './routes/sonarr.route';
 import auth from './routes/auth.route';
 import admin from './routes/admin.route';
 import recommend from './routes/recommend.route';
+import winston from '../config/winston';
+
 require('./services/auth/passport');
 
 export default () => {
@@ -38,6 +41,13 @@ export default () => {
     );
     server.use(passport.initialize());
     server.use(passport.session());
+
+    server.use(
+      morgan(
+        'Method: :method URL: :url Status: :status Content Length: :res[content-length] Request Header: :req[header] Response Header: :res[header] Response Time: :response-time ms',
+        { stream: winston.stream },
+      ),
+    );
 
     // Set up routes
     server.use('/api/plex', plex);
@@ -66,6 +76,15 @@ export default () => {
     }
 
     server.get('*', function(req, res, next) {
+      res.locals.message = err.message;
+      res.locals.error =
+        req.app.get('env') === 'development' ? err : {};
+
+      winston.error(
+        `${err.status || 500} - ${err.message} - ${
+          req.originalUrl
+        } - ${req.method} - ${req.ip}`,
+      );
       const err = new Error(
         `Page Not Found at route ${req.originalUrl}`,
       );
@@ -75,7 +94,16 @@ export default () => {
 
     // eslint-disable-next-line no-unused-vars
     server.use(function(err, req, res, next) {
-      console.error('error caught in server/index', err.message); // Log error message in our server's console
+      // set locals, only providing error in development
+      res.locals.message = err.message;
+      res.locals.error =
+        req.app.get('env') === 'development' ? err : {};
+
+      winston.error(
+        `${err.status || 500} - ${err.message} - ${
+          req.originalUrl
+        } - ${req.method} - ${req.ip}`,
+      );
 
       // eslint-disable-next-line no-param-reassign
       if (!err.statusCode) err.statusCode = 500; // If err has no specified error code, set error code to 'Internal Server Error (500)'

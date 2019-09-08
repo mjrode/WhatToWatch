@@ -103,6 +103,7 @@ export const checkPlexPin = createPollingAction(dispatch => {
   axios.get('/api/plex/check-plex-pin').then(res => {
     if (res.data) {
       var highestTimeoutId = setTimeout(';');
+      console.log('highestTimeoutId', highestTimeoutId)
       for (var i = 0; i < highestTimeoutId; i++) {
         clearTimeout(i);
       }

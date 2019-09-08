@@ -154,7 +154,6 @@ const importMostWatchedData = async (sectionKey, user) => {
     { sectionKey },
     user,
   );
-  console.log('most watched data', mostWatchedData);
 
   const mostWatchedDbData = await updateLibrary(
     mostWatchedData,

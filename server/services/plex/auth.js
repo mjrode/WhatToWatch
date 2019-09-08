@@ -6,6 +6,23 @@ import models from '../../db/models';
 
 const rxAuthToken = /authenticationToken="([^"]+)"/;
 
+const encryptUserCreds = (username, password) => {
+  const creds = `${username}:${password}`;
+  return btoa(creds);
+};
+
+const fetchToken = async (username, password) => {
+  try {
+    const res = await request.post(
+      tokenUrlParams(username, password),
+    );
+    const token = res.match(rxAuthToken)[1];
+    return token;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const tokenUrlParams = (username, password) => ({
   url: 'https://plex.tv/users/sign_in.xml',
   headers: {
@@ -14,25 +31,10 @@ const tokenUrlParams = (username, password) => ({
   },
 });
 
-const encryptUserCreds = (username, password) => {
-  const creds = `${username}:${password}`;
-  return btoa(creds);
-};
-
-const fetchToken = async (username, password) => {
-  try {
-    const res = await request.post(tokenUrlParams(username, password));
-    const token = res.match(rxAuthToken)[1];
-    return token;
-  } catch (error) {
-    return error.message;
-  }
-};
-
 const plexUrlParams = (plexToken, user) => ({
   url: 'https://plex.tv/pms/servers.xml',
   headers: {
-    'X-Plex-Client-Identifier': user.googleId,
+    'X-Plex-Client-Identifier': user.user.email,
     'X-Plex-Token': plexToken,
   },
 });
@@ -42,7 +44,7 @@ const getPlexPin = async user => {
     const params = {
       url: 'https://plex.tv/pins.xml',
       headers: {
-        'X-Plex-Client-Identifier': user.googleId,
+        'X-Plex-Client-Identifier': user.email,
       },
     };
     const res = await request.post(params);
@@ -79,8 +81,8 @@ const checkPlexPin = async (pinId, user) => {
 const getPlexUrl = async (plexToken, user) => {
   try {
     const res = await request.get(plexUrlParams(plexToken, user));
-    let formattedResponse = JSON.parse(parser.toJson(res)).MediaContainer
-      .Server;
+    let formattedResponse = JSON.parse(parser.toJson(res))
+      .MediaContainer.Server;
 
     if (!Array.isArray(formattedResponse)) {
       formattedResponse = [formattedResponse];
@@ -96,7 +98,7 @@ const getPlexUrl = async (plexToken, user) => {
         plexToken: plexToken.trim(),
         plexUrl: `http://${server.address}:${server.port}`.trim(),
       },
-      {where: {googleId: user.googleId}},
+      { where: { googleId: user.googleId } },
     );
     console.log('server--', server);
     return `http://${server.address}:${server.port}`;
@@ -106,4 +108,4 @@ const getPlexUrl = async (plexToken, user) => {
   }
 };
 
-export default {fetchToken, getPlexPin, checkPlexPin, getPlexUrl};
+export default { fetchToken, getPlexPin, checkPlexPin, getPlexUrl };

@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 class PlexPin extends Component {
   async componentDidMount() {
     await this.props.fetchPin();
-    const check = await this.props.checkPlexPin();
+    await this.props.checkPlexPin();
   }
   render() {
     if (!this.props) {
