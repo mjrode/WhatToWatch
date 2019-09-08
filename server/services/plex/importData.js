@@ -3,42 +3,47 @@ import plexApi from './plexApi';
 import models from '../../db/models';
 import config from '../../../config';
 import MovieDb from 'moviedb-promise';
-import {Op} from 'sequelize';
+import { Op } from 'sequelize';
 const mdb = new MovieDb(config.server.movieApiKey);
 
-const updateOrCreate = async (model, where, newItem, beforeCreate) => {
-  const item = await model.findOne({where});
+const updateOrCreate = async (
+  model,
+  where,
+  newItem,
+  beforeCreate,
+) => {
+  const item = await model.findOne({ where });
   if (!item) {
     const createItem = await model.create(newItem, {
       returning: true,
       plain: true,
       raw: true,
     });
-    return {createItem, created: true};
+    return { createItem, created: true };
   } else {
     const updatedItem = await model.update(
       newItem,
-      {where: where},
-      {returning: true, plain: true, raw: true},
+      { where: where },
+      { returning: true, plain: true, raw: true },
     );
-    return {item, created: false};
+    return { item, created: false };
   }
 };
 
 const importTvPosters = async user => {
   try {
     const mostWatched = await models.PlexLibrary.findAll({
-      where: {UserId: user.id, type: 'show', views: {[Op.gt]: 0}},
+      where: { UserId: user.id, type: 'show', views: { [Op.gt]: 0 } },
     });
 
     const imageUrls = await mostWatched.map(async show => {
-      const res = await mdb.searchTv({query: show.title});
+      const res = await mdb.searchTv({ query: show.title });
       return models.PlexLibrary.update(
         {
           poster_path: res.results[0].poster_path,
         },
         {
-          where: {UserId: user.id, title: show.title},
+          where: { UserId: user.id, title: show.title },
         },
       );
     });
@@ -49,7 +54,6 @@ const importTvPosters = async user => {
 
 const importSections = async user => {
   const sections = await plexApi.getSections(user);
-  console.log('getSections response', sections);
   const dbSections = await createSections(sections, user);
   return dbSections;
 };
@@ -96,51 +100,66 @@ const importLibrary = async (sectionKey, user) => {
 };
 
 const createLibrary = async (libraryData, user) => {
-  const updatedLibrary = await Promise.map(libraryData, sectionLibraryData => {
-    const newSectionLibraryData = {
-      title: sectionLibraryData.title,
-      type: sectionLibraryData.type,
-      views: sectionLibraryData.views,
-      rating_key: sectionLibraryData.ratingKey,
-      meta_data_path: sectionLibraryData.key,
-      UserId: user.id,
-      summary: sectionLibraryData.summary,
-      rating: sectionLibraryData.rating,
-      year: sectionLibraryData.year,
-      genre: JSON.stringify(sectionLibraryData.Genre),
-    };
-    return updateOrCreate(
-      models.PlexLibrary,
-      {
-        UserId: user.id,
+  const updatedLibrary = await Promise.map(
+    libraryData,
+    sectionLibraryData => {
+      const newSectionLibraryData = {
         title: sectionLibraryData.title,
-      },
-      newSectionLibraryData,
-    );
-  }).catch(err => console.log(err));
+        type: sectionLibraryData.type,
+        views: sectionLibraryData.views,
+        rating_key: sectionLibraryData.ratingKey,
+        meta_data_path: sectionLibraryData.key,
+        UserId: user.id,
+        summary: sectionLibraryData.summary,
+        rating: sectionLibraryData.rating,
+        year: sectionLibraryData.year,
+        genre: JSON.stringify(sectionLibraryData.Genre),
+      };
+      return updateOrCreate(
+        models.PlexLibrary,
+        {
+          UserId: user.id,
+          title: sectionLibraryData.title,
+        },
+        newSectionLibraryData,
+      );
+    },
+  ).catch(err => console.log(err));
   return updatedLibrary;
 };
 
 const importMostWatched = async user => {
-  console.log('here4444');
-  const sectionKeys = await models.PlexSection.findAll({
-    where: {userId: user.id},
-  }).then(sections => {
-    return sections.map(section => section.key.toString());
-  });
-  console.log('importMostWatched section keys----', sectionKeys);
-  return Promise.map(sectionKeys, sectionKey => {
-    return importMostWatchedData(sectionKey, user);
-  }).catch(err => {
-    console.log(err);
-  });
+  try {
+    const sections = await models.PlexSection.findAll({
+      where: { UserId: user.id },
+    });
+
+    const sectionKeys = sections.map(section => {
+      return section.key.toString();
+    });
+
+    sections.map(section => section.key.toString());
+    return Promise.map(sectionKeys, sectionKey => {
+      return importMostWatchedData(sectionKey, user);
+    }).catch(err => {
+      console.log(err);
+    });
+  } catch (error) {
+    console.log('caught error', error);
+  }
 };
 
 const importMostWatchedData = async (sectionKey, user) => {
-  const mostWatchedData = await plexApi.getMostWatched({sectionKey}, user);
+  const mostWatchedData = await plexApi.getMostWatched(
+    { sectionKey },
+    user,
+  );
   console.log('most watched data', mostWatchedData);
 
-  const mostWatchedDbData = await updateLibrary(mostWatchedData, user);
+  const mostWatchedDbData = await updateLibrary(
+    mostWatchedData,
+    user,
+  );
   return mostWatchedDbData;
 };
 

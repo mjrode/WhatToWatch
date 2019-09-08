@@ -21,14 +21,19 @@ const getSectionsUrlParams = function(user) {
   };
 };
 
-const mostWatchedUrlParams = function(accountId, sectionKey, limit = 10, user) {
+const mostWatchedUrlParams = function(
+  accountId,
+  sectionKey,
+  limit = 10,
+  user,
+) {
   return {
     host: user.plexUrl,
     path: '/library/all/top',
     queryParams: {
-      ...(accountId && {accountId}),
-      ...(sectionKey && {type: sectionKey}),
-      ...(limit && {limit}),
+      ...(accountId && { accountId }),
+      ...(sectionKey && { type: sectionKey }),
+      ...(limit && { limit }),
       'X-Plex-Token': user.plexToken,
     },
   };
@@ -56,12 +61,17 @@ const getUsers = async function(user) {
 };
 
 const getMostWatched = async function(
-  {accountId, sectionKey, limit = 10},
+  { accountId, sectionKey, limit = 10 },
   user,
 ) {
   try {
     console.log('section key mike --', sectionKey);
-    const urlParams = mostWatchedUrlParams(accountId, sectionKey, limit, user);
+    const urlParams = mostWatchedUrlParams(
+      accountId,
+      sectionKey,
+      limit,
+      user,
+    );
     const mostWatchedUrl = helpers.buildUrl(urlParams);
     const response = await helpers.request(mostWatchedUrl);
     console.log('most-watched-raw-response---', response);
@@ -94,13 +104,16 @@ const getSections = async function(user) {
   }
 };
 
-const getLibraryDataBySection = async function({sectionKey}, user) {
+const getLibraryDataBySection = async function({ sectionKey }, user) {
   try {
-    console.log('sectionId--', sectionKey);
-    const urlParams = getLibraryDataBySectionUrlParams(sectionKey, user);
+    const urlParams = getLibraryDataBySectionUrlParams(
+      sectionKey,
+      user,
+    );
     const getLibraryDataBySectionUrl = helpers.buildUrl(urlParams);
-    const response = await helpers.request(getLibraryDataBySectionUrl);
-    console.log('library-data-by-section---', response.MediaContainer.Metadata);
+    const response = await helpers.request(
+      getLibraryDataBySectionUrl,
+    );
     return response.MediaContainer.Metadata;
   } catch (error) {
     console.log('caught error', error);
