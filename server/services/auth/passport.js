@@ -52,7 +52,6 @@ passport.use(
         email: email,
         password: userPassword,
       };
-      console.log('data', data);
       const newUser = models.User.create(data, {
         returning: true,
         plain: true,
@@ -105,6 +104,7 @@ passport.use(
             });
           }
 
+          console.log('login user email', user.email);
           return done(null, user);
         })
         .catch(function(err) {

@@ -66,31 +66,13 @@ export default () => {
     }
 
     server.get('*', function(req, res, next) {
-      if (process.env.NODE_ENV === 'test') {
-        console.log('index headers', req.headers);
-        console.log('index headers', req.query);
-        console.log('index headers', req.body);
-
-        if (req.query.email) {
-          models.User.findOne({
-            where: { email: req.query.email },
-            raw: true,
-            plain: true,
-          }).then(user => {
-            console.log('proxy user', user);
-            res.status(302).send(user);
-          });
-        } else {
-          res.status(302).send(req.body);
-        }
-      } else {
-        const err = new Error(
-          `Page Not Found at route ${req.originalUrl}`,
-        );
-        err.statusCode = 404;
-        next(err);
-      }
+      const err = new Error(
+        `Page Not Found at route ${req.originalUrl}`,
+      );
+      err.statusCode = 404;
+      next(err);
     });
+
     // eslint-disable-next-line no-unused-vars
     server.use(function(err, req, res, next) {
       console.error('error caught in server/index', err.message); // Log error message in our server's console

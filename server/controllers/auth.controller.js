@@ -29,11 +29,23 @@ router.post('/sign-up', function(req, res, next) {
   })(req, res, next);
 });
 
-router.post('/login', passport.authenticate('local-login'), function(
-  req,
-  res,
-) {
-  res.redirect('/');
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local-login', function(err, user, info) {
+    console.log('user', user.email);
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.json({ message: info.message });
+    }
+    req.login(user, function(err) {
+      if (err) {
+        console.log(err);
+      }
+      console.log('req user email signup', req.user.email);
+      res.send({ email: req.user.email });
+    });
+  })(req, res, next);
 });
 
 router.get(

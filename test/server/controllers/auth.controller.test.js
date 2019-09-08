@@ -6,8 +6,13 @@ import * as nocks from '../../nocks';
 import app from '../../../index';
 import { seed, truncate } from '../../../server/db/scripts';
 import models from './../../../server/db/models';
+const bCrypt = require('bcrypt-nodejs');
 
 var expect = require('chai').expect;
+
+const generateHash = password => {
+  return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+};
 
 const userProfile = () => {
   return {
@@ -101,44 +106,43 @@ describe.only('auth.controller', () => {
           });
       });
     });
-  });
 
-  describe('a request is made to GET /api/auth/google', () => {
-    describe('and the user has not previously registered', () => {
-      it('should not find the current user in the database before auth', async () => {
-        const dbUser = await models.User.findOne({
-          where: { email: 'michaelrode44@gmail.com' },
+    describe('a request is made to GET /api/auth/google', () => {
+      describe('and the user has not previously registered', () => {
+        it('should not find the current user in the database before auth', async () => {
+          const dbUser = await models.User.findOne({
+            where: { email: 'michaelrode44@gmail.com' },
+          });
+          expect(dbUser).to.be.null;
+          const usersCount = await models.User.count();
+          expect(usersCount).to.equal(0);
         });
-        expect(dbUser).to.be.null;
-        const usersCount = await models.User.count();
-        expect(usersCount).to.equal(0);
-      });
 
-      describe('When a user successfully auths with google', () => {
-        it('should create a new user record in the database and return the user record', async () => {
-          console.log('Was I called----');
+        describe('When a user successfully auths with google', () => {
+          it('should create a new user record in the database and return the user record', async () => {
+            console.log('Was I called----');
 
-          const usersCountBefore = await models.User.count();
-          expect(usersCountBefore).to.equal(0);
+            const usersCountBefore = await models.User.count();
+            expect(usersCountBefore).to.equal(0);
 
-          setMockGoogleStrategy('michaelrode44@gmail.com');
+            setMockGoogleStrategy('michaelrode44@gmail.com');
 
-          const res = await chai
-            .request(app)
-            .get('/api/auth/google')
-            .redirects(1);
+            const res = await chai
+              .request(app)
+              .get('/api/auth/google')
+              .redirects(1);
 
-          res.should.have.status(302);
-          expect(res.headers.location).to.equal(
-            '/plex-pin/?email=michaelrode44@gmail.com',
-          );
+            res.should.have.status(302);
+            expect(res.headers.location).to.equal(
+              '/plex-pin?email=michaelrode44@gmail.com',
+            );
 
-          const usersCountAfter = await models.User.count();
-          expect(usersCountAfter).to.equal(1);
+            const usersCountAfter = await models.User.count();
+            expect(usersCountAfter).to.equal(1);
+          });
         });
       });
     });
-
     describe('when the user already exists in the database', () => {
       it('user count should not change', async () => {
         await models.User.create({
@@ -157,7 +161,7 @@ describe.only('auth.controller', () => {
 
         res.should.have.status(302);
         expect(res.headers.location).to.equal(
-          '/plex-pin/?email=michaelrode44@gmail.com',
+          '/plex-pin?email=michaelrode44@gmail.com',
         );
 
         const usersCountAfter = await models.User.count();
@@ -165,8 +169,73 @@ describe.only('auth.controller', () => {
       });
     });
   });
+  describe('POST /api/auth/login', async () => {
+    describe('When a user successfully logs in with local strategy', () => {
+      it('set the current user in session', async () => {
+        const password = generateHash('password');
+        await models.User.create({
+          email: 'michaelrode44@gmail.com',
+          password,
+        });
+        const usersCountBefore = await models.User.count();
+        expect(usersCountBefore).to.equal(1);
 
-  describe('GET /api/auth/sign-up', async () => {
+        const res = await chai
+          .request(app)
+          .post('/api/auth/login')
+          .send({
+            email: 'michaelrode44@gmail.com',
+            password: 'password',
+          })
+          .redirects(1);
+        res.should.have.status(200);
+        expect(res.body).to.deep.equal({
+          email: 'michaelrode44@gmail.com',
+        });
+
+        const usersCountAfter = await models.User.count();
+        expect(usersCountAfter).to.equal(1);
+      });
+    });
+    describe('when a user fails to auth with local strategy', () => {
+      it('should return missing credentials error when missing required params', done => {
+        chai
+          .request(app)
+          .post('/api/auth/login')
+          .send({
+            email: 'mike.rodde@gmail.com',
+          })
+          .end((err, res) => {
+            console.log(res.body);
+            res.should.have.status(200);
+            res.body.message.should.equal('Missing credentials');
+            done();
+          });
+      });
+
+      it('should return invalid password error when given the wrong password', async () => {
+        const password = generateHash('password');
+        await models.User.create({
+          email: 'michaelrode44@gmail.com',
+          password,
+        });
+        const usersCountBefore = await models.User.count();
+        expect(usersCountBefore).to.equal(1);
+
+        const res = await chai
+          .request(app)
+          .post('/api/auth/login')
+          .send({
+            email: 'michaelrode44@gmail.com',
+            password: 'pass',
+          });
+        console.log(res.body);
+        res.should.have.status(200);
+        res.body.message.should.equal('Incorrect password.');
+      });
+    });
+  });
+  describe('POST /api/auth/sign-up', async () => {
     it('should not find the current user in the database before auth', async () => {
       const dbUser = await models.User.findOne({
         where: { email: 'michaelrode@gmail.com' },
@@ -174,9 +243,9 @@ describe.only('auth.controller', () => {
       expect(dbUser).to.be.null;
     });
 
-    describe('When a user successfully auths with local strategy', () => {
+    describe('When a user successfully signs up with local strategy', () => {
       describe('and the user has not previously registered', () => {
-        it.only('should create a new user record in the database and return the user record', async () => {
+        it('should create a new user record in the database and return the user record', async () => {
           const usersCountBefore = await models.User.count();
           expect(usersCountBefore).to.equal(0);
           const res = await chai
@@ -187,21 +256,17 @@ describe.only('auth.controller', () => {
               password: 'password',
             })
             .redirects(1);
-          console.log('res', res.status);
-          console.log('res', res.text);
-          console.log('res', res.message);
-          console.log('res', res.headers);
-          res.should.have.status(302);
-          expect(res.headers.location).to.equal(
-            '/plex-pin/?email=mike.rodde@gmail.com',
-          );
+          res.should.have.status(200);
+          expect(res.body).to.deep.equal({
+            email: 'mike.rodde@gmail.com',
+          });
 
           const usersCountAfter = await models.User.count();
           expect(usersCountAfter).to.equal(1);
         });
       });
       describe('when a user fails to auth with local strategy', () => {
-        it('should fail to create a new user record in the database when missing required params', done => {
+        it('should return missing credentials error when missing required params', done => {
           chai
             .request(app)
             .post('/api/auth/sign-up')
