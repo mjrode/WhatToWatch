@@ -1,8 +1,9 @@
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 export const types = {
   SET_LOADING: 'set_loading',
   FETCH_USER: 'fetch_user',
+  SIGN_UP_USER: 'sign_up_user',
   FETCH_USERS: 'fetch_users',
   FETCH_MEDIA_RESPONSE: 'fetch_media_response',
   GET_MOST_WATCHED: 'get_most_watched',
@@ -13,12 +14,25 @@ export const types = {
 };
 
 export const setLoading = loading => dispatch => {
-  dispatch({type: types.SET_LOADING, payload: {loading: loading}});
+  dispatch({
+    type: types.SET_LOADING,
+    payload: { loading: loading },
+  });
 };
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/auth/current_user');
-  dispatch({type: types.FETCH_USER, payload: res.data});
+  dispatch({ type: types.FETCH_USER, payload: res.data });
+};
+
+export const signUpUser = params => async dispatch => {
+  const res = await axios({
+    method: 'post',
+    url: '/api/auth/sign-up',
+    data: params,
+  });
+  console.log('signupres', res);
+  dispatch({ type: types.SIGN_UP_USER, payload: res.data });
 };
 
 export const fetchUsers = () => async dispatch => {
@@ -28,35 +42,35 @@ export const fetchUsers = () => async dispatch => {
 
 export const fetchPin = () => async dispatch => {
   const res = await axios.get('/api/plex/plex-pin');
-  dispatch({type: types.FETCH_PIN, payload: res.data});
+  dispatch({ type: types.FETCH_PIN, payload: res.data });
 };
 
 export const fetchMedia = () => async dispatch => {
-  dispatch({type: types.SET_LOADING, payload: true});
+  dispatch({ type: types.SET_LOADING, payload: true });
   const res = await axios.get('/api/plex/import/all');
   console.log('fetchMedia', res);
-  dispatch({type: types.SET_LOADING, payload: false});
-  dispatch({type: types.FETCH_MEDIA_RESPONSE, payload: res.data});
+  dispatch({ type: types.SET_LOADING, payload: false });
+  dispatch({ type: types.FETCH_MEDIA_RESPONSE, payload: res.data });
 };
 
 export const getMostWatched = params => async dispatch => {
-  dispatch({type: types.SET_LOADING, payload: true});
+  dispatch({ type: types.SET_LOADING, payload: true });
   const res = await axios.get('/api/recommend/most-watched');
   console.log('TCL: res', res);
 
-  dispatch({type: types.SET_LOADING, payload: false});
-  dispatch({type: types.GET_MOST_WATCHED, payload: res.data});
+  dispatch({ type: types.SET_LOADING, payload: false });
+  dispatch({ type: types.GET_MOST_WATCHED, payload: res.data });
 };
 
 export const addSeries = params => async dispatch => {
-  dispatch({type: types.SET_LOADING, payload: true});
-  dispatch({type: types.CURRENT_SHOW, payload: params.showName});
-  const res = await axios.get('/api/sonarr/series/add', {params});
-  dispatch({type: types.SET_LOADING, payload: false});
+  dispatch({ type: types.SET_LOADING, payload: true });
+  dispatch({ type: types.CURRENT_SHOW, payload: params.showName });
+  const res = await axios.get('/api/sonarr/series/add', { params });
+  dispatch({ type: types.SET_LOADING, payload: false });
   res.data.title
     ? toast('Successfully added: ' + res.data.title)
     : toast(res.data);
-  dispatch({type: types.ADD_SERIES, payload: res.data});
+  dispatch({ type: types.ADD_SERIES, payload: res.data });
 };
 
 const createPoller = (interval, initialDelay) => {
@@ -75,9 +89,14 @@ const createPoller = (interval, initialDelay) => {
   };
 };
 
-export const createPollingAction = (action, interval, initialDelay) => {
+export const createPollingAction = (
+  action,
+  interval,
+  initialDelay,
+) => {
   const poll = createPoller(action, initialDelay);
-  return () => (dispatch, getState) => poll(() => action(dispatch, getState));
+  return () => (dispatch, getState) =>
+    poll(() => action(dispatch, getState));
 };
 
 export const checkPlexPin = createPollingAction(dispatch => {
@@ -89,6 +108,6 @@ export const checkPlexPin = createPollingAction(dispatch => {
       }
     }
     console.log('action res', res);
-    dispatch({type: types.CHECK_PLEX_PIN, payload: res.data});
+    dispatch({ type: types.CHECK_PLEX_PIN, payload: res.data });
   });
 }, 15000);

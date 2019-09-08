@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import * as actions from './../../actions';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { connect } from 'react-redux';
@@ -15,20 +16,16 @@ class SignUp extends React.Component {
     password: '',
   };
 
-  onFormSubmit = event => {
+  componentWilldMount() {
+    const res = this.props.fetchUser();
+    console.log('user', res);
+  }
+
+  onFormSubmit = async event => {
     event.preventDefault();
     console.log('signUpUserState', this.state);
-    this.signUpUser(this.state);
-  };
-
-  signUpUser = async params => {
-    console.log('params', params);
-    const res = await axios({
-      method: 'post',
-      url: '/api/auth/sign-up',
-      data: params,
-    });
-    console.log('signup response', res);
+    const res = await this.props.signUpUser(this.state);
+    console.log('res', this.props.auth);
   };
 
   render() {
@@ -125,4 +122,7 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(SignUp));
+export default connect(
+  mapStateToProps,
+  actions,
+)(withStyles(styles)(SignUp));

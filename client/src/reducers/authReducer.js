@@ -7,10 +7,13 @@ export const initialState = {
   users: '',
 };
 
-export default function (state = {}, action) {
-  console.log('action - payload', action.type);
+export default function(state = {}, action) {
+  console.log('action - type', action.type);
+  console.log('action - type', action.payload);
   switch (action.type) {
     case types.FETCH_USER:
+      return action.payload || false;
+    case types.SIGN_UP_USER:
       return action.payload || false;
     case types.FETCH_USERS:
       return { ...state, users: action.payload };
