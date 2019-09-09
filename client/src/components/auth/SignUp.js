@@ -32,7 +32,7 @@ class SignUp extends React.Component {
   render() {
     const { classes } = this.props;
     if (this.props.auth) {
-      return <Redirect to="/" />;
+      return <Redirect to="/plex-pin" />;
     } else if (!this.props.auth) {
       return (
         <React.Fragment>

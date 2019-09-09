@@ -3,12 +3,25 @@ import uuid from 'uuid';
 import btoa from 'btoa';
 import request from 'request-promise';
 import models from '../../db/models';
+import logger from '../../../config/winston';
 
-const rxAuthToken = /authenticationToken="([^"]+)"/;
+const getPlexPin = async user => {
+  try {
+    logger.info(`getPlexPin(User) ${user}`);
+    const params = {
+      url: 'https://plex.tv/pins.xml',
+      headers: {
+        'X-Plex-Client-Identifier': user.email,
+      },
+    };
+    const res = await request.post(params);
+    const formattedResponse = JSON.parse(parser.toJson(res));
 
-const encryptUserCreds = (username, password) => {
-  const creds = `${username}:${password}`;
-  return btoa(creds);
+    return formattedResponse;
+  } catch (error) {
+    logger.error(error);
+    return error.message;
+  }
 };
 
 const fetchToken = async (username, password) => {
@@ -39,24 +52,6 @@ const plexUrlParams = (plexToken, user) => ({
   },
 });
 
-const getPlexPin = async user => {
-  try {
-    const params = {
-      url: 'https://plex.tv/pins.xml',
-      headers: {
-        'X-Plex-Client-Identifier': user.email,
-      },
-    };
-    const res = await request.post(params);
-    const formattedResponse = JSON.parse(parser.toJson(res));
-
-    return formattedResponse;
-  } catch (error) {
-    console.log(error);
-    return error.message;
-  }
-};
-
 const checkPlexPin = async (pinId, user) => {
   try {
     const params = {
@@ -67,10 +62,6 @@ const checkPlexPin = async (pinId, user) => {
     };
     const res = await request.get(params);
     const formattedResponse = JSON.parse(parser.toJson(res));
-    console.log(
-      'TCL: checkPlexPin -> formattedResponse',
-      formattedResponse.pin.auth_token,
-    );
     return formattedResponse.pin.auth_token;
   } catch (error) {
     console.log(error);
@@ -106,6 +97,13 @@ const getPlexUrl = async (plexToken, user) => {
     console.log(error.message);
     return error.message;
   }
+};
+
+const rxAuthToken = /authenticationToken="([^"]+)"/;
+
+const encryptUserCreds = (username, password) => {
+  const creds = `${username}:${password}`;
+  return btoa(creds);
 };
 
 export default { fetchToken, getPlexPin, checkPlexPin, getPlexUrl };

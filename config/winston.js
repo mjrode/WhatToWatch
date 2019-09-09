@@ -1,4 +1,5 @@
 var appRoot = require('app-root-path');
+import path from 'path';
 const { createLogger, format, transports } = require('winston');
 const {
   combine,
@@ -10,9 +11,14 @@ const {
   printf,
 } = format;
 
-const myFormat = printf(({ level, message, label, timestamp }) => {
-  return `${timestamp} [${label}] ${level}: ${message}`;
-});
+function formatParams(info) {
+  let { timestamp, level, message, label, ...args } = info;
+  const ts = timestamp.slice(0, 19).replace('T', ' ');
+  if (!label) label = 'App';
+  return `${ts} ${label} ${level}: ${message} ${
+    Object.keys(args).length ? JSON.stringify(args, '', '') : ''
+  }`;
+}
 
 const logger = createLogger({
   level: 'debug',
@@ -21,7 +27,7 @@ const logger = createLogger({
     prettyPrint(),
     json(),
     timestamp(),
-    myFormat,
+    printf(formatParams),
   ),
   transports: [
     new transports.File({ filename: `${appRoot}/logs/app.log` }),

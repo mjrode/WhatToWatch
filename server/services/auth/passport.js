@@ -12,7 +12,6 @@ import keys from '../../../config';
 import models from '../../db/models';
 
 passport.serializeUser((user, done) => {
-  console.log('serialize', user.id);
   done(null, user.id);
 });
 
@@ -61,7 +60,6 @@ passport.use(
           return done(null, false);
         }
         if (newUser) {
-          console.log('new user email', newUser.email);
           return done(null, newUser);
         }
       });
@@ -83,7 +81,6 @@ passport.use(
         return admin === true;
       };
 
-      console.log('email');
       models.User.findOne({
         where: {
           email: email,
@@ -98,7 +95,6 @@ passport.use(
               message: 'Email does not exist',
             });
           }
-          console.log('email and admin', email, admin);
 
           if (!isValidPassword(email, admin)) {
             return done(null, false, {
@@ -106,12 +102,9 @@ passport.use(
             });
           }
 
-          console.log('login user email', user.email);
           return done(null, user);
         })
         .catch(function(err) {
-          console.log('Error:', err);
-
           return done(null, false, {
             message: 'Something went wrong with your Signin',
           });
@@ -155,7 +148,6 @@ passport.use(
             });
           }
 
-          console.log('login user email', user.email);
           return done(null, user);
         })
         .catch(function(err) {

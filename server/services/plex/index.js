@@ -4,9 +4,11 @@ import auth from './auth';
 import models from '../../db/models';
 import helpers from '../helpers';
 import { Op } from 'sequelize';
+import logger from '../../../config/winston';
 
 const getPlexPin = async (req, res) => {
   try {
+    logger.info(`getPlexPin(User) ${req.user}`);
     const pinRes = await auth.getPlexPin(req.user);
     const plexPinId = pinRes.pin.id['$t'];
     await models.User.update(

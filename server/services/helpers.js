@@ -1,14 +1,16 @@
 import axios from 'axios';
 import parser from 'xml2json';
 import buildUrlPackage from 'build-url';
+import logger from '../../config/winston';
 
 const formatResponse = response => {
-  const xmlResponse = response.headers['content-type'].includes('xml');
+  const xmlResponse = response.headers['content-type'].includes(
+    'xml',
+  );
   if (xmlResponse) {
     return JSON.parse(parser.toJson(response.data));
   }
   if (response.config.url.includes('tastedive')) {
-    console.log('taste dive response', response.data.Similar.Results[0]);
     return response.data.Similar.Results;
   }
   return response.data;
@@ -23,7 +25,7 @@ const fixedEncodeURIComponent = str => {
 const buildUrl = function(urlParams) {
   try {
     const params = urlParams;
-    const {host} = params;
+    const { host } = params;
     delete params.host;
     const urlHash = params;
 
@@ -57,7 +59,10 @@ const request = async function(url) {
         if (error.request) {
           // eslint-disable-next-line no-underscore-dangle
           console.log(error);
-          console.log('Error: Request Path--', error.request._options.path);
+          console.log(
+            'Error: Request Path--',
+            error.request._options.path,
+          );
         } else {
           console.log('Error:', error.message);
         }
@@ -68,11 +73,11 @@ const request = async function(url) {
 
 const handleError = (res, method) => err => {
   console.log('Error in', method);
-  const {code, message} = err.responseData || {
+  const { code, message } = err.responseData || {
     code: 500,
     message: 'An unknown error occurred.',
   };
-  res.status(code).json({message});
+  res.status(code).json({ message });
 };
 
 export default {

@@ -15,6 +15,7 @@ class PlexPin extends Component {
       return;
     }
     if (this.props.auth.plexToken) {
+      console.log('plex pinn', this.props.auth);
       return <Redirect to="/most-watched" />;
     }
     if (!this.props.auth.plexToken) {

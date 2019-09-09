@@ -12,7 +12,6 @@ router.get(
 
 router.post('/sign-up', function(req, res, next) {
   passport.authenticate('local-signup', function(err, user, info) {
-    console.log('user', user.email);
     if (err) {
       return next(err);
     }
@@ -23,14 +22,12 @@ router.post('/sign-up', function(req, res, next) {
       if (err) {
         console.log(err);
       }
-      console.log('req user email signup', req.user.email);
       res.send({ email: req.user.email });
     });
   })(req, res, next);
 });
 router.post('/fake-session', (req, res, next) => {
   passport.authenticate('fake-session', function(err, user, info) {
-    console.log('user', user.email);
     if (err) {
       return next(err);
     }
@@ -41,14 +38,12 @@ router.post('/fake-session', (req, res, next) => {
       if (err) {
         console.log(err);
       }
-      console.log('req user email signup', req.user.email);
       res.send({ email: req.user.email });
     });
   })(req, res, next);
 });
 router.post('/login', function(req, res, next) {
   passport.authenticate('local-login', function(err, user, info) {
-    console.log('user', user.email);
     if (err) {
       return next(err);
     }
@@ -59,7 +54,6 @@ router.post('/login', function(req, res, next) {
       if (err) {
         console.log(err);
       }
-      console.log('req user email signup', req.user.email);
       res.send({ email: req.user.email });
     });
   })(req, res, next);
@@ -69,13 +63,11 @@ router.get(
   '/google/callback',
   passport.authenticate('google'),
   function(req, res) {
-    console.log('yumm cookies response', req.session);
     res.redirect('/plex-pin' + `?email=${req.user.email}`);
   },
 );
 
 router.get('/current_user', (req, res) => {
-  console.log('current user session', req.session);
   res.send(req.user);
 });
 
