@@ -54,7 +54,7 @@ const setMockGoogleStrategy = email => {
   strategy._profile = googleProfile(email);
 };
 
-describe.only('auth.controller', () => {
+describe('auth.controller', () => {
   beforeEach(async () => {
     await truncate('User');
     await truncate('PlexLibrary');
@@ -170,6 +170,7 @@ describe.only('auth.controller', () => {
             password: 'password',
           })
           .redirects(1);
+        console.log('res login', res.headers);
         res.should.have.status(200);
         expect(res.body).to.deep.equal({
           email: 'michaelrode44@gmail.com',

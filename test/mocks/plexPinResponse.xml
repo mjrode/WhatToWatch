@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pin>
+  <id type="integer">1742227353</id>
+  <code>CX56</code>
+  <expires-at type="dateTime">2019-09-09T05:04:56Z</expires-at>
+  <user-id type="integer" nil="true"/>
+  <client-identifier>0e865e70-332e-11e9-afcf-e35ae68216f9</client-identifier>
+  <trusted type="boolean">false</trusted>
+  <auth-token nil="true"/>
+  <auth_token nil="true"></auth_token>
+</pin>

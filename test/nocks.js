@@ -4,6 +4,7 @@ import tdawResponses from './mocks/tdawResponses';
 
 const usersResponse = `${__dirname}/mocks/getUsersResponse.xml`;
 const authResponse = `${__dirname}/mocks/authResponse.xml`;
+const plexPinResponse = `${__dirname}/mocks/plexPinResponse.xml`;
 const invalidRequestResponse = `${__dirname}/mocks/error.html`;
 
 export const plexSections = () => {
@@ -25,7 +26,9 @@ export const plexLibrary = () =>
 export const plexUsers = () => {
   nock('https://plex.tv')
     .get('/api/users?X-Plex-Token=testPlexApiToken')
-    .replyWithFile(200, usersResponse, {'Content-Type': 'text/xml'});
+    .replyWithFile(200, usersResponse, {
+      'Content-Type': 'text/xml',
+    });
 };
 
 export const mostWatched = () => {
@@ -59,6 +62,14 @@ export const auth = () => {
   nock('https://plex.tv')
     .post(uri => uri.includes('/users/sign_in.xml'))
     .replyWithFile(200, authResponse, {
+      'Content-Type': 'text/xml',
+    });
+};
+
+export const plexPin = () => {
+  nock('https://plex.tv')
+    .post(uri => uri.includes('/pins.xml'))
+    .replyWithFile(200, plexPinResponse, {
       'Content-Type': 'text/xml',
     });
 };

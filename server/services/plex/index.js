@@ -8,12 +8,11 @@ import logger from '../../../config/winston';
 
 const getPlexPin = async (req, res) => {
   try {
-    logger.info(`getPlexPin(User) ${req.user}`);
     const pinRes = await auth.getPlexPin(req.user);
     const plexPinId = pinRes.pin.id['$t'];
     await models.User.update(
       { plexPinId },
-      { where: { googleId: req.user.googleId } },
+      { where: { googleId: req.user.email } },
     );
     const pinCode = pinRes.pin.code;
     return res.json(pinCode);

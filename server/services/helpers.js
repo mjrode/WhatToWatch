@@ -47,6 +47,7 @@ const request = async function(url) {
     httpClient
       .get(url)
       .then(response => {
+        logger.info(response);
         return resolve(formatResponse(response));
       })
       .catch(error => {

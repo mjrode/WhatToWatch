@@ -5,6 +5,7 @@ import passport from 'passport';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import morganBody from 'morgan-body';
 import models from './db/models';
 import keys from '../config';
 import plex from './routes/plex.route';
@@ -30,11 +31,11 @@ export default () => {
     // Returns middleware that parses json
     server.use(json());
     server.use(urlencoded({ extended: true }));
+    morganBody(server);
 
     server.use(cookieParser(keys.server.cookieKey));
     server.use(
       cookieSession({
-        name: 'session',
         maxAge: 30 * 24 * 60 * 60 * 1000,
         keys: [keys.server.cookieKey],
       }),
@@ -86,6 +87,7 @@ export default () => {
     // eslint-disable-next-line no-unused-vars
     server.use(function(err, req, res, next) {
       // set locals, only providing error in development
+      console.log('wasI called from here');
       res.locals.message = err.message;
       res.locals.error =
         req.app.get('env') === 'development' ? err : {};
