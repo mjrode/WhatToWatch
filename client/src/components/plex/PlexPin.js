@@ -31,9 +31,10 @@ class PlexPin extends Component {
               color="textSecondary"
               paragraph
             >
-              Enter the code below to link your account on &nbsp;
+              Click the link and enter the code below to link your
+              account &nbsp;
               <a href="https://plex.tv/link" target="_blank">
-                plex.com/link.
+                Link Plex Account
               </a>
             </Typography>
           </div>
