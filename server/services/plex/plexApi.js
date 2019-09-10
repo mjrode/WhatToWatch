@@ -1,6 +1,6 @@
 import config from '../../../config';
 import helpers from '../helpers';
-
+import logger from '../../../config/winston';
 const getUsers = async function(user) {
   try {
     const urlParams = getUsersUrlParams(user);
@@ -97,6 +97,7 @@ const getMostWatched = async function(
       return [];
     }
   } catch (error) {
+    logger('getMostWatched plexAPI', error);
     console.log('getMostWatched plexAPI error', error);
     return {
       code: error.status,

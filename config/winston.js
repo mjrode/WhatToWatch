@@ -1,4 +1,5 @@
 var appRoot = require('app-root-path');
+import { inspect } from 'util';
 import path from 'path';
 const { createLogger, format, transports } = require('winston');
 const {
@@ -7,27 +8,32 @@ const {
   label,
   prettyPrint,
   colorize,
-  json,
-  printf,
+  splat,
+  errors,
+  simple,
 } = format;
 
-function formatParams(info) {
-  let { timestamp, level, message, label, ...args } = info;
-  const ts = timestamp.slice(0, 19).replace('T', ' ');
-  if (!label) label = 'App';
-  return `${ts} ${label} ${level}: ${message} ${
-    Object.keys(args).length ? JSON.stringify(args, '', '') : ''
-  }`;
-}
+const prettyJson = format.printf(info => {
+  if (info.message.constructor === Object) {
+    info.message = inspect(info.message, {
+      depth: 3,
+      colors: true,
+    });
+  }
+  return `WINSTON: ${info.timestamp} ${info.level}: ${info.message}`;
+});
 
 const logger = createLogger({
-  level: 'debug',
+  level: 'info',
   format: combine(
     colorize(),
     prettyPrint(),
-    json(),
+    errors({ stack: true }),
+    splat(),
+    label(),
     timestamp(),
-    printf(formatParams),
+    simple(),
+    prettyJson,
   ),
   transports: [
     new transports.File({ filename: `${appRoot}/logs/app.log` }),
@@ -38,7 +44,7 @@ const logger = createLogger({
 
 logger.stream = {
   write: function(message, encoding) {
-    logger.info(message, { label: 'HTTP' });
+    logger.info(message, { level: 'HTTP' });
   },
 };
 

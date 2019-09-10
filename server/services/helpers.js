@@ -2,8 +2,22 @@ import axios from 'axios';
 import parser from 'xml2json';
 import buildUrlPackage from 'build-url';
 import logger from '../../config/winston';
+import { inspect } from 'util';
 
 const formatResponse = response => {
+  logger.info(
+    `API request url: ${response.config.method} ${inspect(
+      response.config.url,
+    )}`,
+  );
+  logger.info(
+    `API response status: ${inspect(
+      response.status,
+    )} API response length: ${inspect(
+      response.headers['content-length'],
+    )}`,
+  );
+  logger.silly(`API response data: ${inspect(response.data)}`);
   const xmlResponse = response.headers['content-type'].includes(
     'xml',
   );
@@ -29,8 +43,6 @@ const buildUrl = function(urlParams) {
     delete params.host;
     const urlHash = params;
 
-    console.log('hash', urlHash);
-
     if (typeof urlHash !== 'object') {
       throw new Error(`Invalid urlParams: ${urlHash}`);
     }
@@ -41,31 +53,29 @@ const buildUrl = function(urlParams) {
 };
 
 const request = async function(url) {
-  console.log('Request URL', url);
   return new Promise((resolve, reject) => {
     const httpClient = axios;
     httpClient
       .get(url)
       .then(response => {
-        logger.info(response);
         return resolve(formatResponse(response));
       })
       .catch(error => {
         if (error.response) {
-          console.log('Error: Response --', error.response);
-          console.log('Error: Status--', error.response.status);
-          console.log('Error: Headers--', error.response.headers);
+          logger.error(`Error: Status --, ${error.response.status}`);
+          logger.error(
+            `Error: Headers --, ${error.response.headers}`,
+          );
+          logger.error(`Error: Response --, ${error.response}`);
           return reject(error.response);
         }
         if (error.request) {
           // eslint-disable-next-line no-underscore-dangle
-          console.log(error);
-          console.log(
-            'Error: Request Path--',
-            error.request._options.path,
+          logger.error(
+            `Error request path: ${error.request._options.path} ${error}`,
           );
         } else {
-          console.log('Error:', error.message);
+          logger.error(`Error: ${error.message}`);
         }
         return reject(error);
       });
@@ -73,7 +83,7 @@ const request = async function(url) {
 };
 
 const handleError = (res, method) => err => {
-  console.log('Error in', method);
+  logger.error(`Error in ${method}`);
   const { code, message } = err.responseData || {
     code: 500,
     message: 'An unknown error occurred.',

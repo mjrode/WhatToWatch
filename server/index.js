@@ -4,7 +4,6 @@ import { json, urlencoded } from 'body-parser';
 import passport from 'passport';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
-import morgan from 'morgan';
 import morganBody from 'morgan-body';
 import models from './db/models';
 import keys from '../config';
@@ -31,24 +30,19 @@ export default () => {
     // Returns middleware that parses json
     server.use(json());
     server.use(urlencoded({ extended: true }));
-    morganBody(server);
+    morganBody(server, {
+      stream: winston.stream,
+    });
 
-    server.use(cookieParser(keys.server.cookieKey));
     server.use(
       cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 1000,
         keys: [keys.server.cookieKey],
       }),
     );
+    server.use(cookieParser(keys.server.cookieKey));
     server.use(passport.initialize());
     server.use(passport.session());
-
-    server.use(
-      morgan(
-        'Method: :method URL: :url Status: :status Content Length: :res[content-length] Request Header: :req[header] Response Header: :res[header] Response Time: :response-time ms',
-        { stream: winston.stream },
-      ),
-    );
 
     // Set up routes
     server.use('/api/plex', plex);
