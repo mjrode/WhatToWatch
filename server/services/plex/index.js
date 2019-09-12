@@ -12,7 +12,7 @@ const getPlexPin = async (req, res) => {
     const plexPinId = pinRes.pin.id['$t'];
     await models.User.update(
       { plexPinId },
-      { where: { googleId: req.user.email } },
+      { where: { email: req.user.email } },
     );
     const pinCode = pinRes.pin.code;
     return res.json(pinCode);
@@ -58,7 +58,7 @@ const getMostWatched = async (req, res) => {
     );
     res.json(mostWatched);
   } catch (error) {
-    console.log('mike', error);
+    logger.info(`getMostWatched ${error.stack}`);
     res.json(error);
   }
 };

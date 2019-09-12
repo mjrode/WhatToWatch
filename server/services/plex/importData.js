@@ -3,6 +3,7 @@ import plexApi from './plexApi';
 import models from '../../db/models';
 import config from '../../../config';
 import MovieDb from 'moviedb-promise';
+import logger from '../../../config/winston';
 import { Op } from 'sequelize';
 const mdb = new MovieDb(config.server.movieApiKey);
 
@@ -37,7 +38,10 @@ const importTvPosters = async user => {
     });
 
     const imageUrls = await mostWatched.map(async show => {
-      const res = await mdb.searchTv({ query: show.title });
+      const res = await mdb.searchTv({
+        query: show.title.replace(/ *\([^)]*\) */g, ''),
+      });
+      logger.info(`Poster response ${show.title} ${res.results}`);
       return models.PlexLibrary.update(
         {
           poster_path: res.results[0].poster_path,
@@ -75,7 +79,7 @@ const createSections = async (sections, user) => {
       newSection,
     );
   }).catch(err => {
-    console.log('create section error', err);
+    logger.error(`createSections ${err}`);
   });
   return updatedSections;
 };
@@ -85,7 +89,7 @@ const importLibraries = async user => {
   const dbSections = await createSections(sections, user);
   return Promise.map(sections, section => {
     return importLibrary(section.key, user);
-  }).catch(err => console.log('ImportLibraries', err));
+  }).catch(err => logger.error(`ImportLibraries ${err}`));
 };
 
 const importLibrary = async (sectionKey, user) => {

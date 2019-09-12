@@ -64,9 +64,9 @@ const request = async function(url) {
         if (error.response) {
           logger.error(`Error: Status --, ${error.response.status}`);
           logger.error(
-            `Error: Headers --, ${error.response.headers}`,
+            `Error: URL --, ${inspect(error.request.path)}`,
           );
-          logger.error(`Error: Response --, ${error.response}`);
+          logger.error(`Error: Response --, ${error.response.data}`);
           return reject(error.response);
         }
         if (error.request) {
