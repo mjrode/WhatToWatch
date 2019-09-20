@@ -11,7 +11,7 @@ const similarMedia = async (req, res) => {
     logger.info(
       `show name for tdaw api similar media ${formattedShowName}`,
     );
-    const media = 'show';
+    const media = 'shows';
     const response = await tdawApi.similarMedia(
       req,
       formattedShowName.replace(/[{()}]/g, ''),

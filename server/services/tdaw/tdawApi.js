@@ -11,7 +11,7 @@ const tdawMediaUrl = function(mediaName, mediaType) {
       q: mediaName,
       k: config.tdaw.token,
       info: 1,
-      mediaType,
+      type: mediaType,
     },
   };
 };
