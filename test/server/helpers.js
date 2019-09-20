@@ -9,8 +9,6 @@ export const authorizedAgent = async email => {
     .post('/api/auth/login')
     .send({ email: 'testuser@email.com', password: 'password' })
     .redirects(1);
-  console.log('res body', res.body);
-  console.log('res headers', res.headers);
 
   return agent;
 };

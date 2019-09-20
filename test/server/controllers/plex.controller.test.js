@@ -23,7 +23,7 @@ const createUserWithNoPin = () => {
   });
 };
 
-describe('plex.controller', () => {
+describe.only('plex.controller', () => {
   beforeEach(async () => {
     await truncate('User');
     await truncate('PlexLibrary');
@@ -31,7 +31,7 @@ describe('plex.controller', () => {
   });
   describe('a request is made to GET /api/plex/plex-pin', () => {
     describe('there is a valid user in the session', () => {
-      it.only('should return a plexPinId', async () => {
+      it('should return a plexPinId', async () => {
         nocks.plexPin();
         await createUserWithNoPin();
         const authorizedAgent = await testHelpers.authorizedAgent(
@@ -40,9 +40,9 @@ describe('plex.controller', () => {
 
         const res = await authorizedAgent.get('/api/plex/plex-pin');
 
-        console.log('res plex pin', res.body);
         res.should.have.status(200);
         res.body.should.equal('CX56');
+        await authorizedAgent.close();
       });
     });
   });

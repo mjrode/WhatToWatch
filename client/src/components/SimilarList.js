@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
-import {withStyles} from '@material-ui/core/styles';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import styles from '../css/materialize.css.js';
 import axios from 'axios';
 import SimilarCard from './SimilarCard';
@@ -11,14 +11,19 @@ class Similar extends Component {
     shows: [],
   };
   componentDidMount() {
+    console.log('Similar list mounted');
     this.getSimilar();
   }
 
   getSimilar = async () => {
-    const params = {showName: this.props.match.params.show};
-    const res = await axios.get('/api/moviedb/tv/similar', {params});
+    const params = { showName: this.props.match.params.show };
+    console.log('params---', params);
+    const res = await axios.get('/api/moviedb/tv/similar', {
+      params,
+    });
+    console.log('Shows--', shows);
     const shows = res.data;
-    this.setState({shows: shows});
+    this.setState({ shows: shows });
   };
 
   render() {
@@ -40,8 +45,12 @@ class Similar extends Component {
   }
 }
 
-function mapStateToProps({plex, auth, sonarr}) {
-  return {loading: plex.loading, auth, sonarrAddSeries: sonarr.sonarrAddSeries};
+function mapStateToProps({ plex, auth, sonarr }) {
+  return {
+    loading: plex.loading,
+    auth,
+    sonarrAddSeries: sonarr.sonarrAddSeries,
+  };
 }
 
 export default connect(

@@ -2,6 +2,7 @@ import config from '../../../config';
 import helpers from '../helpers';
 import models from '../../db/models';
 import movieDbApi from '../moviedb/movieDbApi';
+import logger from '../../../config/winston';
 
 const tdawMediaUrl = function(mediaName, mediaType) {
   return {
@@ -17,8 +18,11 @@ const tdawMediaUrl = function(mediaName, mediaType) {
 
 const similarMedia = async function(req, mediaName, mediaType) {
   try {
-    console.log('mediatype', mediaType);
-    const urlParams = tdawMediaUrl(mediaName, mediaType);
+    const formattedShowName = mediaName.replace(/ *\([^)]*\) */g, '');
+    logger.info(
+      `Show name for tdaw similar req ${formattedShowName}`,
+    );
+    const urlParams = tdawMediaUrl(formattedShowName, mediaType);
     const mediaUrl = helpers.buildUrl(urlParams);
     const similarResponse = await helpers.request(mediaUrl);
     console.log('TCL: tdaw -> similarResponse', similarResponse);
@@ -29,7 +33,9 @@ const similarMedia = async function(req, mediaName, mediaType) {
     });
 
     // Use Sonarr list instead
-    const libraryTitles = jsonLibrary.map(show => show.title.toLowerCase());
+    const libraryTitles = jsonLibrary.map(show =>
+      show.title.toLowerCase(),
+    );
 
     const filteredResponse = await similarResponse.filter(
       show => !libraryTitles.includes(show.Name.toLowerCase()),
@@ -60,7 +66,7 @@ const qlooMediaId = async (mediaName, mediaType) => {
   const params = {
     host:
       'https://qsz08t9vtl.execute-api.us-east-1.amazonaws.com/production/search',
-    queryParams: {query: mediaName},
+    queryParams: { query: mediaName },
   };
 
   const formattedMediaType = mediaTypeMapping()[mediaType];
@@ -75,7 +81,7 @@ const qlooMediaId = async (mediaName, mediaType) => {
 };
 
 const mediaTypeMapping = () => {
-  return {tv: 'tv/shows', movie: 'film/movies'};
+  return { tv: 'tv/shows', movie: 'film/movies' };
 };
 
 const qlooMedia = async (mediaId, mediaType) => {

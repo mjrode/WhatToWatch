@@ -16,7 +16,6 @@ describe('Users', () => {
           plexUrl: 'plexserver.com',
         })
         .end((err, res) => {
-          console.log(res);
           res.should.have.status(200);
           res.body.should.equal('testPlexApiToken');
           done();

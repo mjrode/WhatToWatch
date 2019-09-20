@@ -1,15 +1,20 @@
 import tdawApi from './tdawApi';
 import models from '../../db/models';
 import helpers from '../helpers';
+import logger from '../../../config/winston';
 
 const similarMedia = async (req, res) => {
   try {
     const { showName } = req.query;
-    console.log('Show name', showName);
+    logger.info(`Show name for similarMedia ${showName}`);
+    const formattedShowName = showName.replace(/ *\([^)]*\) */g, '');
+    logger.info(
+      `show name for tdaw api similar media ${formattedShowName}`,
+    );
     const media = 'show';
     const response = await tdawApi.similarMedia(
       req,
-      showName.replace(/[{()}]/g, ''),
+      formattedShowName.replace(/[{()}]/g, ''),
       media,
     );
     console.log('tdaw response test--', response);

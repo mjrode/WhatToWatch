@@ -102,8 +102,6 @@ describe('auth.controller', () => {
 
         describe('When a user successfully auths with google', () => {
           it('should create a new user record in the database and return the user record', async () => {
-            console.log('Was I called----');
-
             const usersCountBefore = await models.User.count();
             expect(usersCountBefore).to.equal(0);
 
@@ -170,7 +168,6 @@ describe('auth.controller', () => {
             password: 'password',
           })
           .redirects(1);
-        console.log('res login', res.headers);
         res.should.have.status(200);
         expect(res.body).to.deep.equal({
           email: 'michaelrode44@gmail.com',
@@ -189,7 +186,6 @@ describe('auth.controller', () => {
             email: 'mike.rodde@gmail.com',
           })
           .end((err, res) => {
-            console.log(res.body);
             res.should.have.status(200);
             res.body.message.should.equal('Missing credentials');
             done();
@@ -212,7 +208,6 @@ describe('auth.controller', () => {
             email: 'michaelrode44@gmail.com',
             password: 'pass',
           });
-        console.log(res.body);
         res.should.have.status(200);
         res.body.message.should.equal('Incorrect password.');
       });

@@ -7,12 +7,7 @@ import logger from '../../../config/winston';
 import { Op } from 'sequelize';
 const mdb = new MovieDb(config.server.movieApiKey);
 
-const updateOrCreate = async (
-  model,
-  where,
-  newItem,
-  beforeCreate,
-) => {
+const updateOrCreate = async (model, where, newItem) => {
   const item = await model.findOne({ where });
   if (!item) {
     const createItem = await model.create(newItem, {
@@ -22,7 +17,7 @@ const updateOrCreate = async (
     });
     return { createItem, created: true };
   } else {
-    const updatedItem = await model.update(
+    await model.update(
       newItem,
       { where: where },
       { returning: true, plain: true, raw: true },
@@ -37,7 +32,7 @@ const importTvPosters = async user => {
       where: { UserId: user.id, type: 'show', views: { [Op.gt]: 0 } },
     });
 
-    const imageUrls = await mostWatched.map(async show => {
+    await mostWatched.map(async show => {
       const res = await mdb.searchTv({
         query: show.title.replace(/ *\([^)]*\) */g, ''),
       });
@@ -86,7 +81,7 @@ const createSections = async (sections, user) => {
 
 const importLibraries = async user => {
   const sections = await plexApi.getSections(user);
-  const dbSections = await createSections(sections, user);
+  await createSections(sections, user);
   return Promise.map(sections, section => {
     return importLibrary(section.key, user);
   }).catch(err => logger.error(`ImportLibraries ${err}`));
